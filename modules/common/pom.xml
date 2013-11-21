@@ -1,63 +1,38 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <artifactId>sdatacrawler-common</artifactId>
-  <packaging>jar</packaging>
+	<artifactId>sdatacrawler-common</artifactId>
+	<packaging>jar</packaging>
+	<name>sdatacrawler-common</name>
+	<url>http://maven.apache.org</url>
 
-  <name>sdatacrawler-common</name>
-  <url>http://maven.apache.org</url>
-  
-  <parent>
-	<artifactId>sdatacrawler-parent</artifactId>
-	<groupId>com.sdata</groupId>
-	<version>1.0.0-SNAPSHOT</version>
-	<relativePath>../../parent/</relativePath>
- </parent>
-
-  <dependencies>
-	<!-- Spring -->
-	<dependency>
+	<parent>
+		<artifactId>sdatacrawler-parent</artifactId>
 		<groupId>com.sdata</groupId>
-		<artifactId>sdatacrawler-core</artifactId>
-		<version>${project.version}</version>
-		<exclusions>
-			<exclusion>
-				<artifactId>commons-logging</artifactId>
-				<groupId>commons-logging</groupId>
-			</exclusion>
-			<exclusion>
-				<artifactId>hibernate-core</artifactId>
-				<groupId>org.hibernate</groupId>
-			</exclusion>
-			<exclusion>
-				<artifactId>hibernate-annotations</artifactId>
-				<groupId>org.hibernate</groupId>
-			</exclusion>
-		</exclusions>
-	</dependency>
-    <dependency>
-    	<groupId>org.apache.zookeeper</groupId>
-    	<artifactId>zookeeper</artifactId>
-    	<version>${zookeeper.version}</version>
-    	 <exclusions>
-            <exclusion>
-                <groupId>com.sun.jmx</groupId>
-                <artifactId>jmxri</artifactId>
-            </exclusion>
-            <exclusion>
-                <groupId>com.sun.jdmk</groupId>
-                <artifactId>jmxtools</artifactId>
-            </exclusion>
-            <exclusion>
-                <groupId>javax.jms</groupId>
-                <artifactId>jms</artifactId>
-            </exclusion>
-            <exclusion>
-            	<artifactId>slf4j-log4j12</artifactId>
-            	<groupId>org.slf4j</groupId>
-            </exclusion>
-    	 </exclusions>
-    </dependency>
-  </dependencies>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../../parent/</relativePath>
+	</parent>
+
+	<dependencies>
+		<!-- Spring -->
+		<dependency>
+			<groupId>com.sdata</groupId>
+			<artifactId>sdatacrawler-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>
