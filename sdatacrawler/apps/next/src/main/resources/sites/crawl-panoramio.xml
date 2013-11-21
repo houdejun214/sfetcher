@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<configuration>
+	<site name="panoramio" hosturl="www.panoramio.com"
+		fetcher="com.sdata.component.fetcher.PanoramioFetcher" storer="com.sdata.component.data.SdataImageDbStorer">
+		<property>
+			<name>DataDir</name>
+			<value>/public/data/images</value>
+		</property>
+		<property>
+			<name>FetchThreadNum</name>
+			<value>15</value>
+		</property>
+		<property>
+			<name>source</name>
+			<value>panoramio</value>
+		</property>
+		<property>
+			<name>MainCrawlThreadNum</name>
+			<value>1</value>
+		</property>
+		<!-- location info -->
+		<property>
+			<name>CityName</name>
+			<value>beijing</value>
+		</property>
+		<property>
+			<name>southwest</name>
+			<!--<value>1.3315000,103.8012000</value> small singapore -->
+			<!--<value>1.2015000,103.6012000</value> lager singapore-->
+			<!--<value>39.683411,116.053391</value> small beijing-->
+			<value>39.44275810,115.42341160</value>
+		</property>
+		<property>
+			<name>northeast</name>
+			<!--<value>1.3484000,103.9030565</value> small singapore-->
+			<!--<value>1.4784000,104.0930565</value> lager singapore-->
+			<!--<value>40.179923,116.731796</value> small beijing-->
+			<value>41.06081590,117.5146250</value>
+		</property>
+		<property>
+		  <name>solrServer</name>
+		  <value>http://172.18.109.14:8983/solr</value>
+		</property>
+		<!-- mongo db info -->
+		<property>
+		  <name>mongoHost</name>
+		  <value>172.18.109.14</value>
+		</property>
+		<property>
+		  <name>indexCollection</name>
+		  <value>images</value>
+		</property>
+		<property>
+			<name>ImageProcessHost</name>
+			<value>172.18.109.14:8080</value>
+		</property>
+		<property>
+			<name>mongoPort</name>
+			<value>27017</value>
+		</property>
+		<property>
+			<name>mongoDbName</name>
+			<value>panoramio</value>
+		</property>
+		<property>
+			<name>datumXml</name>
+			<value>conf/column-maps-image-panoramio.xml</value>
+		</property>
+		<property>
+			<name>TaskInterval</name>
+			<value>86400000</value>
+		</property>
+	</site>
+</configuration>

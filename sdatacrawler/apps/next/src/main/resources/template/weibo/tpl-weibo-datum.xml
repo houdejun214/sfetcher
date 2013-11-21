@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!-- filter '&amp;' = '&' -->
+<datum filter="null:name&amp;text|_id">
+	<!-- tweet -->
+	<field from="id" name="_id" ></field>
+	<field from="origin" name="origin" index="origin" value="weibo"></field>
+	<field from="classification" name="classification" index="classification" value="tweets" indexOnly="true"></field>
+	<field from="docloc" name="docloc" index="loc" value="cn" indexOnly="true"></field>
+	<field from="lang" name="lang" index="lang" value="zh" indexOnly="true"></field>
+	<field from="id" name="id" index="dbid"></field>
+	<field from="created_at" name="crtdt" action="todate" index="date"></field>
+	<field from="user/screen_name" name="sname" index="author"></field>
+	<field from="user/name" name="name" ></field>
+	<field from="text" name="text" index="content"></field>
+	<field from="source" name="sourc"></field>
+	<field from="truncated" name="trunc"></field>
+	<field from="in_reply_to_status_id" name="irtsi"></field>
+	<field from="in_reply_to_user_id" name="irtui"></field>
+	<field from="in_reply_to_screen_name" name="irtn"></field>
+	<field from="thumbnail_pic" name="thpic"></field> 
+	<field from="bmiddle_pic" name="bmpic"></field>
+	<field from="original_pic" name="orpic" action="saveImage" index="img_s"></field>
+	<field from="geo" name="geo">
+		<field from="coordinates" name="coord" index="geo"></field>
+		<field from="type" name="type"></field>
+	</field>
+	<field from="annotations" name="antin"></field>
+	<field from="reposts_count" name="retct"></field>
+	<field from="comments_count" name="comct"></field>
+	<field from="visible" name="visb"></field>
+	<field from="user/id" name="uid"></field>
+	<field from="retid" name="retid"></field>
+	<field from="fetdt" name="fetdt" action="todate" index="fetchtime"></field>
+	<field from="user" name="user">
+		<field from="id" name="_id"></field>
+		<field from="origin" name="origin" value="weibo"></field>
+		<field from="id" name="id"></field>
+		<field from="created_at" name="crtdt"></field>
+		<field from="name" name="name"></field>
+		<field from="screen_name" name="sname"></field>
+		<field from="gender" name="g"></field>
+		<field from="profile_image_url" name="head"></field>
+		<field from="description" name="desc"></field>
+		<field from="profile_url" name="prou"></field>
+		<field from="followers_count" name="folct"></field>
+		<field from="friends_count" name="frdct"></field>
+		<field from="statuses_count" name="stact"></field>
+		<field from="favourites_count" name="favct"></field>
+		<field from="location" name="loc"></field>
+		<field from="url" name="url"></field>
+		<field from="allow_all_act_msg" name="almsg"></field>
+		<field from="allow_all_comment" name="alcom"></field>
+		<field from="geo_enabled" name="geoen"></field>
+		<field from="verified" name="vrfed"></field>
+		<field from="verified_reason" name="vefrs"></field>
+		<field from="verified_type" name="vrft"></field>
+		<field from="bi_followers_count" name="bfc"></field>
+		<field from="weihao" name="wh"></field>
+		<field from="avatar_large" name="avlg"></field>
+		<field from="lang" name="lang"></field>
+		<field from="province" name="proce"></field>
+		<field from="city" name="city"></field>
+		<field from="status_id" name="status_id"></field>
+		<field from="domain" name="dmn"></field>
+	</field>
+</datum>

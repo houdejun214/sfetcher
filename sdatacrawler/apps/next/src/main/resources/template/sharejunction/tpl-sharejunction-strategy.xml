@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<strategy>
+	<init link="http://www.sharejunction.com/sharejunction/listLatestTopics.htm"></init>
+	<links selector="span.msg a:contains(Older)|link"></links>
+	<datum selector="#forumTable tbody tr">
+		<field name="block" selector="td a|[0]|txt"></field>
+		<field name="block_url" selector="td a|[0]|link"></field>
+		<field name="url" selector="td a|[1]|link" handler="com.sdata.core.parser.html.handler.URLHandler"></field>
+		<field name="views" selector="td|[2]|txt"></field>
+		<field name="replies" selector="td|[3]|txt"></field>
+		<field name="rating" selector="td|[4]|img|[src]"></field>
+		<field name="lastpost" selector="td|[5]|txt"></field>
+	</datum>
+</strategy>

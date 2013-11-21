@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<configuration>
+ <!-- crawl site for template -->
+	  <site fetcher = "com.sdata.core.parser.html.SdataHtmlFetcher"
+	  	parser = "com.sdata.core.parser.html.SdataHtmlParser"
+	  	storer = "com.sdata.core.data.SdataStandardStorer">
+			<property>
+				<name>FetchThreadNum</name>
+				<value>5</value>
+			</property>
+			<property>
+				<name>UseProxy</name>
+				<value>false</value>
+			</property>
+			<property>
+			  <name>maxDatum</name>
+			  <value>500</value>
+			</property>
+			<property>
+				<name>TaskInterval</name>
+				<value>20000</value>
+			</property>
+	  </site>
+</configuration>

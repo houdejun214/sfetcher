@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<datum filter="null:name|_id|url">
+	
+	<!-- shop warning:if have action then from is must needed -->
+	<!--<field name="_id" from=""  type="string" selector="" link="" ref="" next="" param="" action="" index="dbid"></field> -->
+	<field name="_id"  selector="link[rel=canonical]|link|~/^http://www\.dianping\.com/shop/(\d+)\??.*/|[1]" handler="com.sdata.core.parser.html.handler.UuidSiteHandler" ></field>
+	<field name="url" selector="link[rel=canonical]|link" index="url"></field>
+</datum>

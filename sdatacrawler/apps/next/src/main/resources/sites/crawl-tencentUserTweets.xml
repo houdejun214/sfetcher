@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<configuration>
+	<!-- tencent user tweets -->
+	<site name="tencentUserTweets" hosturl="t.qq.com"
+		fetcher="com.sdata.component.fetcher.TencentUserTweetsFetcher" storer="com.sdata.component.data.SdataUserTweetsDbStorer">
+		<property>
+			<name>QueueThresholdSizeSlow</name>
+			<value>999</value>
+			<description></description>
+		</property>
+		<property>
+			<name>FetchThreadNum</name>
+			<value>5</value>
+		</property>
+		<property>
+			<name>source</name>
+			<value>tencent</value>
+		</property>
+		<property>
+			<name>MainCrawlThreadNum</name>
+			<value>5</value>
+		</property>
+		<!-- consumer info -->
+		<property>
+			<name>ConsumerKey</name>
+			<value>fce8b11b2f03403fafc7dda6e75e34a6</value>
+		</property>
+		<property>
+			<name>ConsumerSecret</name>
+			<value>721621cfce289a476e16cbe306734318</value>
+		</property>
+		<!-- acess info -->
+		<property>
+			<name>AccessToken</name>
+			<value>b6f0cb88b56d4581850c8dc75d138a5d</value>
+		</property>
+		<property>
+			<name>AccessTokenSecret</name>
+			<value>cf46873087335987eaa688cef321b4cf</value>
+		</property>
+		<property>
+			<name>ImageProcessHost</name>
+			<value>localhost:8080</value>
+		</property>
+		<!-- mongo db info -->
+		<property>
+			<name>mongoHost</name>
+			<value>172.18.109.13</value>
+		</property>
+		<property>
+			<name>mongoPort</name>
+			<value>27017</value>
+		</property>
+		<property>
+			<name>mongoDbName</name>
+			<value>tencent</value>
+		</property>
+		<property>
+			<name>crawlerQueueTableName</name>
+			<value>CrawlQueueTencentUserRelation</value>
+		</property>
+		<property>
+		  	<name>Host</name>
+		  	<value>172.29.34.96</value>
+		</property>
+		<property>
+			<name>indexCollection</name>
+			<value>tweets</value>
+		</property>
+		<property>
+			<name>UseProxy</name>
+			<value>false</value>
+		</property>
+		<property>
+			<name>datumXml</name>
+			<value>conf/column-maps-tencent.xml</value>
+		</property>
+		<property>
+			<name>userSeedFile</name>
+			<value>conf/user-seeds.list</value>
+		</property>
+	</site>
+</configuration>

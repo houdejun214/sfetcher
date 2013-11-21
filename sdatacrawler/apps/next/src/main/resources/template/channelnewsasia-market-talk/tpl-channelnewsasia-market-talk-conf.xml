@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<configuration>
+
+	<!-- 数据存储DB -->
+	<property>
+		<name>dbSourceName</name>
+		<value>sense</value>
+	</property>
+	<property>
+		<name>siteName</name>
+		<value>channelnewsasia</value>
+	</property>
+</configuration>

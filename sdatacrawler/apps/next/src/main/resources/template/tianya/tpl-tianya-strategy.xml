@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<strategy>
+	<init link="http://bbs.tianya.cn/"></init>
+	<links selector=".nav_child_box .nav_child a|links"></links>
+	<links selector=".short-pages-2 .links a:contains(下一页)|links"></links>
+	<datum selector=".td-title a|links"></datum>
+</strategy>

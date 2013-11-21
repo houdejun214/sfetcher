@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<configuration>
+<!-- crawl site for twitter -->
+	<site name="twitterFilter" hosturl="twitter.com"
+		fetcher="com.sdata.component.fetcher.TwitterFilterFetcher" parser="com.sdata.component.parser.AmazonParser"
+		storer="com.sdata.component.data.SdataTweetsDbStorer">
+		<property>
+			<name>FetchThreadNum</name>
+			<value>5</value>
+		</property>
+		<property>
+			<name>siteName</name>
+			<value>twitter</value>
+		</property>
+		<!-- consumer info -->
+		<property>
+			<name>ConsumerKey</name>
+			<value>GhBYe75xd84A7axu4E4xMA</value>
+		</property>
+		<property>
+			<name>ConsumerSecret</name>
+			<value>4eBAV7VOHc55SHGsxOnwRRt4BMcAWngwdqkVtrdw</value>
+		</property>
+		<!-- acess info -->
+		<property>
+			<name>AccessToken</name>
+			<value>544194759-8mrKS81tJ5LybgLnGSbuEvKBkMCCyHmlomXDIrwS</value>
+		</property>
+		<property>
+			<name>AccessTokenSecret</name>
+			<value>RZWC6AHkmzvJHxYfQ2E39yQJFntTrtFXgT2pYqDfNI</value>
+		</property>
+		<property>
+			<name>filterLocation</name>
+			<value>103.6012000,1.2015000,104.0930565,1.4784000</value>
+		</property>
+		<property>
+			<name>filterTrack</name>
+			<value>singapore,新加坡</value>
+		</property>
+		<property>
+			<name>indexCollection</name>
+			<value>tweets</value>
+		</property>
+		<!-- mongo db info -->
+		<property>
+			<name>mongoHost</name>
+			<value>172.18.109.11</value>
+		</property>
+		<property>
+			<name>ImageProcessHost</name>
+			<value>172.18.109.11:8080</value>
+		</property>
+		<property>
+			<name>mongoPort</name>
+			<value>27017</value>
+		</property>
+		<property>
+			<name>mongoDbName</name>
+			<value>twitter</value>
+		</property>
+		<property>
+			<name>QueueThresholdSizeSlow</name>
+			<value>800</value>
+			<description></description>
+		</property>
+		<property>
+			<name>datumXml</name>
+			<value>conf/column-maps-twitter.xml</value>
+		</property>
+		<filter pos="before" class="com.sdata.component.filter.SdataTweetsDbFilter"></filter>
+	</site>
+</configuration>

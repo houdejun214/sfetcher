@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<strategy>
+	<!-- http://www.tianya.cn/search/bbs?q=%E4%B9%A0%E8%BF%91%E5%B9%B3&s=4&f=3 -->
+	<links selector=".long-pages a:contains(下一页)|link|~/go\\((\\d*)\\)/|{{url}&amp;pn={0}}"></links>
+	<datum selector=".searchListOne div h3 a|links"></datum>
+</strategy>

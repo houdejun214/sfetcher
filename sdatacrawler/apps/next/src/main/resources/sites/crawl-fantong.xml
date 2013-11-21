@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<configuration>
+ <!-- crawl site for fantong -->
+	  <site name="fantong" 
+	  	fetcher = "com.sdata.component.fetcher.FantongFetcher"
+	  	storer = "com.sdata.core.data.SdataStandardStorer"  >
+			<property>
+				<name>FetchThreadNum</name>
+				<value>1</value>
+			</property>
+			<property>
+				<name>source</name>
+				<value>fantong</value>
+			</property>
+			<property>
+			  <name>topArea</name>
+			  <value>div.beijin_lefe</value>
+			</property>
+			<property>
+			  <name>secondArea</name>
+			  <value>.select a[href]</value>
+			</property>
+			<property>
+			  <name>maxDatum</name>
+			  <value>200</value>
+			</property>
+			<property>
+				<name>datumXml</name>
+				<value>template/fantong/tpl-fantong-datum.xml</value>
+			</property>
+			<property>
+				<name>storeXml</name>
+				<value>template/fantong/tpl-fantong-store.xml</value>
+			</property>
+			<property>
+				<name>TaskInterval</name>
+				<value>86400000</value>
+			</property>
+	  </site>
+</configuration>

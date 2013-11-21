@@ -1,0 +1,64 @@
+package com.sdata.hot.store;
+
+import java.util.Map;
+
+import com.nus.next.db.Constants;
+import com.nus.next.db.hbase.thrift.HBaseClient;
+import com.nus.next.db.hbase.thrift.HBaseClientFactory;
+import com.sdata.core.Configuration;
+import com.sdata.core.FetchDatum;
+import com.sdata.core.RunState;
+import com.sdata.core.data.SdataStandardStorer;
+
+/**
+ * @author zhufb
+ *
+ */
+public class WeiboHotStorer extends SdataStandardStorer {
+
+	private HBaseClient client;
+	private String tweetTable;
+	private String userTable;
+	private String retRelationTable;
+	public WeiboHotStorer(Configuration conf, RunState state) {
+		super(conf, state);
+	}
+	
+	@Override
+	protected void init() {
+		this.tweetTable = super.getConf("hbase.tweet.table","tweets");
+		this.userTable = super.getConf("hbase.user.table","users");
+		this.retRelationTable = super.getConf("hbase.retRelation.table","rets");
+		this.client = HBaseClientFactoryBean.getObject(super.getConf());
+		this.client.createTable(tweetTable,Constants.HBASE_DEFAULT_COLUMN_FAMILY);
+		this.client.createTable(userTable,Constants.HBASE_DEFAULT_COLUMN_FAMILY);
+		this.client.createTable(retRelationTable,Constants.HBASE_DEFAULT_COLUMN_FAMILY);
+	}
+	
+	public HBaseClient getClient() {
+		return client;
+	}
+
+	@Override
+	public void save(FetchDatum datum) throws Exception {
+		Map<String, Object> metadata = datum.getMetadata();
+		Object user = metadata.remove("user");
+		if(user!=null&&user instanceof Map){
+			Map map = (Map)user;
+			long rk =Long.valueOf(String.valueOf(map.get("id")));
+			client.save(this.userTable, rk, map);
+		}
+		Object rets = metadata.remove("rets");
+		if(rets!=null&&rets instanceof Map){
+			Map map = (Map)rets;
+			long rk =Long.valueOf(String.valueOf(map.get("id")));
+			client.save(this.retRelationTable, rk, map);
+		}
+		long rk = Long.valueOf(String.valueOf(metadata.get("id")));
+		client.save(tweetTable, rk, metadata);
+	}
+	
+	public boolean isExists(FetchDatum datum) {
+		return false;
+	}
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<configuration>
+	<site name="fashionBlogs"
+		fetcher="com.sdata.component.fetcher.FashionBlogsFetcher"  storer="com.sdata.component.data.SdataFashionBolgsDbStorer">
+		<property>
+			<name>QueueThresholdSizeSlow</name>
+			<value>500</value>
+		</property>
+		<property>
+			<name>maxCrawlDBQueueSize</name>
+			<value>30000</value>
+		</property>
+		<property>
+			<name>FetchThreadNum</name>
+			<value>3</value>
+		</property>
+		<property>
+			<name>source</name>
+			<value>fashionBlog</value>
+		</property>
+		<property>
+			<name>MainCrawlThreadNum</name>
+			<value>20</value>
+		</property>
+		<!-- mongo db info -->
+		<property>
+		  <name>mongoHost</name>
+		  <value>137.132.145.238</value>
+		</property>
+		<property>
+		  <name>indexCollection</name>
+		  <value>fashionBlog</value>
+		</property>
+		<property>
+			<name>mongoPort</name>
+			<value>27017</value>
+		</property>
+		<property>
+			<name>mongoDbName</name>
+			<value>fashionBlog</value>
+		</property>
+		<property>
+			<name>BlogsListFile</name>
+			<value>template/fashionBlogs/blog_list.txt</value>
+		</property>
+		<property>
+			<name>filterPath</name>
+			<value>template/fashionBlogs/filterRules.txt</value>
+		</property>
+	</site>
+</configuration>

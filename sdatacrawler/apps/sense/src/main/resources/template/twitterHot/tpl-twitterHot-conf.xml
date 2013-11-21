@@ -1,0 +1,20 @@
+<configuration>
+		<!-- consumer info -->
+		<property>
+			<name>ConsumerKey</name>
+			<value>GhBYe75xd84A7axu4E4xMA</value>
+		</property>
+		<property>
+			<name>ConsumerSecret</name>
+			<value>4eBAV7VOHc55SHGsxOnwRRt4BMcAWngwdqkVtrdw</value>
+		</property>
+		<!-- acess info -->
+		<property>
+			<name>AccessToken</name>
+			<value>544194759-8mrKS81tJ5LybgLnGSbuEvKBkMCCyHmlomXDIrwS</value>
+		</property>
+		<property>
+			<name>AccessTokenSecret</name>
+			<value>RZWC6AHkmzvJHxYfQ2E39yQJFntTrtFXgT2pYqDfNI</value>
+		</property>
+</configuration>

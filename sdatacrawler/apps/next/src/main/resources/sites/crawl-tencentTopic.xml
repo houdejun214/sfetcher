@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<configuration>
+	<site name="tencentTopic" hosturl="t.qq.com"
+		fetcher="com.sdata.component.fetcher.TencentTopicFetcher" parser="com.sdata.component.parser.TencentTopicParser"
+		storer="com.sdata.component.data.SdataTopicTweetsDbStorer">
+		<property>
+			<name>FetchThreadNum</name>
+			<value>5</value>
+		</property>
+		<property>
+			<name>source</name>
+			<value>tencent</value>
+		</property>
+		<!-- strategy info -->
+		<property>
+			<name>topicReqnum</name>
+			<value>20</value>
+		</property>
+		<property>
+			<name>hotTweetsReqPageNum</name>
+			<value>10</value>
+		</property>
+		<property>
+			<name>latestTweetsReqPageNum</name>
+			<value>10</value>
+		</property>
+		<property>
+			<name>userName</name>
+			<value>2220441093</value>
+		</property>
+		<property>
+			<name>passWd</name>
+			<value>nusnext2012</value>
+		</property>
+		<!-- consumer info -->
+		<property>
+			<name>ConsumerKey</name>
+			<value>801126559</value>
+		</property>
+		<property>
+			<name>ConsumerSecret</name>
+			<value>2eb966cecf339076941dd7ffd383cd90</value>
+		</property>
+		<!-- acess info -->
+		<property>
+			<name>AccessToken</name>
+			<value>8204f6c9a6e04428b43e3f419b4faaa9</value>
+		</property>
+		<property>
+			<name>AccessTokenSecret</name>
+			<value>b336aa99fdb52490bf2fda8bce0dcbdc</value>
+		</property>
+		<property>
+			<name>ImageProcessHost</name>
+			<value>localhost:8080</value>
+		</property>
+		<!-- mongo db info -->
+		<property>
+			<name>mongoHost</name>
+			<value>172.18.109.83</value>
+		</property>
+		<property>
+			<name>mongoPort</name>
+			<value>27017</value>
+		</property>
+		<property>
+			<name>mongoDbName</name>
+			<value>tencentOthers</value>
+		</property>
+		<property>
+			<name>QueueThresholdSizeSlow</name>
+			<value>800</value>
+			<description></description>
+		</property>
+		<property>
+			<name>UseProxy</name>
+			<value>false</value>
+		</property>
+		<property>
+			<name>indexCollection</name>
+			<value>topics</value>
+		</property>
+		<property>
+			<name>datumXml</name>
+			<value>template/other/tpl-tencent.xml</value>
+		</property>
+		<property>
+			<name>topicIndexPath</name>
+			<value>template/other/tpl-topics.xml</value>
+		</property>
+		<property>
+			<name>FetchSleepInterval</name>
+			<value>3600000</value>
+		</property>
+	</site>
+</configuration>

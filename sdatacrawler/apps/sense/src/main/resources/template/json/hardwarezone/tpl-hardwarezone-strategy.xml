@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<strategy>
+	<!-- https://www.googleapis.com/customsearch/v1element?key=AIzaSyCVAXiUzRYsML1Pv6RwSG1gunmMikTzQqY&rsz=filtered_cse&num=10&hl=en&prettyPrint=false&source=gcsc&gss=.sg&sig=5530b85faafd53e1d394092d8d1eb26a&start=0&cx=011134908705750190689:daz50x-t54k&q=site%3Aforums.hardwarezone.com.sg%2F%20{keywords}&sort=date&googlehost=www.google.com -->
+	<links ref="url" path="cursor/pages/start" replace="start=(\d+)"></links>
+	<links path="results/url"></links>
+	<links selector="li.prevnext:not(form li) a:contains(Next)|link"></links>
+	<datum selector="#posts .post-wrapper .thead a[id]|links"></datum>
+</strategy>

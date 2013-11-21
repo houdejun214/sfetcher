@@ -1,0 +1,7 @@
+<configuration>
+	<property>
+		<name>sense.statistic.bean</name>
+		<value>com.sdata.sense.parser.statistic.DengueWeekStatistic</value>
+		<description></description>
+	</property>
+</configuration>

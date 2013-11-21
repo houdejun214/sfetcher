@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<configuration>
+	<site name="instagramTagSearch" hosturl="www.instrgram.com"
+		fetcher="com.sdata.component.fetcher.InstagramTagSearchFetcher" storer="com.sdata.component.data.storer.SdataImagesStorer">
+		<property>
+			<name>DataDir</name>
+			<value>/public/data/images</value>
+		</property>
+		<property>
+			<name>query.input.file</name>
+			<value>conf/tags.instagram.list</value>
+		</property>
+		<property>
+			<name>crawlMaxPages</name>
+			<value>10</value>
+		</property>
+		<property>
+			<name>FetchThreadNum</name>
+			<value>1</value>
+		</property>
+		<property>
+			<name>source</name>
+			<value>instagram</value>
+		</property>
+		<property>
+			<name>MainCrawlThreadNum</name>
+			<value>1</value>
+		</property>
+		<property>
+			<name>CrawlType</name>
+			<value>tagSearch</value>
+		</property>
+		<property>
+			<name>AccessToken</name>
+			<value>211126402.4aca32b.3ed1dd30137d4c92b545ab96ad9fd385</value>
+		</property>
+		<property>
+			<name>StartTime</name>
+			<value>2012-02-01 00:00:00</value>
+		</property>
+		<property>
+			<name>TimeSpan</name>
+			<value>6000</value>
+		</property>
+		<property>
+			<name>Distance</name>
+			<value>1000</value>
+		</property>
+		<!-- location info -->
+		<property>
+			<name>CityName</name>
+			<value></value>
+		</property>
+		<property>
+			<name>southwest</name>
+			<value>39.683411,116.053391</value>
+			<!--<value>1.1663980,103.60562460</value> lager singapore-->
+			<!--<value></value> small singapore -->
+			<!--<value>39.683411,116.053391</value> large beijing-->
+			<!--<value></value> small beijing-->
+		</property>
+		<property>
+			<name>northeast</name>
+			<value>41.06081590,117.5146250</value>
+			<!--<value>1.47088090,104.0930565</value> lager singapore-->
+			<!--<value></value> small singapore-->
+			<!--<value>41.06081590,117.5146250</value> large beijing-->
+			<!--<value></value> small beijing-->
+		</property>
+		<!-- mongo db info -->
+		<property>
+		  <name>indexCollection</name>
+		  <value>images</value>
+		</property>
+		<property>
+			<name>ImageProcessHost</name>
+			<value>172.18.109.14:8080</value>
+		</property>
+		<property>
+			<name>datumXml</name>
+			<value>template/instagram/tpl-instagram-image-datum.xml</value>
+		</property>
+		<property>
+			<name>storeXml</name>
+			<value>template/instagram/tpl-instagram-image-store.xml</value>
+		</property>
+		<property>
+			<name>TaskInterval</name>
+			<value>86400000</value>
+		</property>
+		<property>
+			<name>CrawlDbTableName</name>
+			<value>instagramTag</value>
+		</property>
+		<property>
+			<name>FetchSleepInterval</name>
+			<value>0</value>
+		</property>
+	</site>
+</configuration>

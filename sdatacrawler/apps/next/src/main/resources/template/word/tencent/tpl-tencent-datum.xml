@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<datum filter="null:name&amp;content&amp;_id&amp;url">
+	<!-- dcf -->
+	<field from="id" name="_id"></field>
+	<field from="id" name="id" index="dbid"></field>
+	
+	<field from="url" name="url" index="url"></field>
+	<field from="text" name="content" index="content"></field>
+	<field from="nick" name="uname" index="author" desc="：发表人昵称"></field>
+	<field from="name" name="uid"></field>
+	<field from="head" name="head"></field>
+	
+	<field from="latitude,longitude" name="geo" index="geo"></field>
+	<field from="image" name="image" action="saveImage" index="img_s" desc="图片url列表"></field>
+	<field from="video/realurl" name="video"></field>
+	
+	
+	<field from="location" name="loc" desc="发表者所在地"></field>
+	<field from="pub_time" name="pub_time" action="todate" index="date" desc="发表时间(转换后的时间)"></field>
+	<field from="fet_time" name="fet_time" action="todate" index="fetchtime"></field>
+	<field from="lang" name="lang" index="lang" value="zh"></field>
+	
+	<field name="dtf_w"></field>
+	
+	<!-- other -->
+	<field from="uurl" name="uurl"></field>
+	<field from="name" name="name"></field>
+	<field from="count" name="retct" desc="微博被转次数"></field>
+	<field from="mcount" name="comct" desc="点评次数"></field>
+	<field from="from" name="sourc" desc="来源"></field>
+	<field from="fromurl" name="fromu" desc="来源"></field>
+	<field from="self" name="self" desc="是否自已发的的微博，0-不是，1-是"></field>
+	<field from="timestamp" name="times" desc="发表时间"></field>
+	<field from="type" name="type" desc="微博类型，1-原创发表，2-转载，3-私信，4-回复，5-空回，6-提及，7-评论"></field>
+	<field from="country_code" name="counc" desc="国家码（与地区发表时间线一样）"></field>
+	<field from="province_code" name="provc" desc="省份码（与地区发表时间线一样）"></field>
+	<field from="city_code" name="cityc" desc="城市码（与地区发表时间线一样）"></field>
+	<field from="openid" name="openid" desc="用户唯一id，与name相对应"></field>
+	<field from="retweeted_status" name="retweeted_status"></field>
+	<field from="video" name="vd">
+		<field from="picurl" name="pu" desc="缩略图"></field>
+		<field from="player" name="py" desc="播放器地址"></field>
+		<field from="realurl" name="ru" desc="视频原地址"></field>
+		<field from="shorturl" name="su" desc="视频的短url"></field>
+		<field from="title" name="tt" desc="视频标题"></field>
+	</field>
+	<field from="music" name="mu">
+		<field from="author" name="au" desc="演唱者"></field>
+		<field from="url" name="ul" desc="音频地址"></field>
+		<field from="title" name="tt" desc="音频名字，歌名"></field>
+	</field>
+	
+	<field from="userinfo" name="userinfo">
+		<field from="name" name="_id" ></field>
+		<field from="origin" name="origin" value="tencent"></field>
+		<field from="name" name="id"></field>
+		<field from="name" name="sname" desc="用户帐户名"></field>
+		<field from="nick" name="name" desc="用户昵称"></field>
+		<field from="head" name="head" desc="头像url"></field>
+		<field from="sex" name="g" desc="用户性别，1-男，2-女，0-未填写"></field>
+		<field from="openid" name="openid" desc="用户唯一id，与name相对应"></field>
+		<field from="isvip" name="isvip" desc="是否认证用户"></field>
+		<field from="verifyinfo" name="vefrs" desc="认证信息"></field>
+		<field from="isrealname" name="isrln" desc=""></field>
+		<field from="isent" name="isent" desc="是否企业用户"></field>
+		<field from="fansnum" name="folct" desc="听众数"></field>
+		<field from="idolnum" name="frdct" desc="收听的人数"></field>
+		<field from="tweetnum" name="stact" desc="发表的微博数"></field>
+		<field from="favnum" name="favct"></field>
+		<field from="introduction" name="desc" desc="个人介绍"></field>
+		<field from="location" name="loc" desc="所在地"></field>
+		<field from="country_code" name="counc" desc="国家id,"></field>
+		<field from="province_code" name="provc" desc="地区id,"></field>
+		<field from="city_code" name="cityc" desc="城市id,"></field>
+		<list from="tag" name="tag">
+			<item>
+				<field from="id" name="id"></field>
+				<field from="name" name="name"></field>
+			</item>
+		</list>
+		<field from="exp" name="exp"></field>
+		<field from="level" name="level"></field>
+		<list from="comp" name="comp">
+			<item>
+				<field from="begin_year" name="bey"></field>
+				<field from="company_name" name="compn"></field>
+				<field from="department_name" name="deptn"></field>
+				<field from="end_year" name="edy"></field>
+				<field from="id" name="id"></field>
+			</item>
+		</list>
+		<list from="edu" name="edu">
+			<item>
+				<field from="id" name="id" desc="教育信息记录id"></field>
+				<field from="year" name="year" desc="入学年"></field>
+				<field from="schoolid" name="schid" desc="学校id"></field>
+				<field from="departmentid" name="depart" desc="院系id"></field>
+				<field from="level" name="level" desc="学历级别"></field>
+			</item>
+		</list>
+		<field from="birth_year" name="byear" desc="出生年"></field>
+		<field from="birth_month" name="bmonth" desc="出生月"></field>
+		<field from="birth_day" name="bday" desc="出生天 "></field>
+		<field from="hometown_code" name="htcd" desc="邮箱"></field>
+		<field from="homecity_code" name="hcicd" desc="邮箱"></field>
+		<field from="homeprovince_code" name="hpcd" desc="邮箱"></field>
+		<field from="homecountry_code" name="hcocd" desc="邮箱"></field>
+		<field from="homepage" name="burl" desc="邮箱"></field>
+		<field from="industry_code" name="iducd" desc="邮箱"></field>
+		<field from="email" name="email" desc="邮箱"></field>
+		<field from="key" name="key" ></field>
+		<field from="depth" name="depth" ></field>
+		<field from="regtime" name="crtdt" action="todate"></field>
+		<field from="regtime" name="regtime"></field>
+		<field from="send_private_flag" name="almsgf"></field>
+		<field from="mutual_fans_num" name="bfc"></field>
+	</field>
+</datum>

@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<configuration>
+	<site name="twitterTopic" hosturl="twitter.com"
+		fetcher="com.sdata.component.fetcher.TwitterTopicFetcher"
+		storer="com.sdata.component.data.SdataTopicTweetsDbStorer">
+		<property>
+			<name>FetchThreadNum</name>
+			<value>1</value>
+		</property>
+		<property>
+			<name>CrawlName</name>
+			<value>twitterTopic</value>
+		</property>
+		<property>
+			<name>source</name>
+			<value>twitter</value>
+		</property>
+		
+		<!-- consumer info -->
+		<property>
+			<name>ConsumerKey</name>
+			<value>JxbZCJLzi4vQEJS7TNb9rA</value>
+		</property>
+		<property>
+			<name>ConsumerSecret</name>
+			<value>8Er6J6iI6EQH8jzYsbVrWbgdqFf3WcWBzsRE8Yxzu0</value>
+		</property>
+		<!-- acess info -->
+		<property>
+			<name>AccessToken</name>
+			<value>544194759-esvNxnh4p8k8BAo95VteSplM5aVuPhCjQHEjuNuF</value>
+		</property>
+		<property>
+			<name>AccessTokenSecret</name>
+			<value>ikNacleByw5U8O7SjF04DWZzTXQIMLLyFBoI4dobk</value>
+		</property>
+		<!-- strategy info -->
+		<property>
+			<name>tweetsCountInOneTopic</name>
+			<value>200</value>
+		</property>
+		<property>
+			<name>topicLocation</name>
+			<value>1,1062617</value>
+		</property>
+		<!-- mongo db info -->
+		<property>
+			<name>mongoHost</name>
+			<value>172.18.109.78</value>
+		</property>
+		<property>
+			<name>mongoPort</name>
+			<value>27017</value>
+		</property>
+		<property>
+			<name>mongoDbName</name>
+			<value>twitterOthers</value>
+		</property>
+		<property>
+			<name>QueueThresholdSizeSlow</name>
+			<value>800</value>
+			<description></description>
+		</property>
+		<property>
+			<name>UseProxy</name>
+			<value>false</value>
+		</property>
+		<property>
+			<name>indexCollection</name>
+			<value>topics</value>
+		</property>
+		<property>
+			<name>datumXml</name>
+			<value>template/other/tpl-twitter.xml</value>
+		</property>
+		<property>
+			<name>topicIndexPath</name>
+			<value>template/other/tpl-topics.xml</value>
+		</property>
+		<property>
+			<name>FetchSleepInterval</name>
+			<value>1200000</value>
+		</property>
+	</site>
+</configuration>

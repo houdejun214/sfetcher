@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config>
+	<fields page="photo">
+		<field name="title" selector="#main #meta h1.photo-title" type="String"></field>
+		<!--<field name="referenceUrl" selector="#name" type="String"></field>-->
+		<field name="description" selector="#main #meta .photo-desc" type="String"></field>
+		<field name="originalPhotoId" selector="#main #photo .photo-div img" type="String"></field>
+		<field name="imageUrl" selector="#main #photo .photo-div img" type="String"></field>
+		<field name="fileType" selector="#main #photo .photo-div img" type="String"></field>
+		<!--<field name="siteType" selector="siteType" type="String"></field>-->
+		<field name="latitude" selector="#main #sidebar #photo-story #photo-story-map img" type="String"></field>
+		<field name="longitude" selector="#main #sidebar #photo-story #photo-story-map img" type="String"></field>
+		<field name="ownerId" selector="#main #sidebar #photo-story #photo-story-attribution .flickr-user .name .username a" type="String"></field>
+		<field name="ownerName" selector="#main #sidebar #photo-story #photo-story-attribution .flickr-user .name .username a" type="String"></field>
+		<field name="tags" selector="#main #sidebar #sidecar #thetags-wrapper #thetags li span.tag-wrapper a,#main #photo #photo-drag-proxy #notes li.note .note-content .note-wrap" type="Array"></field>
+	</fields>
+	<fields page="comments">
+		<field name="comments" selector="#main #comments ol li.comment-block" type="ObjectList"></field>
+		<field name="comments.comment" selector=".comment-body" type="String"></field>
+		<field name="comments.ownerId" selector=".comment-head .comment-owner a.comment-author" type="String"></field>
+		<field name="comments.ownerName" selector=".comment-head .comment-owner a.comment-author" type="String"></field>
+		<field name="comments.commentTime" selector=".comment-date a" type="String"></field>
+	</fields>
+	<fields page="exif">
+		<field name="exif" selector="" type="Object"></field>
+		<field name="exif.apertureValue" selector="" type="String"></field>
+		<field name="exif.dateTime" selector="" type="String"></field>
+		<field name="exif.exposureBias" selector="" type="String"></field>
+		<field name="exif.exposureTime" selector="" type="String"></field>
+		<field name="exif.flash" selector="" type="String"></field>
+		<field name="exif.focalLength" selector="" type="String"></field>
+		<field name="exif.imageHeight" selector="" type="String"></field>
+		<field name="exif.imageWidth" selector="" type="String"></field>
+		<field name="exif.isoSpeed" selector="" type="String"></field>
+		<field name="exif.camera" selector="" type="String"></field>
+	</fields>
+</config>

@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<store>
+	<collection name="blogs" pkTable="index">
+	</collection>
+</store>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<strategy>
+	<!-- http://mndsingapore.wordpress.com/ -->
+	<links selector="#content h2 a,.nav-previous a|link"></links>
+	<datum selector="#content h2 a,.nav-previous a|link"></datum>
+</strategy>

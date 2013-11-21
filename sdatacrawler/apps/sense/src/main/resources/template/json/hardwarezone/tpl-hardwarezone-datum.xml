@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<datum>
+	<!-- default column family -->
+ 	<field name="_id" ref="_id"  ></field>
+ 	<field name="id"  ref="_id"></field>
+ 	<field name="url" ref="url"></field>
+ 	
+	<field name="title"  selector=".tborder div.smallfont a|txt"></field>
+	<field name="content"  selector=".post-wrapper .post td.alt1[id] div[id]|html"></field>
+	<field name="pub_time"  selector=".post-wrapper #currentPost|txt" handler="com.sdata.sense.handler.hardware.HardwarePubtimeHandler"></field>
+	<field name="fet_time" action="todate"></field>
+	<field name="lang" value="en"></field>
+
+	<field name="image" selector=".post-wrapper td.alt1[id] div[id] img|links" action="saveImage"></field>
+	<field name="video" selector=".post-wrapper td.alt1[id] div[id] iframe|links "></field>
+	<field name="uname" selector=".post-wrapper a.bigusername|txt" ></field>
+	<field name="uid" selector="{{uurl}}|~/users/(\d+)/|[1]"></field>
+	<field name="geo"></field>
+	<field name="loc" value="singapore"></field>
+	<field name="head" selector=".post-wrapper td.alt2 a>img|link"></field>
+	
+	<!-- other -->
+	<field name="titleUrl" selector=".tborder div.smallfont a|link"></field>
+	<field name="floor" selector=".post-wrapper #currentPost~td a|txt"></field>
+	<field name="uurl" selector=".post-wrapper a.bigusername|link"></field>
+</datum>

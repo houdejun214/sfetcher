@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<datum filter="null:uname&amp;content&amp;_id">
+	<!-- dcf -->
+	<field name="_id" ref="_id"></field>
+	<field name="id" selector="{{url}}|~/status/(\d+)/|[1]"></field>
+	
+	<field name="url" ref="url"></field>
+	<field name="content" selector=".permalink-tweet-container .original-tweet .js-tweet-text|html"></field>
+	<field name="geo" selector=".permalink-footer .client-and-actions .metadata a.tweet-geo-text|link|~/q=(-?\d+.?\d+ *%2C*-?\d+.?\d+)/|[1]"></field>
+	<field name="image" selector=".permalink-footer .media img|links" action="saveImage"></field>
+	
+	<field name="uid" selector=".permalink-header .account-group|[data-user-id]"></field>
+	<field name="uname" selector=".permalink-header .account-group .fullname|txt"></field>
+	<field name="head" selector=".permalink-header .account-group img|link"></field>
+	
+	<field name="lang" index="lang" value="en"></field>
+	<field name="pub_time" selector=".permalink-header .time span|[data-time]" action="todate"></field>
+	<field name="fet_time" action="todate"></field>
+	
+	<field name="retct" selector=".permalink-footer .js-tweet-stats-container .stats strong|[0]|txt"></field>
+	<!-- other -->	
+	<field name="uurl" selector=".permalink-header .account-group|link"></field>
+	<field name="account" selector=".permalink-header .account-group .username b|txt"></field>
+	
+	<field name="user" selector=".permalink-header" >
+		<field name="_id" ref="uid"></field>
+		<field name="id" ref="uid"></field>
+		<field name="name" ref="account"></field>
+		<field name="sname" ref="uname"></field>
+		<field name="head" ref="head"></field>
+		<field name="url" ref="uurl"></field>
+		<field name="folct"></field>
+		<field name="stact"></field>
+		<field name="frdct"></field>
+	</field>
+</datum>

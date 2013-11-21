@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<store>
+	<!-- 
+	如果有多个collection，配置文件中内部field的子集合一定要放到前面，datum的大集合放到配置文件的最后面
+	<collection name="posts" primyKey="_id" >
+		<update>reviews</update>
+		<remove>user</remove>
+	</collection> 
+	-->
+	<collection name="hot_twitter_users" primaryKey="id" field="user">
+	</collection>
+	
+	<collection name="hot_twitter_tweets" primaryKey="id" pkTable="index">
+		<remove>user</remove>
+		<colfly name="others">srct,retct,irtsi,irtui,irtn,sourc,reted,trunc,filt,entt,place</colfly>
+	</collection>
+</store>

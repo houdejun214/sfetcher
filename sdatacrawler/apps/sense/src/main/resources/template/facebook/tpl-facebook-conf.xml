@@ -1,0 +1,8 @@
+<!-- https://graph.facebook.com/oauth/access_token?client_id=469118379846908&client_secret=36368a99bd4e4a5f94a5d794ac7341dd&grant_type=fb_exchange_token&fb_exchange_token=exists_token -->
+<configuration>
+		<property>
+			<name>access_token</name>
+			<value>CAAGqqSJjbPwBABq0jSUaicHLAKyxM8zHW4R7Ra4fZBZCUcTuIYzOowbAlDW2nddEcYUdajz0FfW3zMBFIN20WSHUo6zsMj0bZCLGvTvZAM7vleDVa6N43wZAj34kAXEEZCKQP6SKt3vpbCOvkWZAlKRTSZCSwHoEfKHkWCtWTatacWu31ypkA7bp</value>
+			<description></description>
+		</property>
+</configuration>

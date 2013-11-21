@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<datum>
+	<!-- shop warning:if have action then from is must needed -->
+	<!--<field name="_id" from=""  type="string" selector="" link="" ref="" next="" param="" action="" index="dbid"></field> -->
+	<field name="_id"  selector="{{block}_{postid}}" index="dbid"></field>
+	<field name="aurl" selector=".atl-menu |[js_activityurl]" index="url"></field>
+	<field name="rcount" selector=".atl-menu |[js_replycount]"></field>
+	<field name="ccount" selector=".atl-menu |[js_clickcount]"></field>
+	<field name="uid" selector=".atl-menu |[js_activityuserid]"></field>
+	<field name="rtime" selector=".atl-menu |[js_replytime]" action="todate" from="rtime"></field>
+	<field name="block" selector=".atl-menu |[js_blockid]"></field>
+	<field name="postid" selector=".atl-menu |[js_postid]"></field>
+	<field name="posttime" selector=".atl-menu |[js_posttime]" action="todate" from="posttime"></field>
+	<field name="title" selector=".atl-menu |[js_title]" handler="com.sdata.core.parser.html.handler.URLEncodeHandler"></field>
+	<field name="grade" selector=".atl-menu |[js_grade]"></field>
+	<field name="powerreply" selector=".atl-menu |[js_powerreply]"></field>
+	<field name="blockname" selector=".atl-menu |[js_blockname]" handler="com.sdata.core.parser.html.handler.URLEncodeHandler"></field>
+	<field name="uname" selector=".atl-menu |[js_activityusername]" handler="com.sdata.core.parser.html.handler.URLEncodeHandler"></field>
+	<field name="content" selector=".atl-main .atl-item:not([id]) .atl-con-bd .bbs-content|html" index="content"></field>
+	<list name="replys" selector=".atl-main .atl-item[id]" next=".js-keyboard-next|link">
+		 <item> 
+		 	<field name="rid" selector=".atl-item|[id]|{{_id}_{0}}"></field>
+		 	<field name="aid" ref="_id"></field>
+		 	<field name="floor" selector=".atl-item |[id]"></field>
+			<field name="rtime" selector=".atl-item |[js_resTime]" action="todate" from="replytime"></field>
+		 	<field name="uid" selector=".atl-info a|[uid]"></field>
+		 	<field name="uname" selector=".atl-info a|[uname]"></field>
+		 	<field name="rcontent" selector=".atl-content .atl-con-bd .bbs-content|html"></field>
+		 </item>
+	</list>
+	<field name="aid" ref="_id"></field>
+	<field name="st" value="forum"></field>
+	<field name="fetdt" type="date" value="Date()" index="fetchtime" ></field>
+	<field name="origin" index="origin" value="tianya"></field>
+	<field name="classification" index="classification" value="post"></field>
+	<field name="docloc" index="loc" value="cn"></field>
+	<field name="lang" index="lang" value="zh"></field>
+</datum>

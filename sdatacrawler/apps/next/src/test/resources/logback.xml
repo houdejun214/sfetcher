@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="1000 seconds">
+  
+    <!-- Output to Console -->
+     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+	      <pattern>%date %level [%thread] %10logger [line:%line] %msg%n</pattern>
+	    </encoder>
+    </appender>
+  
+    <logger name="ch.qos.logback" level="WARN"/>
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="net.sf.json" level="OFF"/>
+    <logger name="defaultBeanProcessing" level="WARN"/>
+    <logger name="twitter4j" level="WARN"/>
+    <logger name="weibo4j" level="WARN"/>
+    <logger name="net.sf.json.JSONObject defaultBeanProcessing" level="none"/>
+    <logger name="com.tencent.weibo" level="WARN"/>
+    <logger name="datapub" level="INFO" />
+    <logger name="com.almworks.sqlite4java" level="WARN"/>
+    <root level="INFO">
+        <appender-ref ref="Console"/>
+    </root>
+</configuration>

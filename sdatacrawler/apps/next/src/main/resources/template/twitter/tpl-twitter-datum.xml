@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<datum filter="null:name&amp;text|_id">
+	<field from="id" name="_id"></field>
+	<field from="id" name="id" index="dbid"></field>
+	<field from="origin" name="origin" index="origin" value="twitter"></field>
+	<field from="classification" name="classification" index="classification" indexOnly="true" value="tweets"></field>
+	<field from="docloc" name="docloc" index="loc" value="ww" indexOnly="true"></field>
+	<field from="lang" name="lang" index="lang" value="en"></field>
+	<field from="text" name="text" index="content"></field>
+	<field from="retweet_count" name="retct"></field>
+	<field from="in_reply_to_status_id" name="irtsi"></field>
+	<field from="in_reply_to_user_id" name="irtui"></field>
+	<field from="in_reply_to_screen_name" name="irtn"></field>
+	<field from="source" name="sourc"></field>
+	<field from="geo" name="geo" index="geo"></field>
+	<field from="retweeted" name="reted"></field>
+	<field from="created_at" name="crtdt" action="todate" index="date"></field>
+	<field from="truncated" name="trunc"></field>
+	<field from="filt" name="filt"></field><!-- todo -->
+	<field from="entities" name="entt">
+		<list from="hashtags" name="hast">
+			<item>
+				<field from="text" name="text"></field>
+			</item>
+		</list>
+		<list from="user_mentions" name="userm">
+			<item>
+				<field from="id" name="id"></field>
+				<field from="name" name="name"></field>
+				<field from="screen_name" name="sname"></field>
+			</item>
+		</list>
+		<list from="media" name="media">
+			<item>
+				<field from="id" name="id"></field>
+				<field from="type" name="type"></field>
+				<field from="expanded_url" name="expu"></field>
+				<field from="display_url" name="dispu"></field>
+				<field from="url" name="url"></field>
+				<field from="media_url" name="mdau" action="saveImage" index="img_s"></field>
+			</item>
+		</list>
+	</field>
+	<field from="place" name="place">
+		<field from="attributes" name="attr"></field>
+		<field from="bounding_box" name="bbox">
+			<field from="coordinates" name="coord"></field>
+			<field from="type" name="type"></field>
+		</field>
+		<field from="country" name="coun"></field>
+		<field from="country_code" name="counc"></field>
+		<field from="full_name" name="fname"></field>
+		<field from="id" name="id"></field>
+		<field from="name" name="name"></field>
+		<field from="place_type" name="pltyp"></field>
+		<field from="url" name="url"></field>
+	</field>
+	<field from="uname" name="name"></field>
+	<field from="screen_name" name="sname" index="author"></field>
+	<field from="user/id" name="uid"></field>
+	<field from="retid" name="retid"></field>
+	<field from="fetdt" name="fetdt" action="todate" index="fetchtime"></field>
+	<field from="user" name="user">
+		<field from="id" name="_id"></field>
+		<field from="origin" name="origin" value="twitter"></field>
+		<field from="id" name="id"></field>
+		<field from="name" name="name"></field>
+		<field from="screen_name" name="sname"></field>
+		<field from="url" name="url"></field>
+		<field from="profile_image_url" name="head"></field>
+		<field from="verified" name="vrfed"></field>
+		<field from="created_at" name="crtdt"></field>
+		<field from="favourites_count" name="favct"></field>
+		<field from="statuses_count" name="stact"></field>
+		<field from="followers_count" name="folct"></field>
+		<field from="friends_count" name="frdct"></field>
+		<field from="geo_enabled" name="geoen"></field>
+		<field from="location" name="loc"></field>
+		<field from="lang" name="lang"></field>
+		<field from="description" name="desc"></field>
+		<field from="time_zone" name="timez"></field>
+		<field from="utc_offset" name="utcof"></field>
+		<field from="listed_count" name="listct"></field>
+		<field from="protected" name="prote"></field>
+		<field from="withheld_in_countries" name="whcun"></field>
+		<field from="withheld_scope" name="whsc"></field>		
+	</field>
+</datum>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<datum filter="null:_id&amp;url&amp;title&amp;content&amp;pub_time">
+	<!-- default column family -->
+ 	<field name="_id" ref="_id"  ></field>
+ 	<field name="id"  ref="_id"></field>
+ 	<field name="url" ref="url"></field>
+ 	
+	<field name="title"  selector="#main .post h3.post-title|txt"></field>
+	<field name="content"  selector="#main .post .post-body|html"></field>
+	<field name="pub_time"  selector="h2.date-header|txt|~/, ?(.*)/|[1]" action="todate" ></field>
+	<field name="fet_time" action="todate"></field>
+	<field name="lang" value="en"></field>
+
+	<field name="image" selector="#main .post .post-body img|links" action="saveImage"></field>
+	<field name="video" selector="#main .post .post-body iframe|links "></field>
+	<field name="uname" value="Velda Tan" ></field>
+	<field name="uid"></field>
+	<field name="geo"></field>
+	<field name="loc" value="singapore"></field>
+	<field name="head" selector="#sidebar-wrapper .widget-content img|link"></field>
+		
+	<field name="dtf_s"></field>
+	<field name="dtf_pv"></field>
+	<field name="dtf_pt"></field>
+	<field name="dtf_oid"></field>
+	
+	<!-- extended column family -->
+</datum>

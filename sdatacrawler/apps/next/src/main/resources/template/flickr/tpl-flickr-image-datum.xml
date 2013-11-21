@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<datum>
+	<field from="orgid" name="_id" handler="com.sdata.core.parser.html.handler.UuidSiteHandler"></field>
+	<field from="origin" name="origin" index="origin" value="flickr" indexOnly="true"></field>
+	<field from="classification" name="classification" index="classification" value="image" indexOnly="true"></field>
+	<field from="docloc" name="docloc" index="loc" value="ww" indexOnly="true"></field>
+	<field from="lang" name="lang" index="lang" value="en" indexOnly="true"></field>
+	<field from="_id" name="id" index="dbid"></field>
+	<field from="description" name="desc" index="content"></field>
+	<field from="fileType" name="filet"></field>
+	<field from="height_l" name="high"></field>
+	<field from="width_l" name="width"></field>
+	<field from="height_o" name="higho"></field>
+	<field from="width_0" name="widtho"></field>
+	<field from="isPublic" name="ispub"></field>
+	<field from="imageUrl" name="imgur" action="saveImage" index="img_s"></field>
+	<field from="latitude" name="lat" index="geo.lat"></field>
+	<field from="longitude" name="logit" index="geo.lng"></field>
+	<field from="referenceUrl" name="refur" index="url"></field>
+	<field from="referenceUrl" name="uid" handler="com.sdata.core.parser.html.handler.flickr.FlickrUidHandler"></field>
+	<field from="title" name="title" index="title"></field>
+	<field from="ownerName" name="ownn" index="author"></field>
+	<field from="ownerId" name="ownid" ></field>
+	<field from="siteType" name="sitty" ></field>
+	<field from="fetchTime" name="fetdt" index="fetchtime"></field>
+	<field from="cityName" name="citn" ></field>
+	<field from="takenDate" name="takdt" action="todate"></field>
+	<field from="uploadDate" name="updt" action="todate" index="date"></field>
+	<field from="exif" name="exif">
+		<field from="apertureValue" name="aptv"></field>
+		<field from="dateTime" name="datt"></field>
+		<field from="exposureBias" name="expbi"></field>
+		<field from="exposureTime" name="expt"></field>
+		<field from="fNumber" name="fnum"></field>
+		<field from="flash" name="flash"></field>
+		<field from="focalLength" name="flen"></field>
+		<field from="imageHeight" name="imgh"></field>
+		<field from="imageWidth" name="imgw"></field>
+		<field from="isoSpeed" name="isosp"></field>
+		<field from="camera" name="cama"></field>		
+	</field>
+	<field from="tags" name="tags"></field>
+	<field from="groups" name="groups"></field>
+	<list from="comments" name="comts">
+		<item>
+			<field from="ownid" name="ownid"></field>
+			<field from="ownn" name="ownn"></field>
+			<field from="commentTime" name="comtt"></field>
+			<field from="comment" name="comt"></field>
+			<field from="pid" name="pid"></field>
+			<field from="pid" name="shk"></field>
+			<field from="origin" name="origin" value="flickr"></field>
+		</item>
+	</list>
+</datum>

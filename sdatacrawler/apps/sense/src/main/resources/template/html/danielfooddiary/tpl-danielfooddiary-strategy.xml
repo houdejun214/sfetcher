@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<strategy>
+	<!-- http://danielfooddiary.com/?s={keywords}-->
+	<links selector=".nav-entries a:contains(Older)|link"></links>
+	<datum selector=".post h2.title a|links"></datum>
+</strategy>

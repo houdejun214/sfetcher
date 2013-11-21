@@ -1,0 +1,7 @@
+<configuration>
+	<!-- crawl site for tencent -->
+		<property>
+			<name>FetchThreadNum</name>
+			<value>1</value>
+		</property>
+</configuration>

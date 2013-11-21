@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<configuration>
+ <!-- crawl site for tianya -->
+	  <site name="tianya" 
+	  	hosturl="http://bbs.tianya.cn/"
+	  	fetcher = "com.sdata.component.parser.html.SdataHtmlFetcher"
+	  	parser = "com.sdata.component.parser.html.SdataHtmlParser"
+	  	storer = "com.sdata.component.data.SdataHtmlStorer">
+			<property>
+				<name>FetchThreadNum</name>
+				<value>1</value>
+			</property>
+			<property>
+				<name>siteName</name>
+				<value>tianya</value>
+			</property>
+			<property>
+			  <name>mongoHost</name>
+			  <value>172.18.109.15</value>
+			</property>
+			<property>
+				<name>ImageProcessHost</name>
+				<value>172.18.109.15:8081</value>
+			</property>
+		  	<property>
+			  <name>mongoPort</name>
+			  <value>27017</value>
+			</property>
+			<property>
+			  <name>mongoDbName</name>
+			  <value>tianya</value>
+			</property>
+			<property>
+				<name>UseProxy</name>
+				<value>false</value>
+			</property>
+			<property>
+			  <name>maxDatum</name>
+			  <value>500</value>
+			</property>
+			<property>
+				<name>strategyPath</name>
+				<value>template/tianya/tpl-tianya-strategy.xml</value>
+			</property>
+			<property>
+				<name>datumXml</name>
+				<value>template/tianya/tpl-tianya-datum.xml</value>
+			</property>
+			<property>
+				<name>storeXml</name>
+				<value>template/tianya/tpl-tianya-store.xml</value>
+			</property>
+			<property>
+				<name>TaskInterval</name>
+				<value>20000</value>
+			</property>
+	  </site>
+</configuration>

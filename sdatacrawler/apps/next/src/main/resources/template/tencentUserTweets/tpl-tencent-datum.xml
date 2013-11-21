@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<datum filter="null:name&amp;text|shkey|_id">
+	<field from="id" name="_id"></field>
+	<field from="id" name="id"></field>
+	<field from="text" name="text"></field>
+	<field from="name" name="sname" desc="发表人帐户名"></field>
+	<field from="name" name="uid" handler="com.sdata.core.parser.html.handler.tencent.TencentUidHandler"></field>
+	<field from="nick" name="name" desc="：发表人昵称"></field>
+	<field from="count" name="retct" desc="微博被转次数"></field>
+	<field from="mcount" name="comct" desc="点评次数"></field>
+	<field from="from" name="sourc" desc="来源"></field>
+	<field from="fromurl" name="fromu" desc="来源"></field>
+	<field from="image" name="image" desc="图片url列表"></field>
+	<field from="video" name="vd">
+		<field from="picurl" name="pu" desc="缩略图"></field>
+		<field from="player" name="py" desc="播放器地址"></field>
+		<field from="realurl" name="ru" desc="视频原地址"></field>
+		<field from="shorturl" name="su" desc="视频的短url"></field>
+		<field from="title" name="tt" desc="视频标题"></field>
+	</field>
+	<field from="music" name="mu">
+		<field from="author" name="au" desc="演唱者"></field>
+		<field from="url" name="ul" desc="音频地址"></field>
+		<field from="title" name="tt" desc="音频名字，歌名"></field>
+	</field>
+	<field from="self" name="self" desc="是否自已发的的微博，0-不是，1-是"></field>
+	<field from="timestamp" name="times" desc="发表时间"></field>
+	<field from="crtdt" name="crtdt" desc="发表时间(转换后的时间)"></field>
+	<field from="type" name="type" desc="微博类型，1-原创发表，2-转载，3-私信，4-回复，5-空回，6-提及，7-评论"></field>
+	<field from="geo" name="geo" desc="发表者地理信息"></field>
+	<field from="location" name="loc" desc="发表者所在地"></field>
+	<field from="country_code" name="counc" desc="国家码（与地区发表时间线一样）"></field>
+	<field from="province_code" name="provc" desc="省份码（与地区发表时间线一样）"></field>
+	<field from="city_code" name="cityc" desc="城市码（与地区发表时间线一样）"></field>
+	<field from="latitude" name="lat"></field>
+	<field from="longitude" name="logit"></field>
+	<field from="openid" name="openid" desc="用户唯一id，与name相对应"></field>
+	<field from="fetdt" name="fetdt"></field>
+	<field from="user" name="user"></field>
+	<field from="retid" name="retid"></field>
+	<field from="retweeted_status" name="retweeted_status"></field>
+</datum>

@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<configuration>
+	<!-- crawl site for tencent -->
+	<site name="twitterWord"
+		fetcher="com.sdata.component.word.WordFetcher" 
+		storer="com.sdata.core.data.SdataStandardStorer">
+		<property>
+			<name>FetchThreadNum</name>
+			<value>1</value>
+		</property>
+		<property>
+			<name>source</name>
+			<value>twitter</value>
+		</property>
+		<!-- consumer info -->
+		<property>
+			<name>ConsumerKey</name>
+			<value>JxbZCJLzi4vQEJS7TNb9rA</value>
+		</property>
+		<property>
+			<name>ConsumerSecret</name>
+			<value>8Er6J6iI6EQH8jzYsbVrWbgdqFf3WcWBzsRE8Yxzu0</value>
+		</property>
+		<!-- acess info -->
+		<property>
+			<name>AccessToken</name>
+			<value>544194759-esvNxnh4p8k8BAo95VteSplM5aVuPhCjQHEjuNuF</value>
+		</property>
+		<property>
+			<name>AccessTokenSecret</name>
+			<value>ikNacleByw5U8O7SjF04DWZzTXQIMLLyFBoI4dobk</value>
+		</property>
+		<!-- crawler item db info -->
+		<property>
+		  <name>next.crawler.item.host</name>
+		  <value>172.29.34.96</value>
+		</property>
+		<property>
+		  <name>next.crawler.item.port</name>
+		  <value>3306</value>
+		</property>
+		<property>
+		  <name>next.crawler.item.dataBase</name>
+		  <value>sdatacrawler</value>
+		</property>
+		<property>
+		  <name>next.crawler.item.userName</name>
+		  <value>sdatacrawler</value>
+		</property>
+		<property>
+		  <name>next.crawler.item.password</name>
+		  <value>sdatacrawler123</value>
+		</property>
+		<property>
+		  <name>next.crawler.item.queue.table</name>
+		  <value>TwitterWordQueue</value>
+		</property>
+		<property>
+		  <name>next.crawler.item.redis.namespace</name>
+		  <value>Twitter_Word</value>
+		</property>
+		<!-- mongo db info -->
+		<property>
+			<name>QueueThresholdSizeSlow</name>
+			<value>30</value>
+			<description></description>
+		</property>
+		<property>
+			<name>datumXml</name>
+			<value>template/word/twitter/tpl-twitter-datum.xml</value>
+		</property>
+		<property>
+			<name>storeXml</name>
+			<value>template/word/twitter/tpl-twitter-store.xml</value>
+		</property>
+		<property>
+			<name>FetchSleepInterval</name>
+			<value>20000</value>
+		</property>
+	</site>
+</configuration>

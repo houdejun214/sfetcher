@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<configuration>
+	<!-- crawl site for tencent -->
+	<site name="tencentTweets" hosturl="t.qq.com"
+		fetcher="com.sdata.component.fetcher.TencentTweetsFetcher" parser="com.sdata.component.parser.TencentTweetsParser"
+		storer="com.sdata.component.data.storer.SdataTweetsStorer">
+		<property>
+			<name>FetchThreadNum</name>
+			<value>1</value>
+		</property>
+		<property>
+			<name>source</name>
+			<value>tencent</value>
+		</property>
+		<property>
+			<name>Host</name>
+			<value>172.29.34.96</value>
+		</property>
+		<!-- consumer info -->
+		<property>
+			<name>ConsumerKey</name>
+			<value>fce8b11b2f03403fafc7dda6e75e34a6</value>
+		</property>
+		<property>
+			<name>ConsumerSecret</name>
+			<value>721621cfce289a476e16cbe306734318</value>
+		</property>
+		<!-- acess info -->
+		<property>
+			<name>AccessToken</name>
+			<value>b6f0cb88b56d4581850c8dc75d138a5d</value>
+		</property>
+		<property>
+			<name>AccessTokenSecret</name>
+			<value>cf46873087335987eaa688cef321b4cf</value>
+		</property>
+		<!-- mongo db info -->
+		<property>
+			<name>QueueThresholdSizeSlow</name>
+			<value>30</value>
+			<description></description>
+		</property>
+		<property>
+			<name>datumXml</name>
+			<value>template/tencent/tpl-tencent-datum.xml</value>
+		</property>
+		<property>
+			<name>storeXml</name>
+			<value>template/tencent/tpl-tencent-store.xml</value>
+		</property>
+		<property>
+			<name>FetchSleepInterval</name>
+			<value>20000</value>
+		</property>
+		<filter pos="before" class="com.sdata.component.filter.SdataTweetsDbFilter"></filter>
+	</site>
+</configuration>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<strategy>
+	<init link="http://forum.channelnewsasia.com/forumdisplay.php?19-Market-Talk"></init>
+	<links selector=".prev_next a[rel=next]|link"></links>
+	<datum selector="li.threadbit">
+		<field name="url" selector=".threadtitle a.title|link" ></field>
+		<!--reply count-->
+		<field name="rcount" selector=".threadstats .understate|txt"></field>
+		<!--click count-->
+		<field name="ccount" selector=".threadstats li:eq(1)|txt" action="tonumber"></field>
+	</datum>
+</strategy>

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<datum>
+	<field from="id" name="_id"></field>
+	<field from="id" name="id" index="dbid"></field>
+	<field from="origin" name="origin" index="origin" value="instagram" indexOnly="true"></field>
+	<field from="classification" name="classification" index="classification" value="image" indexOnly="true"></field>
+	<field from="docloc" name="docloc" index="loc" value="ww" indexOnly="true"></field>
+	<field from="lang" name="lang" index="lang" value="en" indexOnly="true"></field>
+	<field from="attribution" name="attr"></field>
+	<field from="authid" name="ownid" ></field>
+	<field from="author" name="ownn" index="author"></field>
+	<field from="content" name="desc" index="content"></field>
+	<field from="caption" name="caption"></field>
+	<list from="comments/data" name="comts">
+		<item>
+			<field from="id" name="_id" ></field>
+			<field from="id" name="id"></field>
+			<field from="pid" name="pid"></field>
+			<field from="uid" name="ownid"></field>
+			<field from="text" name="comt"></field>
+			<field from="created_time" name="comtt" action="todate"></field>
+			<field from="origin" name="origin" value="instagram"></field>
+		</item>
+	</list>
+	<field from="comments/count" name="comtct"></field>
+	<field from="fetdt" name="fetdt" action="todate" index="fetchtime"></field>
+	<field from="created_time" name="crtdt" action="todate" index="date"></field>	
+	<field from="imgurl" name="imgur">
+		<field from="path" name="path"></field>
+		<field from="imgurl" name="url" index="img_s"></field>
+	</field>
+	<field from="filter" name="filter"></field>
+	<field from="height" name="high"></field>
+	<field from="width" name="width"></field>
+	<field from="images" name="images"></field>
+	<field from="likes" name="likes"></field>
+	<field from="link" name="refur" index="url"></field>
+	<field from="location" name="location">
+		<field from="latitude" name="lat" index="geo.lat"></field>
+		<field from="longitude" name="logit" index="geo.lng"></field>
+	</field>
+	<field from="tags" name="tags"></field>
+	<field from="type" name="type"></field>
+	<field from="user_has_liked" name="uhasliked"></field>
+	<field from="sitty" name="sitty" value="instagram"></field>
+	<list from="userlist" name="userlist">
+		<item>
+			<field from="id" name="_id" ></field>
+			<field from="id" name="id"></field>
+			<field from="username" name="name"></field>
+			<field from="profile_picture" name="upic"></field>
+			<field from="full_name" name="fname"></field>
+			<field from="bio" name="bio"></field>
+			<field from="wbsite" name="wbsite"></field>
+			<field from="origin" name="origin" value="instagram"></field>
+		</item>
+	</list>
+</datum>

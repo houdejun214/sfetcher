@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<strategy>
+	<!-- http://www.sgpolitics.net/index.php?s=video -->
+	<links selector="p a:contains(Next)|link"></links>
+	<datum selector="#content h1 a|links"></datum>
+</strategy>

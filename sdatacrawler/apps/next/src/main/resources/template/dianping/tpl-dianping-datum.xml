@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<datum filter="null:name|_id|url">
+	<!-- shop warning:if have action then from is must needed -->
+	<!--<field name="_id" from=""  type="string" selector="" link="" ref="" next="" param="" action="" index="dbid"></field> -->
+	<field name="_id"  selector="link[rel=canonical]|link|~/^http://www\.dianping\.com/shop/(\d+)\??.*/|[1]"></field>
+	<field name="url" selector="link[rel=canonical]|link" index="url"></field>
+	<field name="geo" selector="~/poi:*'([A-Z]*)/|[1]'" handler="com.sdata.core.parser.html.handler.dianping.DianpingGeoHandler" index="geo"></field>
+	<field name="id"  selector="link[rel=canonical]|link|~/^http://www\.dianping\.com/shop/(\d+)\??.*/|[1]" action="tolong" index="dbid"></field>
+	<field name="name" selector=".shop-info-inner .shop-name .shop-title|txt" index="title"></field>
+	<field name="crst" selector=".shop-info-inner .comment-rst .item-rank-rst meta|[content]"></field>
+	<field name="fee" type="number" selector="shop-info-inner .comment-rst dl dd|txt"></field>
+	<field name="taste"  selector=".shop-info-inner .desc-list dl|:[dt=口味]|dd em|txt" ></field>
+	<field name="srd"  selector=".shop-info-inner .desc-list dl|:[dt=环境]|dd em|txt"></field>
+	<field name="service"  selector=".shop-info-inner .desc-list dl|:[dt=服务]|dd em|txt"></field>
+	<field name="adres"  selector=".shop-info-inner .desc-list dl|:[dt=地址]|dd span[itemprop]|txt"></field>
+	<field name="contact"  selector=".shop-info-inner .desc-list dl|:[dt=电话]|dd|txt"></field>
+	<field name="tag"  selector=".shop-info-inner .desc-list dl|:[dt=标签]|dd span|txt"></field>
+	<list name="images"  from="images" next="div.Pages a.NextPage|link" link="{{url}/photos}"  action="saveImage" index="img_s">
+		<item selector=".frame .frame-inner img|links" handler="com.sdata.core.parser.html.handler.dianping.DianpingImageHandler" ></item>
+	</list>
+	<field name="sg" selector=".shop-info-inner .shop-gallery .thumb-wrapper a.thumb|link"></field>
+	<field name="alias"  selector=".block .block-inner.desc-list dl|:[dt=别名]|dd|txt" ></field>
+	<field name="desc"  selector=".block .block-inner.desc-list dl|:[dt=商户描述]|dd|txt" index="content"></field>
+	<field name="rcmd"  selector=".block .block-inner.desc-list dl|:[dt=推荐菜]|dd strong|txt"></field>
+	
+	<field name="stb"  selector=".block .block-inner.desc-list dl|:[dt=餐厅氛围]|dd span:not(.link-fn)|txt"></field>
+	<field name="fture"  selector=".block .block-inner.desc-list dl|:[dt=餐厅特色]|dd span:not(.link-fn)|txt"></field>
+	<field name="opt"  selector=".block .block-inner.desc-list dl|:[dt=营业时间]|dd span:not(.link-fn,.no-info)|txt"></field>
+	<field name="trst"  selector=".block .block-inner.desc-list dl|:[dt=公交信息]|dd .J_full-cont:not(.link-fn)|txt"></field>
+	<list name="reviews" selector="ul.comment-list li.comment-list-item" link="{{url}/review_more}" next="div.Pages a.NextPage|link">
+		 <item> 
+		 	<field name="_id"  selector="li|[id]|~/^rev_(\d+)/|[1]"></field>
+		 	<field name="id"  selector="li|[id]|~/^rev_(\d+)/|[1]" action="tolong"></field>
+		 	<field name="url"  selector="li|[id]|~/^rev_(\d+)/|[1]|{http://www.dianping.com/review/{0}}"></field>
+		 	<field name="sid" ref="id"></field>
+		 	<field name="uid" selector=".content .user-info a|[user-id]"></field>
+		 	<field name="uname" selector=".content .user-info a|txt"></field>
+		 	<field name="crtdt" selector=".content .misc span.time|txt" handler="com.sdata.core.parser.html.handler.dianping.DianpingReviewDateHandler"></field>
+		 	<field name="taste" selector=".content .comment-rst dl|dd|[0]|txt"></field>
+		 	<field name="srd" selector=".content .comment-rst dl|dd|[1]|txt"></field>
+		 	<field name="service" selector=".content .comment-rst dl|dd|[2]|txt"></field>
+		 	<field name="fee" selector=".content .comment-rst dl|dd|[3]|txt"></field>
+		 	<field name="content" selector=".content .comment-entry div|txt"></field>
+		 	<field from="origin" name="origin" index="origin" value="dianping"></field>
+		 </item>
+	</list>
+	<field name="fetdt" index="fetchtime" ></field>
+	<field name="origin" index="origin" value="dianping"></field>
+	<field name="classification" index="classification" value="shop" indexOnly="true"></field>
+	<field name="docloc" index="loc" value="cn" indexOnly="true"></field>
+	<field name="lang" index="lang" value="zh" indexOnly="true"></field>
+</datum>

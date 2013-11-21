@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<datum filter="null:_id&amp;url&amp;title&amp;content&amp;pub_time">
+	<!-- default column family -->
+ 	<field name="_id" ref="id"  ></field>
+ 	<field name="id"  ref="url"  handler="com.sdata.core.parser.html.handler.UuidEncodeHandler"></field>
+ 	<field name="url" ref="url"></field>
+	<field name="title"  selector="#artibodyTitle|txt"></field>
+	<field name="content"  selector="#artibody|html"></field>
+	<field name="pub_time"  selector=".artInfo #pub_date|txt" action="todate"></field>
+	<field name="fet_time" action="todate"></field>
+	<field name="lang" value="zh"></field>
+
+	<field name="image" selector="#artibody img|links" action="saveImage"></field>
+	<field name="video" selector="#artibody #J_Video_Source|link "></field>
+	<field name="uname"></field>
+	<field name="uid"></field>
+	<field name="geo"></field>
+	<field name="loc"></field>
+		
+	<field name="dtf_s"></field>
+	<field name="dtf_pv"></field>
+	<field name="dtf_pt"></field>
+	<field name="dtf_oid"></field>
+	
+	<!-- extended column family -->
+	<field name="media"  selector=".artInfo #media_name|txt"></field>
+	<field name="tags"  selector=".content_label_list|txt"></field>
+</datum>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<configuration>
+	
+	<!-- flickr's groupDetail -->
+	<site name="flickrGroupDetail" hosturl="www.flickr.com"
+		fetcher="com.sdata.component.fetcher.FlickrGroupDetailFetcher" storer="com.sdata.component.data.SdataFlickrUserDetailDbStorer">
+		<property>
+			<name>FetchThreadNum</name>
+			<value>10</value>
+		</property>
+		<property>
+			<name>MainCrawlThreadNum</name>
+			<value>1</value>
+		</property>
+		<!-- mongo db info -->
+		<property>
+			<name>mongoHost</name>
+			<value>172.18.109.14</value>
+		</property>
+		<property>
+			<name>mongoPort</name>
+			<value>27017</value>
+		</property>
+		<property>
+			<name>mongoDbName</name>
+			<value>flickrusers</value>
+		</property>
+		<property>
+			<name>UseProxy</name>
+			<value>false</value>
+		</property>
+		<property>
+			<name>datumXml</name>
+			<value>conf/column-maps-image.xml</value>
+		</property>
+	</site>
+</configuration>

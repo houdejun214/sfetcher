@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<configuration>
+	<site name="youtube" hosturl="www.youtube.com"
+		fetcher="com.sdata.component.fetcher.YoutubeByIdsFetcher"  storer="com.sdata.component.data.SdataVideoDbStorer">
+		<property>
+			<name>filrDir</name>
+			<!-- 
+			<value>F:\\Videodataset\\YoutubeforConceptSequence\\videos</value>
+			-->
+			<value>/public/data/videos</value>
+		</property>
+		<property>
+			<name>YoutubeIdsFile</name>
+			<value>youtube_video_id.txt</value>
+		</property>
+		<property>
+			<name>QueueThresholdSizeSlow</name>
+			<value>40</value>
+		</property>
+		<property>
+			<name>FetchThreadNum</name>
+			<value>10</value>
+		</property>
+		<property>
+			<name>siteName</name>
+			<value>youtube</value>
+		</property>
+		<property>
+			<name>MainCrawlThreadNum</name>
+			<value>1</value>
+		</property>
+		<!-- location info -->
+		<property>
+		  <name>solrServer</name>
+		  <value>http://172.18.109.17:8983/solr</value>
+		</property>
+		<!-- mongo db info -->
+		<property>
+		  <name>mongoHost</name>
+		  <value>172.18.109.17</value>
+		</property>
+		<property>
+		  <name>indexCollection</name>
+		  <value>videos</value>
+		</property>
+		<property>
+			<name>mongoPort</name>
+			<value>27017</value>
+		</property>
+		<property>
+			<name>mongoDbName</name>
+			<value>youtube</value>
+		</property>
+		<property>
+			<name>datumXml</name>
+			<value>conf/column-maps-video-youtube.xml</value>
+		</property>
+	</site>
+</configuration>

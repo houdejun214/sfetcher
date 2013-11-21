@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<configuration>
+	
+	<site name="weiboTopic" hosturl="www.weibo.com/pub/topic"
+		fetcher="com.sdata.component.fetcher.WeiboTopicFetcher" storer="com.sdata.component.data.SdataTopicTweetsDbStorer">
+		<property>
+			<name>FetchThreadNum</name>
+			<value>1</value>
+		</property>
+		<property>
+			<name>FetchPageNum</name>
+			<value>10</value>
+		</property>
+		<property>
+			<name>UseProxy</name>
+			<value>false</value>
+		</property>
+		<property>
+			<name>source</name>
+			<value>weibo</value>
+		</property>
+		<!-- mongo db info -->
+		<property>
+			<name>mongoHost</name>
+			<value>172.18.109.78</value>
+		</property>
+		<property>
+			<name>mongoPort</name>
+			<value>27017</value>
+		</property>
+		<property>
+			<name>mongoDbName</name>
+			<value>weiboOthers</value>
+		</property>
+		<property>
+			<name>indexCollection</name>
+			<value>topics</value>
+		</property>
+		<property>
+			<name>ImageProcessHost</name>
+			<value>localhost:8080</value>
+		</property>
+		<property>
+			<name>FetchSleepInterval</name>
+			<value>3600000</value>
+		</property>
+		<property>
+			<name>datumXml</name>
+			<value>template/other/tpl-weibo.xml</value>
+		</property>
+		<property>
+			<name>topicIndexPath</name>
+			<value>template/other/tpl-topics.xml</value>
+		</property>
+	</site>
+</configuration>

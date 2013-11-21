@@ -1,0 +1,29 @@
+<configuration>
+	<!-- crawl site for tencent -->
+		<property>
+			<name>FetchThreadNum</name>
+			<value>1</value>
+		</property>
+		<property>
+			<name>ConsumerKey</name>
+			<value>801126559</value>
+		</property>
+		<property>
+			<name>ConsumerSecret</name>
+			<value>2eb966cecf339076941dd7ffd383cd90</value>
+		</property>
+		<!-- acess info -->
+		<property>
+			<name>AccessToken</name>
+			<value>8204f6c9a6e04428b43e3f419b4faaa9</value>
+		</property>
+		<property>
+			<name>AccessTokenSecret</name>
+			<value>b336aa99fdb52490bf2fda8bce0dcbdc</value>
+		</property>
+		<property>
+			<name>QueueThresholdSizeSlow</name>
+			<value>800</value>
+			<description></description>
+		</property>
+</configuration>
