@@ -174,7 +174,7 @@ public class WebPageDownloader {
 	public HttpClient getClient(){
 		HttpClient httpClient = userThreadLocal.get();
 		if(httpClient==null){
-			httpClient = new HttpClient(new SimpleHttpConnectionManager(true));
+			httpClient = new HttpClient(new SimpleHttpConnectionManager());
 			userThreadLocal.set(httpClient);
 		}
 		return httpClient;

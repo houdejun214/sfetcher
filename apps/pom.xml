@@ -6,6 +6,7 @@
 
 	<artifactId>sdatacrawler-apps</artifactId>
 	<packaging>pom</packaging>
+	<name>sdatacrawler-apps</name>
 
 	<parent>
 		<groupId>com.sdata</groupId>

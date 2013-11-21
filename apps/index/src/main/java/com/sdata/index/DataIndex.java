@@ -15,7 +15,7 @@ import com.sdata.core.CrawlAppContext;
 import com.sdata.core.RunState;
 import com.sdata.core.crawldb.CrawlDB;
 import com.sdata.core.crawldb.impl.CrawlDBImpl;
-import com.sdata.core.data.index.solr.IndexControler;
+import com.sdata.solr.IndexControler;
 
 /**
  * DB DATA INDEX Implement

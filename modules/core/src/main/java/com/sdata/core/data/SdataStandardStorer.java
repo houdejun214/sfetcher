@@ -16,6 +16,7 @@ import com.sdata.core.data.dao.DBStore;
 import com.sdata.core.data.dao.StoreCollection;
 import com.sdata.core.index.es.ElasticServer;
 import com.sdata.core.parser.html.config.StoreConfig;
+import com.sdata.elastic.Elastic;
 
 /**
  * @author zhufb
@@ -25,7 +26,7 @@ public class SdataStandardStorer extends SdataStorer {
 
 	private static final Logger log = LoggerFactory.getLogger("SdataStandardStorer");
 	protected Map<String,DBStore> storeMap = new HashMap<String,DBStore>();
-	protected ElasticServer es;
+	protected Elastic es;
 	protected FieldProcess fieldProcess;
 	public SdataStandardStorer(Configuration conf,RunState state){
 		this.setConf(conf);
@@ -53,12 +54,12 @@ public class SdataStandardStorer extends SdataStorer {
 		return conf.getBoolean("crawler.index", false);
 	}
 	
-	protected ElasticServer initElastic(Configuration conf) {
+	protected Elastic initElastic(Configuration conf) {
 		String name = conf.get("elastic.cluster.name");
 		if(StringUtils.isEmpty(name)){
 			throw new RuntimeException("elastic.cluster.name is null!");
 		}
-		return new ElasticServer(name);
+		return ElasticServer.getElastic(name);
 	}
 	
 	protected Map<String, Object> process(FieldProcess fieldProcess,Map<String, Object> data) {
@@ -146,7 +147,7 @@ public class SdataStandardStorer extends SdataStorer {
 		return fieldProcess;
 	}
 
-	public ElasticServer getEs() {
+	public Elastic getEs() {
 		return es;
 	}
 }

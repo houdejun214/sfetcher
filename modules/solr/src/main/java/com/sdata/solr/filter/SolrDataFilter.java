@@ -1,4 +1,4 @@
-package com.sdata.core.data.index.solr;
+package com.sdata.solr.filter;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

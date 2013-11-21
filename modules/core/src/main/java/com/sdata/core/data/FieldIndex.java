@@ -5,11 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.sdata.core.data.index.IndexDataHandle;
 import com.sdata.core.parser.html.field.DatumField;
 import com.sdata.core.parser.html.field.DatumItem;
 import com.sdata.core.parser.html.field.DatumList;
 import com.sdata.core.parser.html.field.Field;
+import com.sdata.solr.IndexDataHandle;
 
 /**
  * @author zhufb

@@ -1,4 +1,4 @@
-package com.sdata.core.data.index.solr;
+package com.sdata.core.index.solr;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -7,22 +7,22 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.sdata.core.Configuration;
-import com.sdata.core.data.index.IndexDataHandle;
 import com.sdata.core.parser.html.field.DatumField;
 import com.sdata.core.parser.html.field.Field;
+import com.sdata.solr.IndexDataHandle;
 
 /**
  * @author zhufb
  *
  */
-public class IndexGenerater {
+public class SolrGenerater {
 	
 	private final String ID = "id";
 	private final String ORIGIN = "origin";
 	private final String DBID = "dbid";
 	private Map<String,Field> map;
 	
-	public IndexGenerater(Configuration config,Map<String,Field> indexs){
+	public SolrGenerater(Configuration config,Map<String,Field> indexs){
 		this.map = indexs;
 	}
 	

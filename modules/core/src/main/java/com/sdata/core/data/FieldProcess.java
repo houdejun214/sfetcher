@@ -3,9 +3,9 @@ package com.sdata.core.data;
 import java.util.Map;
 
 import com.sdata.core.Configuration;
-import com.sdata.core.data.index.solr.IndexControler;
 import com.sdata.core.parser.html.config.DatumConfig;
 import com.sdata.core.parser.html.field.Field;
+import com.sdata.solr.IndexControler;
 
 /**
  * 
@@ -40,6 +40,7 @@ public class FieldProcess {
 
 	public void solrIndex(Map<String,Object> data){
 		 Map<String, Object> index = fi.getIndexField(data);
+		 //THIS SOLR INDEX DONT USE NOW
 		 IndexControler.add(index);
 	}
 	

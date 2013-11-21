@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import com.sdata.core.Configuration;
 import com.sdata.core.CrawlAppContext;
 import com.sdata.core.data.FieldProcess;
-import com.sdata.core.data.index.solr.IndexControler;
+import com.sdata.solr.IndexControler;
 
 /**
  * @author zhufb

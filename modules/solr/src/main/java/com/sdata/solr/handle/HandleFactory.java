@@ -1,4 +1,4 @@
-package com.sdata.core.data.index;
+package com.sdata.solr.handle;
 
 import java.util.HashMap;
 import java.util.Map;

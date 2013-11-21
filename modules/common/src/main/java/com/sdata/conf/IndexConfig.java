@@ -14,8 +14,8 @@ import org.dom4j.io.SAXReader;
 
 import com.lakeside.core.utils.ApplicationResourceUtils;
 import com.lakeside.core.utils.StringUtils;
-import com.sdata.core.data.index.solr.IndexSite;
-import com.sdata.core.data.index.solr.IndexSource;
+import com.sdata.solr.IndexSite;
+import com.sdata.solr.IndexSource;
 
 /**
  * @author zhufb

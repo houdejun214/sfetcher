@@ -5,20 +5,15 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import com.sdata.conf.ArgConfig;
-import com.sdata.conf.IndexConfig;
 import com.sdata.conf.sites.CrawlConfig;
 import com.sdata.conf.sites.CrawlConfigManager;
 import com.sdata.core.Configuration;
-import com.sdata.core.Constants;
 import com.sdata.core.CrawlAppContext;
 import com.sdata.core.RunState;
 import com.sdata.core.crawldb.CrawlDB;
 import com.sdata.core.crawldb.impl.CrawlDBImpl;
-import com.sdata.core.data.index.solr.IndexControler;
 import com.sdata.core.http.proxy.ProxyConfig;
 import com.sdata.core.parser.html.mail.CrawlerMail;
-import com.sdata.core.util.ApplicationResourceUtils;
-import com.sdata.crawl.cluster.CrawlClusterManager;
 import com.sdata.crawl.task.CrawlTask;
 
 public class DataCrawl {
@@ -61,8 +56,8 @@ public class DataCrawl {
 		CrawlAppContext.db = db;
 		
 		//start crawl solr server controler
-		String siteName = conf.get(Constants.SOURCE);
-		IndexControler.init(IndexConfig.getSite(siteName));
+//		String siteName = conf.get(Constants.SOURCE);
+//		IndexControler.init(IndexConfig.getSite(siteName));
 		
 		// load proxy list
 		if("true".equals(conf.get("UseProxy"))){

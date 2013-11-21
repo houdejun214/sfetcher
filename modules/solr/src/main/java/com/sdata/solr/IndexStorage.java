@@ -1,4 +1,4 @@
-package com.sdata.core.data.index.solr;
+package com.sdata.solr;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.apache.solr.common.SolrInputDocument;
 
 import com.lakeside.core.utils.StringUtils;
-import com.sdata.core.Configuration;
+import com.sdata.solr.filter.SolrDataFilter;
 
 /**
  * @author zhufb
@@ -24,8 +24,8 @@ import com.sdata.core.Configuration;
 public class IndexStorage {
 	private final int TIMES = 3;
 	private SolrServer server;
-	public IndexStorage(String core,Configuration config){
-		String serverUrl = config.get("solrServer").concat("/").concat(core);
+	public IndexStorage(String core,String  solrServer){
+		String serverUrl = solrServer.concat("/").concat(core);
 		server = new HttpSolrServer(serverUrl);
 	}
 

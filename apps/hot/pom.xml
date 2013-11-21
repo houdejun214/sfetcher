@@ -18,6 +18,16 @@
 	<dependency>
 		<groupId>com.sdata</groupId>
 		<artifactId>sdatacrawler-common</artifactId>
+		<exclusions>
+			<exclusion>
+				<artifactId>sdatacrawler-solr</artifactId>
+				<groupId>com.sdata</groupId>
+			</exclusion>
+			<exclusion>
+				<artifactId>sdatacrawler-elastic</artifactId>
+				<groupId>com.sdata</groupId>
+			</exclusion>
+		</exclusions>
 	</dependency>
    	<dependency>
          <groupId>org.twitter4j</groupId>

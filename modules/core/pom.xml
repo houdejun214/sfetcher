@@ -8,10 +8,10 @@
   <url>http://maven.apache.org</url>
   
   <parent>
-	<artifactId>sdatacrawler-parent</artifactId>
+	<artifactId>sdatacrawler-modules</artifactId>
 	<groupId>com.sdata</groupId>
 	<version>1.0.0-SNAPSHOT</version>
-	<relativePath>../../parent/</relativePath>
+	<relativePath>../modules/</relativePath>
   </parent>
   
   <dependencies>
@@ -36,18 +36,10 @@
     	<groupId>javax.mail</groupId>
     	<artifactId>mail</artifactId>
     </dependency>
-    <dependency>
-    	<groupId>org.apache.solr</groupId>
-    	<artifactId>solr-solrj</artifactId>
-    </dependency>
 	<dependency>
 		<groupId>mysql</groupId>
 		<artifactId>mysql-connector-java</artifactId>
 	</dependency>
-    <dependency>
-    	<groupId>org.elasticsearch</groupId>
-    	<artifactId>elasticsearch</artifactId>
-    </dependency>
     <dependency>
     	<groupId>com.mchange</groupId>
     	<artifactId>c3p0</artifactId>
@@ -55,6 +47,16 @@
 	<dependency>
 		<groupId>com.nus</groupId>
 		<artifactId>next-db-core</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>com.sdata</groupId>
+		<artifactId>sdatacrawler-solr</artifactId>
+		<version>${project.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.sdata</groupId>
+		<artifactId>sdatacrawler-elastic</artifactId>
+		<version>${project.version}</version>
 	</dependency>
   </dependencies>
   <build>

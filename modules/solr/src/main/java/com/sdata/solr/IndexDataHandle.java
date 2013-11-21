@@ -1,4 +1,4 @@
-package com.sdata.core.data.index;
+package com.sdata.solr;
 
 import java.util.Iterator;
 import java.util.List;
