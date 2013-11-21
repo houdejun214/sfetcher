@@ -16,6 +16,10 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.sdata</groupId>
+			<artifactId>sdatacrawler-common</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.twitter4j</groupId>
 			<artifactId>twitter4j-core</artifactId>
 		</dependency>
@@ -55,15 +59,6 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>com.sdata</groupId>
-			<artifactId>sdatacrawler-common</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sdata</groupId>
-			<artifactId>sdatacrawler-core</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.weibo</groupId>
 			<artifactId>weibo-api</artifactId>
@@ -83,10 +78,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.m2e</groupId>
-				<artifactId>lifecycle-mapping</artifactId>
 			</plugin>
 		</plugins>
 	</build>

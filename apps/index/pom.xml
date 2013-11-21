@@ -14,11 +14,7 @@
 	<relativePath>../apps/</relativePath>
   </parent>
   
-  <dependencies> 
-	<dependency>
-		<groupId>com.sdata</groupId>
-		<artifactId>sdatacrawler-core</artifactId>
-	</dependency>
+  <dependencies>
 	<dependency>
 		<groupId>com.sdata</groupId>
 		<artifactId>sdatacrawler-common</artifactId>
@@ -38,10 +34,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.m2e</groupId>
-				<artifactId>lifecycle-mapping</artifactId>
 			</plugin>
 		</plugins>
 	</build>

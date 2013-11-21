@@ -24,10 +24,6 @@
 		<artifactId>json-lib</artifactId>
 		<classifier>jdk15</classifier>
 	</dependency>
-	<dependency>
-		<groupId>com.lakeside</groupId>
-		<artifactId>lakeside-core</artifactId>
-	</dependency>
     <dependency>
     	<groupId>com.lakeside</groupId>
     	<artifactId>lakeside-data-sql</artifactId>
@@ -35,10 +31,6 @@
     <dependency>
     	<groupId>com.lakeside</groupId>
     	<artifactId>lakeside-data-redis</artifactId>
-    </dependency>
-    <dependency>
-    	<groupId>com.lakeside</groupId>
-    	<artifactId>lakeside-data-mongo</artifactId>
     </dependency>
     <dependency>
     	<groupId>javax.mail</groupId>

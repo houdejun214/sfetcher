@@ -20,10 +20,6 @@
 		<artifactId>sdatacrawler-common</artifactId>
 	</dependency>
 	<dependency>
-		<groupId>com.sdata</groupId>
-		<artifactId>sdatacrawler-core</artifactId>
-	</dependency>
-	<dependency>
 		<groupId>com.nus</groupId>
 		<artifactId>next-io</artifactId>
 	</dependency>
@@ -42,10 +38,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.m2e</groupId>
-				<artifactId>lifecycle-mapping</artifactId>
 			</plugin>
 		</plugins>
 	</build>

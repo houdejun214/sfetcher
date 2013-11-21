@@ -15,6 +15,10 @@
 	</parent>
   
   <dependencies>
+	<dependency>
+		<groupId>com.sdata</groupId>
+		<artifactId>sdatacrawler-common</artifactId>
+	</dependency>
    	<dependency>
          <groupId>org.twitter4j</groupId>
          <artifactId>twitter4j-core</artifactId>
@@ -28,24 +32,12 @@
     	<artifactId>qweibo4j</artifactId>
     </dependency>
 	<dependency>
-		<groupId>com.sdata</groupId>
-		<artifactId>sdatacrawler-common</artifactId>
-	</dependency>
-	<dependency>
 		<groupId>org.weibo</groupId>
 		<artifactId>weibo-api</artifactId>
 	</dependency>
 	<dependency>
 		<groupId>jaxen</groupId>
 		<artifactId>jaxen</artifactId>
-	</dependency>
-	<dependency>
-		<groupId>xml-apis</groupId>
-		<artifactId>xml-apis</artifactId>
-	</dependency>
-	<dependency>
-		<groupId>xerces</groupId>
-		<artifactId>xercesImpl</artifactId>
 	</dependency>
   </dependencies>
   
@@ -62,10 +54,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.m2e</groupId>
-				<artifactId>lifecycle-mapping</artifactId>
 			</plugin>
 		</plugins>
 	</build>
