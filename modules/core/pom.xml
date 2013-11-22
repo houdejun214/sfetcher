@@ -45,8 +45,12 @@
     	<artifactId>c3p0</artifactId>
     </dependency>
 	<dependency>
-		<groupId>com.nus</groupId>
-		<artifactId>next-db-core</artifactId>
+		<groupId>com.framework</groupId>
+		<artifactId>framework-db-hbase</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>com.framework</groupId>
+		<artifactId>framework-db-mongo</artifactId>
 	</dependency>
 	<dependency>
 		<groupId>com.sdata</groupId>

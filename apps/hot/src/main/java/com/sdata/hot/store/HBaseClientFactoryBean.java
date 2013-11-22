@@ -2,8 +2,8 @@ package com.sdata.hot.store;
 
 import org.springframework.beans.factory.FactoryBean;
 
-import com.nus.next.db.hbase.thrift.HBaseClient;
-import com.nus.next.db.hbase.thrift.HBaseClientFactory;
+import com.framework.db.hbase.thrift.HBaseClient;
+import com.framework.db.hbase.thrift.HBaseClientFactory;
 import com.sdata.core.Configuration;
 
 /**

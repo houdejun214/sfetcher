@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import com.framework.db.hbase.Constants;
+import com.framework.db.hbase.ids.IdGenerator;
+import com.framework.db.hbase.thrift.BytesBufferUtils;
+import com.framework.db.hbase.thrift.HBaseClient;
 import com.lakeside.core.utils.UUIDUtils;
-import com.nus.next.db.Constants;
-import com.nus.next.db.hbase.thrift.BytesBufferUtils;
-import com.nus.next.db.hbase.thrift.HBaseClient;
-import com.nus.next.db.ids.IdGenerator;
 
 /**
  * @author zhufb

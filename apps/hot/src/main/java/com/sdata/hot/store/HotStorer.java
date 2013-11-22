@@ -2,8 +2,8 @@ package com.sdata.hot.store;
 
 import java.util.Map;
 
-import com.nus.next.db.Constants;
-import com.nus.next.db.hbase.thrift.HBaseClient;
+import com.framework.db.hbase.Constants;
+import com.framework.db.hbase.thrift.HBaseClient;
 import com.sdata.core.Configuration;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.RunState;

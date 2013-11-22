@@ -17,12 +17,11 @@ import weibo4j.WeiboHelper;
 import weibo4j.model.WeiboException;
 import weibo4j.util.WeiboServer;
 
+import com.framework.db.hbase.thrift.HBaseClient;
+import com.framework.db.hbase.thrift.HBaseClientFactory;
 import com.lakeside.core.utils.PatternUtils;
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.time.DateTimeUtils;
-import com.nus.next.db.hbase.HBaseFactory;
-import com.nus.next.db.hbase.thrift.HBaseClient;
-import com.nus.next.db.hbase.thrift.HBaseClientFactory;
 import com.sdata.component.word.WordParser;
 import com.sdata.core.Configuration;
 import com.sdata.core.CrawlAppContext;

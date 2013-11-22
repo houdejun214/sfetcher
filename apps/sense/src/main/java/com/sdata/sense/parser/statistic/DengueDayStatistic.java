@@ -6,7 +6,7 @@ import java.util.Date;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import com.nus.next.db.ids.RowkeyUtils;
+import com.framework.db.hbase.ids.RowkeyUtils;
 import com.sdata.core.Configuration;
 import com.sdata.core.Constants;
 import com.sdata.core.FetchDispatch;

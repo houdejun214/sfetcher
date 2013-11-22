@@ -6,12 +6,12 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.nus.next.config.NSouce;
-import com.nus.next.config.SourceConfig;
-import com.nus.next.db.NextSourceDao;
-import com.nus.next.db.NextSourceDbManager;
-import com.nus.next.db.hbase.thrift.HBaseClient;
-import com.nus.next.db.hbase.thrift.HBaseClientFactory;
+import com.framework.config.NSouce;
+import com.framework.config.SourceConfig;
+import com.framework.db.hbase.thrift.HBaseClient;
+import com.framework.db.hbase.thrift.HBaseClientFactory;
+import com.framework.db.mongo.NextSourceDao;
+import com.framework.db.mongo.NextSourceDbManager;
 import com.sdata.core.Configuration;
 import com.sdata.core.Constants;
 import com.sdata.core.parser.html.config.StoreConfig;

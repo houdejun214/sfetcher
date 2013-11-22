@@ -16,11 +16,10 @@ import org.slf4j.LoggerFactory;
 
 import twitter4j.TwitterException;
 
+import com.framework.db.hbase.thrift.HBaseClient;
+import com.framework.db.hbase.thrift.HBaseClientFactory;
 import com.lakeside.core.utils.PatternUtils;
 import com.lakeside.core.utils.StringUtils;
-import com.nus.next.db.hbase.HBaseFactory;
-import com.nus.next.db.hbase.thrift.HBaseClient;
-import com.nus.next.db.hbase.thrift.HBaseClientFactory;
 import com.sdata.component.site.TwitterApi;
 import com.sdata.component.word.WordParser;
 import com.sdata.core.Configuration;

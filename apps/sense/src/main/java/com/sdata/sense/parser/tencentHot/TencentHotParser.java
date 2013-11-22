@@ -7,10 +7,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.framework.db.hbase.thrift.HBaseClient;
+import com.framework.db.hbase.thrift.HBaseClientFactory;
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.data.redis.RedisDB;
-import com.nus.next.db.hbase.thrift.HBaseClient;
-import com.nus.next.db.hbase.thrift.HBaseClientFactory;
 import com.sdata.core.Configuration;
 import com.sdata.core.Constants;
 import com.sdata.core.RawContent;

@@ -3,11 +3,11 @@ package com.sdata.core.data.dao;
 import java.util.Iterator;
 import java.util.Map;
 
+import com.framework.db.mongo.NextSourceDao;
 import com.lakeside.core.utils.StringUtils;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
-import com.nus.next.db.NextSourceDao;
 import com.sdata.core.Constants;
 import com.sdata.core.CrawlAppContext;
 import com.sdata.core.data.statistics.StatisticsStore;

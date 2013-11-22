@@ -6,8 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.framework.db.hbase.thrift.HBaseClient;
 import com.lakeside.core.utils.StringUtils;
-import com.nus.next.db.hbase.thrift.HBaseClient;
 import com.sdata.core.Constants;
 import com.sdata.core.CrawlAppContext;
 import com.sdata.core.data.statistics.StatisticsStore;
@@ -28,7 +28,7 @@ public class HBaseStore extends DBStore {
 		this.statisStore = new StatisticsStore(CrawlAppContext.conf);
 		
 		List<String> cfs = new ArrayList<String>();
-		cfs.add(com.nus.next.db.Constants.HBASE_DEFAULT_COLUMN_FAMILY);
+		cfs.add(com.framework.db.hbase.Constants.HBASE_DEFAULT_COLUMN_FAMILY);
 		for(ColumnFamily scf:storeCollection.getColflys()){
 			cfs.add(scf.getName());
 		}
@@ -88,7 +88,7 @@ public class HBaseStore extends DBStore {
 			}
 		}
 		if(needDCF){
-			result.put(com.nus.next.db.Constants.HBASE_DEFAULT_COLUMN_FAMILY, data);
+			result.put(com.framework.db.hbase.Constants.HBASE_DEFAULT_COLUMN_FAMILY, data);
 		}
 		return result;
 	}

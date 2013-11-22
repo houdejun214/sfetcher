@@ -14,9 +14,8 @@
   
   <dependencies>
   	<dependency>
-  		<groupId>com.nus</groupId>
-  		<artifactId>next-config</artifactId>
-  		<version>0.0.1</version>
+  		<groupId>com.framework</groupId>
+  		<artifactId>framework-config</artifactId>
   	</dependency>
   	<dependency>
   		<groupId>com.lakeside</groupId>

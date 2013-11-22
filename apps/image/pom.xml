@@ -30,8 +30,8 @@
 		</exclusions>
 	</dependency>
 	<dependency>
-		<groupId>com.nus</groupId>
-		<artifactId>next-io</artifactId>
+		<groupId>com.framework</groupId>
+		<artifactId>framework-io</artifactId>
 	</dependency>
   </dependencies>
   

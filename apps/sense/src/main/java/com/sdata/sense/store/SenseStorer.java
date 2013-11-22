@@ -4,9 +4,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.framework.db.hbase.thrift.HBaseClient;
+import com.framework.db.hbase.thrift.HBaseClientFactory;
 import com.lakeside.core.utils.StringUtils;
-import com.nus.next.db.hbase.thrift.HBaseClient;
-import com.nus.next.db.hbase.thrift.HBaseClientFactory;
 import com.sdata.core.Configuration;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.RunState;

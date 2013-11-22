@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.framework.db.mongo.NextSourceDao;
+import com.framework.db.mongo.NextSourceDbManager;
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.UUIDUtils;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.nus.next.db.NextSourceDao;
-import com.nus.next.db.NextSourceDbManager;
 import com.sdata.core.Constants;
 import com.sdata.core.data.FieldProcess;
 

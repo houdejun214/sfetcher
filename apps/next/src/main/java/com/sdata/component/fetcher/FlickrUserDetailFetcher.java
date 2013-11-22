@@ -11,11 +11,11 @@ import java.util.concurrent.ArrayBlockingQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.framework.config.NSouceDB;
+import com.framework.config.SourceConfig;
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.time.DateTimeUtils;
 import com.mongodb.MongoException;
-import com.nus.next.config.NSouceDB;
-import com.nus.next.config.SourceConfig;
 import com.sdata.component.data.dao.GroupMgDao;
 import com.sdata.component.data.dao.ImageMgDao;
 import com.sdata.component.data.dao.LeafUserMgDao;

@@ -3,10 +3,10 @@ package com.sdata.core.data.dao;
 import java.util.Map;
 import java.util.UUID;
 
+import com.framework.db.hbase.Constants;
+import com.framework.db.hbase.thrift.HBaseClient;
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.UUIDUtils;
-import com.nus.next.db.Constants;
-import com.nus.next.db.hbase.thrift.HBaseClient;
 
 /**
  * @author zhufb

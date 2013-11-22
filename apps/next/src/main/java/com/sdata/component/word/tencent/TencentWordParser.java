@@ -9,11 +9,9 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.framework.db.hbase.thrift.HBaseClient;
+import com.framework.db.hbase.thrift.HBaseClientFactory;
 import com.lakeside.core.utils.StringUtils;
-import com.nus.next.db.hbase.HBaseDao;
-import com.nus.next.db.hbase.HBaseFactory;
-import com.nus.next.db.hbase.thrift.HBaseClient;
-import com.nus.next.db.hbase.thrift.HBaseClientFactory;
 import com.sdata.component.word.WordParser;
 import com.sdata.core.Configuration;
 import com.sdata.core.Constants;

@@ -14,14 +14,14 @@ import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.index.mapper.MergeMappingException;
 
+import com.framework.config.ClusterConfig;
+import com.framework.config.NCluster;
+import com.framework.config.NEntry;
+import com.framework.config.NSouce;
+import com.framework.config.NSourceIndex;
+import com.framework.config.SourceConfig;
 import com.lakeside.core.utils.ApplicationResourceUtils;
 import com.lakeside.core.utils.FileUtils;
-import com.nus.next.config.ClusterConfig;
-import com.nus.next.config.NCluster;
-import com.nus.next.config.NEntry;
-import com.nus.next.config.NSouce;
-import com.nus.next.config.NSourceIndex;
-import com.nus.next.config.SourceConfig;
 
 /**
  * @author zhufb

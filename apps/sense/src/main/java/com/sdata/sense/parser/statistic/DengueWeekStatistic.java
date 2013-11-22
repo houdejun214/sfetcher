@@ -11,8 +11,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.framework.db.hbase.ids.RowkeyUtils;
 import com.lakeside.core.utils.PatternUtils;
-import com.nus.next.db.ids.RowkeyUtils;
 import com.sdata.core.Configuration;
 import com.sdata.core.Constants;
 import com.sdata.core.FetchDatum;

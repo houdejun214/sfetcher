@@ -5,8 +5,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.framework.io.NextFileStore;
 import com.lakeside.core.utils.StringUtils;
-import com.nus.next.io.NextFileStore;
 import com.sdata.core.Configuration;
 import com.sdata.core.NegligibleException;
 import com.sdata.core.crawldb.CrawlDBImageQueueEnum;

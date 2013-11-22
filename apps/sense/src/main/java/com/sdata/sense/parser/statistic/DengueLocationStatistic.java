@@ -8,9 +8,9 @@ import java.util.List;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import com.framework.db.hbase.ids.RowkeyUtils;
 import com.lakeside.core.utils.JSONUtils;
 import com.lakeside.core.utils.time.DateTimeUtils;
-import com.nus.next.db.ids.RowkeyUtils;
 import com.sdata.core.Configuration;
 import com.sdata.core.Constants;
 import com.sdata.core.FetchDatum;

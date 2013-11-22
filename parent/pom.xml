@@ -13,10 +13,12 @@
 	<!--properties -->
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
-
 		<!-- sdatacrawler version -->
 		<sdatacrawler.version>1.0.0-SNAPSHOT</sdatacrawler.version>
-
+		<!-- lakeside version -->
+		<lakeside.version>1.0.0-SNAPSHOT</lakeside.version>
+		<!-- common framework version -->
+		<framework.version>1.0.0-SNAPSHOT</framework.version>
 		<!-- index version -->
 		<solr.version>3.6.0</solr.version>
 		<elasticsearch.version>0.20.1</elasticsearch.version>
@@ -39,11 +41,6 @@
 		<jsonlib.version>2.4</jsonlib.version>
 		<javax.mail.version>1.4.5</javax.mail.version>
 
-		<!-- lakeside version -->
-		<lakeside.version>1.0.0-SNAPSHOT</lakeside.version>
-
-		<!-- common framework version -->
-		<framework.version>1.0.0</framework.version>
 
 		<!-- log version -->
 		<logback.version>1.0.6</logback.version>
@@ -107,18 +104,23 @@
 			
 			<!-- framework dependency -->
 			<dependency>
-		 		<groupId>com.nus</groupId>
-				<artifactId>next-config</artifactId>
+		 		<groupId>com.framework</groupId>
+				<artifactId>framework-config</artifactId>
 				<version>${framework.version}</version>
 		 	</dependency>
 			<dependency>
-				<groupId>com.nus</groupId>
-				<artifactId>next-db-core</artifactId>
+				<groupId>com.framework</groupId>
+				<artifactId>framework-db-hbase</artifactId>
 				<version>${framework.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.nus</groupId>
-				<artifactId>next-io</artifactId>
+				<groupId>com.framework</groupId>
+				<artifactId>framework-db-mongo</artifactId>
+				<version>${framework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.framework</groupId>
+				<artifactId>framework-io</artifactId>
 				<version>${framework.version}</version>
 			</dependency>
 
@@ -453,8 +455,8 @@
 	<!-- distributionManagement -->
 	<distributionManagement>
 		<repository>
-			<id>local.maven.nexus</id>
-			<name>local.maven.nexus</name>
+			<id>nexus-snapshots</id>
+			<name>nexus-snapshots</name>
 			<url>http://172.29.34.116:9000/nexus/content/repositories/snapshots/</url>
 		</repository>
 	</distributionManagement>

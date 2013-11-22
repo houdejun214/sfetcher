@@ -15,17 +15,17 @@ import org.apache.hadoop.hbase.thrift.generated.TScan;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.thrift.TException;
 
+import com.framework.db.hbase.HNamespaceTable;
+import com.framework.db.hbase.filter.HBaseFilterBuilder;
+import com.framework.db.hbase.mapping.CustomSerializer;
+import com.framework.db.hbase.thrift.BytesBufferUtils;
+import com.framework.db.hbase.thrift.HBaseClient;
+import com.framework.db.hbase.thrift.HBaseClientFactory;
+import com.framework.db.hbase.thrift.HBaseThriftClient;
+import com.framework.db.hbase.thrift.HBaseThriftException;
+import com.framework.db.hbase.thrift.HBaseClient.HBaseThriftActionNoResult;
+import com.framework.db.hbase.thrift.pool.ThriftConnection;
 import com.lakeside.core.utils.FileUtils;
-import com.nus.next.db.hbase.HNamespaceTable;
-import com.nus.next.db.hbase.filter.HBaseFilterBuilder;
-import com.nus.next.db.hbase.mapping.CustomSerializer;
-import com.nus.next.db.hbase.thrift.BytesBufferUtils;
-import com.nus.next.db.hbase.thrift.HBaseClient;
-import com.nus.next.db.hbase.thrift.HBaseClient.HBaseThriftActionNoResult;
-import com.nus.next.db.hbase.thrift.HBaseClientFactory;
-import com.nus.next.db.hbase.thrift.HBaseThriftClient;
-import com.nus.next.db.hbase.thrift.HBaseThriftException;
-import com.nus.next.db.hbase.thrift.pool.ThriftConnection;
 import com.sdata.core.util.ApplicationResourceUtils;
 import com.sdata.sense.fetcher.twitter.TwitterFetcher;
 

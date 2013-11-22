@@ -40,18 +40,13 @@ import org.apache.hadoop.hbase.thrift.generated.IllegalArgument;
 import org.apache.hadoop.hbase.thrift.generated.TCell;
 import org.apache.hadoop.hbase.thrift.generated.TRowResult;
 import org.apache.thrift.TException;
-import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TProtocol;
-import org.apache.thrift.transport.TSocket;
 import org.junit.Test;
 
-import com.nus.next.config.hbase.HCluster;
-import com.nus.next.config.hbase.HClusterConfig;
-import com.nus.next.db.hbase.HBaseConfig;
-import com.nus.next.db.hbase.mapping.CustomSerializer;
-import com.nus.next.db.hbase.mapping.ValueSerializer;
-import com.nus.next.db.hbase.thrift.HBaseClient;
-import com.nus.next.db.hbase.thrift.HBaseClientFactory;
+import com.framework.config.hbase.HCluster;
+import com.framework.config.hbase.HClusterConfig;
+import com.framework.db.hbase.HBaseConfig;
+import com.framework.db.hbase.thrift.HBaseClient;
+import com.framework.db.hbase.thrift.HBaseClientFactory;
 
 /*
  * Instructions:
