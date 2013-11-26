@@ -1,12 +1,5 @@
 package com.sdata.core.parser.select;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.util.Assert;
-
-import com.sdata.core.http.HttpPageLoader;
 
 public class DataSelectorPipleBuilderTest {
 	

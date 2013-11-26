@@ -34,9 +34,6 @@
 		<commons-lang.version>2.6</commons-lang.version>
 
 		<!-- http request version -->
-		<httpcore.version>4.2.3</httpcore.version>
-		<httpmime.version>4.1.3</httpmime.version>
-		<httpclient.version>4.2.3</httpclient.version>
 		<jsoup.version>1.7.1</jsoup.version>
 		<jsonlib.version>2.4</jsonlib.version>
 		<javax.mail.version>1.4.5</javax.mail.version>
@@ -108,6 +105,7 @@
 				<artifactId>framework-config</artifactId>
 				<version>${framework.version}</version>
 		 	</dependency>
+		 	
 			<dependency>
 				<groupId>com.framework</groupId>
 				<artifactId>framework-db-hbase</artifactId>
@@ -168,26 +166,6 @@
 				<artifactId>logback-classic</artifactId>
 				<version>${logback.version}</version>
 				<type>jar</type>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.httpcomponents</groupId>
-				<artifactId>httpcore</artifactId>
-				<version>${httpcore.version}</version>
-				<type>jar</type>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.httpcomponents</groupId>
-				<artifactId>httpclient</artifactId>
-				<version>${httpclient.version}</version>
-				<type>jar</type>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.httpcomponents</groupId>
-				<artifactId>httpmime</artifactId>
-				<version>${httpmime.version}</version>
-				<scope>compile</scope>
 			</dependency>
 
 			<dependency>
@@ -310,6 +288,11 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+		    <dependency>
+		    	<groupId>com.lakeside</groupId>
+		    	<artifactId>lakeside-download</artifactId>
+				<version>${lakeside.version}</version>
+		    </dependency>
 			<dependency>
 				<groupId>com.lakeside</groupId>
 				<artifactId>lakeside-data-sql</artifactId>
@@ -422,18 +405,7 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpcore</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpmime</artifactId>
-		</dependency>
+		
 	</dependencies>
 
 	<!-- repositories -->

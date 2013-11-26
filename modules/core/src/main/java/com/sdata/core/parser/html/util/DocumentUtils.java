@@ -7,8 +7,8 @@ import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import com.sdata.core.http.HttpPage;
-import com.sdata.core.http.HttpPageLoader;
+import com.lakeside.download.http.HttpPage;
+import com.lakeside.download.http.HttpPageLoader;
 
 /**
  * @author zhufb
@@ -20,7 +20,7 @@ public class DocumentUtils {
 		if(StringUtils.isEmpty(url)){
 			return null;
 		}
-		HttpPage page = HttpPageLoader.getDefaultPageLoader().download(url);
+		HttpPage page = HttpPageLoader.getAdvancePageLoader().download(url);
 		if(page.getStatusCode()!=HttpStatus.SC_OK){
 			return null;
 		}
@@ -31,7 +31,7 @@ public class DocumentUtils {
 		if(StringUtils.isEmpty(url)){
 			return null;
 		}
-		HttpPage page = HttpPageLoader.getDefaultPageLoader().download(header,url);
+		HttpPage page = HttpPageLoader.getAdvancePageLoader().download(header,url);
 		if(page.getStatusCode()!=HttpStatus.SC_OK){
 			return null;
 		}
