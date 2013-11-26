@@ -11,8 +11,8 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 
+import com.lakeside.download.http.HttpPageLoader;
 import com.sdata.core.Configuration;
-import com.sdata.core.http.HttpPageLoader;
 import com.sdata.core.site.BaseDataApi;
 
 /**

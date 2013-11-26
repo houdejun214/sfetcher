@@ -22,12 +22,12 @@ import com.framework.db.hbase.thrift.HBaseClientFactory;
 import com.lakeside.core.utils.PatternUtils;
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.time.DateTimeUtils;
+import com.lakeside.download.http.HttpPage;
+import com.lakeside.download.http.HttpPageLoader;
 import com.sdata.component.word.WordParser;
 import com.sdata.core.Configuration;
 import com.sdata.core.CrawlAppContext;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.http.HttpPage;
-import com.sdata.core.http.HttpPageLoader;
 import com.sdata.core.item.CrawlItem;
 
 /**

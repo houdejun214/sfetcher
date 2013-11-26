@@ -11,12 +11,12 @@ import net.sf.json.JSONObject;
 import com.framework.db.hbase.ids.RowkeyUtils;
 import com.lakeside.core.utils.JSONUtils;
 import com.lakeside.core.utils.time.DateTimeUtils;
+import com.lakeside.download.http.HttpPage;
+import com.lakeside.download.http.HttpPageLoader;
 import com.sdata.core.Configuration;
 import com.sdata.core.Constants;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.FetchDispatch;
-import com.sdata.core.http.HttpPage;
-import com.sdata.core.http.HttpPageLoader;
 import com.sdata.sense.SenseFetchDatum;
 import com.sdata.sense.item.SenseCrawlItem;
 
@@ -29,7 +29,7 @@ public class DengueLocationStatistic implements ISenseStatistic{
 	public void statistic(FetchDispatch fetchDispatch,Configuration conf,
 			SenseCrawlItem item) {
 		String url = item.parse();
-		HttpPage hp = HttpPageLoader.getDefaultPageLoader().download(url);
+		HttpPage hp = HttpPageLoader.getAdvancePageLoader().download(url);
 		String content = hp.getContentHtml();
 		if(!content.startsWith("{")||!content.endsWith("}")){
 			return;

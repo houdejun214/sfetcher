@@ -9,12 +9,11 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.lakeside.core.utils.StringUtils;
+import com.lakeside.download.http.HttpPage;
+import com.lakeside.download.http.HttpPageLoader;
 import com.sdata.core.Configuration;
 import com.sdata.core.NegligibleException;
 import com.sdata.core.RawContent;
-import com.sdata.core.RunState;
-import com.sdata.core.http.HttpPage;
-import com.sdata.core.http.HttpPageLoader;
 import com.sdata.core.parser.ParseResult;
 import com.sdata.sense.Constants;
 import com.sdata.sense.SenseFetchDatum;
@@ -97,7 +96,7 @@ public class SenseFacebookParser extends SenseParser{
 		datum.getMetadata().remove(FACEBOOK_COMMENTS_KEY);
 		List<Object> comments = new ArrayList<Object>();
 		while(!StringUtils.isEmpty(url)){
-			HttpPage page = HttpPageLoader.getDefaultPageLoader().download(url);
+			HttpPage page = HttpPageLoader.getAdvancePageLoader().download(url);
 			String contentHtml = page.getContentHtml();
 			JSONObject data = JSONObject.fromObject(contentHtml);
 			if(data.containsKey(DATA_KEY) && data.get(DATA_KEY) instanceof JSONArray){
@@ -149,10 +148,10 @@ public class SenseFacebookParser extends SenseParser{
 	
 	private JSONObject getUserProfile(Configuration conf,String uid){
 		String uurl = FACEBOOK_API.concat(uid);
-		HttpPage upage = HttpPageLoader.getDefaultPageLoader().download(this.mergeTokenUrl(conf,uurl));
+		HttpPage upage = HttpPageLoader.getAdvancePageLoader().download(this.mergeTokenUrl(conf,uurl));
 		JSONObject profile = JSONObject.fromObject(upage.getContentHtml());
 		String picurl = uurl.concat(FACEBOOK_USER_PIC);
-		HttpPage picpage = HttpPageLoader.getDefaultPageLoader().download(picurl);
+		HttpPage picpage = HttpPageLoader.getAdvancePageLoader().download(picurl);
 		profile.put(USER_HEAD, picpage.getUrl());
 		return profile;
 	}

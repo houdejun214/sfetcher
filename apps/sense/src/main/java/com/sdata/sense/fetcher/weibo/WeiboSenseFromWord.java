@@ -15,10 +15,10 @@ import com.lakeside.core.utils.JSONUtils;
 import com.lakeside.core.utils.PatternUtils;
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.UrlUtils;
+import com.lakeside.download.http.HttpPage;
+import com.lakeside.download.http.HttpPageLoader;
 import com.sdata.core.Configuration;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.http.HttpPage;
-import com.sdata.core.http.HttpPageLoader;
 import com.sdata.core.item.CrawlItemEnum;
 import com.sdata.core.parser.html.util.DocumentUtils;
 import com.sdata.sense.SenseFetchDatum;
@@ -64,7 +64,7 @@ public class WeiboSenseFromWord extends WeiboSenseFrom {
 	
 	private String fetchPage(String url) {
 		super.sleep(htmlWait);
-		HttpPage page = HttpPageLoader.getDefaultPageLoader().download(httpHeader,url);
+		HttpPage page = HttpPageLoader.getAdvancePageLoader().download(httpHeader,url);
 		return page.getContentHtml();
 	}
 	

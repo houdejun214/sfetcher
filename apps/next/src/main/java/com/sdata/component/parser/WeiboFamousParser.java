@@ -17,11 +17,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import weibo4j.Weibo;
-
 import com.lakeside.core.utils.PatternUtils;
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.UrlUtils;
+import com.lakeside.download.http.HttpPage;
+import com.lakeside.download.http.HttpPageLoader;
 import com.mongodb.DBObject;
 import com.sdata.component.data.dao.FamousMgDao;
 import com.sdata.component.data.dao.TweetsMgDao;
@@ -32,8 +32,6 @@ import com.sdata.core.Constants;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.RawContent;
 import com.sdata.core.RunState;
-import com.sdata.core.http.HttpPage;
-import com.sdata.core.http.HttpPageLoader;
 import com.sdata.core.parser.ParseResult;
 import com.sdata.core.parser.SdataParser;
 

@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,8 +13,8 @@ import org.jsoup.nodes.Element;
 
 import com.framework.db.hbase.thrift.HBaseClient;
 import com.framework.db.hbase.thrift.HBaseClientFactory;
-import com.sdata.core.http.HttpPage;
-import com.sdata.core.http.HttpPageLoader;
+import com.lakeside.download.http.HttpPage;
+import com.lakeside.download.http.HttpPageLoader;
 import com.sdata.core.util.JsoupUtils;
 import com.tencent.weibo.utils.Tencent;
 

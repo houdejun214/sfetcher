@@ -4,6 +4,7 @@ package com.sdata.crawl;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
+import com.lakeside.download.http.proxy.ProxyConfig;
 import com.sdata.conf.ArgConfig;
 import com.sdata.conf.sites.CrawlConfig;
 import com.sdata.conf.sites.CrawlConfigManager;
@@ -12,7 +13,6 @@ import com.sdata.core.CrawlAppContext;
 import com.sdata.core.RunState;
 import com.sdata.core.crawldb.CrawlDB;
 import com.sdata.core.crawldb.impl.CrawlDBImpl;
-import com.sdata.core.http.proxy.ProxyConfig;
 import com.sdata.core.parser.html.mail.CrawlerMail;
 import com.sdata.crawl.task.CrawlTask;
 

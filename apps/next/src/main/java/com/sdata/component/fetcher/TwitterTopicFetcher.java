@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import twitter4j.Status;
 import twitter4j.Trends;
 
-import com.lakeside.core.utils.JSONUtils;
 import com.lakeside.core.utils.time.DateTimeUtils;
 import com.sdata.component.parser.TwitterTopicParser;
 import com.sdata.component.site.TopicAPI;
@@ -20,12 +19,9 @@ import com.sdata.component.site.TwitterTopicApi;
 import com.sdata.core.Configuration;
 import com.sdata.core.Constants;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.RawContent;
 import com.sdata.core.RunState;
 import com.sdata.core.fetcher.SdataFetcher;
-import com.sdata.core.http.HttpPageLoader;
 import com.sdata.core.parser.ParseResult;
-import com.sdata.core.util.WebPageDownloader;
 
 public class TwitterTopicFetcher extends SdataFetcher{
 	

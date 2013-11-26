@@ -20,12 +20,12 @@ import com.framework.db.hbase.thrift.HBaseClient;
 import com.framework.db.hbase.thrift.HBaseClientFactory;
 import com.lakeside.core.utils.PatternUtils;
 import com.lakeside.core.utils.StringUtils;
+import com.lakeside.download.http.HttpPage;
+import com.lakeside.download.http.HttpPageLoader;
 import com.sdata.component.site.TwitterApi;
 import com.sdata.component.word.WordParser;
 import com.sdata.core.Configuration;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.http.HttpPage;
-import com.sdata.core.http.HttpPageLoader;
 import com.sdata.core.item.CrawlItem;
 
 public class TwitterWordParser extends WordParser {

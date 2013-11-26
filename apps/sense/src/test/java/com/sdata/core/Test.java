@@ -2,7 +2,7 @@ package com.sdata.core;
 
 import java.io.Serializable;
 
-import com.sdata.core.http.HttpPageLoader;
+import com.lakeside.download.http.HttpPageLoader;
 
 
 

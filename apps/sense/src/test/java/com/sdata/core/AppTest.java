@@ -20,7 +20,6 @@ import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.lakeside.core.utils.time.DateTimeUtils;
-import com.sdata.core.http.HttpPageLoader;
 
 /**
  * Unit test for simple App.

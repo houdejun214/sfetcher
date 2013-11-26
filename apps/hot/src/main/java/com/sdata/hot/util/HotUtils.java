@@ -6,8 +6,8 @@ import java.util.Map;
 import org.apache.hadoop.hbase.util.Bytes;
 
 import com.lakeside.core.utils.StringUtils;
+import com.lakeside.download.http.HttpPageLoader;
 import com.sdata.core.RawContent;
-import com.sdata.core.http.HttpPageLoader;
 
 /**
  * @author zhufb

@@ -8,13 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lakeside.core.utils.StringUtils;
+import com.lakeside.download.http.HttpPageLoader;
 import com.sdata.core.Configuration;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.FetchDispatch;
 import com.sdata.core.RawContent;
 import com.sdata.core.RunState;
 import com.sdata.core.fetcher.SdataFetcher;
-import com.sdata.core.http.HttpPageLoader;
 import com.sdata.core.parser.ParseResult;
 import com.sdata.sense.SenseConfig;
 import com.sdata.sense.SenseFetchDatum;
@@ -43,7 +43,7 @@ public abstract class SenseFetcher extends SdataFetcher {
 		if(StringUtils.isEmpty(url)){
 			return null;
 		}
-		String content = HttpPageLoader.getDefaultPageLoader().download(url).getContentHtml();
+		String content = HttpPageLoader.getAdvancePageLoader().download(url).getContentHtml();
 		if(content == null){
 			return null;
 		}

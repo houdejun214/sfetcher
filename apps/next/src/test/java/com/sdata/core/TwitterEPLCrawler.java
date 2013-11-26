@@ -19,14 +19,14 @@ import twitter4j.TwitterException;
 import com.lakeside.core.utils.JSONUtils;
 import com.lakeside.core.utils.PatternUtils;
 import com.lakeside.core.utils.time.DateFormat;
+import com.lakeside.download.http.HttpPage;
+import com.lakeside.download.http.HttpPageLoader;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
 import com.sdata.component.site.TwitterApi;
-import com.sdata.core.http.HttpPage;
-import com.sdata.core.http.HttpPageLoader;
 
 public class TwitterEPLCrawler {
 	private static String URL = "https://twitter.com/i/search/timeline?type=recent&src=typd&include_available_features=1&include_entities=1&q=%s&max_id=%s";

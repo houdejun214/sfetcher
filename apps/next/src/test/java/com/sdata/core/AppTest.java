@@ -1,19 +1,9 @@
 package com.sdata.core;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
-import java.util.regex.Pattern;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -23,10 +13,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import com.lakeside.core.utils.PatternUtils;
-import com.lakeside.core.utils.StringUtils;
-import com.lakeside.core.utils.UUIDUtils;
-import com.lakeside.core.utils.UrlUtils;
 import com.lakeside.core.utils.time.DateTimeUtils;
+import com.lakeside.download.http.HttpPageLoader;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -34,8 +22,6 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
-import com.sdata.core.http.HttpPageLoader;
-import com.sdata.core.util.WebPageDownloader;
 
 /**
  * Unit test for simple App.
@@ -133,7 +119,7 @@ public class AppTest
      */
     public void testApp() throws UnsupportedEncodingException, UnknownHostException, MongoException, ParseException
     {
-    	String text = "½ñÌìÌìÆøºÃ";
+    	String text = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
     	byte[] bytes = text.getBytes("UTF-8");
     	String string = new String(bytes,"UTF-8");
     	System.out.println(string);

@@ -10,8 +10,8 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sdata.core.http.HttpPage;
-import com.sdata.core.http.HttpPageLoader;
+import com.lakeside.download.http.HttpPage;
+import com.lakeside.download.http.HttpPageLoader;
 
 /**
  * sina weibo download

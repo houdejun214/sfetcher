@@ -14,7 +14,7 @@ import org.apache.commons.httpclient.ProxyHost;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 
-import com.sdata.core.http.HttpPageLoader;
+import com.lakeside.download.http.HttpPageLoader;
 
 public class TestPost {     
     
