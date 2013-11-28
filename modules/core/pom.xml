@@ -64,6 +64,14 @@
 		<groupId>com.sdata</groupId>
 		<artifactId>sdatacrawler-elastic</artifactId>
 	</dependency>
+	<dependency>
+		<groupId>org.reflections</groupId>
+		<artifactId>reflections</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>com.google.guava</groupId>
+		<artifactId>guava</artifactId>
+	</dependency>
   </dependencies>
   <build>
 		<plugins>

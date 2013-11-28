@@ -90,7 +90,8 @@ public class TwitteParser extends SenseParser {
 		if(document == null){
 			return null;
 		}
-		if(!isSingapore(datum,document)){
+		boolean check = conf.getBoolean("checkInSingapore", false);
+		if(check&&!isSingapore(datum,document)){
 			return null;
 		}
 		//parser
