@@ -16,7 +16,6 @@
 	</parent>
 
 	<modules>
-		<module>next</module>
 		<module>sense</module>
 		<module>hot</module>
 		<module>index</module>
