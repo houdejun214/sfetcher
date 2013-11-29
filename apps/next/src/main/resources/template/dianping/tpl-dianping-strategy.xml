@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<strategy>
-	<init link="http://www.dianping.com/shopall/2/0"></init>
-	<links selector=".list .B|links"></links>
-	<links selector=".D|links"></links>
-	<links selector=".NextPage|links"></links>
-	<datum selector=".BL|links"></datum>
-</strategy>
