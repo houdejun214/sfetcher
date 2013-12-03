@@ -25,12 +25,11 @@ public class HBaseStoreWithGenID extends HBaseStore {
 	protected void save(Object _id,Map<String,Object> data){
 		String oi = String.valueOf(data.remove(Constants.OBJECT_INDEX));
 		// string to bytes for row key
-		UUID uuid = UUIDUtils.decode(_id.toString());
 		// exists
 		// Get row key through Id Generator
-		Long rk = hbaseGenID.getOrCreateRowKey(uuid);
+		Long rk = hbaseGenID.getOrCreateRowKey(_id);
 		// Index collection save
-		hbaseGenID.save(uuid, rk, oi);
+		hbaseGenID.save(_id, rk, oi);
 		// main data save
 		if(isExists(rk)){
 			data.remove(com.sdata.core.Constants.FETCH_TIME);

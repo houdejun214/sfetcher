@@ -1,0 +1,21 @@
+<configuration>
+        <!-- crawl site for tencent -->
+                <property>
+                        <name>ClientId</name>
+                        <value>801422948</value>
+                </property>
+                <property>
+                        <name>OpenId</name>
+                        <value>B38DF4D6C5BEE98F2ED5AEF1AA5851BE</value>
+                </property>
+                <!-- acess info -->
+                <property>
+                        <name>AccessToken</name>
+                        <value>ab80bd71b19203ac4fb2b16ed23a8da7</value>
+                </property>
+                <property>
+                        <name>QueueThresholdSizeSlow</name>
+                        <value>800</value>
+                        <description></description>
+                </property>
+</configuration>

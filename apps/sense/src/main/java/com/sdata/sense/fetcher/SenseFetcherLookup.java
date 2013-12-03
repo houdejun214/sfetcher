@@ -20,7 +20,7 @@ public class SenseFetcherLookup {
 		if(fetcherMap.size() == 0){
 			synchronized (fetcherMap) {
 				if(fetcherMap.size() ==0){
-					Set<Class<? extends SenseFetcher>> subClass = ClassUtils.getSubClass(SenseFetcher.class, "com.sdata.sense");
+					Set<Class<? extends SenseFetcher>> subClass = ClassUtils.getSubClass(SenseFetcher.class, "com.sdata");
 					for(Class<? extends SenseFetcher> sub:subClass){
 						String fid = getFID(sub); 
 						fetcherMap.put(fid,sub);

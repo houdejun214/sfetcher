@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<configuration>
+	<site name="future" fetcher="com.sdata.future.FutureProxyFetcher"
+		  storer="com.sdata.sense.store.SenseProxyStorer">
+	 	 <property>
+			<name>TaskInterval</name>
+			<value>60000</value>
+		</property>
+		<property>
+		  <name>MainCrawlThreadNum</name>
+		  <value>1</value>
+		</property>
+		<property>
+			<name>FetchThreadNum</name>
+			<value>1</value>
+		</property>
+		<!-- crawler item db info -->
+		<property>
+		  <name>next.crawler.item.host</name>
+		  <value>172.18.109.42</value>
+		</property>
+		<property>
+		  <name>next.crawler.item.port</name>
+		  <value>3306</value>
+		</property>
+		<property>
+		  <name>next.crawler.item.dataBase</name>
+		  <value>next_sense</value>
+		</property>
+		<property>
+		  <name>next.crawler.item.userName</name>
+		  <value>nextsense</value>
+		</property>
+		<property>
+		  <name>next.crawler.item.password</name>
+		  <value>nextsense123</value>
+		</property>
+		<property>
+		  <name>next.crawler.item.queue.table</name>
+		  <value>sc_queue_future_weibo</value>
+		</property>
+		<property>
+		  <name>next.sense.template.table</name>
+		  <value>ss_crawler_template</value>
+		</property>
+		<!-- crawl data save db type -->
+		<property>
+		  <name>DBType</name>
+		  <value>HBase</value>
+		</property>
+		<property>
+		  <name>hbase.namespace</name>
+		  <value>future</value>
+		</property>
+		<property>
+			<name>hbase.cluster.name</name>
+			<value>next-2</value>
+		</property> 
+		<!-- runstate db -redis -->
+		<property>
+			<name>RedisHost</name>
+			<value>172.29.34.96</value>
+		</property>
+		<property>
+			<name>RedisPort</name>
+			<value>6379</value>
+		</property>
+		<property>
+			<name>RedisPassword</name>
+			<value>9561cdda0d17fd15cfb9cecf7f0d081c</value>
+		</property>
+		<property>
+			<name>next.crawler.item.redis.namespace</name>
+			<value>Future_Crawler_Item</value>
+		</property>
+		<!-- 定义crawler queue wait timeout(s), default 20s at least 10s-->
+		<property>
+			<name>crawler.queue.wait.timeout</name>
+			<value>20</value>
+		</property> 
+		<!-- 定义crawler queue get item count one time , default 20-->
+		<property>
+			<name>crawler.item.queue.onetime.count</name>
+			<value>10</value>
+		</property> 
+		<property>
+			<name>sense.crawl.increment</name>
+			<value>true</value>
+		</property> 
+		<filter pos="before" class="com.sdata.sense.filter.SenseProxyFilter"></filter>
+	</site>
+</configuration>

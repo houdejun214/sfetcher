@@ -1,7 +1,6 @@
 package com.sdata.sense;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.lakeside.core.utils.time.DateFormat;
@@ -45,28 +44,20 @@ public class SenseFetchDatum extends FetchDatum {
 	}
 	
 	public boolean prepare(){
-		super.getMetadata().putAll(defaultData());
 		FieldProcess fieldProcess = new FieldProcess(SenseConfig.getConfig(item));
 		this.setMetadata(fieldProcess.fieldReduce(this.getMetadata()));
 		if(super.getMetadata() == null){
 			return false;
 		}
+		super.getMetadata().putAll(defaultData());
 		return true;
 	}
 	
 	public Map<String,Object> defaultData() {
-		Map<String,Object> result = new HashMap<String, Object>();
-		result.put(Constants.DATA_TAGS_FROM_SOURCE,this.item.getSourceName());
-		result.put(Constants.DATA_TAGS_FROM_OBJECT_ID,this.item.getObjectId());
-		result.put(Constants.DATA_TAGS_FROM_PARAM_TYPE,this.item.getObjectId());
-		result.put(Constants.DATA_INDEX_COLUMN,getIndexColumn());
-		result.put(Constants.FETCH_TIME,new Date());
-		result.putAll(item.getFields());
-		result.putAll(item.getParams());
-		return result;
+		return this.item.toMap();
 	}
 
 	public String getIndexColumn() {
-		return String.valueOf(item.getParamStr().hashCode());
+		return this.item.getIndexColumn();
 	}
 }

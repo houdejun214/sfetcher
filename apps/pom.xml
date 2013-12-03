@@ -20,6 +20,8 @@
 		<module>hot</module>
 		<module>index</module>
 		<module>image</module>
+		<module>future</module>
+		<module>live</module>
 	</modules>
 
 	<description>Sdatacrawler apps is advance crawler task of data crawler framework. </description>

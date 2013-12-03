@@ -1,8 +1,5 @@
 package com.sdata.sense.fetcher;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Map;
 
 import com.lakeside.core.utils.StringUtils;
@@ -20,24 +17,33 @@ import com.sdata.sense.item.SenseCrawlItem;
  * @author zhufb
  *
  */
-public class SenseProxyFetcher extends SdataFetcher {
-	protected SenseCrawlItem word = null;
-	protected static CrawlItemQueue crawlItemQueue = null;
+public abstract class SenseProxyFetcher extends SdataFetcher {
+	protected SenseCrawlItem item = null;
+	protected static Object syn = new Object();
+	private static CrawlItemQueue crawlItemQueue;
 
 	@Override
 	public void taskInitialize(){
-		crawlItemQueue = CrawlItemQueue.getInstance();
+		if(crawlItemQueue == null){
+			synchronized(syn){
+				if(crawlItemQueue == null){
+					crawlItemQueue = this.initItemQueue();
+				}
+			}
+		}
 	}
 	
+	protected abstract CrawlItemQueue initItemQueue();
+	
+	protected abstract SenseCrawlItem initItem(Map<String, Object> map);
+
 	public SenseProxyFetcher(Configuration conf,RunState state) {
 		this.setConf(conf);
 		this.setRunState(state);
 	}
 	
 	protected SenseCrawlItem getNextItem() {
-		Map<String, Object> map = crawlItemQueue.get();
-		SenseCrawlItem citem = new SenseCrawlItem(map); 
-		return citem;
+		return initItem(crawlItemQueue.get());
 	}
 	
 	@Override
@@ -49,12 +55,12 @@ public class SenseProxyFetcher extends SdataFetcher {
 	        if(StringUtils.isEmpty(crawlId)){
 	        	return;
 	        }
-	        //process item
+	        // process item
 			SenseFetcher fetcher = SenseFactory.getFetcher(crawlId);
 			if(fetcher == null){
 				return;
 			}
-			//  -- monitor start
+			// monitor start
 			SenseItemMonitor.monitor(item, fetcher);
 			
 			// fetch list and dispatch
@@ -65,7 +71,6 @@ public class SenseProxyFetcher extends SdataFetcher {
 
 		}catch(Exception e){
 			this.failItem(item);
-			e.printStackTrace();
 //			CrawlerMail.send(item.toString(),getExceptionStr(e));
 		}finally{
 			//--- monitor end
@@ -97,25 +102,25 @@ public class SenseProxyFetcher extends SdataFetcher {
 		return null;
 	}
 	
-	private String getExceptionStr(Exception e){
-		// email exception info
-		StringWriter writer = new StringWriter();
-		PrintWriter out = new PrintWriter(writer);
-		e.printStackTrace(out);
-		String result = writer.toString();
-		try {
-			writer.close();
-			out.close();
-		} catch (IOException e1) {
-			
-		}
-		return result;
-	}
-	private void completeItem(SenseCrawlItem item){
+//	private String getExceptionStr(Exception e){
+//		// email exception info
+//		StringWriter writer = new StringWriter();
+//		PrintWriter out = new PrintWriter(writer);
+//		e.printStackTrace(out);
+//		String result = writer.toString();
+//		try {
+//			writer.close();
+//			out.close();
+//		} catch (IOException e1) {
+//			
+//		}
+//		return result;
+//	}
+	protected void completeItem(SenseCrawlItem item){
 		 crawlItemQueue.complete(item);
 	}
 
-	private void failItem(SenseCrawlItem item){
+	protected void failItem(SenseCrawlItem item){
 		 crawlItemQueue.fail(item);
 	}
 

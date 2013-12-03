@@ -70,8 +70,8 @@ public abstract class SenseFetcher extends SdataFetcher {
 		if(list == null||list.size() == 0){
 			return true;
 		}
-		Boolean incrementCrawl = this.getConfBoolean("sense.crawl.increment", false);
-		if(incrementCrawl){
+		String crawl = this.getConf("crawlName", "live");
+		if("live".equals(crawl)){
 			return senseStore.isExists((SenseFetchDatum) list.get(list.size() - 1));
 		}
 		return false;

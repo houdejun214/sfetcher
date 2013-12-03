@@ -13,6 +13,13 @@ import com.lakeside.core.utils.MapUtils;
  */
 public class CrawlItem {
 	
+	protected Long id;
+	protected String keyword;
+	protected String type;
+	protected Date start;
+	protected Date end;
+	protected String  status;
+	
 	public CrawlItem(Map<String,Object> map){
 		if(map == null||map.size() == 0){
 			return;
@@ -29,12 +36,6 @@ public class CrawlItem {
 		this.status = MapUtils.getString(map,"status");
 	}
 	
-	private Long id;
-	private String keyword;
-	private String type;
-	private Date start;
-	private Date end;
-	private String  status;
 	public Long getId() {
 		return id;
 	}

@@ -5,8 +5,6 @@ import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import org.apache.commons.lang.StringUtils;
-
 import com.lakeside.data.redis.DistributeLock;
 import com.lakeside.data.redis.DistributeLock.DistributelLockTimeOutException;
 import com.sdata.core.CrawlAppContext;
@@ -24,29 +22,16 @@ public class CrawlItemQueue {
 	private CrawlItemDB crawlItemDB;
 	private DistributeLock crawlLock;
 	private final int COUNT; 
-	private static CrawlItemQueue itemQueue;
 	private static Object syn = new Object(); 
 	private final int WAIT_SECONDS = 5;
 	private int TOTAL_WAIT_SECONDS = 300;
-	public static CrawlItemQueue getInstance(){
-		if(itemQueue == null){
-			synchronized (syn) {
-				if(itemQueue == null)
-					itemQueue=  new CrawlItemQueue();
-			}
-		}
-		return itemQueue;
-	}
 	
-	private CrawlItemQueue(){
+	public CrawlItemQueue(CrawlItemDB crawlItemDB){
+		this.crawlItemDB = crawlItemDB;
 		this.COUNT = CrawlAppContext.conf.getInt("crawler.item.queue.onetime.count", 20);
 		this.TOTAL_WAIT_SECONDS = CrawlAppContext.conf.getInt("crawler.queue.wait.timeout", 300);
 		this.queue = new LinkedBlockingQueue<Map<String,Object>>(COUNT*5);
-		this.crawlItemDB = new CrawlItemDB(CrawlAppContext.conf);
-		String namespace = CrawlAppContext.conf.get("next.crawler.item.redis.namespace");
-		if(StringUtils.isEmpty(namespace)){
-			namespace = "Next_Crawl_Item";
-		}
+		String namespace = CrawlAppContext.conf.get("next.crawler.item.redis.namespace","Crawl_Item");
 		this.crawlLock = new DistributeLock(CrawlDBRedis.getRedisDB(CrawlAppContext.conf,namespace));
 		this.crawlLock.setTimeout(WAIT_SECONDS);
 	}
@@ -87,13 +72,6 @@ public class CrawlItemQueue {
 				//add queue from running not completeed
 				if(isLock&&size() == 0) {
 					complete = true;
-					//reset running
-//					this.resetRuning();
-					
-//					this.add();
-					
-//					if(size() == 0){
-//					}
 				}
 				//unlock db
 				if(isLock){
@@ -133,10 +111,6 @@ public class CrawlItemQueue {
 		}
 		crawlItemDB.updateItemStatus(id,QueueStatus.FAILED);
 	}
-	
-//	public void resetRuning(){
-//		crawlItemDB.updateItemStatus(QueueStatus.RUNING, QueueStatus.INIT);
-//	}
 	
 	public void reset(){
 		crawlItemDB.resetItemStatus();

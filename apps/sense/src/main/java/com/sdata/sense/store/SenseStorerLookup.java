@@ -20,7 +20,7 @@ public class SenseStorerLookup {
 		if(stroreMap.size() == 0){
 			synchronized (stroreMap) {
 				if(stroreMap.size() ==0){
-					Set<Class<? extends SenseStorer>> subClass = ClassUtils.getSubClass(SenseStorer.class, "com.sdata.sense");
+					Set<Class<? extends SenseStorer>> subClass = ClassUtils.getSubClass(SenseStorer.class, "com.sdata");
 					for(Class<? extends SenseStorer> sub:subClass){
 						String sid = getSID(sub); 
 						stroreMap.put(sid,sub);

@@ -86,7 +86,7 @@ public class SenseStorer extends SdataStandardStorer {
 			return false;
 		}
 		HBaseStoreWithGenID dbStore = (HBaseStoreWithGenID)super.getDBStore(conf,sc.getName());
-		return	dbStore.getHbaseGenID().isExists(StringUtils.valueOf(datum.getId()),datum.getIndexColumn());
+		return	dbStore.getHbaseGenID().isExists(datum.getId(),datum.getIndexColumn());
 	}
 	
 	public StoreCollection getMainCollection(Configuration config) {

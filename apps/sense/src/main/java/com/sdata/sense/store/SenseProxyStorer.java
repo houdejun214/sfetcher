@@ -7,6 +7,10 @@ import com.sdata.core.data.SdataStorer;
 import com.sdata.sense.SenseFactory;
 import com.sdata.sense.SenseFetchDatum;
 
+/**
+ * @author zhufb
+ *
+ */
 public class SenseProxyStorer extends SdataStorer {
 
 	public SenseProxyStorer(Configuration conf,RunState state){

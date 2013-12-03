@@ -54,7 +54,7 @@ public class SenseConfig {
 	public static Configuration getConfig(SenseCrawlItem item){
 		String id = item.getCrawlerName();
 		String entry = item.getEntryName();
-		String key = id.concat(":").concat(entry);
+		String key = getMergeKey(id,entry);
 		if(configMap.get(key) == null){
 			synchronized (configMap) {
 				if(configMap.get(key) == null){
@@ -155,7 +155,20 @@ public class SenseConfig {
 	}
 	
 	private static String getMergePath(String id,String entry){
-		return id.concat("/").concat(entry);
+		String result = id;
+		if(!StringUtils.isEmpty(entry)){
+			result =  id.concat("/").concat(entry);
+		}
+		return result;
+	}
+
+	
+	private static String getMergeKey(String id,String entry){
+		String result = id;
+		if(!StringUtils.isEmpty(entry)){
+			result =  id.concat(":").concat(entry);
+		}
+		return result;
 	}
 	
 	private static boolean check(String path){
