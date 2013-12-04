@@ -42,8 +42,9 @@ public class TwitterFutureParser extends SenseParser {
 		ParseResult result = new ParseResult();
 		TwitterAPI.init(conf);
 		RedisDB redisDB = CrawlDBRedis.getRedisDB(conf,"TwitterFuture");
-		String uid = item.parse();
-		String lastid = redisDB.get(uid);
+		String key = item.parse();
+		String uid = key.split(":")[1];
+		String lastid = redisDB.get(key);
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		try {
 			if(StringUtils.isEmpty(lastid)){
@@ -64,8 +65,8 @@ public class TwitterFutureParser extends SenseParser {
 			log.error("user:"+uid +" maybe not exists!");
 		}else{
 			result.setFetchList(parseMapToDatum(list,item));
-			redisDB.set(uid, lastid);
-			log.warn("fetch twitter uid:"+uid+",fetch tweets size:"+result.getListSize());
+			redisDB.set(key, lastid);
+			log.warn("fetch twitter user:"+key+",fetch tweets size:"+result.getListSize());
 		}
 		this.wait(5);
 		return result;

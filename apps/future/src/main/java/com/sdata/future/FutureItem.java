@@ -34,7 +34,9 @@ public class FutureItem extends SenseCrawlItem {
 
 	@Override
 	public String parse() {
-		return StringUtils.valueOf(this.getParam(UID));
+		StringBuffer sb = new StringBuffer();
+		sb.append(tags).append(":").append(this.getParam(UID));
+		return sb.toString();
 	}
 	
 }

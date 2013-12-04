@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.sdata.context.config.Configuration;
 import com.sdata.core.item.CrawlItemDB;
 
@@ -13,8 +15,10 @@ import com.sdata.core.item.CrawlItemDB;
  */
 public class FutureItemDB extends CrawlItemDB {
 	
+	private String tag;
 	public FutureItemDB(Configuration conf){
 		super(conf);
+		this.tag = conf.get("tag", null);
 	}
 	
 	protected List<Map<String,Object>> queryItemQueue(int topN,String status){
@@ -22,6 +26,9 @@ public class FutureItemDB extends CrawlItemDB {
 		StringBuffer sql = new StringBuffer("select * from ");
 		sql.append(itemQueueTable);
 		sql.append(" where status=:status ");
+		if(!StringUtils.isEmpty(tag)){
+			sql.append(" and tags = '").append(tag).append("'");
+		}
 		sql.append(" order by priority_score desc limit :topn ");
 		parameters.put("status", status);
 		parameters.put("topn", topN);

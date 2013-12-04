@@ -38,8 +38,9 @@ public class WeiboFutureParser extends SenseParser {
 			SenseCrawlItem item) {
 		ParseResult result = new ParseResult();
 		RedisDB redisDB = CrawlDBRedis.getRedisDB(conf,"WeiboFuture");
-		String uid = item.parse();
-		String sinceId = redisDB.get(uid);
+		String key = item.parse();
+		String uid = key.split(":")[1];
+		String sinceId = redisDB.get(key);
 		int count = 100;
 		if(StringUtils.isEmpty(sinceId)||!StringUtils.isNum(sinceId)||"0".equals(sinceId)){
 			sinceId = "0";
@@ -50,11 +51,11 @@ public class WeiboFutureParser extends SenseParser {
 			Collections.sort(tweets,new TweetsComparator());
 			String newid = StringUtils.valueOf(tweets.get(0).get(Constants.TWEET_ID));
 			if(Long.valueOf(newid)> Long.valueOf(sinceId)){
-				redisDB.set(uid, newid);
+				redisDB.set(key, newid);
 			}
 		}
 		result.setFetchList(parseMapToDatum(tweets,item));
-		log.warn("fetch weibo uid:"+uid+",sinceId " + sinceId +",fetch tweets size:"+tweets.size());
+		log.warn("fetch weibo user:"+key+",sinceId " + sinceId +",fetch tweets size:"+tweets.size());
 		return result;
 	}
 	

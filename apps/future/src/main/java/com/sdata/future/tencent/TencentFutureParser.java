@@ -53,8 +53,9 @@ public class TencentFutureParser extends SenseParser {
 		ParseResult result = new ParseResult();
 		TencentOAuthV1.init(conf);
 		RedisDB redisDB = CrawlDBRedis.getRedisDB(conf,"TencentFuture");
-		String uid = item.parse();
-		String dbState = redisDB.get(uid);
+		String key = item.parse();
+		String uid = key.split(":")[1];
+		String dbState = redisDB.get(key);
 		String page = "0";//pageflag 0:first page,1:next page ,2:previous page
 		String lastid="0";
 		String pagetime = "0";
@@ -87,9 +88,9 @@ public class TencentFutureParser extends SenseParser {
 		lastid = StringUtils.valueOf(metadata.get("lastid"));
 		pagetime = StringUtils.valueOf(metadata.get("pagetime"));
 		if(!StringUtils.isEmpty(lastid)&&!StringUtils.isEmpty(pagetime)){
-			redisDB.set(uid, lastid+","+pagetime);
+			redisDB.set(key, lastid+","+pagetime);
 		}
-		log.warn("fetch tencent uid:"+uid+",fetch tweets size:"+result.getListSize());
+		log.warn("fetch tencent user:"+key+",fetch tweets size:"+result.getListSize());
 		return result;
 	}
 	
