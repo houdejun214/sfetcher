@@ -10,12 +10,12 @@ import java.util.concurrent.LinkedBlockingQueue;
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.data.redis.DistributeLock;
 import com.lakeside.data.redis.DistributeLock.DistributelLockTimeOutException;
-import com.sdata.core.Constants;
-import com.sdata.core.CrawlAppContext;
-import com.sdata.core.QueueStatus;
-import com.sdata.core.crawldb.CrawlDB;
-import com.sdata.core.crawldb.CrawlDBRedis;
-import com.sdata.core.parser.html.config.StrategyConfig;
+import com.sdata.context.config.Constants;
+import com.sdata.context.config.CrawlAppContext;
+import com.sdata.context.model.QueueStatus;
+import com.sdata.context.state.crawldb.CrawlDB;
+import com.sdata.context.state.crawldb.CrawlDBRedis;
+import com.sdata.core.parser.config.StrategyConfig;
 
 /**
  * @author zhufb

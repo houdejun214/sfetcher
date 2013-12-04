@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 
 import com.lakeside.core.utils.UUIDUtils;
 import com.mongodb.DBObject;
-import com.sdata.core.Constants;
-import com.sdata.core.CrawlAppContext;
-import com.sdata.core.data.FieldProcess;
+import com.sdata.context.config.Constants;
+import com.sdata.context.config.CrawlAppContext;
+import com.sdata.core.data.trans.FieldProcess;
 
 public class DBIndexProcess implements Runnable {
 	private static final Logger log = LoggerFactory.getLogger("DBIndexProcess");

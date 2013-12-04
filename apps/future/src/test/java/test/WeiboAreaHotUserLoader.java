@@ -15,7 +15,6 @@ import org.apache.commons.lang.StringUtils;
 import com.lakeside.core.utils.PatternUtils;
 import com.lakeside.download.http.HttpPage;
 import com.lakeside.download.http.HttpPageLoader;
-import com.sdata.future.FutureIDBuilder;
 
 /**
  * @author zhufb
@@ -40,6 +39,7 @@ public class WeiboAreaHotUserLoader {
 //			client.createTable(table, "dcf");
 //		}
 
+
 		List<String> result = new ArrayList<String>();
 		for (String letter : Letters) {
 			int p = 1;
@@ -52,9 +52,10 @@ public class WeiboAreaHotUserLoader {
 				}
 				p++;
 			}
+//			System.out.println("letter "+letter + " user size:" + result.size());
 		}
-
 		saveUsers(result);
+
 	}
 
 	private static boolean getUserIds(List<String> result, String html) {
@@ -68,7 +69,7 @@ public class WeiboAreaHotUserLoader {
 		if (StringUtils.isEmpty(html)) {
 			html = "";
 		}
-		return html.contains("\u4e0b\u4e00\u9875");
+		return html.contains("\\u4e0b\\u4e00\\u9875");
 	}
 
 	private static boolean getAllMatchPattern(List<String> result,

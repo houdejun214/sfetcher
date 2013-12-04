@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.lakeside.core.utils.MapUtils;
-import com.sdata.core.CrawlAppContext;
+import com.sdata.context.config.CrawlAppContext;
 
 /**
  * @author zhufb

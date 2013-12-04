@@ -7,8 +7,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import com.framework.db.hbase.ids.RowkeyUtils;
-import com.sdata.core.Configuration;
-import com.sdata.core.Constants;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.config.Constants;
 import com.sdata.core.FetchDispatch;
 import com.sdata.core.parser.html.util.DocumentUtils;
 import com.sdata.live.LiveItem;

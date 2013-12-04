@@ -1,7 +1,7 @@
 package com.sdata.image;
 
-import com.sdata.core.Configuration;
-import com.sdata.core.data.statistics.StatisticsStore;
+import com.sdata.context.config.Configuration;
+import com.sdata.extension.statistic.Statistic;
 
 /**
  * @author zhufb
@@ -11,9 +11,9 @@ public class ImageStatistic {
 
 	private static String CollectionName = "images"; 
 	private static ImageStatistic is;
-	private StatisticsStore ss;
+	private Statistic ss;
 	private  ImageStatistic(Configuration conf){
-		ss = new StatisticsStore(conf);
+		ss = new Statistic(conf);
 	}
 	
 	public void save(String source,String collection){

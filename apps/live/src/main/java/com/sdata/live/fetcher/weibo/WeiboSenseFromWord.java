@@ -17,7 +17,7 @@ import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.UrlUtils;
 import com.lakeside.download.http.HttpPage;
 import com.lakeside.download.http.HttpPageLoader;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.item.CrawlItemEnum;
 import com.sdata.core.parser.html.util.DocumentUtils;

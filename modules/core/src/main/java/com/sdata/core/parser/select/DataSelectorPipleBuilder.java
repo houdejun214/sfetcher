@@ -1,6 +1,6 @@
 package com.sdata.core.parser.select;
 
-import com.sdata.core.parser.html.context.IParserContext;
+import com.sdata.context.parser.IParserContext;
 
 
 public class DataSelectorPipleBuilder {

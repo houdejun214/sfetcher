@@ -3,9 +3,9 @@ package com.sdata.future.twitter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDispatch;
-import com.sdata.core.RunState;
 import com.sdata.core.parser.ParseResult;
 import com.sdata.sense.SenseConfig;
 import com.sdata.sense.SenseFetchDatum;

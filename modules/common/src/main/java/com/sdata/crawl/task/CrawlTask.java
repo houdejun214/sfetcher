@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import com.sdata.conf.sites.CrawlConfig;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDispatch;
-import com.sdata.core.RunState;
-import com.sdata.core.data.SdataStorer;
+import com.sdata.core.data.store.SdataStorer;
 import com.sdata.core.fetcher.SdataFetcher;
 import com.sdata.core.filter.SdataFilter;
 

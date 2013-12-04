@@ -7,8 +7,8 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 import com.lakeside.data.sqldb.MysqlDataSource;
-import com.sdata.core.Configuration;
-import com.sdata.core.QueueStatus;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.model.QueueStatus;
 
 /**
  * @author zhufb

@@ -15,8 +15,8 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.UUIDUtils;
-import com.sdata.core.Configuration;
-import com.sdata.core.crawldb.CrawlDBSqlSupport;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.state.crawldb.CrawlDBSqlSupport;
 import com.sdata.crawl.task.AbstractTask;
 
 /**

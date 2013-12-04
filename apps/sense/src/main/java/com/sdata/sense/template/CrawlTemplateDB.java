@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.lakeside.data.sqldb.MysqlDataSource;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.item.CrawlItemDataSource;
 
 /**

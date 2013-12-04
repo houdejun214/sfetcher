@@ -9,23 +9,22 @@ import net.sf.json.JSONObject;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lakeside.core.utils.PatternUtils;
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.time.DateFormat;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.NegligibleException;
 import com.sdata.core.RawContent;
+import com.sdata.core.exception.NegligibleException;
 import com.sdata.core.parser.html.util.DocumentUtils;
-import com.sdata.core.util.JsoupUtils;
 import com.sdata.hot.HotConstants;
 import com.sdata.hot.Source;
 import com.sdata.hot.fetcher.video.HotVideoFetcher;
 import com.sdata.hot.util.HotUtils;
+import com.sdata.util.JsoupUtils;
 
 /**
  * @author zhufb

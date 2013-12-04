@@ -3,12 +3,12 @@ package com.sdata.sense.fetcher;
 import java.util.Map;
 
 import com.lakeside.core.utils.StringUtils;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.state.RunState;
+import com.sdata.core.CrawlItemQueue;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.FetchDispatch;
-import com.sdata.core.RunState;
 import com.sdata.core.fetcher.SdataFetcher;
-import com.sdata.core.item.CrawlItemQueue;
 import com.sdata.sense.SenseFactory;
 import com.sdata.sense.SenseFetchDatum;
 import com.sdata.sense.item.SenseCrawlItem;

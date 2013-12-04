@@ -14,6 +14,7 @@
 			<name>FetchThreadNum</name>
 			<value>3</value>
 		</property>
+		
 		<!-- crawler item db info -->
 		<property>
 		  <name>next.crawler.item.host</name>
@@ -37,12 +38,13 @@
 		</property>
 		<property>
 		  <name>next.crawler.item.queue.table</name>
-		  <value>sc_crawl_item_queue</value>
+		  <value>sc_queue_live</value>
 		</property>
 		<property>
 		  <name>next.sense.template.table</name>
 		  <value>ss_crawler_template</value>
 		</property>
+		
 		<!-- crawl data save db type -->
 		<property>
 		  <name>DBType</name>
@@ -50,21 +52,13 @@
 		</property>
 		<property>
 		  <name>hbase.namespace</name>
-		  <value>ls</value>
+		  <value>live</value>
 		</property>
 		<property>
 			<name>hbase.cluster.name</name>
 			<value>next-2</value>
 		</property> 
-		<property>
-			<name>image.namespace</name>
-			<value>ls</value>
-		</property>
-		<!-- elastic server cluster name -->
-		<property>
-		  <name>elastic.cluster.name</name>
-		  <value>sense</value>
-		</property>
+		
 		<!-- runstate db -redis -->
 		<property>
 			<name>RedisHost</name>
@@ -78,14 +72,17 @@
 			<name>RedisPassword</name>
 			<value>9561cdda0d17fd15cfb9cecf7f0d081c</value>
 		</property>
+		
+		<!-- use redis for Distribute Lock multi process -->
 		<property>
-			<name>StatisticsRedisDBName</name>
-			<value>SenseStatistics</value>
+			<name>crawler.item.redis.namespace</name>
+			<value>Live_Crawler_Item</value>
 		</property>
 		<property>
-			<name>next.crawler.item.redis.namespace</name>
-			<value>Sense_Crawler_Item</value>
-		</property>
+			<name>crawler.stastisticEnable</name>
+			<value>false</value>
+		</property> 
+		
 		<!-- 定义crawler queue wait timeout(s), default 20s at least 10s-->
 		<property>
 			<name>crawler.queue.wait.timeout</name>

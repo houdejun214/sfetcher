@@ -2,8 +2,6 @@ package com.sdata.core;
 
 import java.util.List;
 
-import com.sdata.core.FetchDatum;
-
 public interface FetchDispatch {
 
 	public abstract void dispatch(FetchDatum data);

@@ -1,6 +1,6 @@
 package com.sdata.live.parser.statistic;
 
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDispatch;
 import com.sdata.sense.item.SenseCrawlItem;
 

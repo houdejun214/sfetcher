@@ -11,7 +11,7 @@ import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.sdata.core.Constants;
+import com.sdata.context.config.Constants;
 
 /**
  * @author zhufb

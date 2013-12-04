@@ -8,10 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lakeside.core.utils.PatternUtils;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDispatch;
 import com.sdata.core.RawContent;
-import com.sdata.core.RunState;
 import com.sdata.core.parser.ParseResult;
 import com.sdata.live.parser.html.SenseJsonParser;
 import com.sdata.sense.SenseConfig;

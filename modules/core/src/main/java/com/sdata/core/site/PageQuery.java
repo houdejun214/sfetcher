@@ -3,7 +3,7 @@ package com.sdata.core.site;
 import java.util.Date;
 
 import com.lakeside.core.utils.time.DateTimeUtils;
-import com.sdata.core.Location;
+import com.sdata.context.model.Location;
 
 /**
  * a simple object represent the query parameters

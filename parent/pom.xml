@@ -73,17 +73,24 @@
 		<dependencies>
 			<dependency>
 				<groupId>com.sdata</groupId>
-				<artifactId>sdatacrawler-common</artifactId>
+				<artifactId>sdatacrawler-context</artifactId>
 				<version>${sdatacrawler.version}</version>
-				<scope>compile</scope>
-				<exclusions>
-					<exclusion>
-						<artifactId>slf4j-log4j12</artifactId>
-						<groupId>org.slf4j</groupId>
-					</exclusion>
-				</exclusions>
 			</dependency>
-
+			<dependency>
+				<groupId>com.sdata</groupId>
+				<artifactId>sdatacrawler-db</artifactId>
+				<version>${sdatacrawler.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sdata</groupId>
+				<artifactId>sdatacrawler-extension</artifactId>
+				<version>${sdatacrawler.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sdata</groupId>
+				<artifactId>sdatacrawler-util</artifactId>
+				<version>${sdatacrawler.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.sdata</groupId>
 				<artifactId>sdatacrawler-core</artifactId>
@@ -97,6 +104,24 @@
 			<dependency>
 				<groupId>com.sdata</groupId>
 				<artifactId>sdatacrawler-elastic</artifactId>
+				<version>${sdatacrawler.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sdata</groupId>
+				<artifactId>sdatacrawler-common</artifactId>
+				<version>${sdatacrawler.version}</version>
+				<scope>compile</scope>
+				<exclusions>
+					<exclusion>
+						<artifactId>slf4j-log4j12</artifactId>
+						<groupId>org.slf4j</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sdata</groupId>
+				<artifactId>sdatacrawler-sense</artifactId>
 				<version>${sdatacrawler.version}</version>
 			</dependency>
 			<dependency>

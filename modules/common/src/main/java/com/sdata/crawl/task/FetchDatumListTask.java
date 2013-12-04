@@ -4,11 +4,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-import com.sdata.core.Configuration;
-import com.sdata.core.FetchDispatch;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.NegligibleException;
-import com.sdata.core.RunState;
+import com.sdata.core.FetchDispatch;
+import com.sdata.core.exception.NegligibleException;
 import com.sdata.core.fetcher.SdataFetcher;
 
 /**

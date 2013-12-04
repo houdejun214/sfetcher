@@ -1,7 +1,7 @@
 package com.sdata.core.item;
 
 import com.lakeside.data.sqldb.MysqlDataSource;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 
 /**
  * @author zhufb

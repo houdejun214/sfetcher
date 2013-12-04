@@ -5,8 +5,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sdata.core.Configuration;
-import com.sdata.core.NegligibleException;
+import com.sdata.context.config.Configuration;
+import com.sdata.core.exception.NegligibleException;
 
 /**
  * @author zhufb

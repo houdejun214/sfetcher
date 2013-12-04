@@ -1,8 +1,8 @@
 package com.sdata.live.handler.weibo;
 
 import com.lakeside.core.utils.StringUtils;
-import com.sdata.core.parser.html.context.IParserContext;
-import com.sdata.core.parser.html.handler.IParserHandler;
+import com.sdata.context.parser.IParserContext;
+import com.sdata.extension.handler.IParserHandler;
 
 /**
  * @author zhufb

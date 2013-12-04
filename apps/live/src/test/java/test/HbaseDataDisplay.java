@@ -24,7 +24,6 @@ import com.framework.db.hbase.thrift.HBaseClientFactory;
 import com.framework.db.hbase.thrift.HBaseThriftClient;
 import com.framework.db.hbase.thrift.HBaseThriftException;
 import com.lakeside.core.utils.FileUtils;
-import com.sdata.core.util.ApplicationResourceUtils;
 import com.sdata.live.fetcher.twitter.TwitterFetcher;
 
 public class HbaseDataDisplay {
@@ -128,7 +127,7 @@ public class HbaseDataDisplay {
 
 	private static String[] getWords(Long oid){
 		try {
-			String resourceUrl = ApplicationResourceUtils.getResourceUrl(TwitterFetcher.class,"conf/".concat(String.valueOf(oid)).concat(".txt"));
+			String resourceUrl = com.lakeside.core.utils.ApplicationResourceUtils.getResourceUrl(TwitterFetcher.class,"conf/".concat(String.valueOf(oid)).concat(".txt"));
 			String str = FileUtils.readFileToString(resourceUrl);
 			return str.split("\n");
 		} catch (IOException e) {

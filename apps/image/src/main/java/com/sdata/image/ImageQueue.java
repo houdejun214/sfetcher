@@ -2,9 +2,9 @@ package com.sdata.image;
 
 import java.util.Map;
 
-import com.sdata.core.Configuration;
-import com.sdata.core.crawldb.CrawlDB;
-import com.sdata.core.crawldb.impl.CrawlDBImpl;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.state.crawldb.CrawlDB;
+import com.sdata.context.state.crawldb.impl.CrawlDBImpl;
 
 /**
  * @author zhufb

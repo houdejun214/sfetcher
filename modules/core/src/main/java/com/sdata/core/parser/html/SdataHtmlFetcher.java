@@ -9,12 +9,12 @@ import org.slf4j.LoggerFactory;
 
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.download.http.HttpPageLoader;
-import com.sdata.core.Configuration;
-import com.sdata.core.Constants;
-import com.sdata.core.CrawlAppContext;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.config.Constants;
+import com.sdata.context.config.CrawlAppContext;
+import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.RawContent;
-import com.sdata.core.RunState;
 import com.sdata.core.fetcher.SdataFetcher;
 import com.sdata.core.parser.ParseResult;
 

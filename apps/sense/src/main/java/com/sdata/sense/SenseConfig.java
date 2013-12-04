@@ -8,14 +8,14 @@ import org.apache.commons.lang.StringUtils;
 import com.lakeside.core.utils.ApplicationResourceUtils;
 import com.lakeside.core.utils.FileUtils;
 import com.sdata.conf.sites.CrawlConfigManager;
-import com.sdata.core.Configuration;
-import com.sdata.core.Constants;
-import com.sdata.core.CrawlAppContext;
-import com.sdata.core.parser.html.config.DatumConfig;
-import com.sdata.core.parser.html.config.StoreConfig;
-import com.sdata.core.parser.html.config.StrategyConfig;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.config.CrawlAppContext;
+import com.sdata.core.parser.config.DatumConfig;
+import com.sdata.core.parser.config.StoreConfig;
+import com.sdata.core.parser.config.StrategyConfig;
 import com.sdata.sense.item.SenseCrawlItem;
 import com.sdata.sense.template.CrawlTemplate;
+import com.sdata.context.config.Constants;
 
 /**
  * @author zhufb

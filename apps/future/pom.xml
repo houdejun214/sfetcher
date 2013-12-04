@@ -4,6 +4,7 @@
     <groupId>com.sdata</groupId>
     <artifactId>sdatacrawler-apps</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../../apps/</relativePath>
   </parent>
   <artifactId>sdatacrawler-future</artifactId>
   <name>sdatacrawler-future</name>

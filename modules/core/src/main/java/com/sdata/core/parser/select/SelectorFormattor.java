@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.lakeside.core.utils.StringUtils;
-import com.sdata.core.parser.html.context.IParserContext;
+import com.sdata.context.parser.IParserContext;
 
 public class SelectorFormattor {
 

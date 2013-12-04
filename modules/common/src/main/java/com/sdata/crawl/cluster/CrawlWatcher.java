@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lakeside.core.utils.StringUtils;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 
 public class CrawlWatcher extends ZKConnectionWatcher {
 	

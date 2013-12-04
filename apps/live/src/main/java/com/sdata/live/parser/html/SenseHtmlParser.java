@@ -7,10 +7,10 @@ import java.util.Map;
 import org.jsoup.nodes.Document;
 
 import com.lakeside.core.utils.StringUtils;
-import com.sdata.core.Configuration;
-import com.sdata.core.NegligibleException;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.state.RunState;
 import com.sdata.core.RawContent;
-import com.sdata.core.RunState;
+import com.sdata.core.exception.NegligibleException;
 import com.sdata.core.parser.ParseResult;
 import com.sdata.core.parser.html.StrategyHtmlParser;
 import com.sdata.core.parser.html.field.Tags;

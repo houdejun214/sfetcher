@@ -1,9 +1,9 @@
 package com.sdata.sense.store;
 
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.RunState;
-import com.sdata.core.data.SdataStorer;
+import com.sdata.core.data.store.SdataStorer;
 import com.sdata.sense.SenseFactory;
 import com.sdata.sense.SenseFetchDatum;
 

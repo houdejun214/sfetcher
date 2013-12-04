@@ -2,7 +2,7 @@ package com.sdata.crawl.task;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDatum;
 
 /**

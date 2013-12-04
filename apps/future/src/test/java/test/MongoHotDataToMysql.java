@@ -13,8 +13,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.sdata.conf.sites.CrawlConfig;
 import com.sdata.conf.sites.CrawlConfigManager;
-import com.sdata.core.Configuration;
-import com.sdata.core.item.CrawlItemDB;
+import com.sdata.context.config.Configuration;
 import com.sdata.future.FutureItemDB;
 
 /**

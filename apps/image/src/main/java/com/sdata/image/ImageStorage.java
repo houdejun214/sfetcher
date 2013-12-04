@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 
 import com.framework.io.NextFileStore;
 import com.lakeside.core.utils.StringUtils;
-import com.sdata.core.Configuration;
-import com.sdata.core.NegligibleException;
-import com.sdata.core.crawldb.CrawlDBImageQueueEnum;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.state.crawldb.CrawlDBImageQueueEnum;
+import com.sdata.core.exception.NegligibleException;
 
 /**
  * @author zhufb

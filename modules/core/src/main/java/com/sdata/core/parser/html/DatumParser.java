@@ -5,8 +5,8 @@ import java.util.Map;
 
 import org.jsoup.nodes.Document;
 
-import com.sdata.core.Configuration;
-import com.sdata.core.parser.html.config.DatumConfig;
+import com.sdata.context.config.Configuration;
+import com.sdata.core.parser.config.DatumConfig;
 import com.sdata.core.parser.html.context.DatumContext;
 import com.sdata.core.parser.html.field.Field;
 

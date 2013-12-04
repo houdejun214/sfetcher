@@ -11,10 +11,10 @@ import org.slf4j.LoggerFactory;
 import weibo4j.Weibo;
 import weibo4j.util.WeiboServer;
 
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.FetchDispatch;
-import com.sdata.core.RunState;
 import com.sdata.sense.SenseConfig;
 import com.sdata.sense.SenseFetchDatum;
 import com.sdata.sense.fetcher.SenseFetcher;

@@ -24,7 +24,7 @@ import com.lakeside.core.utils.MapUtils;
 import com.lakeside.core.utils.PatternUtils;
 import com.lakeside.core.utils.time.DateFormat;
 import com.lakeside.core.utils.time.DateTimeUtils;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.FetchDispatch;
 import com.sdata.core.RawContent;

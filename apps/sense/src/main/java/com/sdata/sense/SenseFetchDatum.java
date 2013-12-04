@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.lakeside.core.utils.time.DateFormat;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.data.FieldProcess;
+import com.sdata.core.data.trans.FieldProcess;
 import com.sdata.sense.item.SenseCrawlItem;
 
 /**

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <configuration>
-	<site name="history" fetcher="com.sdata.sense.fetcher.SenseProxyFetcher"
+	<site name="history" fetcher="com.sdata.live.history.HistoryProxyFetcher"
 		  storer="com.sdata.sense.store.SenseProxyStorer">
 	 	 <property>
 			<name>TaskInterval</name>
@@ -50,21 +50,12 @@
 		</property>
 		<property>
 		  <name>hbase.namespace</name>
-		  <value>ls</value>
+		  <value>live</value>
 		</property>
 		<property>
 			<name>hbase.cluster.name</name>
 			<value>next-2</value>
 		</property> 
-		<property>
-			<name>image.namespace</name>
-			<value>ls</value>
-		</property>
-		<!-- elastic server cluster name -->
-		<property>
-		  <name>elastic.cluster.name</name>
-		  <value>sense</value>
-		</property>
 		<!-- runstate db -redis -->
 		<property>
 			<name>RedisHost</name>
@@ -78,14 +69,15 @@
 			<name>RedisPassword</name>
 			<value>9561cdda0d17fd15cfb9cecf7f0d081c</value>
 		</property>
+		<!-- use redis for Distribute Lock multi process -->
 		<property>
-			<name>StatisticsRedisDBName</name>
-			<value>SenseStatistics</value>
+			<name>crawler.item.redis.namespace</name>
+			<value>History_Crawler_Item</value>
 		</property>
 		<property>
-			<name>next.crawler.item.redis.namespace</name>
-			<value>Sense_Crawler_Item</value>
-		</property>
+			<name>crawler.stastisticEnable</name>
+			<value>false</value>
+		</property> 
 		<!-- 定义crawler queue wait timeout(s), default 20s at least 10s-->
 		<property>
 			<name>crawler.queue.wait.timeout</name>
@@ -95,10 +87,6 @@
 		<property>
 			<name>crawler.item.queue.onetime.count</name>
 			<value>10</value>
-		</property> 
-		<property>
-			<name>sense.crawl.increment</name>
-			<value>true</value>
 		</property> 
 		<filter pos="before" class="com.sdata.sense.filter.SenseProxyFilter"></filter>
 	</site>

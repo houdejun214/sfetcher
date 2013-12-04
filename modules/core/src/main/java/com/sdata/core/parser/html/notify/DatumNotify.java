@@ -8,11 +8,11 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.sdata.core.Configuration;
-import com.sdata.core.CrawlAppContext;
-import com.sdata.core.parser.html.config.DatumConfig;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.config.CrawlAppContext;
+import com.sdata.core.parser.config.DatumConfig;
 import com.sdata.core.parser.html.field.Field;
-import com.sdata.core.util.BooleanEvaluator;
+import com.sdata.util.BooleanEvaluator;
 
 
 /**

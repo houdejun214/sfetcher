@@ -3,8 +3,8 @@ package com.sdata.live.handler;
 import org.apache.commons.lang.StringUtils;
 
 import com.lakeside.core.utils.PatternUtils;
-import com.sdata.core.parser.html.context.IParserContext;
-import com.sdata.core.parser.html.handler.IParserHandler;
+import com.sdata.context.parser.IParserContext;
+import com.sdata.extension.handler.IParserHandler;
 
 public class HtmlPageHandler implements IParserHandler {
 

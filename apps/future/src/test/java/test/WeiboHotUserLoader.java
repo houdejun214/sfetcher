@@ -16,8 +16,8 @@ import com.framework.db.hbase.thrift.HBaseClientFactory;
 import com.lakeside.core.utils.PatternUtils;
 import com.lakeside.download.http.HttpPage;
 import com.lakeside.download.http.HttpPageLoader;
-import com.sdata.core.util.JsoupUtils;
 import com.sdata.future.weibo.WeiboAPI;
+import com.sdata.util.JsoupUtils;
 
 /**
  * @author zhufb

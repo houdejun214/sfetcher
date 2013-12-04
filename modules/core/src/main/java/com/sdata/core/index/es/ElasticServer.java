@@ -2,8 +2,8 @@ package com.sdata.core.index.es;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.sdata.core.Constants;
-import com.sdata.core.CrawlAppContext;
+import com.sdata.context.config.Constants;
+import com.sdata.context.config.CrawlAppContext;
 import com.sdata.elastic.Elastic;
 
 /**

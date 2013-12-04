@@ -1,7 +1,7 @@
 package com.sdata.image;
 
 import com.sdata.conf.sites.CrawlConfigManager;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 
 public class ImageDownloadProcess {
 	private final static String  imageConfXml = "crawl-image.xml";

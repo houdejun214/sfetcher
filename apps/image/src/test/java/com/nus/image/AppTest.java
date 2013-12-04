@@ -2,12 +2,6 @@ package com.nus.image;
 
 import java.io.UnsupportedEncodingException;
 
-import net.sf.json.JSONObject;
-
-import com.lakeside.core.utils.PatternUtils;
-import com.sdata.core.crawldb.CrawlDBImageQueueEnum;
-import com.sdata.core.util.WebPageDownloader;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -39,17 +33,6 @@ public class AppTest
     
     public void testApp() throws UnsupportedEncodingException
     {
-    	System.out.println(CrawlDBImageQueueEnum.SOURCE.value());
-
-		JSONObject json  = new JSONObject();
-		json.put("s", "www");
-		json.put("v", "11111111");
-		System.out.println(json.toString());
-//    	String download = WebPageDownloader.download("http://news.sina.com.cn/o/2012-11-25/144925658189.shtml");
-//    	System.out.println(download);
-//		String charset = PatternUtils.getMatchPattern("HTTP-EQUIV=\"Refresh\".*URL=(.*)\"\\>",
-//				download, 1);
-//		System.out.println(charset);
 		
     }
 }

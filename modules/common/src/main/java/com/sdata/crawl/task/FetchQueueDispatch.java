@@ -2,10 +2,10 @@ package com.sdata.crawl.task;
 
 import java.util.List;
 
-import com.sdata.core.Configuration;
-import com.sdata.core.FetchDispatch;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.RunState;
+import com.sdata.core.FetchDispatch;
 
 public class FetchQueueDispatch implements FetchDispatch  {
 	

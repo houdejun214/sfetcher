@@ -56,6 +56,7 @@
 			<name>hbase.cluster.name</name>
 			<value>next-2</value>
 		</property> 
+		
 		<!-- runstate db -redis -->
 		<property>
 			<name>RedisHost</name>
@@ -69,6 +70,8 @@
 			<name>RedisPassword</name>
 			<value>9561cdda0d17fd15cfb9cecf7f0d081c</value>
 		</property>
+		
+		<!-- use redis for Distribute Lock multi process -->
 		<property>
 			<name>next.crawler.item.redis.namespace</name>
 			<value>Future_Crawler_Item</value>
@@ -84,8 +87,8 @@
 			<value>10</value>
 		</property> 
 		<property>
-			<name>sense.crawl.increment</name>
-			<value>true</value>
+			<name>crawler.stastisticEnable</name>
+			<value>false</value>
 		</property> 
 		<filter pos="before" class="com.sdata.sense.filter.SenseProxyFilter"></filter>
 	</site>

@@ -6,9 +6,9 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import com.mongodb.DBObject;
-import com.sdata.core.Constants;
-import com.sdata.core.CrawlAppContext;
-import com.sdata.core.RunState;
+import com.sdata.context.config.Constants;
+import com.sdata.context.config.CrawlAppContext;
+import com.sdata.context.state.RunState;
 
 /**
  * @author zhufb

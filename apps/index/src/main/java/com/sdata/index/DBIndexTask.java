@@ -7,9 +7,9 @@ import java.util.concurrent.CountDownLatch;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.sdata.core.Configuration;
-import com.sdata.core.CrawlAppContext;
-import com.sdata.core.data.FieldProcess;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.config.CrawlAppContext;
+import com.sdata.core.data.trans.FieldProcess;
 import com.sdata.solr.IndexControler;
 
 /**

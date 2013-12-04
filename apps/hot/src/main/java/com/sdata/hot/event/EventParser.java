@@ -10,16 +10,16 @@ import org.jsoup.nodes.Element;
 
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.time.DateFormat;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.NegligibleException;
 import com.sdata.core.RawContent;
+import com.sdata.core.exception.NegligibleException;
 import com.sdata.core.parser.ParseResult;
 import com.sdata.core.parser.SdataParser;
 import com.sdata.core.parser.html.util.DocumentUtils;
-import com.sdata.core.util.JsoupUtils;
 import com.sdata.hot.Hot;
 import com.sdata.hot.util.HotUtils;
+import com.sdata.util.JsoupUtils;
 
 /**
  * @author zhufb

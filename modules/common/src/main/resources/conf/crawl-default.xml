@@ -40,7 +40,6 @@
 	<property>
 		<name>crawler.index</name>
 		<value>true</value>
-		<description></description>
 	</property>
 	<!-- elastic server cluster name -->
 	<property>

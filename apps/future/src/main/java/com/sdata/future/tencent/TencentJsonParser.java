@@ -9,7 +9,7 @@ import net.sf.json.JSONObject;
 
 import com.lakeside.core.utils.MapUtils;
 import com.lakeside.core.utils.StringUtils;
-import com.sdata.core.Constants;
+import com.sdata.context.config.Constants;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.RawContent;
 import com.sdata.core.parser.ParseResult;

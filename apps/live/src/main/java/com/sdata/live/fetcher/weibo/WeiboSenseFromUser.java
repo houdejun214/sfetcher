@@ -15,7 +15,7 @@ import weibo4j.util.WeiboConfig;
 import com.lakeside.core.utils.JSONUtils;
 import com.lakeside.core.utils.StringUtils;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.NegligibleException;
+import com.sdata.core.exception.NegligibleException;
 import com.sdata.core.item.CrawlItemEnum;
 import com.sdata.sense.SenseFetchDatum;
 import com.sdata.sense.item.SenseCrawlItem;

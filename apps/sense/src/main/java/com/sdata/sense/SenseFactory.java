@@ -4,9 +4,9 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.sdata.core.Configuration;
-import com.sdata.core.CrawlAppContext;
-import com.sdata.core.RunState;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.config.CrawlAppContext;
+import com.sdata.context.state.RunState;
 import com.sdata.sense.fetcher.SenseFetcher;
 import com.sdata.sense.fetcher.SenseFetcherLookup;
 import com.sdata.sense.fetcher.SingletonFetcher;

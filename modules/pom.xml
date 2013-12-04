@@ -7,7 +7,6 @@
 	<packaging>pom</packaging>
 	<name>sdatacrawler-modules</name>
 
-
 	<parent>
 		<groupId>com.sdata</groupId>
 		<artifactId>sdatacrawler-parent</artifactId>
@@ -18,6 +17,10 @@
 	<description>Sdatacrawler modules is basis components of data crawler framework. </description>
 
 	<modules>
+		<module>util</module>
+		<module>context</module>
+		<module>extension</module>
+		<module>db</module>
 		<module>solr</module>
 		<module>elastic</module>
 		<module>core</module>

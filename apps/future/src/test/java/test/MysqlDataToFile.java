@@ -11,7 +11,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import com.sdata.conf.sites.CrawlConfig;
 import com.sdata.conf.sites.CrawlConfigManager;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.future.FutureItemDB;
 
 /**

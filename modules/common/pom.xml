@@ -11,7 +11,7 @@
 		<artifactId>sdatacrawler-modules</artifactId>
 		<groupId>com.sdata</groupId>
 		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../modules/</relativePath>
+		<relativePath>../../modules/</relativePath>
 	</parent>
 
 	<dependencies>

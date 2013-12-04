@@ -4,9 +4,4 @@
 		<value>800</value>
 		<description></description>
 	</property>
-	<property>
-		<name>checkInSingapore</name>
-		<value>false</value>
-		<description></description>
-	</property>
 </configuration>

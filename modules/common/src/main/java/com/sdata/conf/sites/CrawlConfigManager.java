@@ -8,11 +8,11 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import com.lakeside.core.utils.ApplicationResourceUtils;
 import com.lakeside.core.utils.FileUtils;
 import com.lakeside.core.utils.StringUtils;
-import com.sdata.core.Configuration;
-import com.sdata.core.Constants;
-import com.sdata.core.util.ApplicationResourceUtils;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.config.Constants;
 
 /**
  * 

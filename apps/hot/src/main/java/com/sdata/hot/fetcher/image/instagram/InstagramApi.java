@@ -5,7 +5,7 @@ import java.text.MessageFormat;
 import net.sf.json.JSONObject;
 
 import com.lakeside.download.http.HttpPageLoader;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.site.BaseDataApi;
 
 /**

@@ -1,22 +1,19 @@
 package com.sdata.hot.video;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.dom4j.Node;
-import org.dom4j.QName;
 
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.time.DateFormat;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.NegligibleException;
 import com.sdata.core.RawContent;
+import com.sdata.core.exception.NegligibleException;
 import com.sdata.core.parser.ParseResult;
 import com.sdata.core.parser.SdataParser;
 import com.sdata.hot.Hot;

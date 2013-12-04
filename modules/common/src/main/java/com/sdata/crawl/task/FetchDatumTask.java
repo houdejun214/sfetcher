@@ -1,12 +1,12 @@
 package com.sdata.crawl.task;
 
 import com.lakeside.core.utils.StringUtils;
-import com.sdata.core.Configuration;
-import com.sdata.core.FetchDispatch;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.NegligibleException;
-import com.sdata.core.RunState;
-import com.sdata.core.data.SdataStorer;
+import com.sdata.core.FetchDispatch;
+import com.sdata.core.data.store.SdataStorer;
+import com.sdata.core.exception.NegligibleException;
 import com.sdata.core.fetcher.SdataFetcher;
 
 /**

@@ -1,9 +1,9 @@
 package com.sdata.sense.filter;
 
 
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.RunState;
 import com.sdata.core.filter.SdataFilter;
 import com.sdata.sense.SenseFactory;
 import com.sdata.sense.SenseFetchDatum;

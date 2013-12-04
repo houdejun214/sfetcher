@@ -3,9 +3,9 @@ package com.sdata.core.filter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.config.SdataConfigurable;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.SdataConfigurable;
 
 
 public class SdataFilter extends SdataConfigurable  {

@@ -11,7 +11,7 @@
 		<artifactId>sdatacrawler-apps</artifactId>
 		<groupId>com.sdata</groupId>
 		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../apps/</relativePath>
+		<relativePath>../../apps/</relativePath>
 	</parent>
   
   <dependencies>

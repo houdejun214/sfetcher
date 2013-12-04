@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.sdata.core.Configuration;
-import com.sdata.core.parser.html.field.DatumField;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.parser.html.field.Field;
+import com.sdata.core.parser.html.field.datum.DatumField;
 import com.sdata.solr.IndexDataHandle;
 
 /**

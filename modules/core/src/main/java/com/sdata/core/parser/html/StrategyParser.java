@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sdata.core.parser.html.config.StrategyConfig;
+import com.sdata.core.parser.config.StrategyConfig;
 import com.sdata.core.parser.html.context.StrategyContext;
 import com.sdata.core.parser.html.field.Tags;
 import com.sdata.core.parser.html.notify.CrawlNotify;

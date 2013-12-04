@@ -8,11 +8,11 @@ import com.lakeside.download.http.proxy.ProxyConfig;
 import com.sdata.conf.ArgConfig;
 import com.sdata.conf.sites.CrawlConfig;
 import com.sdata.conf.sites.CrawlConfigManager;
-import com.sdata.core.Configuration;
-import com.sdata.core.CrawlAppContext;
-import com.sdata.core.RunState;
-import com.sdata.core.crawldb.CrawlDB;
-import com.sdata.core.crawldb.impl.CrawlDBImpl;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.config.CrawlAppContext;
+import com.sdata.context.state.RunState;
+import com.sdata.context.state.crawldb.CrawlDB;
+import com.sdata.context.state.crawldb.impl.CrawlDBImpl;
 import com.sdata.core.parser.html.mail.CrawlerMail;
 import com.sdata.crawl.task.CrawlTask;
 

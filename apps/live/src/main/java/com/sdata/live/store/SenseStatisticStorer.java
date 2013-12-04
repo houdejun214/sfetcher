@@ -1,9 +1,9 @@
 package com.sdata.live.store;
 
-import com.sdata.core.Configuration;
-import com.sdata.core.RunState;
-import com.sdata.core.data.dao.DBStore;
-import com.sdata.core.data.dao.StoreCollection;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.state.RunState;
+import com.sdata.db.BaseDao;
+import com.sdata.db.DaoCollection;
 import com.sdata.sense.SenseFetchDatum;
 import com.sdata.sense.store.SenseStorer;
 
@@ -21,11 +21,11 @@ public class SenseStatisticStorer extends SenseStorer {
 	
 	public boolean isExists(SenseFetchDatum datum) {
 		Configuration conf = getConf(datum);
-		StoreCollection sc = getMainCollection(conf);
+		DaoCollection sc = getMainCollection(conf);
 		if(sc == null){
 			return false;
 		}
-		DBStore dbStore = super.getDBStore(conf,sc.getName());
+		BaseDao dbStore = super.getDBStore(conf,sc.getName());
 		return dbStore.isExists(datum.getId());
 	}
 }

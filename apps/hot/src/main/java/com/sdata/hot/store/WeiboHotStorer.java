@@ -4,10 +4,10 @@ import java.util.Map;
 
 import com.framework.db.hbase.Constants;
 import com.framework.db.hbase.thrift.HBaseClient;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.RunState;
-import com.sdata.core.data.SdataStandardStorer;
+import com.sdata.core.data.store.SdataStandardStorer;
 
 /**
  * @author zhufb

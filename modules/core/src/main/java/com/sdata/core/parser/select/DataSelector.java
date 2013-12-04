@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 import net.sf.json.JSONArray;
 
-import com.sdata.core.parser.html.context.IParserContext;
+import com.sdata.context.parser.IParserContext;
 
 
 

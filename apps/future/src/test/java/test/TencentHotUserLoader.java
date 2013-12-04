@@ -16,7 +16,7 @@ import com.framework.db.hbase.thrift.HBaseClient;
 import com.framework.db.hbase.thrift.HBaseClientFactory;
 import com.lakeside.download.http.HttpPage;
 import com.lakeside.download.http.HttpPageLoader;
-import com.sdata.core.util.JsoupUtils;
+import com.sdata.util.JsoupUtils;
 import com.tencent.weibo.utils.Tencent;
 
 /**

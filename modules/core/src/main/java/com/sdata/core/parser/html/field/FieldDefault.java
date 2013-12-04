@@ -3,7 +3,7 @@ package com.sdata.core.parser.html.field;
 import org.jsoup.nodes.Element;
 
 import com.lakeside.core.utils.StringUtils;
-import com.sdata.core.parser.html.context.IParserContext;
+import com.sdata.context.parser.IParserContext;
 import com.sdata.core.parser.html.util.FieldInvoke;
 import com.sdata.core.parser.select.DataSelector;
 import com.sdata.core.parser.select.DataSelectorPipleBuilder;

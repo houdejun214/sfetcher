@@ -8,7 +8,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sdata.core.RunState;
+import com.sdata.context.state.RunState;
 
 
 public abstract class AbstractTask implements Runnable{

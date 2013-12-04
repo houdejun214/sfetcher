@@ -2,7 +2,7 @@ package com.sdata.live.fetcher.weibo;
 
 import java.util.Map;
 
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.item.CrawlItemEnum;
 import com.sdata.sense.item.SenseCrawlItem;
 

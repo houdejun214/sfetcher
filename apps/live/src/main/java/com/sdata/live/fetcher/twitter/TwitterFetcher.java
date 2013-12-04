@@ -4,12 +4,12 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDispatch;
 import com.sdata.core.RawContent;
-import com.sdata.core.RunState;
 import com.sdata.core.parser.ParseResult;
-import com.sdata.live.parser.twitter.TwitteParser;
+import com.sdata.live.parser.twitter.TwitterParser;
 import com.sdata.sense.SenseConfig;
 import com.sdata.sense.fetcher.SenseFetcher;
 import com.sdata.sense.item.SenseCrawlItem;
@@ -23,7 +23,7 @@ public class TwitterFetcher extends SenseFetcher {
 	protected static final Logger log = LoggerFactory.getLogger("Sense.TwitterFetcher");
 	public TwitterFetcher(Configuration conf,RunState state) {
 		super(conf,state);
-		super.parser = new TwitteParser(conf);
+		super.parser = new TwitterParser(conf);
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class TwitterFetcher extends SenseFetcher {
 			ParseResult result = parser.parseCrawlItem(conf, rc, crawlItem);
 			end = this.end(result, crawlItem);
 			fetchDispatch.dispatch(result.getFetchList());
-			String currentStatus = ((TwitteParser)parser).getCurrentStatus(rc);
+			String currentStatus = ((TwitterParser)parser).getCurrentStatus(rc);
 			if(StringUtils.isEmpty(currentStatus)){
 				break;
 			}

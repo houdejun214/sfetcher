@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.lakeside.core.utils.StringUtils;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.RawContent;
 import com.sdata.core.item.CrawlItemEnum;

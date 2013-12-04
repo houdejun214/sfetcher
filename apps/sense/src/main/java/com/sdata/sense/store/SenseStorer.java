@@ -7,14 +7,14 @@ import java.util.Map;
 import com.framework.db.hbase.thrift.HBaseClient;
 import com.framework.db.hbase.thrift.HBaseClientFactory;
 import com.lakeside.core.utils.StringUtils;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.RunState;
-import com.sdata.core.data.SdataStandardStorer;
-import com.sdata.core.data.dao.DBStore;
-import com.sdata.core.data.dao.HBaseStoreWithGenID;
-import com.sdata.core.data.dao.StoreCollection;
-import com.sdata.core.parser.html.config.StoreConfig;
+import com.sdata.core.data.store.SdataStandardStorer;
+import com.sdata.core.parser.config.StoreConfig;
+import com.sdata.db.BaseDao;
+import com.sdata.db.DaoCollection;
+import com.sdata.db.HBaseDaoWithRawIndex;
 import com.sdata.sense.SenseConfig;
 import com.sdata.sense.SenseFetchDatum;
 import com.sdata.sense.item.SenseCrawlItem;
@@ -46,15 +46,15 @@ public class SenseStorer extends SdataStandardStorer {
 	public void save(FetchDatum datum) throws Exception {
 		Configuration config = getConf(datum);
 		Map<String, Object> prepareData = ((SenseFetchDatum)datum).defaultData();
-		Iterator<StoreCollection> collections = StoreConfig.getInstance(config).getCollections();
+		Iterator<DaoCollection> collections = StoreConfig.getInstance(config).getCollections();
 		while(collections.hasNext()){
-			StoreCollection collection = collections.next();
-			DBStore dao = getDBStore(config,collection.getName());
+			DaoCollection collection = collections.next();
+			BaseDao dao = getDBStore(config,collection.getName());
 			this.save(collection,dao,datum.getMetadata(),prepareData);
 		}
 	}
 	
-	protected void save(StoreCollection collection,DBStore dao,Map<String, Object> data,Map<String,Object> prepare){
+	protected void save(DaoCollection collection,BaseDao dao,Map<String, Object> data,Map<String,Object> prepare){
 		String field = collection.getField();
 		// default all datum
 		if(StringUtils.isEmpty(field)){
@@ -74,22 +74,22 @@ public class SenseStorer extends SdataStandardStorer {
 		}
 	}
 	
-	protected void save(DBStore dao,Map<String, Object> data,Map<String,Object> prepare){
+	protected void save(BaseDao dao,Map<String, Object> data,Map<String,Object> prepare){
 		data.putAll(prepare);
 		dao.save(data);
 	}
 	
 	public boolean isExists(SenseFetchDatum datum) {
 		Configuration conf = getConf(datum);
-		StoreCollection sc = getMainCollection(conf);
+		DaoCollection sc = getMainCollection(conf);
 		if(sc == null){
 			return false;
 		}
-		HBaseStoreWithGenID dbStore = (HBaseStoreWithGenID)super.getDBStore(conf,sc.getName());
+		HBaseDaoWithRawIndex dbStore = (HBaseDaoWithRawIndex)super.getDBStore(conf,sc.getName());
 		return	dbStore.getHbaseGenID().isExists(datum.getId(),datum.getIndexColumn());
 	}
 	
-	public StoreCollection getMainCollection(Configuration config) {
+	public DaoCollection getMainCollection(Configuration config) {
 		StoreConfig instance = StoreConfig.getInstance(config);
 		return instance.getMainCollection();
 	}
