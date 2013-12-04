@@ -36,7 +36,6 @@
 	<dependency>
 		<groupId>com.sdata</groupId>
 		<artifactId>sdatacrawler-extension</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
 	</dependency>
   </dependencies>
   

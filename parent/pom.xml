@@ -447,7 +447,10 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>com.lakeside</groupId>
+			<artifactId>lakeside-core</artifactId>
+		</dependency>
 	</dependencies>
 
 	<!-- repositories -->

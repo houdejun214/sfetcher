@@ -13,10 +13,6 @@
 	</parent>
 	<dependencies>
 		<dependency>
-			<groupId>com.lakeside</groupId>
-			<artifactId>lakeside-core</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 		</dependency>

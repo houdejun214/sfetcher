@@ -19,10 +19,6 @@
 			<artifactId>framework-config</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.lakeside</groupId>
-			<artifactId>lakeside-core</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.elasticsearch</groupId>
 			<artifactId>elasticsearch</artifactId>
 		</dependency>

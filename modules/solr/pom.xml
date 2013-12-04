@@ -15,10 +15,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.lakeside</groupId>
-			<artifactId>lakeside-core</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.solr</groupId>
 			<artifactId>solr-solrj</artifactId>
 		</dependency>

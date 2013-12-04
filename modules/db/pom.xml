@@ -14,10 +14,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.lakeside</groupId>
-			<artifactId>lakeside-core</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.framework</groupId>
 			<artifactId>framework-db-hbase</artifactId>
 		</dependency>
