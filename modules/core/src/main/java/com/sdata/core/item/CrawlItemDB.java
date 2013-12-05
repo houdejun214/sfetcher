@@ -20,8 +20,6 @@ public abstract class CrawlItemDB {
 	protected MysqlDataSource dataSource;
 	protected String[] sourceInclude;
 	protected String[] sourceExclude;
-	protected String[] objectInclude;
-	protected String[] objectExclude;
 	
 	public CrawlItemDB(Configuration conf){
 		this.dataSource = CrawlItemDataSource.getDataSource(conf);
@@ -34,14 +32,6 @@ public abstract class CrawlItemDB {
 		if(!StringUtils.isEmpty(sexclude)){
 			sourceExclude = sexclude.split(",");
 		}
-		String oinclude = conf.get("object.include");
-		String oexclude = conf.get("object.exclude");
-		if(!StringUtils.isEmpty(oinclude)){
-			objectInclude = oinclude.split(",");
-		}
-		if(!StringUtils.isEmpty(oexclude)){
-			objectExclude = oexclude.split(",");
-		}
 	}
 
 	/**
@@ -50,6 +40,14 @@ public abstract class CrawlItemDB {
 	 * @return
 	 */
 	protected abstract List<Map<String,Object>> queryItemQueue(int topN,String status);
+	
+
+	/**
+	 * reset queue item status
+	 * 
+	 * @return
+	 */
+	public abstract int resetItemStatus();
 	
 	public List<Map<String,Object>> queryItemQueue(int topN){
 		return this.queryItemQueue(topN, QueueStatus.INIT);
@@ -90,36 +88,6 @@ public abstract class CrawlItemDB {
 		}
 	}
 
-	protected void appendObjectInclude(StringBuffer sql){
-		if(objectInclude!=null&&objectInclude.length>0){
-			sql.append(" and object_id in (");
-			for(int i=0;i<objectInclude.length;i++){
-				String s = objectInclude[i];
-				sql.append("'").append(s).append("'");
-				if(i == objectInclude.length -1){
-					sql.append(") ");
-				}else{
-					sql.append(",");
-				}
-			}
-		}
-	}
-
-	protected void appendObjectExclude(StringBuffer sql){
-		if(objectExclude!=null&&objectExclude.length>0){
-			sql.append(" and object_id not in (");
-			for(int i=0;i<objectExclude.length;i++){
-				String s = objectExclude[i];
-				sql.append("'").append(s).append("'");
-				if(i == objectExclude.length -1){
-					sql.append(") ");
-				}else{
-					sql.append(",");
-				}
-			}
-		}
-	}
-	
 	public int updateItemStatus(final Long id,String status){
 		StringBuffer sql = new StringBuffer("update ");
 		sql.append(itemQueueTable);
@@ -140,19 +108,6 @@ public abstract class CrawlItemDB {
 		return dataSource.getJdbcTemplate().update(sql.toString(), parameters);
 	}
 	
-	
-	public int resetItemStatus() {
-		Map<String,Object> parameters = new HashMap<String,Object>();
-		StringBuffer sql = new StringBuffer("update ");
-		sql.append(itemQueueTable);
-		sql.append(" set status=:status where 1 = 1 ");
-		this.appendSourceInclude(sql);
-		this.appendSourceExclude(sql);
-		this.appendObjectInclude(sql);
-		this.appendObjectExclude(sql);
-		parameters.put("status", QueueStatus.INIT);
-		return dataSource.getJdbcTemplate().update(sql.toString(), parameters);
-	}
 	
 	public MysqlDataSource getDataSource() {
 		return dataSource;

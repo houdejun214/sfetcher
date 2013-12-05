@@ -10,6 +10,7 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.io.FileUtils;
 
+import com.lakeside.download.http.HttpPageLoader;
 import com.sdata.conf.sites.CrawlConfig;
 import com.sdata.conf.sites.CrawlConfigManager;
 import com.sdata.future.FutureItemDB;
@@ -26,6 +27,11 @@ public class HotUserDataToMysql {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
+		
+		HttpPageLoader.getDefaultPageLoader().download("http://172.29.32.205:8080/whi8per-future/hot/tweets/new?source=weibo&timelineId=408416975987933184");
+		
+		
+		
 		CrawlConfigManager configs = CrawlConfigManager.load("future");
 		CrawlConfig crawlSite = configs.getCurCrawlSite();
 		FutureItemDB crawlItemDB = new FutureItemDB(crawlSite.getConf());
@@ -44,7 +50,7 @@ public class HotUserDataToMysql {
 		map.put("priorityScore", 100);
 		map.put("status", 0);
 		map.put("sourceName", "weibo");
-		map.put("tags", "nanjing");
+		map.put("tags", "jiangsu");
 		for(String l:flines1){
 //			String replaceAll = l.replaceAll(" ", "").trim();
 //			replaceAll = replaceAll.substring(1,replaceAll.length() -1);

@@ -22,7 +22,7 @@ import com.lakeside.download.http.HttpPageLoader;
  */
 public class WeiboAreaHotUserLoader {
 
-	private static String MAINPAGE = "http://verified.weibo.com/fame/jiangsu/?rt=3&srt=4&letter={0}&province=32&city=1&page={1}";
+	private static String MAINPAGE = "http://verified.weibo.com/fame/jiangsu/?rt=3&srt=4&letter={0}&page={1}";
 	private static String table = "nanjing_weibo_users";
 
 	private static List<String> Letters = Arrays.asList("a", "b", "c", "d",
@@ -39,9 +39,9 @@ public class WeiboAreaHotUserLoader {
 //			client.createTable(table, "dcf");
 //		}
 
-
-		List<String> result = new ArrayList<String>();
+		File file = getFile();
 		for (String letter : Letters) {
+			List<String> result = new ArrayList<String>();
 			int p = 1;
 			while (true) {
 				String url = MessageFormat.format(MAINPAGE, letter, p);
@@ -52,9 +52,9 @@ public class WeiboAreaHotUserLoader {
 				}
 				p++;
 			}
-//			System.out.println("letter "+letter + " user size:" + result.size());
+			saveUsers(result,file);
+			System.out.println("letter "+letter + " user size:" + result.size());
 		}
-		saveUsers(result);
 
 	}
 
@@ -89,13 +89,12 @@ public class WeiboAreaHotUserLoader {
 		return have;
 	}
 
-	private static void saveUsers(List<String> users) throws IOException {
-		StringBuffer sb = new StringBuffer();
-		for (String uid : users) {
-			sb.append(uid).append("\r\n");
-			File file = getFile();
-			FileUtils.writeStringToFile(file, sb.toString());
-		}
+	private static void saveUsers(List<String> users,File file) throws IOException {
+//		StringBuffer sb = new StringBuffer();
+//		for (String uid : users) {
+//			sb.append(uid).append("\r\n");
+//		}
+		FileUtils.writeLines(file, users,true);
 		System.out.println("save user size:" + users.size());
 	}
 

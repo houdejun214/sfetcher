@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 import com.sdata.context.config.Configuration;
+import com.sdata.context.model.QueueStatus;
 import com.sdata.core.item.CrawlItemDB;
 
 /**
@@ -15,20 +16,24 @@ import com.sdata.core.item.CrawlItemDB;
  */
 public class FutureItemDB extends CrawlItemDB {
 	
-	private String tag;
+	private String[] tags;
 	public FutureItemDB(Configuration conf){
 		super(conf);
-		this.tag = conf.get("tag", null);
+		String strTags = conf.get("tag", null);
+		if(!StringUtils.isEmpty(strTags)){
+			this.tags = strTags.split(",");
+		}
 	}
 	
+	@Override
 	protected List<Map<String,Object>> queryItemQueue(int topN,String status){
 		Map<String,Object> parameters = new HashMap<String,Object>();
 		StringBuffer sql = new StringBuffer("select * from ");
 		sql.append(itemQueueTable);
 		sql.append(" where status=:status ");
-		if(!StringUtils.isEmpty(tag)){
-			sql.append(" and tags = '").append(tag).append("'");
-		}
+		this.appendSourceInclude(sql);
+		this.appendSourceExclude(sql);
+		this.appendTag(sql);
 		sql.append(" order by priority_score desc limit :topn ");
 		parameters.put("status", status);
 		parameters.put("topn", topN);
@@ -36,6 +41,34 @@ public class FutureItemDB extends CrawlItemDB {
 		return list;
 	}
 
+	protected void appendTag(StringBuffer sql){
+		if(tags!=null&&tags.length>0){
+			sql.append(" and tags in (");
+			for(int i=0;i<tags.length;i++){
+				String s = tags[i];
+				sql.append("'").append(s).append("'");
+				if(i == tags.length -1){
+					sql.append(") ");
+				}else{
+					sql.append(",");
+				}
+			}
+		}
+	}
+	
+	@Override
+	public int resetItemStatus() {
+		Map<String,Object> parameters = new HashMap<String,Object>();
+		StringBuffer sql = new StringBuffer("update ");
+		sql.append(itemQueueTable);
+		sql.append(" set status=:status where 1 = 1 ");
+		this.appendSourceInclude(sql);
+		this.appendSourceExclude(sql);
+		this.appendTag(sql);
+		parameters.put("status", QueueStatus.INIT);
+		return dataSource.getJdbcTemplate().update(sql.toString(), parameters);
+	}
+	
 	/**
 	 * save item queue data
 	 * 
