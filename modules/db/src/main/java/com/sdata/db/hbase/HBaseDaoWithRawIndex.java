@@ -1,4 +1,4 @@
-package com.sdata.db;
+package com.sdata.db.hbase;
 
 import java.util.Map;
 import java.util.UUID;
@@ -7,6 +7,7 @@ import com.framework.db.hbase.Constants;
 import com.framework.db.hbase.thrift.HBaseClient;
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.UUIDUtils;
+import com.sdata.db.DaoCollection;
 
 /**
  * @author zhufb

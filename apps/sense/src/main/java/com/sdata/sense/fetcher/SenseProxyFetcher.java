@@ -5,10 +5,10 @@ import java.util.Map;
 import com.lakeside.core.utils.StringUtils;
 import com.sdata.context.config.Configuration;
 import com.sdata.context.state.RunState;
-import com.sdata.core.CrawlItemQueue;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.FetchDispatch;
 import com.sdata.core.fetcher.SdataFetcher;
+import com.sdata.sense.SenseItemQueue;
 import com.sdata.sense.SenseFactory;
 import com.sdata.sense.SenseFetchDatum;
 import com.sdata.sense.item.SenseCrawlItem;
@@ -20,7 +20,7 @@ import com.sdata.sense.item.SenseCrawlItem;
 public abstract class SenseProxyFetcher extends SdataFetcher {
 	protected SenseCrawlItem item = null;
 	protected static Object syn = new Object();
-	private static CrawlItemQueue crawlItemQueue;
+	private static SenseItemQueue crawlItemQueue;
 
 	@Override
 	public void taskInitialize(){
@@ -33,7 +33,7 @@ public abstract class SenseProxyFetcher extends SdataFetcher {
 		}
 	}
 	
-	protected abstract CrawlItemQueue initItemQueue();
+	protected abstract SenseItemQueue initItemQueue();
 	
 	protected abstract SenseCrawlItem initItem(Map<String, Object> map);
 

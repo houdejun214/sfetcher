@@ -1,4 +1,4 @@
-package com.sdata.db;
+package com.sdata.db.mongo;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -10,12 +10,15 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.sdata.context.config.Constants;
 import com.sdata.context.config.CrawlAppContext;
+import com.sdata.db.BaseDao;
+import com.sdata.db.DaoCollection;
 import com.sdata.extension.statistic.Statistic;
 
 /**
  * @author zhufb
  *
  */
+@Deprecated
 public class MongoDao implements BaseDao {
 	private DaoCollection storeCollection ;
 	private DBCollection dbCollection;

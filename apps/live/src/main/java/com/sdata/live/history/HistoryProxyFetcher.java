@@ -5,8 +5,8 @@ import java.util.Map;
 import com.sdata.context.config.Configuration;
 import com.sdata.context.config.CrawlAppContext;
 import com.sdata.context.state.RunState;
-import com.sdata.core.CrawlItemQueue;
 import com.sdata.live.LiveItem;
+import com.sdata.sense.SenseItemQueue;
 import com.sdata.sense.fetcher.SenseProxyFetcher;
 import com.sdata.sense.item.SenseCrawlItem;
 
@@ -21,8 +21,8 @@ public class HistoryProxyFetcher extends SenseProxyFetcher {
 	}
 
 	@Override
-	protected CrawlItemQueue initItemQueue() {
-		return new CrawlItemQueue(new HistoryItemDB(CrawlAppContext.conf));
+	protected SenseItemQueue initItemQueue() {
+		return new SenseItemQueue(new HistoryItemDB(CrawlAppContext.conf));
 	}
 
 	@Override

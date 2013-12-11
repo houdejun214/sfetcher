@@ -1,4 +1,4 @@
-package com.sdata.db;
+package com.sdata.db.hbase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +10,8 @@ import com.framework.db.hbase.thrift.HBaseClient;
 import com.lakeside.core.utils.StringUtils;
 import com.sdata.context.config.Constants;
 import com.sdata.context.config.CrawlAppContext;
+import com.sdata.db.BaseDao;
+import com.sdata.db.DaoCollection;
 import com.sdata.extension.statistic.Statistic;
 
 /**

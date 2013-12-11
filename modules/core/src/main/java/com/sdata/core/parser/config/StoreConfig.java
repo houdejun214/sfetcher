@@ -16,8 +16,8 @@ import org.dom4j.tree.DefaultAttribute;
 import com.sdata.context.config.Configuration;
 import com.sdata.context.config.Constants;
 import com.sdata.context.parser.config.AbstractConfig;
-import com.sdata.db.ColumnFamily;
 import com.sdata.db.DaoCollection;
+import com.sdata.db.hbase.ColumnFamily;
 
 /**
  * @author zhufb

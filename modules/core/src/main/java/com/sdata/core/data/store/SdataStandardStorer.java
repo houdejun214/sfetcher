@@ -1,6 +1,5 @@
 package com.sdata.core.data.store;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +26,6 @@ import com.sdata.elastic.Elastic;
 public class SdataStandardStorer extends SdataStorer {
 
 	private static final Logger log = LoggerFactory.getLogger("SdataStandardStorer");
-	protected Map<String,BaseDao> storeMap = new HashMap<String,BaseDao>();
 	protected Elastic es;
 	protected FieldProcess fieldProcess;
 	
@@ -38,31 +36,24 @@ public class SdataStandardStorer extends SdataStorer {
 	}
 	
 	protected void init() {
-		this.fieldProcess = initFieldProcess(getConf());
-		this.storeMap = initStoreMap(getConf());
-		if(isIndex(getConf())){
-			this.es = initElastic(getConf());
-		}
+		Configuration conf = this.getConf();
+		this.initElastic(conf);
+		this.initFieldProcess(conf);
 	}
 	
-	protected FieldProcess initFieldProcess(Configuration conf) {
-		return new FieldProcess(conf);
+	protected void initFieldProcess(Configuration conf) {
+		this.fieldProcess = new FieldProcess(conf);
 	}
 
-	protected Map<String,BaseDao> initStoreMap(Configuration conf) {
-		return DaoFactory.getDaos(conf);
-	}
-	
-	protected boolean isIndex(Configuration conf) {
-		return conf.getBoolean("crawler.index", false);
-	}
-	
-	protected Elastic initElastic(Configuration conf) {
+	protected void initElastic(Configuration conf) {
+		if(!conf.getBoolean("crawler.index", false)){
+			return;
+		}
 		String name = conf.get("elastic.cluster.name");
 		if(StringUtils.isEmpty(name)){
 			throw new RuntimeException("elastic.cluster.name is null!");
 		}
-		return ElasticServer.getElastic(name);
+		this.es =  ElasticServer.getElastic(name);
 	}
 	
 	protected Map<String, Object> process(FieldProcess fieldProcess,Map<String, Object> data) {
@@ -127,7 +118,7 @@ public class SdataStandardStorer extends SdataStorer {
 	}
 	
 	public BaseDao getDBStore(Configuration conf,String name){
-		return this.initStoreMap(conf).get(name);
+		return DaoFactory.getDaos(conf).get(name);
 	}
 
 	@Override

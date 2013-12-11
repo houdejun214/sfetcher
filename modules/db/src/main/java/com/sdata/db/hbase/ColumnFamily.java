@@ -1,4 +1,4 @@
-package com.sdata.db;
+package com.sdata.db.hbase;
 
 import org.apache.commons.lang.StringUtils;
 

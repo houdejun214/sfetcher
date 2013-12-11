@@ -14,7 +14,7 @@ import com.sdata.core.data.store.SdataStandardStorer;
 import com.sdata.core.parser.config.StoreConfig;
 import com.sdata.db.BaseDao;
 import com.sdata.db.DaoCollection;
-import com.sdata.db.HBaseDaoWithRawIndex;
+import com.sdata.db.hbase.HBaseDaoWithRawIndex;
 import com.sdata.sense.SenseConfig;
 import com.sdata.sense.SenseFetchDatum;
 import com.sdata.sense.item.SenseCrawlItem;

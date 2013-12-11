@@ -3,11 +3,14 @@ package com.sdata.db;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sdata.db.hbase.ColumnFamily;
+
 /**
  * @author zhufb
  *
  */
 public class DaoCollection {
+	
 	protected String source;
 	protected String name;
 	protected String primaryKey;
