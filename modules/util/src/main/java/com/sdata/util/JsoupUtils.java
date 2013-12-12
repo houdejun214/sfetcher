@@ -1,6 +1,7 @@
 package com.sdata.util;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -63,6 +64,22 @@ public class JsoupUtils {
 		}
 		Iterator<Element> iterator = list.listIterator();
 		return (List<Element>)IteratorUtils.toList(iterator);
+	}
+	
+	public static List<String> getListAttr(Element doc, String selector,String attr) {
+		List<String> result = new ArrayList<String>();
+		if(doc == null){
+			return null;
+		}
+		Elements list = doc.select(selector);
+		if(list==null){
+			return null;
+		}
+		for(Element e:list){
+			if(e.hasAttr(attr))
+				result.add(e.attr(attr));
+		}
+		return result;
 	}
 
 	public static String getLink(Element doc, String selector) {

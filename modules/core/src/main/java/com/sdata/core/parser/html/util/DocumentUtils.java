@@ -15,12 +15,13 @@ import com.lakeside.download.http.HttpPageLoader;
  *
  */
 public class DocumentUtils {
-	
+
+	private static HttpPageLoader advancePageLoader = HttpPageLoader.getAdvancePageLoader();
 	public static Document getDocument(String url){
 		if(StringUtils.isEmpty(url)){
 			return null;
 		}
-		HttpPage page = HttpPageLoader.getAdvancePageLoader().download(url);
+		HttpPage page = advancePageLoader.download(url);
 		if(page.getStatusCode()!=HttpStatus.SC_OK){
 			return null;
 		}
@@ -31,7 +32,7 @@ public class DocumentUtils {
 		if(StringUtils.isEmpty(url)){
 			return null;
 		}
-		HttpPage page = HttpPageLoader.getAdvancePageLoader().download(header,url);
+		HttpPage page = advancePageLoader.download(header,url);
 		if(page.getStatusCode()!=HttpStatus.SC_OK){
 			return null;
 		}

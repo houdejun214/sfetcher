@@ -2,6 +2,7 @@ package com.sdata.live.fetcher.tencent;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.framework.db.hbase.thrift.HBaseClient;
 import com.framework.db.hbase.thrift.HBaseClientFactory;
 import com.lakeside.core.utils.StringUtils;
+import com.lakeside.download.http.HttpPageLoader;
 import com.sdata.context.config.Configuration;
 import com.sdata.context.config.Constants;
 import com.sdata.core.FetchDatum;
@@ -21,8 +23,9 @@ import com.sdata.sense.SenseFetchDatum;
 import com.sdata.sense.item.SenseCrawlItem;
 import com.sdata.sense.parser.SenseParser;
 import com.tencent.weibo.api.UserAPI;
-import com.tencent.weibo.constants.OAuthConstants;
-import com.tencent.weibo.oauthv2.OAuthV2;
+import com.tencent.weibo.beans.OAuth;
+import com.tencent.weibo.oauthv1.OAuthV1;
+import com.tencent.weibo.utils.Tencent;
 
 
 /**
@@ -39,44 +42,69 @@ public abstract class TencentSenseParser extends SenseParser{
 	protected String sorttype = "0";//排序方式 0-表示按默认方式排序(即时间排序(最新)) 
 	protected String msgtype = "0";//消息的类型（按位使用）0-所有，1-原创发表，2 转载，8-回复(针对一个消息，进行对话)，0x10-空回(点击客人页，进行对话) 
 	protected static  HBaseClient client;
-	protected OAuthV2 oauth;
-	
+	protected OAuth oauth;
+	protected Map<String,String> header = new HashMap<String,String>();
+	protected static HttpPageLoader pageLoader = HttpPageLoader.getAdvancePageLoader();
 	public TencentSenseParser(Configuration conf) {
 		super(conf);
 	}
 	
-	public TencentSenseParser(Configuration conf,OAuthV2 v2){
+	public TencentSenseParser(Configuration conf,OAuth v,Map<String,String> header){
 		super(conf);
-		this.oauth = v2;
+		this.oauth = v;
+		this.header = header;
 	}
 
 	public static TencentSenseParser getTencentSenseFrom(Configuration conf ,SenseCrawlItem item){
-		String ClientId = conf.get("ClientId");
-		String OpenId = conf.get("OpenId");
+		
+		//Oauth 2
+//		String ClientId = conf.get("ClientId");
+//		String OpenId = conf.get("OpenId");
+//		String AccessToken = conf.get("AccessToken");
+//		OAuthV2 oauth = new OAuthV2();
+//
+//		oauth.setClientId(ClientId);
+//		oauth.setOpenid(OpenId);
+//		oauth.setOauthVersion(OAuthConstants.OAUTH_VERSION_2_A);
+//		oauth.setAccessToken(AccessToken);
+
+		//Oauth 1
+		OAuthV1 oauth = new OAuthV1();
+		String consumerKey = conf.get("ConsumerKey");
+		String consumerSecret = conf.get("ConsumerSecret");
 		String AccessToken = conf.get("AccessToken");
-//		String AccessTokenSecret = conf.get("AccessTokenSecret");
-		OAuthV2 oauth = new OAuthV2();
-//		OAuthV1 oauth = new OAuthV1();
-
-		oauth.setClientId(ClientId);
-		oauth.setOpenid(OpenId);
-		oauth.setOauthVersion(OAuthConstants.OAUTH_VERSION_2_A);
-		oauth.setAccessToken(AccessToken);
-
+		String AccessTokenSecret = conf.get("AccessTokenSecret");
+		oauth.setOauthConsumerKey(consumerKey);
+		oauth.setOauthConsumerSecret(consumerSecret);
+		oauth.setOauthToken(AccessToken);
+		oauth.setOauthTokenSecret(AccessTokenSecret);
+		
 		String clusterName = conf.get("hbase.cluster.name");
 		String namespace = conf.get("hbase.namespace");
 		client = HBaseClientFactory.getClientWithCustomSeri(clusterName, namespace);
 		if(item.containParam(CrawlItemEnum.KEYWORD.getName())){
-			return new TencentSenseParserWord(conf,oauth);
+			return new TencentSenseParserWord(conf,oauth,getHttpHeader(conf));
 		}else if(item.containParam(CrawlItemEnum.ACCOUNT.getName())){
-			return new TencentSenseParserUser(conf,oauth);
+			return new TencentSenseParserUser(conf,oauth,getHttpHeader(conf));
 		}else{
 			throw new RuntimeException("wrong word type input!");
 		}
-
 	}
 	
-	protected Map<String, Object> fetchUserInfo(String name,UserAPI userAPI,OAuthV2 oauth,TencentJsonParser parser) {
+
+	protected static Map<String,String> getHttpHeader(Configuration conf){
+		Map<String,String> header = new HashMap<String,String>();
+		String qq = conf.get("qq","1305327854");
+		String password = conf.get("password","nusnext");
+		String cookie = conf.get("cookie");
+		if(StringUtils.isEmpty(cookie)){
+			cookie = Tencent.getCookie(qq, password);
+		}
+		header.put("Cookie", cookie);
+		return header;
+	}
+	
+	protected Map<String, Object> fetchUserInfo(String name,UserAPI userAPI,OAuth oauth,TencentJsonParser parser) {
 		String userJson = null;
 		while (true) {
 			try {
@@ -112,6 +140,7 @@ public abstract class TencentSenseParser extends SenseParser{
 		return StringUtils.valueOf(instance.getTimeInMillis() / 1000);
 	}
 	
+
 	protected void await(long millis){
 		try {
 			Thread.sleep(millis);

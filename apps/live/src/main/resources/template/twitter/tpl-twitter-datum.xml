@@ -18,6 +18,7 @@
 	<field name="fet_time" action="todate"></field>
 	
 	<field name="retct" selector=".permalink-footer .js-tweet-stats-container .stats strong|[0]|txt"></field>
+	
 	<!-- other -->	
 	<field name="uurl" selector=".permalink-header .account-group|link"></field>
 	<field name="account" selector=".permalink-header .account-group .username b|txt"></field>

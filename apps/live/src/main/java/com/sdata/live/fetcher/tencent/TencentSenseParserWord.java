@@ -1,47 +1,58 @@
 package com.sdata.live.fetcher.tencent;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.jsoup.nodes.Document;
+
 import com.lakeside.core.utils.StringUtils;
+import com.lakeside.core.utils.time.DateTimeUtils;
 import com.sdata.context.config.Configuration;
 import com.sdata.context.config.Constants;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.RawContent;
+import com.sdata.core.download.WebPageDownloader;
 import com.sdata.core.item.CrawlItemEnum;
 import com.sdata.core.parser.ParseResult;
+import com.sdata.core.parser.html.util.DocumentUtils;
 import com.sdata.sense.SenseFetchDatum;
 import com.sdata.sense.item.SenseCrawlItem;
-import com.tencent.weibo.api.SearchAPI;
+import com.sdata.util.JsoupUtils;
+import com.tencent.weibo.api.TAPI;
 import com.tencent.weibo.api.UserAPI;
+import com.tencent.weibo.beans.OAuth;
 import com.tencent.weibo.constants.OAuthConstants;
-import com.tencent.weibo.oauthv2.OAuthV2;
 
 /**
  * @author zhufb
  *
  */
 public class TencentSenseParserWord extends TencentSenseParser {
-	private SearchAPI searchAPI;
+//	private SearchAPI searchAPI;
+	private TAPI tAPI;
 	private UserAPI userAPI;
 	//搜索类型
 	//0-默认搜索类型（现在为模糊搜索） 
 	//1-模糊搜索：时间参数starttime和endtime间隔小于一小时，时间参数会调整为starttime前endtime后的整点，即调整间隔为1小时 
 	//8-实时搜索：选择实时搜索，只返回最近15分钟的微博，时间参数需要设置为最近的15分钟范围内才生效，并且不会调整参数间隔
-	private String searchtype = "1";
-	private String province="";//省编码（不填表示忽略地点搜索）
-	private String city="";// 市编码（不填表示按省搜索）
-	private String longitue="";//经度，（实数）*1000000，需与latitude、radius配合使用
-	private String latitude="";// 纬度，（实数）*1000000，需与longitude、radius配合使用
-	private String radius="";//半径（整数，单位米，不大于20000）,需与longitude、latitude配合使用
+//	private String searchtype = "1";
+//	private String province="";//省编码（不填表示忽略地点搜索）
+//	private String city="";// 市编码（不填表示按省搜索）
+//	private String longitue="";//经度，（实数）*1000000，需与latitude、radius配合使用
+//	private String latitude="";// 纬度，（实数）*1000000，需与longitude、radius配合使用
+//	private String radius="";//半径（整数，单位米，不大于20000）,需与longitude、latitude配合使用
 	private TencentJsonParser parser;
 	private boolean complete = false;
+	
+	//SearchUrl
+    private String searchUrl = "http://search.t.qq.com/index.php?k={0}&s_time={1}%2C{2}&s_advanced=1&s_m_type=1&p={3}";
 
-	public TencentSenseParserWord(Configuration conf,OAuthV2 oauth){
-		super(conf,oauth);
-		this.searchAPI = new SearchAPI(OAuthConstants.OAUTH_VERSION_2_A);
-		this.userAPI = new UserAPI(OAuthConstants.OAUTH_VERSION_2_A);
+	public TencentSenseParserWord(Configuration conf,OAuth oauth,Map<String,String> header){
+		super(conf,oauth,header);
+		this.tAPI = new TAPI(OAuthConstants.OAUTH_VERSION_1);
+		this.userAPI = new UserAPI(OAuthConstants.OAUTH_VERSION_1);
 		this.parser = new TencentJsonParser();
 	}
 	
@@ -50,31 +61,48 @@ public class TencentSenseParserWord extends TencentSenseParser {
 		this.complete = false;
 		List<FetchDatum> tweetsList = new ArrayList<FetchDatum>();
 		String keyword =  StringUtils.valueOf(item.getParam(CrawlItemEnum.KEYWORD.getName()));
-		String starttime = this.getUnixTime(state.getStart());
-		String endtime = this.getUnixTime(state.getEnd());
+		String starttime =DateTimeUtils.format(state.getStart(), "yyyyMMddHHmmss");// this.getUnixTime(state.getStart());
+		String endtime = DateTimeUtils.format(state.getEnd(), "yyyyMMddHHmmss");//this.getUnixTime(state.getEnd());
 		try {
 			super.await(1000);
-			String  content = searchAPI.t(oauth, format, keyword, pagesize, String.valueOf(state.getPage()), contenttype, sorttype, msgtype, searchtype, starttime, endtime, province, city, longitue, latitude, radius);
+			String url = MessageFormat.format(searchUrl,keyword,starttime,endtime,state.getPage());
+			Document document = DocumentUtils.getDocument(url, header);
+			List<String> ids = JsoupUtils.getListAttr(document, "#talkList li", "id");
+			if(ids == null||ids.isEmpty()){
+				complete = true;
+				return tweetsList;
+			}
+			StringBuffer sb = new StringBuffer();
+			for(String id:ids){
+				sb.append(",").append(id);
+			}
+			String content = tAPI.showList(super.oauth,super.format,sb.substring(1));
 			if(StringUtils.isEmpty(content)){
 				complete = true;
 				return tweetsList;
 			}
+			
 			ParseResult parseResult = parser.parseTencentAPITweets(item,new RawContent(content));
-			String errcode =StringUtils.valueOf( parseResult.getMetadata().get("errcode"));
-			if(!errcode.equals("0")){
-				String msg = StringUtils.valueOf( parseResult.getMetadata().get("msg"));
-				log.error("*********** tencent tweets fetchDatumList() has error:【"+ msg +"】***********");
-				complete = true;
-				return tweetsList;
-			}
+//			String errcode = StringUtils.valueOf( parseResult.getMetadata().get("errcode"));
+//			if(!errcode.equals("0")){
+//				String msg = StringUtils.valueOf( parseResult.getMetadata().get("msg"));
+//				log.error("*********** tencent tweets fetchDatumList() has error:【"+ msg +"】***********");
+//				complete = true;
+//				return tweetsList;
+//			}
 			if(parseResult.isListEmpty()){
 				complete = true;
 				return tweetsList;
 			}
 			tweetsList.addAll(parseResult.getFetchList()); 
-			String hasnext = StringUtils.valueOf( parseResult.getMetadata().get("hasnext"));
-			if (hasnext.equals("0") || hasnext.equals("2")) {// "1" mean yes
+//			String hasnext = StringUtils.valueOf( parseResult.getMetadata().get("hasnext"));
+//			if (hasnext.equals("0") || hasnext.equals("2")) {// "1" mean yes
+//				complete = true;
+//			}
+			String link = JsoupUtils.getLink(document, ".pageNav .pageBtn:contains(下一页)");
+			if(StringUtils.isEmpty(link)){
 				complete = true;
+				return tweetsList;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

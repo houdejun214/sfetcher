@@ -14,8 +14,8 @@ import com.sdata.sense.SenseFetchDatum;
 import com.sdata.sense.item.SenseCrawlItem;
 import com.tencent.weibo.api.StatusesAPI;
 import com.tencent.weibo.api.UserAPI;
+import com.tencent.weibo.beans.OAuth;
 import com.tencent.weibo.constants.OAuthConstants;
-import com.tencent.weibo.oauthv2.OAuthV2;
 
 public class TencentSenseParserUser extends TencentSenseParser {
 
@@ -25,8 +25,8 @@ public class TencentSenseParserUser extends TencentSenseParser {
 	private TencentJsonParser parser;
 	private boolean complete;
 	
-	public TencentSenseParserUser(Configuration conf,OAuthV2 oauth){
-		super(conf,oauth);
+	public TencentSenseParserUser(Configuration conf,OAuth oauth,Map<String,String> header){
+		super(conf,oauth,header);
 		this.statusesAPI = new StatusesAPI(OAuthConstants.OAUTH_VERSION_1);
 		this.userAPI = new UserAPI(OAuthConstants.OAUTH_VERSION_1);
 		this.oauth = oauth;

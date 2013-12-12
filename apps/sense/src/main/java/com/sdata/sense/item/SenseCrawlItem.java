@@ -34,7 +34,7 @@ public abstract class SenseCrawlItem extends CrawlItem {
 		this.priorityScore = MapUtils.getInt(map, "priority_score");
 		this.templeteId = MapUtils.getLong(map, "crawler_template_id");
 		//Test end
-		this.init();
+		this.initParent();
 	}
 	
 	protected String crawlerName;
@@ -90,7 +90,7 @@ public abstract class SenseCrawlItem extends CrawlItem {
 		return entryUrl;
 	}
 
-	protected void init() {
+	private void initParent() {
 		if(JSONUtils.isValidJSON(params)){
 			paramMap = JSONObject.fromObject(params);
 		}

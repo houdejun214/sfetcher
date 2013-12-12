@@ -31,26 +31,15 @@ public class TencentJsonParser {
 		String content = c.getContent();
 		JSONObject JSONObj = JSONObject.fromObject(content);
 		if(JSONObj == null){
-			JSONObj = new JSONObject();
-			JSONObj.put("hasnext", "1");
-			result.setMetadata(JSONObj);
 			return result;
 		}
 		Object o = JSONObj.get("data");
 		if(o==null||!(o instanceof JSONObject)){
-			JSONObj.put("hasnext", "1");
-			result.setMetadata(JSONObj);
 			return result;
 		}
 		JSONObject data = (JSONObject)o;
-		String hasnext = StringUtils.valueOf(data.get("hasnext"));
-		JSONObj.put("hasnext", hasnext);
-		String pos = StringUtils.valueOf(data.get("pos"));
-		JSONObj.put("pos", pos);
 		Object info = data.get("info");
 		if(info==null||!(info instanceof JSONArray)){
-			JSONObj.put("hasnext", "1");
-			result.setMetadata(JSONObj);
 			return result;
 		}
 		Iterator<JSONObject> infoIterator= ((JSONArray)info).iterator();
@@ -71,10 +60,7 @@ public class TencentJsonParser {
 			}
 			FetchDatum datum = this.dealTweetsInfo(item,tweetObj);
 			result.addFetchDatum(datum);
-			JSONObj.put("lastid", StringUtils.valueOf(tweetObj.get("id")));
-			JSONObj.put("pagetime", StringUtils.valueOf(tweetObj.get("timestamp")));
 		}
-		result.setMetadata(JSONObj);
 		return result;
 	}
 	
@@ -90,12 +76,6 @@ public class TencentJsonParser {
 			head = head.concat("/180");
 		}
 		tweetObj.put("head", head);
-//		String crtdt = StringUtils.valueOf(tweetObj.get("timestamp"));
-//		if(StringUtils.isNotEmpty(crtdt)){
-//			Long crtdtL = Long.valueOf(crtdt);
-//			Date cdd = DateTimeUtils.getTimeFromUnixTime(crtdtL);
-//			tweetObj.put("pub_time",crtdtL );
-//		}
 		String longitude = (String)tweetObj.get("longitude");
 		String latitude = (String)tweetObj.get("latitude");
 		if("0".equals(longitude) && "0".equals(latitude)){

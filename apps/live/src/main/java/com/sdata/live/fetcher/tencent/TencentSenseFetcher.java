@@ -64,7 +64,7 @@ public class TencentSenseFetcher extends SenseFetcher {
 			if(curStart.compareTo(start) != 1){
 				curStart = start;
 			}
-			TencentCrawlState state = new TencentCrawlState(0,curStart,endTime);
+			TencentCrawlState state = new TencentCrawlState(1,curStart,endTime);
 			end = this.fetch(fetchDispatch,crawlItem, state);
 			endTime = curStart;
 		}
@@ -116,9 +116,9 @@ public class TencentSenseFetcher extends SenseFetcher {
 	@Override
 	public SenseFetchDatum fetchDatum(SenseFetchDatum datum) {
 		Configuration conf = SenseConfig.getConfig(datum.getCrawlItem());
+		
 		TencentSenseParser downloader = TencentSenseParser.getTencentSenseFrom(conf,datum.getCrawlItem());
 		datum = downloader.getDatum(datum);
 		return datum;
 	}
-
 }
