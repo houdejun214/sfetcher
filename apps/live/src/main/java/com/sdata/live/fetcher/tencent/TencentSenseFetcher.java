@@ -97,8 +97,8 @@ public class TencentSenseFetcher extends SenseFetcher {
 		List<FetchDatum> list = result.getFetchList();
 		if(list !=null&&list.size()> 0){
 			SenseStorer senseStore = parser.getSenseStore(item);
-			Boolean incrementCrawl = this.getConfBoolean("sense.crawl.increment", false);
-			if(incrementCrawl){
+			String crawl = this.getConf("crawlName", "live");
+			if("live".equals(crawl)){
 				for(FetchDatum d:list){
 					//碰到一条转发微博，且在数据库中存在了，则可停止。
 					Object opubTime = DateFormat.changeStrToDate(d.getMeta("timestamp"));

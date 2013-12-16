@@ -38,8 +38,8 @@ public class HbaseDataDisplay {
 
     	HBaseClient hclient = HBaseClientFactory.getClientWithCustomSeri("next-2","ls");
 //    	staticObject(hclient,73l);
-    	staticObject(hclient,60l);
-    	staticObject(hclient,61l);
+    	staticObject(hclient,81l);
+//    	staticObject(hclient,61l);
 //    	HBaseClient hclient2 = HBaseClientFactory.getClientWithCustomSeri("next-1","next");
 //    	TScan scan = new TScan();
 //    	scan.addToColumns(BytesBufferUtils.buffer("dcf:"));
@@ -74,7 +74,7 @@ public class HbaseDataDisplay {
 	}
 	
 	private static void staticObject(HBaseClient client,Long objectId){
-		statictisCount(client, "twitter_tweets" , objectId);
+		statictisCount(client, "tencent_tweets" , objectId);
 //		String[] words = getWords(objectId);
 //		for(String w:words){
 //			statictisPrixCount(client,"tencent_tweets",objectId,"keywords",w.trim());

@@ -33,9 +33,9 @@ public class SenseFetchDatum extends FetchDatum {
 		if(item.getStart()!=null&&pubTime.before(item.getStart())){
 			return false;
 		}
-		if(item.getEnd()!=null&&pubTime.after(item.getEnd())){
-			return false;
-		}
+//		if(item.getEnd()!=null&&pubTime.after(item.getEnd())){
+//			return false;
+//		}
 		return true;
 	}
 	

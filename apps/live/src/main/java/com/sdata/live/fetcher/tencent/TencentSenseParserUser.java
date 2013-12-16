@@ -21,12 +21,12 @@ public class TencentSenseParserUser extends TencentSenseParser {
 
 	private StatusesAPI statusesAPI;
 	private UserAPI userAPI;
-	
+	private String pagesize = "30"; 
 	private TencentJsonParser parser;
 	private boolean complete;
 	
-	public TencentSenseParserUser(Configuration conf,OAuth oauth,Map<String,String> header){
-		super(conf,oauth,header);
+	public TencentSenseParserUser(Configuration conf,OAuth oauth){
+		super(conf,oauth);
 		this.statusesAPI = new StatusesAPI(OAuthConstants.OAUTH_VERSION_1);
 		this.userAPI = new UserAPI(OAuthConstants.OAUTH_VERSION_1);
 		this.oauth = oauth;

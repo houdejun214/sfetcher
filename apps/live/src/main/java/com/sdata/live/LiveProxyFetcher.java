@@ -3,7 +3,6 @@ package com.sdata.live;
 import java.util.Map;
 
 import com.sdata.context.config.Configuration;
-import com.sdata.context.config.CrawlAppContext;
 import com.sdata.context.state.RunState;
 import com.sdata.sense.SenseItemQueue;
 import com.sdata.sense.fetcher.SenseProxyFetcher;
@@ -21,7 +20,7 @@ public class LiveProxyFetcher extends SenseProxyFetcher {
 
 	@Override
 	protected SenseItemQueue initItemQueue() {
-		return new SenseItemQueue(new LiveItemDB(CrawlAppContext.conf));
+		return new SenseItemQueue(DBFactory.getItemDB());
 	}
 
 	@Override

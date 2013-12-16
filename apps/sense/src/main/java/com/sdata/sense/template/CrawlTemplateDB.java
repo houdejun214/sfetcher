@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.lakeside.data.sqldb.MysqlDataSource;
 import com.sdata.context.config.Configuration;
-import com.sdata.core.item.CrawlItemDataSource;
+import com.sdata.core.item.CrawlDataSource;
 
 /**
  * @author zhufb
@@ -17,7 +17,7 @@ public class CrawlTemplateDB {
 	private String templateTable = null;
 	private MysqlDataSource dataSource;
 	public CrawlTemplateDB(Configuration conf){
-		this.dataSource = CrawlItemDataSource.getDataSource(conf);
+		this.dataSource = CrawlDataSource.getDataSource(conf);
 		this.templateTable = conf.get("next.sense.template.table");
 	}
 	

@@ -61,7 +61,6 @@ public class LiveItemDB extends CrawlItemDB {
 		}
 	}
 	
-	
 	@Override
 	protected List<Map<String,Object>> queryItemQueue(int topN,String status){
 		Map<String,Object> parameters = new HashMap<String,Object>();

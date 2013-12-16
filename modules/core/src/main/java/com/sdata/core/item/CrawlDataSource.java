@@ -7,7 +7,7 @@ import com.sdata.context.config.Configuration;
  * @author zhufb
  *
  */
-public class CrawlItemDataSource  {
+public class CrawlDataSource  {
 
 	private static MysqlDataSource source;
 	private static Object syn = new Object();

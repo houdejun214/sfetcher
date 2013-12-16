@@ -22,7 +22,7 @@ public abstract class CrawlItemDB {
 	protected String[] sourceExclude;
 	
 	public CrawlItemDB(Configuration conf){
-		this.dataSource = CrawlItemDataSource.getDataSource(conf);
+		this.dataSource = CrawlDataSource.getDataSource(conf);
 		this.itemQueueTable = conf.get("next.crawler.item.queue.table");
 		String sinclude = conf.get("source.include");
 		String sexclude = conf.get("source.exclude");

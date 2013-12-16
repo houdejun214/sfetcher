@@ -456,10 +456,6 @@
 	<!-- repositories -->
 	<repositories>
 		<repository>
-			<id>foursquareapijava</id>
-			<url>http://foursquare-api-java.googlecode.com/svn/repository</url>
-		</repository>
-		<repository>
 			<id>local.maven.nexus</id>
 			<name>local.maven.nexus</name>
 			<url>http://172.29.34.116:9000/nexus/content/groups/public/</url>

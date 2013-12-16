@@ -12,7 +12,7 @@
 		</property>
 		<property>
 			<name>FetchThreadNum</name>
-			<value>3</value>
+			<value>5</value>
 		</property>
 		
 		<!-- crawler item db info -->
@@ -35,6 +35,10 @@
 		<property>
 		  <name>next.crawler.item.password</name>
 		  <value>nextsense123</value>
+		</property>
+		<property>
+		  <name>crawl.resource.table</name>
+		  <value>sc_resource_pool</value>
 		</property>
 		<property>
 		  <name>next.crawler.item.queue.table</name>
@@ -91,7 +95,7 @@
 		<!-- 定义crawler queue get item count one time , default 20-->
 		<property>
 			<name>crawler.item.queue.onetime.count</name>
-			<value>10</value>
+			<value>5</value>
 		</property> 
 		<filter pos="before" class="com.sdata.sense.filter.SenseProxyFilter"></filter>
 	</site>

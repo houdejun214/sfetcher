@@ -25,6 +25,11 @@
 			<directory>src/main/resources/template</directory>
 			<outputDirectory>template</outputDirectory>
 		</fileSet>
+		<fileSet>
+			<directory>src/main/webapp</directory>
+			<outputDirectory>webapp</outputDirectory>
+		</fileSet>
+		
 		<!-- 将dependency-all包含进来 -->
 		<fileSet>
 			<directory>${project.build.directory}</directory>
@@ -50,7 +55,7 @@
 				<include>commons-logging:commons-logging</include>
 			</includes>
 			<excludes>
-				<exclude>com.sdata:sdatacrawler-common</exclude>
+				<exclude>com.sdata:sdatacrawler</exclude>
 			</excludes>
 			<outputDirectory>lib</outputDirectory>
 		</dependencySet>

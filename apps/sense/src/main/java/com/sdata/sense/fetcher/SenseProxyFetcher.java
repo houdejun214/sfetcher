@@ -70,6 +70,7 @@ public abstract class SenseProxyFetcher extends SdataFetcher {
 	        this.completeItem(item);
 
 		}catch(Exception e){
+			e.printStackTrace();
 			this.failItem(item);
 //			CrawlerMail.send(item.toString(),getExceptionStr(e));
 		}finally{
