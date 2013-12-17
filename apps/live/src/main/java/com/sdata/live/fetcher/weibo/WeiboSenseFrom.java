@@ -30,7 +30,13 @@ public abstract class WeiboSenseFrom {
 	public abstract SenseFetchDatum getDatum(SenseFetchDatum datum);
 
 	protected boolean isValid(String html){
-		if(html.toString().contains("你的行为有些异常，请输入验证码")){
+		if(StringUtils.isEmpty(html)){
+			return false;
+		}
+		if(html.contains("$CONFIG['islogin'] = '0'")){
+			return false;
+		}
+		if(html.contains("你的行为有些异常，请输入验证码")){
 			return false;
 		}
 		return true;

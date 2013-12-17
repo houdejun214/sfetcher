@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <configuration>
 	<site name="history" fetcher="com.sdata.live.history.HistoryProxyFetcher"
-		  storer="com.sdata.sense.store.SenseProxyStorer">
+		  storer="com.sdata.proxy.store.SenseProxyStorer">
 	 	 <property>
 			<name>TaskInterval</name>
 			<value>60000</value>
@@ -88,6 +88,6 @@
 			<name>crawler.item.queue.onetime.count</name>
 			<value>10</value>
 		</property> 
-		<filter pos="before" class="com.sdata.sense.filter.SenseProxyFilter"></filter>
+		<filter pos="before" class="com.sdata.proxy.filter.SenseProxyFilter"></filter>
 	</site>
 </configuration>
