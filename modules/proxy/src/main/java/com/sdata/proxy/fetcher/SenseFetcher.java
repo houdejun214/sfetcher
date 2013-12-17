@@ -32,7 +32,7 @@ public abstract class SenseFetcher extends SdataFetcher {
 	public final static String FID = null;
 	protected static Logger log = LoggerFactory.getLogger("Sense.SenseFetcher");
 	protected SenseParser parser;
-	private Map<Long,Boolean> map = new ConcurrentHashMap<Long,Boolean>();
+	protected Map<Long,Boolean> map = new ConcurrentHashMap<Long,Boolean>();
 	
 	protected SenseFetcher(Configuration conf,RunState state) {
 		super.setConf(conf);

@@ -9,7 +9,7 @@ import com.sdata.context.config.CrawlAppContext;
 import com.sdata.core.resource.Resource;
 import com.sdata.core.resource.ResourceFactory;
 import com.sdata.live.DBFactory;
-import com.sdata.live.fetcher.tencent.TencentResource;
+import com.sdata.proxy.resource.TencentResource;
 
 
 public class ResourceTest {

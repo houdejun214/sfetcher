@@ -1,26 +1,45 @@
 package com.sdata.live.fetcher.weibo;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.jsoup.nodes.Document;
 
 import weibo4j.WeiboHelper;
 
 import com.lakeside.core.utils.StringUtils;
+import com.lakeside.download.http.HttpPageLoader;
 import com.sdata.core.FetchDatum;
 import com.sdata.proxy.SenseFetchDatum;
 import com.sdata.proxy.item.SenseCrawlItem;
+import com.sdata.proxy.resource.Resources;
 
 /**
  * @author zhufb
  *
  */
 public abstract class WeiboSenseFrom {
-	private String host = "http://www.weibo.com/";
+	protected String host = "http://www.weibo.com/";
+	protected Map<String,String> httpHeader = new HashMap<String,String>();
+	protected static HttpPageLoader advancePageLoader = HttpPageLoader.getAdvancePageLoader();
 	
+
 	public abstract List<FetchDatum> getData(SenseCrawlItem item);
 	
 	public abstract SenseFetchDatum getDatum(SenseFetchDatum datum);
 
+	protected boolean isValid(String html){
+		if(html.toString().contains("你的行为有些异常，请输入验证码")){
+			return false;
+		}
+		return true;
+	}
+	
+	protected void refreshHeader(){
+		httpHeader.put("Cookie",Resources.Weibo.get().getCookie());
+	}
+	
 	protected String getTweetUrl(Map<String,Object> matadata){
 		StringBuffer sb = new StringBuffer(host);
 		Map user = (Map)matadata.get("user");

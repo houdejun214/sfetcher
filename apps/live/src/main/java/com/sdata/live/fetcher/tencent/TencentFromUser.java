@@ -17,7 +17,7 @@ import com.tencent.weibo.api.UserAPI;
 import com.tencent.weibo.beans.OAuth;
 import com.tencent.weibo.constants.OAuthConstants;
 
-public class TencentSenseParserUser extends TencentSenseParser {
+public class TencentFromUser extends TencentBase {
 
 	private StatusesAPI statusesAPI;
 	private UserAPI userAPI;
@@ -25,7 +25,7 @@ public class TencentSenseParserUser extends TencentSenseParser {
 	private TencentJsonParser parser;
 	private boolean complete;
 	
-	public TencentSenseParserUser(Configuration conf,OAuth oauth){
+	public TencentFromUser(Configuration conf,OAuth oauth){
 		super(conf,oauth);
 		this.statusesAPI = new StatusesAPI(OAuthConstants.OAUTH_VERSION_1);
 		this.userAPI = new UserAPI(OAuthConstants.OAUTH_VERSION_1);
@@ -35,7 +35,7 @@ public class TencentSenseParserUser extends TencentSenseParser {
 	}
 	
 	@Override
-	public List<FetchDatum> getList(SenseCrawlItem item,TencentCrawlState state) {
+	public List<FetchDatum> getList(SenseCrawlItem item,TencentState state) {
 		this.complete = false;
 		List<FetchDatum> tweetsList = new ArrayList<FetchDatum>();
 		String lastid = "0";
@@ -97,16 +97,8 @@ public class TencentSenseParserUser extends TencentSenseParser {
 	}
 
 	@Override
-	public void next(TencentCrawlState state) {
+	public void next(TencentState state) {
 		//nothing to do
 		
 	}
-
-	@Override
-	public ParseResult parseCrawlItem(Configuration conf, RawContent rc,
-			SenseCrawlItem item) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

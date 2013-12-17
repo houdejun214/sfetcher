@@ -30,7 +30,7 @@ import com.sdata.proxy.store.SenseStorer;
 public class TencentSenseFetcher extends SenseFetcher {
 	public final static String FID = "tencent";
 	private static final Logger log = LoggerFactory.getLogger("Sense.TencentSenseFetcher");
-
+	private TencentBase tencentFetcher;
 	public TencentSenseFetcher(Configuration conf, RunState state) {
 		super(conf, state);
 	}
@@ -43,7 +43,7 @@ public class TencentSenseFetcher extends SenseFetcher {
 	@Override
 	public void fetchDatumList(FetchDispatch fetchDispatch, SenseCrawlItem crawlItem) {
 		Configuration conf = SenseConfig.getConfig(crawlItem);
-		this.parser = TencentSenseParser.getTencentSenseFrom(conf,crawlItem);
+		this.tencentFetcher = TencentBase.getTencentSenseFrom(conf,crawlItem);
 		if(crawlItem.containParam(CrawlItemEnum.KEYWORD.getName())){
 			this.fetchWithTime(fetchDispatch,crawlItem);
 		}else{
@@ -64,28 +64,28 @@ public class TencentSenseFetcher extends SenseFetcher {
 			if(curStart.compareTo(start) != 1){
 				curStart = start;
 			}
-			TencentCrawlState state = new TencentCrawlState(1,curStart,endTime);
+			TencentState state = new TencentState(1,curStart,endTime);
 			end = this.fetch(fetchDispatch,crawlItem, state);
 			endTime = curStart;
 		}
 	}
 
 	private void fetchNoTime(FetchDispatch fetchDispatch,SenseCrawlItem crawlItem){
-		TencentCrawlState state = new TencentCrawlState();
+		TencentState state = new TencentState();
 		this.fetch(fetchDispatch, crawlItem, state);
 	}
 	
-	private boolean fetch(FetchDispatch fetchDispatch,SenseCrawlItem crawlItem,TencentCrawlState state){
+	private boolean fetch(FetchDispatch fetchDispatch,SenseCrawlItem crawlItem,TencentState state){
 		boolean complete = false;
 		while (!complete) {
-			List<FetchDatum> data = ((TencentSenseParser)parser).getList(crawlItem, state);
+			List<FetchDatum> data = tencentFetcher.getList(crawlItem, state);
 			log.info("We has crawled tweets: "+ data.size() + ",param:" +crawlItem.getParamStr() + ",state :"+state);
 			ParseResult result = new ParseResult();
 			result.setFetchList(data);
-			complete = ((TencentSenseParser)parser).isComplete();
+			complete = tencentFetcher.isComplete();
 			boolean end = this.end(result,crawlItem,state);
 			fetchDispatch.dispatch(data);
-			((TencentSenseParser)parser).next(state);
+			tencentFetcher.next(state);
 			if(end){
 				return true;
 			}
@@ -93,7 +93,7 @@ public class TencentSenseFetcher extends SenseFetcher {
 		return false;
 	}
 
-	protected boolean end(ParseResult result,SenseCrawlItem item,TencentCrawlState state){
+	protected boolean end(ParseResult result,SenseCrawlItem item,TencentState state){
 		List<FetchDatum> list = result.getFetchList();
 		if(list !=null&&list.size()> 0){
 			SenseStorer senseStore = parser.getSenseStore(item);
@@ -117,7 +117,7 @@ public class TencentSenseFetcher extends SenseFetcher {
 	public SenseFetchDatum fetchDatum(SenseFetchDatum datum) {
 		Configuration conf = SenseConfig.getConfig(datum.getCrawlItem());
 		
-		TencentSenseParser downloader = TencentSenseParser.getTencentSenseFrom(conf,datum.getCrawlItem());
+		TencentBase downloader = TencentBase.getTencentSenseFrom(conf,datum.getCrawlItem());
 		datum = downloader.getDatum(datum);
 		return datum;
 	}

@@ -8,21 +8,21 @@ import org.apache.commons.lang.StringUtils;
  * @author zhufb
  *
  */
-public class TencentCrawlState {
+public class TencentState {
 
-	public TencentCrawlState(){
+	public TencentState(){
 		
 	}
-	public TencentCrawlState(int page){
+	public TencentState(int page){
 		this.page = page;
 	}
 
-	public TencentCrawlState(Date start,Date end){
+	public TencentState(Date start,Date end){
 		this.start = start;
 		this.end = end;
 	}
 	
-	public TencentCrawlState(int page,Date start,Date end){
+	public TencentState(int page,Date start,Date end){
 		this.page= page;
 		this.start = start;
 		this.end = end;

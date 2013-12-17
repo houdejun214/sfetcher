@@ -17,7 +17,6 @@ import org.dom4j.DocumentHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import weibo4j.Weibo;
 import weibo4j.util.WeiboServer;
 
 import com.lakeside.core.utils.MapUtils;
@@ -30,6 +29,7 @@ import com.sdata.core.FetchDispatch;
 import com.sdata.core.RawContent;
 import com.sdata.core.parser.SdataParser;
 import com.sdata.hot.util.HotUtils;
+import com.sdata.proxy.resource.Resources;
 
 /**
  * @author zhufb
@@ -45,7 +45,7 @@ public class WeiboHotParser extends SdataParser{
 	public WeiboHotParser(Configuration conf){
 		this.minutes = conf.getInt("crawl.minutes", 5);
 		WeiboServer.init("weiboWord");
-		header.put("Cookie", Weibo.getCookie());
+		header.put("Cookie", Resources.Weibo.get().getCookie());
 	}
 	
 	public void parseList(FetchDispatch dispatch,JSONObject hotTweet) {

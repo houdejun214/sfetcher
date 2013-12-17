@@ -20,11 +20,9 @@ import com.sdata.core.FetchDatum;
 import com.sdata.core.RawContent;
 import com.sdata.core.item.CrawlItemEnum;
 import com.sdata.core.parser.ParseResult;
-import com.sdata.core.resource.ResourceFactory;
-import com.sdata.live.DBFactory;
 import com.sdata.proxy.SenseFetchDatum;
 import com.sdata.proxy.item.SenseCrawlItem;
-import com.sdata.proxy.parser.SenseParser;
+import com.sdata.proxy.resource.Resources;
 import com.tencent.weibo.api.UserAPI;
 import com.tencent.weibo.beans.OAuth;
 import com.tencent.weibo.oauthv1.OAuthV1;
@@ -34,33 +32,16 @@ import com.tencent.weibo.oauthv1.OAuthV1;
  * @author zhufb
  *
  */
-public abstract class TencentSenseParser extends SenseParser{
+public abstract class TencentBase{
 	
-	protected static final Logger log = LoggerFactory.getLogger("SdataCrawler.TencentSenseFrom");
-	protected static final String Resource_source = "tencent";
+	protected static final Logger log = LoggerFactory.getLogger("SdataCrawler.TencentBaseFether");
 	protected String format = "json";
 	protected static  HBaseClient client;
 	protected OAuth oauth;
 	protected Map<String,String> header = new HashMap<String,String>();
 	protected static HttpPageLoader pageLoader = HttpPageLoader.getAdvancePageLoader();
-	protected static ResourceFactory<TencentResource> resourceFactory; 
-	 
-	static {
-		resourceFactory = new ResourceFactory<TencentResource>(Resource_source,DBFactory.getResourceDB(),TencentResource.class);
-	}
 	
-	public TencentSenseParser(Configuration conf) {
-		super(conf);
-	}
-	
-	public TencentSenseParser(Configuration conf,OAuth v){
-		super(conf);
-		this.oauth = v;
-		refreshHeader();
-	}
-
-	public static TencentSenseParser getTencentSenseFrom(Configuration conf ,SenseCrawlItem item){
-		
+	public static TencentBase getTencentSenseFrom(Configuration conf ,SenseCrawlItem item){
 		//Oauth 1
 		OAuthV1 oauth = new OAuthV1();
 		String consumerKey = conf.get("ConsumerKey");
@@ -76,21 +57,25 @@ public abstract class TencentSenseParser extends SenseParser{
 		String namespace = conf.get("hbase.namespace");
 		client = HBaseClientFactory.getClientWithCustomSeri(clusterName, namespace);
 		if(item.containParam(CrawlItemEnum.KEYWORD.getName())){
-			return new TencentSenseParserWord(conf,oauth);
+			return new TencentFromWord(conf,oauth);
 		}else if(item.containParam(CrawlItemEnum.ACCOUNT.getName())){
-			return new TencentSenseParserUser(conf,oauth);
+			return new TencentFromUser(conf,oauth);
 		}else{
 			throw new RuntimeException("wrong word type input!");
 		}
 	}
 	
+	public TencentBase(Configuration conf,OAuth v){
+		this.oauth = v;
+		refreshHeader();
+	}
 
 	protected boolean isValid(Document document){
 		return document !=null&&document.toString().indexOf("搜太多啦，服务器累得回火星了") < 0&&document.toString().indexOf("腾讯微博_你的心声")<0;
 	}
 	
-	public void refreshHeader(){
-		header.put("Cookie",resourceFactory.getResource().getCookie());
+	protected void refreshHeader(){
+		header.put("Cookie",Resources.Tencent.get().getCookie());
 	}
 	
 	protected Map<String, Object> fetchUserInfo(String name,UserAPI userAPI,OAuth oauth,TencentJsonParser parser) {
@@ -130,7 +115,7 @@ public abstract class TencentSenseParser extends SenseParser{
 	}
 	
 
-	protected static void await(long millis){
+	protected void await(long millis){
 		try {
 			Thread.sleep(millis);
 		} catch (InterruptedException e) {
@@ -138,9 +123,9 @@ public abstract class TencentSenseParser extends SenseParser{
 		}
 	}
 
-	public abstract List<FetchDatum> getList(SenseCrawlItem item,TencentCrawlState state);
+	public abstract List<FetchDatum> getList(SenseCrawlItem item,TencentState state);
 	
-	public abstract void next(TencentCrawlState state);
+	public abstract void next(TencentState state);
 	
 	public abstract Map<String,Object> getTencentUserInfo(String name);
 

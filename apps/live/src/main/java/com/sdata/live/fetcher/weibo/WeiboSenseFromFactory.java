@@ -1,7 +1,5 @@
 package com.sdata.live.fetcher.weibo;
 
-import java.util.Map;
-
 import com.sdata.context.config.Configuration;
 import com.sdata.core.item.CrawlItemEnum;
 import com.sdata.proxy.item.SenseCrawlItem;
@@ -13,9 +11,9 @@ import com.sdata.proxy.item.SenseCrawlItem;
 public class WeiboSenseFromFactory {
 
 	public static WeiboSenseFrom getSenseFrom(SenseCrawlItem item,
-		Configuration conf, Map<String, String> httpHeader) {
+		Configuration conf) {
 		if (item.containParam(CrawlItemEnum.KEYWORD.getName())) {
-			return new WeiboSenseFromWord(conf, httpHeader);
+			return new WeiboSenseFromWord(conf);
 		} else if (item.containParam(CrawlItemEnum.ACCOUNT.getName())) {
 			return new WeiboSenseFromUser();
 		}

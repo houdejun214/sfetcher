@@ -19,6 +19,7 @@ import com.sdata.proxy.SenseConfig;
 import com.sdata.proxy.SenseFetchDatum;
 import com.sdata.proxy.fetcher.SenseFetcher;
 import com.sdata.proxy.item.SenseCrawlItem;
+import com.sdata.proxy.resource.Resources;
 
 /**
  * weibo sense fetcher implement
@@ -39,13 +40,7 @@ public class WeiboSenseFetcher extends SenseFetcher{
 	@Override
 	public void fetchDatumList(FetchDispatch fetchDispatch, SenseCrawlItem crawlItem) {
 		Configuration conf = SenseConfig.getConfig(crawlItem);
-		String token = conf.get("weibo_token");
-  		token = StringUtils.isEmpty(token)?state.getCrawlName():token;
-		WeiboServer.init(token);
-		Weibo.initToken();
-		Map<String,String> header = new HashMap<String,String>();
-		header.put("Cookie", Weibo.getCookie());
-		WeiboSenseFrom senseFrom = WeiboSenseFromFactory.getSenseFrom(crawlItem,conf,header);
+		WeiboSenseFrom senseFrom = WeiboSenseFromFactory.getSenseFrom(crawlItem,conf);
 		List<FetchDatum> data = senseFrom.getData(crawlItem);
 		log.warn("fetch weibo :"+crawlItem.getEntryUrl()+" tweets size:"+data.size());
 		fetchDispatch.dispatch(data);
@@ -53,10 +48,8 @@ public class WeiboSenseFetcher extends SenseFetcher{
 
 	@Override
 	public SenseFetchDatum fetchDatum(SenseFetchDatum datum) {
-		Map<String,String> header = new HashMap<String,String>();
-		header.put("Cookie", Weibo.getCookie());
 		Configuration conf = SenseConfig.getConfig(datum.getCrawlItem());
-		WeiboSenseFrom senseFrom = WeiboSenseFromFactory.getSenseFrom(datum.getCrawlItem(),conf,header);
+		WeiboSenseFrom senseFrom = WeiboSenseFromFactory.getSenseFrom(datum.getCrawlItem(),conf);
 		datum = senseFrom.getDatum(datum);
 		return datum;
 	}

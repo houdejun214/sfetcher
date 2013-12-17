@@ -28,17 +28,16 @@ import com.tencent.weibo.constants.OAuthConstants;
  * @author zhufb
  *
  */
-public class TencentSenseParserWord extends TencentSenseParser {
+public class TencentFromWord extends TencentBase {
 	
 	private TAPI tAPI;
 	private UserAPI userAPI;
 	private TencentJsonParser parser;
 	private boolean complete = false;
-	
 	//SearchUrl
     private String searchUrl = "http://search.t.qq.com/index.php?k={0}&s_time={1}%2C{2}&s_advanced=1&s_m_type=1&p={3}";
 
-	public TencentSenseParserWord(Configuration conf,OAuth oauth){
+	public TencentFromWord(Configuration conf,OAuth oauth){
 		super(conf,oauth);
 		this.tAPI = new TAPI(OAuthConstants.OAUTH_VERSION_1);
 		this.userAPI = new UserAPI(OAuthConstants.OAUTH_VERSION_1);
@@ -46,7 +45,7 @@ public class TencentSenseParserWord extends TencentSenseParser {
 	}
 	
 	@Override
-	public List<FetchDatum> getList(SenseCrawlItem item,TencentCrawlState state) {
+	public List<FetchDatum> getList(SenseCrawlItem item,TencentState state) {
 		this.complete = false;
 		List<FetchDatum> tweetsList = new ArrayList<FetchDatum>();
 		String keyword =  StringUtils.valueOf(item.getParam(CrawlItemEnum.KEYWORD.getName()));
@@ -110,7 +109,7 @@ public class TencentSenseParserWord extends TencentSenseParser {
 	}
 
 	@Override
-	public void next(TencentCrawlState state) {
+	public void next(TencentState state) {
 		state.setPage(state.getPage()+1);
 	}
 
@@ -133,11 +132,5 @@ public class TencentSenseParserWord extends TencentSenseParser {
 			}
 		}
 		return datum;
-	}
-
-	@Override
-	public ParseResult parseCrawlItem(Configuration conf, RawContent rc,
-			SenseCrawlItem item) {
-		return null;
 	}
 }

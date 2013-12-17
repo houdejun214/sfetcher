@@ -1,4 +1,4 @@
-package com.sdata.live.fetcher.tencent;
+package com.sdata.proxy.resource;
 
 import java.util.Map;
 
