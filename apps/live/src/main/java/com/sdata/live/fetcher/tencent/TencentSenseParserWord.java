@@ -16,9 +16,9 @@ import com.sdata.core.RawContent;
 import com.sdata.core.item.CrawlItemEnum;
 import com.sdata.core.parser.ParseResult;
 import com.sdata.core.parser.html.util.DocumentUtils;
-import com.sdata.sense.SenseFetchDatum;
-import com.sdata.sense.item.SenseCrawlItem;
-import com.sdata.util.JsoupUtils;
+import com.sdata.core.util.JsoupUtils;
+import com.sdata.proxy.SenseFetchDatum;
+import com.sdata.proxy.item.SenseCrawlItem;
 import com.tencent.weibo.api.TAPI;
 import com.tencent.weibo.api.UserAPI;
 import com.tencent.weibo.beans.OAuth;
@@ -53,7 +53,6 @@ public class TencentSenseParserWord extends TencentSenseParser {
 		String starttime =DateTimeUtils.format(state.getStart(), "yyyyMMddHHmmss");// this.getUnixTime(state.getStart());
 		String endtime = DateTimeUtils.format(state.getEnd(), "yyyyMMddHHmmss");//this.getUnixTime(state.getEnd());
 		try {
-//			super.await(1000);
 			String url = MessageFormat.format(searchUrl,keyword,starttime,endtime,state.getPage());
 			Document document = null;
 			while(true){

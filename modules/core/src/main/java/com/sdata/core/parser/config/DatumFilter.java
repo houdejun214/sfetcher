@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.sdata.util.BooleanEvaluator;
+import com.sdata.core.util.BooleanEvaluator;
 
 
 /**

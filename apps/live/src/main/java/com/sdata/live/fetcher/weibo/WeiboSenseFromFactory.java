@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.sdata.context.config.Configuration;
 import com.sdata.core.item.CrawlItemEnum;
-import com.sdata.sense.item.SenseCrawlItem;
+import com.sdata.proxy.item.SenseCrawlItem;
 
 /**
  * @author zhufb

@@ -11,8 +11,8 @@ import com.lakeside.core.utils.MapUtils;
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.UrlFormater;
 import com.lakeside.core.utils.UrlUtils;
-import com.sdata.sense.Constants;
-import com.sdata.sense.item.SenseCrawlItem;
+import com.sdata.proxy.Constants;
+import com.sdata.proxy.item.SenseCrawlItem;
 
 /**
  * 

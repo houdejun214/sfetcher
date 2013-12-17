@@ -4,9 +4,9 @@ import java.util.Map;
 
 import com.sdata.context.config.Configuration;
 import com.sdata.context.state.RunState;
-import com.sdata.sense.SenseItemQueue;
-import com.sdata.sense.fetcher.SenseProxyFetcher;
-import com.sdata.sense.item.SenseCrawlItem;
+import com.sdata.proxy.SenseItemQueue;
+import com.sdata.proxy.fetcher.SenseProxyFetcher;
+import com.sdata.proxy.item.SenseCrawlItem;
 
 /**
  * @author zhufb

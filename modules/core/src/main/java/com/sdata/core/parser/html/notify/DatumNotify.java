@@ -12,7 +12,7 @@ import com.sdata.context.config.Configuration;
 import com.sdata.context.config.CrawlAppContext;
 import com.sdata.core.parser.config.DatumConfig;
 import com.sdata.core.parser.html.field.Field;
-import com.sdata.util.BooleanEvaluator;
+import com.sdata.core.util.BooleanEvaluator;
 
 
 /**

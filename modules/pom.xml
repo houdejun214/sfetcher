@@ -17,7 +17,6 @@
 	<description>Sdatacrawler modules is basis components of data crawler framework. </description>
 
 	<modules>
-		<module>util</module>
 		<module>context</module>
 		<module>extension</module>
 		<module>db</module>
@@ -25,6 +24,7 @@
 		<module>elastic</module>
 		<module>core</module>
 		<module>common</module>
+		<module>proxy</module>
 	</modules>
 
 </project>

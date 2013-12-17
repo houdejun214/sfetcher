@@ -21,8 +21,8 @@ import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.item.CrawlItemEnum;
 import com.sdata.core.parser.html.util.DocumentUtils;
-import com.sdata.sense.SenseFetchDatum;
-import com.sdata.sense.item.SenseCrawlItem;
+import com.sdata.proxy.SenseFetchDatum;
+import com.sdata.proxy.item.SenseCrawlItem;
 
 /**
  * @author zhufb

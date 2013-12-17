@@ -1,8 +1,8 @@
 package com.sdata.live;
 
 import com.sdata.context.config.CrawlAppContext;
+import com.sdata.core.resource.ResourceDB;
 import com.sdata.live.history.HistoryItemDB;
-import com.sdata.live.resource.ResourceDB;
 
 /**
  * @author zhufb

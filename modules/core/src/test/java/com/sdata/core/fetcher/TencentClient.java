@@ -12,7 +12,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
 
-import com.sdata.util.MD5Security;
+import com.sdata.core.util.MD5Security;
 
 public class TencentClient {
 	

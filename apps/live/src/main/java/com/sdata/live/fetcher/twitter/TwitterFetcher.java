@@ -10,9 +10,9 @@ import com.sdata.core.FetchDispatch;
 import com.sdata.core.RawContent;
 import com.sdata.core.parser.ParseResult;
 import com.sdata.live.parser.twitter.TwitterParser;
-import com.sdata.sense.SenseConfig;
-import com.sdata.sense.fetcher.SenseFetcher;
-import com.sdata.sense.item.SenseCrawlItem;
+import com.sdata.proxy.SenseConfig;
+import com.sdata.proxy.fetcher.SenseFetcher;
+import com.sdata.proxy.item.SenseCrawlItem;
 
 /**
  * @author zhufb

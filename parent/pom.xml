@@ -49,7 +49,7 @@
 		<!-- third party dependencies version -->
 		<twitter.version>3.0.3</twitter.version>
 		<tencent.version>0.0.1</tencent.version>
-		<weibo.version>0.0.2</weibo.version>
+		<weibo.version>0.0.1</weibo.version>
 		<foursquare.version>1.0.0</foursquare.version>
 		<youtube.version>2.0</youtube.version>
 		<gdata.version>1.0</gdata.version>
@@ -121,7 +121,7 @@
 
 			<dependency>
 				<groupId>com.sdata</groupId>
-				<artifactId>sdatacrawler-sense</artifactId>
+				<artifactId>sdatacrawler-proxy</artifactId>
 				<version>${sdatacrawler.version}</version>
 			</dependency>
 			<dependency>
@@ -490,18 +490,16 @@
 						</execution>
 					</executions>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<inherited>true</inherited>
+					<configuration>
+						<source>${jdk.version}</source>
+						<target>${jdk.version}</target>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
-		<plugins>
-			<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <inherited>true</inherited>
-                <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
-                </configuration>
-            </plugin>
-		</plugins>
 	</build>
 </project>

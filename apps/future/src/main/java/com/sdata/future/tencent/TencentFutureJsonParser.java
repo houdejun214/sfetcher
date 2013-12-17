@@ -12,7 +12,7 @@ import com.sdata.context.config.Constants;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.RawContent;
 import com.sdata.core.parser.ParseResult;
-import com.sdata.sense.item.SenseCrawlItem;
+import com.sdata.proxy.item.SenseCrawlItem;
 
 /**
  * @author zhufb

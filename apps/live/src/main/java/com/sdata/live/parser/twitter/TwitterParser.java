@@ -16,12 +16,12 @@ import com.sdata.context.config.Configuration;
 import com.sdata.core.RawContent;
 import com.sdata.core.parser.ParseResult;
 import com.sdata.core.parser.html.util.DocumentUtils;
+import com.sdata.core.util.JsoupUtils;
 import com.sdata.live.IDBuilder;
 import com.sdata.live.LiveItem;
-import com.sdata.sense.SenseFetchDatum;
-import com.sdata.sense.item.SenseCrawlItem;
-import com.sdata.sense.parser.SenseParser;
-import com.sdata.util.JsoupUtils;
+import com.sdata.proxy.SenseFetchDatum;
+import com.sdata.proxy.item.SenseCrawlItem;
+import com.sdata.proxy.parser.SenseParser;
 
 public class TwitterParser extends SenseParser {
 

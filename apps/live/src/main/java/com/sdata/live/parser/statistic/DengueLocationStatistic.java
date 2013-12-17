@@ -18,8 +18,8 @@ import com.sdata.context.config.Constants;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.FetchDispatch;
 import com.sdata.live.LiveItem;
-import com.sdata.sense.SenseFetchDatum;
-import com.sdata.sense.item.SenseCrawlItem;
+import com.sdata.proxy.SenseFetchDatum;
+import com.sdata.proxy.item.SenseCrawlItem;
 
 /**
  * @author zhufb

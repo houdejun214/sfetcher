@@ -20,11 +20,11 @@ import com.sdata.core.FetchDatum;
 import com.sdata.core.RawContent;
 import com.sdata.core.item.CrawlItemEnum;
 import com.sdata.core.parser.ParseResult;
+import com.sdata.core.resource.ResourceFactory;
 import com.sdata.live.DBFactory;
-import com.sdata.live.resource.ResourceFactory;
-import com.sdata.sense.SenseFetchDatum;
-import com.sdata.sense.item.SenseCrawlItem;
-import com.sdata.sense.parser.SenseParser;
+import com.sdata.proxy.SenseFetchDatum;
+import com.sdata.proxy.item.SenseCrawlItem;
+import com.sdata.proxy.parser.SenseParser;
 import com.tencent.weibo.api.UserAPI;
 import com.tencent.weibo.beans.OAuth;
 import com.tencent.weibo.oauthv1.OAuthV1;
@@ -41,7 +41,7 @@ public abstract class TencentSenseParser extends SenseParser{
 	protected String format = "json";
 	protected static  HBaseClient client;
 	protected OAuth oauth;
-	protected static Map<String,String> header = new HashMap<String,String>();
+	protected Map<String,String> header = new HashMap<String,String>();
 	protected static HttpPageLoader pageLoader = HttpPageLoader.getAdvancePageLoader();
 	protected static ResourceFactory<TencentResource> resourceFactory; 
 	 
@@ -89,7 +89,7 @@ public abstract class TencentSenseParser extends SenseParser{
 		return document !=null&&document.toString().indexOf("搜太多啦，服务器累得回火星了") < 0&&document.toString().indexOf("腾讯微博_你的心声")<0;
 	}
 	
-	public static void refreshHeader(){
+	public void refreshHeader(){
 		header.put("Cookie",resourceFactory.getResource().getCookie());
 	}
 	

@@ -8,10 +8,10 @@ import org.slf4j.LoggerFactory;
 import com.sdata.context.config.Configuration;
 import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDispatch;
-import com.sdata.sense.SenseConfig;
-import com.sdata.sense.SenseFetchDatum;
-import com.sdata.sense.fetcher.SenseFetcher;
-import com.sdata.sense.item.SenseCrawlItem;
+import com.sdata.proxy.SenseConfig;
+import com.sdata.proxy.SenseFetchDatum;
+import com.sdata.proxy.fetcher.SenseFetcher;
+import com.sdata.proxy.item.SenseCrawlItem;
 
 /**
  * @author zhufb

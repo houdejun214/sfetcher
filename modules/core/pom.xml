@@ -60,10 +60,6 @@
 		</dependency>
 		<dependency>
 			<groupId>com.sdata</groupId>
-			<artifactId>sdatacrawler-util</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sdata</groupId>
 			<artifactId>sdatacrawler-context</artifactId>
 		</dependency>
 		<dependency>
@@ -87,9 +83,13 @@
 			<artifactId>guava</artifactId>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>

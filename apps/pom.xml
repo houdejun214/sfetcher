@@ -16,10 +16,7 @@
 	</parent>
 
 	<modules>
-		<module>sense</module>
 		<module>hot</module>
-		<module>index</module>
-		<module>image</module>
 		<module>future</module>
 		<module>live</module>
 	</modules>

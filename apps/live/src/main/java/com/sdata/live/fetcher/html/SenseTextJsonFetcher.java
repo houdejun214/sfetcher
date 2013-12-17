@@ -14,8 +14,8 @@ import com.sdata.core.FetchDispatch;
 import com.sdata.core.RawContent;
 import com.sdata.core.parser.ParseResult;
 import com.sdata.live.parser.html.SenseJsonParser;
-import com.sdata.sense.SenseConfig;
-import com.sdata.sense.item.SenseCrawlItem;
+import com.sdata.proxy.SenseConfig;
+import com.sdata.proxy.item.SenseCrawlItem;
 
 /**
  * @author zhufb

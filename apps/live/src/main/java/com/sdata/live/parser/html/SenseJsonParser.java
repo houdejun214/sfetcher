@@ -12,8 +12,8 @@ import com.sdata.core.exception.NegligibleException;
 import com.sdata.core.parser.ParseResult;
 import com.sdata.core.parser.html.StrategyJSONParser;
 import com.sdata.core.parser.html.field.Tags;
-import com.sdata.sense.Constants;
-import com.sdata.sense.item.SenseCrawlItem;
+import com.sdata.proxy.Constants;
+import com.sdata.proxy.item.SenseCrawlItem;
 
 /**
  * @author zhufb

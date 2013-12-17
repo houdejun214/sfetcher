@@ -19,9 +19,9 @@ import com.sdata.core.FetchDatum;
 import com.sdata.core.RawContent;
 import com.sdata.core.parser.ParseResult;
 import com.sdata.future.FutureIDBuilder;
-import com.sdata.sense.SenseFetchDatum;
-import com.sdata.sense.item.SenseCrawlItem;
-import com.sdata.sense.parser.SenseParser;
+import com.sdata.proxy.SenseFetchDatum;
+import com.sdata.proxy.item.SenseCrawlItem;
+import com.sdata.proxy.parser.SenseParser;
 
 /**
  * @author zhufb

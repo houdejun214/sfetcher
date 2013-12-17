@@ -3,7 +3,7 @@ package com.sdata.live.handler;
 import com.lakeside.core.utils.UUIDUtils;
 import com.sdata.context.parser.IParserContext;
 import com.sdata.extension.handler.IParserHandler;
-import com.sdata.sense.Constants;
+import com.sdata.proxy.Constants;
 
 /**
  * @author zhufb

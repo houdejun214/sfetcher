@@ -20,11 +20,11 @@ import com.sdata.core.FetchDatum;
 import com.sdata.core.RawContent;
 import com.sdata.core.exception.NegligibleException;
 import com.sdata.core.parser.html.util.DocumentUtils;
+import com.sdata.core.util.JsoupUtils;
 import com.sdata.hot.HotConstants;
 import com.sdata.hot.Source;
 import com.sdata.hot.fetcher.video.HotVideoFetcher;
 import com.sdata.hot.util.HotUtils;
-import com.sdata.util.JsoupUtils;
 
 /**
  * @author zhufb

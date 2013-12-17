@@ -4,8 +4,8 @@ import com.sdata.context.config.Configuration;
 import com.sdata.context.state.RunState;
 import com.sdata.db.BaseDao;
 import com.sdata.db.DaoCollection;
-import com.sdata.sense.SenseFetchDatum;
-import com.sdata.sense.store.SenseStorer;
+import com.sdata.proxy.SenseFetchDatum;
+import com.sdata.proxy.store.SenseStorer;
 
 /**
  * @author zhufb

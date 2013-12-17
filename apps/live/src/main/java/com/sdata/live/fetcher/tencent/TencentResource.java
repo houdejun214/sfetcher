@@ -2,7 +2,7 @@ package com.sdata.live.fetcher.tencent;
 
 import java.util.Map;
 
-import com.sdata.live.resource.Resource;
+import com.sdata.core.resource.Resource;
 import com.tencent.weibo.utils.Tencent;
 
 /**

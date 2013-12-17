@@ -3,7 +3,7 @@ package com.sdata.live;
 import org.apache.hadoop.hbase.util.Bytes;
 
 import com.lakeside.core.utils.StringUtils;
-import com.sdata.sense.item.SenseCrawlItem;
+import com.sdata.proxy.item.SenseCrawlItem;
 
 /**
  * @author zhufb

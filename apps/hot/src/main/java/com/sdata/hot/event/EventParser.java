@@ -17,9 +17,9 @@ import com.sdata.core.exception.NegligibleException;
 import com.sdata.core.parser.ParseResult;
 import com.sdata.core.parser.SdataParser;
 import com.sdata.core.parser.html.util.DocumentUtils;
+import com.sdata.core.util.JsoupUtils;
 import com.sdata.hot.Hot;
 import com.sdata.hot.util.HotUtils;
-import com.sdata.util.JsoupUtils;
 
 /**
  * @author zhufb

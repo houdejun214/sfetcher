@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.lakeside.core.utils.MapUtils;
 import com.lakeside.core.utils.StringUtils;
-import com.sdata.sense.item.SenseCrawlItem;
+import com.sdata.proxy.item.SenseCrawlItem;
 
 /**
  * @author zhufb

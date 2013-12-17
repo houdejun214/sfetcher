@@ -16,10 +16,10 @@ import com.sdata.core.parser.html.StrategyHtmlParser;
 import com.sdata.core.parser.html.field.Tags;
 import com.sdata.core.parser.html.util.DocumentUtils;
 import com.sdata.live.IDBuilder;
-import com.sdata.sense.Constants;
-import com.sdata.sense.SenseFetchDatum;
-import com.sdata.sense.item.SenseCrawlItem;
-import com.sdata.sense.parser.SenseParser;
+import com.sdata.proxy.Constants;
+import com.sdata.proxy.SenseFetchDatum;
+import com.sdata.proxy.item.SenseCrawlItem;
+import com.sdata.proxy.parser.SenseParser;
 
 /**
  * @author zhufb
