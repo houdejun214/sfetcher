@@ -4,13 +4,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.framework.db.hbase.thrift.HBaseClient;
-import com.framework.db.hbase.thrift.HBaseClientFactory;
 import com.lakeside.core.utils.StringUtils;
 import com.sdata.context.config.Configuration;
 import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.data.store.SdataStandardStorer;
+import com.sdata.core.data.store.SdataBaseStorer;
 import com.sdata.core.parser.config.StoreConfig;
 import com.sdata.db.BaseDao;
 import com.sdata.db.DaoCollection;
@@ -23,33 +21,29 @@ import com.sdata.proxy.item.SenseCrawlItem;
  * @author zhufb
  *
  */
-public class SenseStorer extends SdataStandardStorer {
+public class SenseStorer extends SdataBaseStorer {
 
 	public static String DEFAULT_SENSE_STORER = "sense" ;
 	
 	public final static String SID = null;
 	
-	private HBaseClient client;
 	public SenseStorer(Configuration conf,RunState state) {
 		super(conf,state);
 	}
-
-	//sense dont use stata standard init
-	@Override
-	protected void init() {
-		String clusterName = super.getConf("hbase.cluster.name");
-		String namespace = super.getConf("hbase.namespace");
-		client = HBaseClientFactory.getClientWithCustomSeri(clusterName, namespace);
-	}
 	
-	@Override
-	public void save(FetchDatum datum) throws Exception {
+	/* 
+	 * save sense datum
+	 * 
+	 * (non-Javadoc)
+	 * @see com.sdata.core.data.store.SdataStandardStorer#save(com.sdata.core.FetchDatum)
+	 */
+	public void save(FetchDatum datum){
 		Configuration config = getConf(datum);
 		Map<String, Object> prepareData = ((SenseFetchDatum)datum).defaultData();
 		Iterator<DaoCollection> collections = StoreConfig.getInstance(config).getCollections();
 		while(collections.hasNext()){
 			DaoCollection collection = collections.next();
-			BaseDao dao = getDBStore(config,collection.getName());
+			BaseDao dao = getDao(config,collection.getName());
 			this.save(collection,dao,datum.getMetadata(),prepareData);
 		}
 	}
@@ -85,8 +79,8 @@ public class SenseStorer extends SdataStandardStorer {
 		if(sc == null){
 			return false;
 		}
-		HBaseDaoWithRawIndex dbStore = (HBaseDaoWithRawIndex)super.getDBStore(conf,sc.getName());
-		return	dbStore.getHbaseGenID().isExists(datum.getId(),datum.getIndexColumn());
+		HBaseDaoWithRawIndex dbStore = (HBaseDaoWithRawIndex)super.getDao(conf,sc.getName());
+		return dbStore.getHbaseGenID().isExists(datum.getId(),datum.getIndexColumn());
 	}
 	
 	public DaoCollection getMainCollection(Configuration config) {

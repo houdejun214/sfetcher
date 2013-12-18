@@ -25,7 +25,7 @@ public class SenseStatisticStorer extends SenseStorer {
 		if(sc == null){
 			return false;
 		}
-		BaseDao dbStore = super.getDBStore(conf,sc.getName());
+		BaseDao dbStore = super.getDao(conf,sc.getName());
 		return dbStore.isExists(datum.getId());
 	}
 }

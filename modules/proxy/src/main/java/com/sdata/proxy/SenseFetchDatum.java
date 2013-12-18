@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.lakeside.core.utils.time.DateFormat;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.data.trans.FieldProcess;
+import com.sdata.core.data.trans.DataOptimizer;
 import com.sdata.proxy.item.SenseCrawlItem;
 
 /**
@@ -44,8 +44,8 @@ public class SenseFetchDatum extends FetchDatum {
 	}
 	
 	public boolean prepare(){
-		FieldProcess fieldProcess = new FieldProcess(SenseConfig.getConfig(item));
-		this.setMetadata(fieldProcess.fieldReduce(this.getMetadata()));
+		DataOptimizer dataOptimizer = new DataOptimizer(SenseConfig.getConfig(item));
+		this.setMetadata(dataOptimizer.optimize(this.getMetadata()));
 		if(super.getMetadata() == null){
 			return false;
 		}

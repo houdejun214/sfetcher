@@ -7,23 +7,19 @@ import com.framework.db.hbase.thrift.HBaseClient;
 import com.sdata.context.config.Configuration;
 import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.data.store.SdataStandardStorer;
+import com.sdata.core.data.store.SdataBaseStorer;
 import com.sdata.hot.HotConstants;
 
 /**
  * @author zhufb
  *
  */
-public class HotStorer extends SdataStandardStorer {
+public class HotStorer extends SdataBaseStorer {
 
 	private HBaseClient client;
 	private String tableName;
 	public HotStorer(Configuration conf, RunState state) {
 		super(conf, state);
-	}
-	
-	@Override
-	protected void init() {
 		this.tableName = super.getConf("hbase.table","senze");
 		this.client = HBaseClientFactoryBean.getObject(super.getConf());
 		this.client.createTable(tableName,Constants.HBASE_DEFAULT_COLUMN_FAMILY);
@@ -34,7 +30,7 @@ public class HotStorer extends SdataStandardStorer {
 	}
 
 	@Override
-	public void save(FetchDatum datum) throws Exception {
+	public void save(FetchDatum datum) {
 		Map<String, Object> metadata = datum.getMetadata();
 		Object rk = metadata.remove(HotConstants.ROWKEY);
 		client.save(tableName, rk, metadata);

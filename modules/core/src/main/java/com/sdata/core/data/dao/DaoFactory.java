@@ -24,6 +24,8 @@ public class DaoFactory {
 	private static Map<Configuration,Map<String,BaseDao>> daos = new HashMap<Configuration,Map<String,BaseDao>>();
 
 	/**
+	 * get daos with conf
+	 * 
 	 * @param conf
 	 * @return
 	 */

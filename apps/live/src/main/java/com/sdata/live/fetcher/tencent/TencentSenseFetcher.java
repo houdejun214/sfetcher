@@ -18,6 +18,7 @@ import com.sdata.core.FetchDispatch;
 import com.sdata.core.item.CrawlItemEnum;
 import com.sdata.core.parser.ParseResult;
 import com.sdata.proxy.SenseConfig;
+import com.sdata.proxy.SenseFactory;
 import com.sdata.proxy.SenseFetchDatum;
 import com.sdata.proxy.fetcher.SenseFetcher;
 import com.sdata.proxy.item.SenseCrawlItem;
@@ -96,7 +97,7 @@ public class TencentSenseFetcher extends SenseFetcher {
 	protected boolean end(ParseResult result,SenseCrawlItem item,TencentState state){
 		List<FetchDatum> list = result.getFetchList();
 		if(list !=null&&list.size()> 0){
-			SenseStorer senseStore = parser.getSenseStore(item);
+			SenseStorer senseStore = SenseFactory.getStorer(item.getCrawlerName());
 			String crawl = this.getConf("crawlName", "live");
 			if("live".equals(crawl)){
 				for(FetchDatum d:list){

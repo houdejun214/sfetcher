@@ -55,10 +55,6 @@ public class DataCrawl {
 		CrawlDB db = getCrawlDB(conf);
 		CrawlAppContext.db = db;
 		
-		//start crawl solr server controler
-//		String siteName = conf.get(Constants.SOURCE);
-//		IndexControler.init(IndexConfig.getSite(siteName));
-		
 		// load proxy list
 		if("true".equals(conf.get("UseProxy"))){
 			ProxyConfig.loadAndSetProxy(configs.getDefaultConf("ProxyFile"));

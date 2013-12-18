@@ -9,10 +9,9 @@ import java.util.Map;
 import com.framework.db.hbase.thrift.HBaseClient;
 import com.lakeside.core.utils.StringUtils;
 import com.sdata.context.config.Constants;
-import com.sdata.context.config.CrawlAppContext;
 import com.sdata.db.BaseDao;
+import com.sdata.db.ColumnFamily;
 import com.sdata.db.DaoCollection;
-import com.sdata.extension.statistic.Statistic;
 
 /**
  * @author zhufb
@@ -20,61 +19,69 @@ import com.sdata.extension.statistic.Statistic;
  */
 public class HBaseDao implements BaseDao {
 	
-	protected DaoCollection storeCollection ;
+	protected DaoCollection daoCollection ;
 	protected HBaseClient client;
-	protected Statistic statisStore;
+	protected String collectionName;
 	
-	public HBaseDao(HBaseClient client,DaoCollection storeCollection){
-		this.storeCollection = storeCollection;
+	public HBaseDao(HBaseClient client,DaoCollection daoCollection){
+		this.daoCollection = daoCollection;
 		this.client = client;
-		this.statisStore = new Statistic(CrawlAppContext.conf);
-		
+		this.collectionName = daoCollection.getName();
 		List<String> cfs = new ArrayList<String>();
 		cfs.add(com.framework.db.hbase.Constants.HBASE_DEFAULT_COLUMN_FAMILY);
-		for(ColumnFamily scf:storeCollection.getColflys()){
+		for(ColumnFamily scf:daoCollection.getColflys()){
 			cfs.add(scf.getName());
 		}
-		this.client.createTable(storeCollection.getName(),cfs.toArray(new String[cfs.size()]));
+		this.client.createTable(daoCollection.getName(),cfs.toArray(new String[cfs.size()]));
 	}
 
-	public void save(Map<String,Object> data){
+	/* 
+	 * save data if insert return 'true' else if update return 'false'
+	 * 
+	 * (non-Javadoc)
+	 * @see com.sdata.db.BaseDao#save(java.util.Map)
+	 */
+	public boolean save(Map<String,Object> data){
 		if(data == null){
-			return;
+			return false;
 		}
 		Object objectId = data.remove(Constants.OBJECT_ID);
 		if(objectId == null){
-			if(StringUtils.isEmpty(storeCollection.getPrimaryKey())){
+			if(StringUtils.isEmpty(daoCollection.getPrimaryKey())){
 				throw new RuntimeException("the property _id of object id is empty and no referce primaryKey!");
 			}
-			objectId = data.get(storeCollection.getPrimaryKey());
+			objectId = data.get(daoCollection.getPrimaryKey());
 		}
-		
 		if(objectId == null){
 			throw new RuntimeException("the map data row key is empty !");
 		}
-		
 		// remove field deal
 		this.removeFields(data);
-		
-		this.save(objectId,data);
+		return this.save(objectId,data);
 	}
 	
-	protected void save(Object _id ,Map<String,Object> data){
+	protected boolean save(Object _id ,Map<String,Object> data){
+		boolean insert = true;
 		// string to bytes for row key
 		if(isExists(_id)){
+			insert = false; 
 			data.remove(Constants.FETCH_TIME);
-		}else{
-			// increase
-			statisStore.increase(storeCollection.getName());
 		}
 		// save main data
 		Map<String, Map<String, Object>> multiColflyData = getMultiColflyData(data);
-		this.client.saveMultiFamily(storeCollection.getName(),_id, multiColflyData);
+		this.client.saveMultiFamily(daoCollection.getName(),_id, multiColflyData);
+		return insert;
 	}
 	
+	/**
+	 * multi column family data parse
+	 * 
+	 * @param data
+	 * @return
+	 */
 	protected Map<String,Map<String,Object>> getMultiColflyData(Map<String,Object> data){
 		Map<String,Map<String,Object>>  result = new HashMap<String, Map<String,Object>>();
-	    Iterator<ColumnFamily> iterator = storeCollection.getColflys().iterator();
+	    Iterator<ColumnFamily> iterator = daoCollection.getColflys().iterator();
 	    boolean needDCF = true;
 		while(iterator.hasNext()){
 			ColumnFamily next = iterator.next();
@@ -107,7 +114,7 @@ public class HBaseDao implements BaseDao {
 	}
 
 	protected void removeFields(Map<String,Object> data){
-		Iterator<String> iterator = storeCollection.getRemove().iterator();
+		Iterator<String> iterator = daoCollection.getRemove().iterator();
 		while(iterator.hasNext()){
 			String field = iterator.next();
 			data.remove(field);
@@ -121,7 +128,7 @@ public class HBaseDao implements BaseDao {
 	 * @return
 	 */
 	public boolean isExists(Object id){
-		return client.exists(storeCollection.getName(), id);
+		return client.exists(collectionName, id);
 	}
 	
 	/**
@@ -131,6 +138,6 @@ public class HBaseDao implements BaseDao {
 	 * @return
 	 */
 	public void delete(Object id){
-		client.delete(storeCollection.getName(), id);
+		client.delete(collectionName, id);
 	}
 }

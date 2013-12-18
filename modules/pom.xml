@@ -20,8 +20,6 @@
 		<module>context</module>
 		<module>extension</module>
 		<module>db</module>
-		<module>solr</module>
-		<module>elastic</module>
 		<module>core</module>
 		<module>common</module>
 		<module>proxy</module>

@@ -3,8 +3,6 @@ package com.sdata.db;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sdata.db.hbase.ColumnFamily;
-
 /**
  * @author zhufb
  *
@@ -15,7 +13,6 @@ public class DaoCollection {
 	protected String name;
 	protected String primaryKey;
 	protected String field;
-	protected String index;
 	protected String pkTable; 
 
 	protected List<ColumnFamily> colflys = new ArrayList<ColumnFamily>(); 
@@ -79,14 +76,6 @@ public class DaoCollection {
 
 	public void setField(String field) {
 		this.field = field;
-	}
-
-	public String getIndex() {
-		return index;
-	}
-
-	public void setIndex(String index) {
-		this.index = index;
 	}
 
 	public List<ColumnFamily> getColflys() {

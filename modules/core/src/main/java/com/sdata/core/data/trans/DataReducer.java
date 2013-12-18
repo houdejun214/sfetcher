@@ -23,18 +23,19 @@ import com.sdata.core.parser.html.field.datum.DatumField;
  * @author zhufb
  *
  */
-public class FieldTrans {
+public class DataReducer {
 	
 	private Configuration conf;
 	private DatumConfig dc;
 	private Map<String,Field> fieldMaps;
-	public FieldTrans(Configuration conf,DatumConfig dc,Map<String,Field> fieldMaps){
+	
+	public DataReducer(Configuration conf,DatumConfig dc,Map<String,Field> fieldMaps){
 		this.conf = conf;
 		this.dc = dc;
 		this.fieldMaps = fieldMaps;
 	}	
 
-	public Map<String,Object> transField(Map<String,Object> data){
+	public Map<String,Object> reduce(Map<String,Object> data){
 		if(fieldMaps == null||this.fieldMaps.size()<=0){
 			return data;
 		}

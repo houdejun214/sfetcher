@@ -56,10 +56,6 @@
 		</dependency>
 		<dependency>
 			<groupId>com.sdata</groupId>
-			<artifactId>sdatacrawler-solr</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sdata</groupId>
 			<artifactId>sdatacrawler-context</artifactId>
 		</dependency>
 		<dependency>
@@ -69,10 +65,6 @@
 		<dependency>
 			<groupId>com.sdata</groupId>
 			<artifactId>sdatacrawler-db</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sdata</groupId>
-			<artifactId>sdatacrawler-elastic</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.reflections</groupId>

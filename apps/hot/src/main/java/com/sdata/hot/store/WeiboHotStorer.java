@@ -7,13 +7,13 @@ import com.framework.db.hbase.thrift.HBaseClient;
 import com.sdata.context.config.Configuration;
 import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.data.store.SdataStandardStorer;
+import com.sdata.core.data.store.SdataBaseStorer;
 
 /**
  * @author zhufb
  *
  */
-public class WeiboHotStorer extends SdataStandardStorer {
+public class WeiboHotStorer extends SdataBaseStorer {
 
 	private HBaseClient client;
 	private String tweetTable;
@@ -21,10 +21,6 @@ public class WeiboHotStorer extends SdataStandardStorer {
 	private String retRelationTable;
 	public WeiboHotStorer(Configuration conf, RunState state) {
 		super(conf, state);
-	}
-	
-	@Override
-	protected void init() {
 		this.tweetTable = super.getConf("hbase.tweet.table","tweets");
 		this.userTable = super.getConf("hbase.user.table","users");
 		this.retRelationTable = super.getConf("hbase.retRelation.table","rets");
@@ -39,7 +35,7 @@ public class WeiboHotStorer extends SdataStandardStorer {
 	}
 
 	@Override
-	public void save(FetchDatum datum) throws Exception {
+	public void save(FetchDatum datum) {
 		Map<String, Object> metadata = datum.getMetadata();
 		Object user = metadata.remove("user");
 		if(user!=null&&user instanceof Map){

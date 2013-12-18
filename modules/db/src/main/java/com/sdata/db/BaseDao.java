@@ -11,7 +11,7 @@ public interface BaseDao {
 	/**
 	 * @param data
 	 */
-	public void save(Map<String,Object> data);
+	public boolean save(Map<String,Object> data);
 	
 	/**
 	 * exists

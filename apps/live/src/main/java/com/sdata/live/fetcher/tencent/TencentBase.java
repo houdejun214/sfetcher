@@ -71,7 +71,7 @@ public abstract class TencentBase{
 	}
 
 	protected boolean isValid(Document document){
-		return document !=null&&document.toString().indexOf("搜太多啦，服务器累得回火星了") < 0&&document.toString().indexOf("腾讯微博_你的心声")<0;
+		return document !=null&&document.toString().indexOf("搜太多啦，服务器累得回火星了") < 0&&document.toString().indexOf("login_div")<0;
 	}
 	
 	protected void refreshHeader(){
