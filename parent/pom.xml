@@ -61,7 +61,8 @@
 		<xml-apis.version>1.3.04</xml-apis.version>
 		<xerces.version>2.9.1</xerces.version>
 		<reflections.version>0.9.8</reflections.version>
-
+		<snacktory.version>1.2-SNAPSHOT</snacktory.version>
+	
 		<!-- Plugin的属性定义 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.7</jdk.version>
@@ -88,27 +89,12 @@
 			</dependency>
 			<dependency>
 				<groupId>com.sdata</groupId>
-				<artifactId>sdatacrawler-util</artifactId>
-				<version>${sdatacrawler.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sdata</groupId>
 				<artifactId>sdatacrawler-core</artifactId>
 				<version>${sdatacrawler.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.sdata</groupId>
-				<artifactId>sdatacrawler-solr</artifactId>
-				<version>${sdatacrawler.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sdata</groupId>
-				<artifactId>sdatacrawler-elastic</artifactId>
-				<version>${sdatacrawler.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sdata</groupId>
-				<artifactId>sdatacrawler-common</artifactId>
+				<artifactId>sdatacrawler-boot</artifactId>
 				<version>${sdatacrawler.version}</version>
 				<scope>compile</scope>
 				<exclusions>
@@ -135,7 +121,6 @@
 				<artifactId>framework-config</artifactId>
 				<version>${framework.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>com.framework</groupId>
 				<artifactId>framework-db-hbase</artifactId>
@@ -163,6 +148,17 @@
 				<artifactId>slf4j-api</artifactId>
 				<version>${slf4j.version}</version>
 			</dependency>
+			<dependency>
+		 		<groupId>de.jetwick</groupId>
+		 		<artifactId>snacktory</artifactId>
+		 		<version>${snacktory.version}</version>
+		 		<exclusions>
+		  			<exclusion>
+		  				<artifactId>slf4j-log4j12</artifactId>
+		  				<groupId>org.slf4j</groupId>
+		  			</exclusion>
+		  		</exclusions>
+		 	</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>jcl-over-slf4j</artifactId>

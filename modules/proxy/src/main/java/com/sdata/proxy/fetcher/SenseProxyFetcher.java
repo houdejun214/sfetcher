@@ -10,7 +10,7 @@ import com.sdata.core.FetchDispatch;
 import com.sdata.core.fetcher.SdataFetcher;
 import com.sdata.proxy.SenseFactory;
 import com.sdata.proxy.SenseFetchDatum;
-import com.sdata.proxy.SenseItemQueue;
+import com.sdata.proxy.CrawlItemQueue;
 import com.sdata.proxy.item.SenseCrawlItem;
 
 /**
@@ -20,7 +20,7 @@ import com.sdata.proxy.item.SenseCrawlItem;
 public abstract class SenseProxyFetcher extends SdataFetcher {
 	protected SenseCrawlItem item = null;
 	protected static Object syn = new Object();
-	private static SenseItemQueue crawlItemQueue;
+	private static CrawlItemQueue crawlItemQueue;
 
 	@Override
 	public void taskInitialize(){
@@ -33,7 +33,7 @@ public abstract class SenseProxyFetcher extends SdataFetcher {
 		}
 	}
 	
-	protected abstract SenseItemQueue initItemQueue();
+	protected abstract CrawlItemQueue initItemQueue();
 	
 	protected abstract SenseCrawlItem initItem(Map<String, Object> map);
 
@@ -103,20 +103,6 @@ public abstract class SenseProxyFetcher extends SdataFetcher {
 		return null;
 	}
 	
-//	private String getExceptionStr(Exception e){
-//		// email exception info
-//		StringWriter writer = new StringWriter();
-//		PrintWriter out = new PrintWriter(writer);
-//		e.printStackTrace(out);
-//		String result = writer.toString();
-//		try {
-//			writer.close();
-//			out.close();
-//		} catch (IOException e1) {
-//			
-//		}
-//		return result;
-//	}
 	protected void completeItem(SenseCrawlItem item){
 		 crawlItemQueue.complete(item);
 	}

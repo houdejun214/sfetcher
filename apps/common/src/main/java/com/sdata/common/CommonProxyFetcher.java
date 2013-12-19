@@ -1,4 +1,4 @@
-package com.sdata.live;
+package com.sdata.common;
 
 import java.util.Map;
 
@@ -12,19 +12,19 @@ import com.sdata.proxy.item.SenseCrawlItem;
  * @author zhufb
  *
  */
-public class LiveProxyFetcher extends SenseProxyFetcher {
+public class CommonProxyFetcher extends SenseProxyFetcher {
 
-	public LiveProxyFetcher(Configuration conf, RunState state) {
+	public CommonProxyFetcher(Configuration conf, RunState state) {
 		super(conf, state);
 	}
 
 	@Override
 	protected CrawlItemQueue initItemQueue() {
-		return new CrawlItemQueue(DBFactory.getItemDB());
+		return new CrawlItemQueue(CommonItemDB.getInstance());
 	}
 
 	@Override
 	protected SenseCrawlItem initItem(Map<String, Object> map) {
-		return new LiveItem(map);
+		return new CommonItem(map);
 	}
 }

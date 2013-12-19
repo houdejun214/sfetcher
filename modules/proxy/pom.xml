@@ -17,7 +17,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.sdata</groupId>
-			<artifactId>sdatacrawler-common</artifactId>
+			<artifactId>sdatacrawler-boot</artifactId>
 			<exclusions>
 				<exclusion>
 					<artifactId>sdatacrawler-solr</artifactId>

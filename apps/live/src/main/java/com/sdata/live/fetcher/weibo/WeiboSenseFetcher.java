@@ -1,15 +1,9 @@
 package com.sdata.live.fetcher.weibo;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import weibo4j.Weibo;
-import weibo4j.util.WeiboServer;
 
 import com.sdata.context.config.Configuration;
 import com.sdata.context.state.RunState;
@@ -19,7 +13,6 @@ import com.sdata.proxy.SenseConfig;
 import com.sdata.proxy.SenseFetchDatum;
 import com.sdata.proxy.fetcher.SenseFetcher;
 import com.sdata.proxy.item.SenseCrawlItem;
-import com.sdata.proxy.resource.Resources;
 
 /**
  * weibo sense fetcher implement

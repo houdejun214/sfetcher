@@ -17,6 +17,7 @@ import com.sdata.proxy.item.SenseCrawlItem;
 /**
  * 
  * Crawl item for crawler from SCMS
+ * 
  * @author zhufb
  *
  */
@@ -31,8 +32,9 @@ public class LiveItem extends SenseCrawlItem {
 		this.objectId = MapUtils.getLong(map, "object_id");
 		this.areas = MapUtils.getString(map,"areas");
 		
-		//Test end
-		this.init();
+		if(JSONUtils.isValidJSON(fields)){
+			fieldMap = JSONObject.fromObject(fields);
+		}
 	}
 	
 	protected String  fields;
@@ -42,12 +44,6 @@ public class LiveItem extends SenseCrawlItem {
 	
 	public Map<String, Object> getFields() {
 		return fieldMap;
-	}
-	
-	protected void init() {
-		if(JSONUtils.isValidJSON(fields)){
-			fieldMap = JSONObject.fromObject(fields);
-		}
 	}
 
 	public String parse(String charset){

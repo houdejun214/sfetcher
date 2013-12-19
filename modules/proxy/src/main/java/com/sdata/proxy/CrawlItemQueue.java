@@ -17,7 +17,7 @@ import com.sdata.core.item.CrawlItemDB;
  * @author zhufb
  *
  */
-public class SenseItemQueue {
+public class CrawlItemQueue {
 	
 	private BlockingQueue<Map<String,Object>> queue;
 	private boolean complete = false;
@@ -28,7 +28,7 @@ public class SenseItemQueue {
 	private final int WAIT_SECONDS = 5;
 	private int TOTAL_WAIT_SECONDS = 300;
 	
-	public SenseItemQueue(CrawlItemDB crawlItemDB){
+	public CrawlItemQueue(CrawlItemDB crawlItemDB){
 		this.crawlItemDB = crawlItemDB;
 		this.COUNT = CrawlAppContext.conf.getInt("crawler.item.queue.onetime.count", 20);
 		this.TOTAL_WAIT_SECONDS = CrawlAppContext.conf.getInt("crawler.queue.wait.timeout", 300);

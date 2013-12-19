@@ -18,6 +18,6 @@ public class SenseParentIdHandler implements IParserHandler {
 		}
 		Object entry = context.getVariable(Constants.DATA_TAGS_FROM_SOURCE);
 		Object objectId = context.getVariable(Constants.DATA_TAGS_FROM_OBJECT_ID);
-		return IDBuilder.build(StringUtils.valueOf(entry), (Long)objectId, StringUtils.valueOf(data));
+		return IDBuilder.build((Long)objectId, StringUtils.valueOf(entry), StringUtils.valueOf(data));
 	}
 }

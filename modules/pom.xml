@@ -18,10 +18,10 @@
 
 	<modules>
 		<module>context</module>
-		<module>extension</module>
 		<module>db</module>
+		<module>extension</module>
 		<module>core</module>
-		<module>common</module>
+		<module>boot</module>
 		<module>proxy</module>
 	</modules>
 

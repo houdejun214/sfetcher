@@ -18,16 +18,8 @@
 			<artifactId>framework-db-hbase</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.framework</groupId>
-			<artifactId>framework-db-mongo</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.sdata</groupId>
 			<artifactId>sdatacrawler-context</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sdata</groupId>
-			<artifactId>sdatacrawler-extension</artifactId>
 		</dependency>
 	</dependencies>
 	

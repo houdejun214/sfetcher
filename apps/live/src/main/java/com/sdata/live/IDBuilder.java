@@ -13,37 +13,37 @@ public class IDBuilder {
 
 	// with object id and origin id
 	public static byte[] build(SenseCrawlItem item,String id){
-		return build(item.getSourceName(),((LiveItem)item).getObjectId(),id);
+		return build(((LiveItem)item).getObjectId(),item.getSourceName(),id);
 	}
 	
 	/**
 	 * 规则：btyes(objectID[Long,8位])+btyes(source.hashcode[int,4位])+btyes(id.hashcode[int,4位])
-	 * 
-	 * @param source
 	 * @param objectId
+	 * @param source
 	 * @param id
+	 * 
 	 * @return
 	 */
-	public static byte[] build(String source,Long objectId,String id){
-		byte[] boid = Bytes.toBytes(objectId);
+	public static byte[] build(Long objectId,String source,String id){
+		byte[] boid = objectId == null?new byte[0]:Bytes.toBytes(objectId);
 		byte[] bs = Bytes.toBytes(source.hashCode());
 		byte[] bid = Bytes.toBytes(id.hashCode());
-		return  Bytes.add(boid, bs, bid);
+		return Bytes.add(boid, bs, bid);
 		
 	}
 	
 	/**
 	 * 规则：btyes(objectID[Long,8位])+btyes(source.hashcode[int,4位])+btyes(id.hashcode[int,4位])
-	 * 
-	 * @param source
 	 * @param objectId
+	 * @param source
 	 * @param id
+	 * 
 	 * @return
 	 */
-	public static byte[] build(Object source,Object objectId,Object id){
+	public static byte[] build(Object objectId,Object source,Object id){
+		Long oid = objectId == null?null:Long.valueOf(StringUtils.valueOf(objectId));
 		String strSource = StringUtils.valueOf(source);
-		Long oid = Long.valueOf(StringUtils.valueOf(objectId));
 		String strid = StringUtils.valueOf(id);
-		return build(strSource,oid,strid);
+		return build(oid,strSource,strid);
 	}
 }
