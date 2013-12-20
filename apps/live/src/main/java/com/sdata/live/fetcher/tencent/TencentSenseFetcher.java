@@ -102,7 +102,7 @@ public class TencentSenseFetcher extends SenseFetcher {
 			if("live".equals(crawl)){
 				for(FetchDatum d:list){
 					//碰到一条转发微博，且在数据库中存在了，则可停止。
-					Object opubTime = DateFormat.changeStrToDate(d.getMeta("timestamp"));
+					Object opubTime = DateFormat.strToDate(d.getMeta("timestamp"));
 					String retid = d.getMeta(Constants.TWEET_RETWEETED_ID);
 					if(opubTime!=null&&opubTime instanceof Date&&state.getEnd().after((Date)opubTime)&&state.getStart().before((Date)opubTime)&&!StringUtils.isEmpty(retid)){
 						return senseStore.isExists((SenseFetchDatum)d);

@@ -27,7 +27,7 @@ public class ParserAction {
 	}
 
 	public Object toDate(Object obj){
-		return DateFormat.changeStrToDate(obj);
+		return DateFormat.strToDate(obj);
 	}
 	
 	public Object toUUID(Object obj){

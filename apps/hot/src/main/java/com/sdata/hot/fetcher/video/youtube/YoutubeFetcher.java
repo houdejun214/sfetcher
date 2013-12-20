@@ -93,7 +93,7 @@ public class YoutubeFetcher extends HotVideoFetcher{
 				datum.addMetadata("title", title);
 				datum.addMetadata("content", contet);
 				datum.addMetadata("image", image);
-				datum.addMetadata("pub_time", DateFormat.changeStrToDate(pubDate));
+				datum.addMetadata("pub_time", DateFormat.strToDate(pubDate));
 				datum.addMetadata("uname", uname);
 				datum.addMetadata("views", views);
 				datum.addMetadata("head", head);

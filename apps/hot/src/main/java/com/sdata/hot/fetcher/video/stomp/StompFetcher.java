@@ -106,7 +106,7 @@ public class StompFetcher extends HotVideoFetcher {
 		String[] ets = extras.split("\\|");
 		if(ets.length>=1){
 			String pub = ets[0].replaceAll("Posted on", "").trim();
-			datum.addMetadata("pub_time", DateFormat.changeStrToDate(trim(pub)));
+			datum.addMetadata("pub_time", DateFormat.strToDate(trim(pub)));
 		}
 		if(ets.length>=2){
 			String views = ets[1].replaceAll("views", "").trim();

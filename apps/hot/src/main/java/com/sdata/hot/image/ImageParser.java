@@ -162,7 +162,7 @@ public class ImageParser extends SdataParser{
 					continue;
 				}
 //				byte[] rk = HotUtils.getRowkey(Hot.Image.getValue(), fetTime, i);
-				Object pubTime = DateFormat.changeStrToDate(json.get("created_time"));
+				Object pubTime = DateFormat.strToDate(json.get("created_time"));
 				datum.addMetadata("pub_time", pubTime);
 				JSONObject caption = json.getJSONObject("caption");
 				if(!caption.isNullObject()&&!StringUtils.isEmpty(caption.getString("text"))){

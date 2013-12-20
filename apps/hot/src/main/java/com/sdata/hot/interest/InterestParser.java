@@ -61,7 +61,7 @@ public class InterestParser extends SdataParser{
 				datum.addMetadata("title", title);
 				datum.addMetadata("content", contet);
 				datum.addMetadata("image", image);
-				datum.addMetadata("pub_time", DateFormat.changeStrToDate(pubDate));
+				datum.addMetadata("pub_time", DateFormat.strToDate(pubDate));
 				datum.setUrl(target.toString());
 				result.addFetchDatum(datum);
 			}

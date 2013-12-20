@@ -171,7 +171,7 @@ public class InstagramFetcher extends HotImageFetcher {
 				if(isHave(result,json)){
 					continue;
 				}
-				Object pubTime = DateFormat.changeStrToDate(json.get("created_time"));
+				Object pubTime = DateFormat.strToDate(json.get("created_time"));
 				datum.addMetadata(HotConstants.PUBLIC_TIME, pubTime);
 				JSONObject caption = json.getJSONObject("caption");
 				if(!caption.isNullObject()&&!StringUtils.isEmpty(caption.getString("text"))){

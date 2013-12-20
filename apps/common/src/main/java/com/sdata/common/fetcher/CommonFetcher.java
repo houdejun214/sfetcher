@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lakeside.core.utils.PatternUtils;
-import com.lakeside.core.utils.StringUtils;
+import com.lakeside.core.utils.UrlUtils;
 import com.sdata.common.CommonItem;
 import com.sdata.common.parser.CommonParser;
 import com.sdata.context.config.Configuration;
@@ -20,8 +20,6 @@ import com.sdata.proxy.SenseConfig;
 import com.sdata.proxy.SenseFetchDatum;
 import com.sdata.proxy.fetcher.SenseFetcher;
 import com.sdata.proxy.item.SenseCrawlItem;
-
-import de.jetwick.snacktory.JResult;
 
 /**
  *  common crawler for news,blog etc global site crawl 
@@ -95,9 +93,9 @@ public class CommonFetcher extends SenseFetcher {
 	protected List<String> filter(List<String> links,SenseCrawlItem item) {
 		List<String> list = new ArrayList<String>();
 		for(String link: links){
-			String trimLink = StringUtils.trim(link);
-			if(trimLink!=null&&!list.contains(trimLink)&&PatternUtils.matches(((CommonItem)item).getUrlPattern(), trimLink))
-				list.add(trimLink);
+			String url = UrlUtils.clean(link);
+			if(url!=null&&!list.contains(url)&&PatternUtils.matches(((CommonItem)item).getUrlPattern(), url))
+				list.add(url);
 		}
 		return list;
 	}

@@ -25,7 +25,7 @@ public class SenseFetchDatum extends FetchDatum {
 	}
 	
 	public boolean valid(){
-		Object opub = DateFormat.changeStrToDate(super.getMeta(Constants.PUB_TIME));
+		Object opub = DateFormat.strToDate(super.getMeta(Constants.PUB_TIME));
 		if(opub == null||!(opub instanceof Date)){
 			return false;
 		}

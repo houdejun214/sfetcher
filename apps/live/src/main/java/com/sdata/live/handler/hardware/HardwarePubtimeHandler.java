@@ -19,7 +19,7 @@ public class HardwarePubtimeHandler implements IParserHandler {
 			return null;
 		}
 		String date = data.toString().replace("Today", DateTimeUtils.format(new Date(), "dd-MM-yyyy")).trim();
-		return DateFormat.changeStrToDate(date);
+		return DateFormat.strToDate(date);
 	}
 
 }

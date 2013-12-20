@@ -4,7 +4,7 @@
 		  storer="com.sdata.proxy.store.SenseProxyStorer">
 	 	 <property>
 			<name>TaskInterval</name>
-			<value>60000</value>
+			<value>1800000</value>
 		</property>
 		<property>
 		  <name>MainCrawlThreadNum</name>
@@ -14,7 +14,6 @@
 			<name>FetchThreadNum</name>
 			<value>2</value>
 		</property>
-		
 		<!-- crawler item db info -->
 		<property>
 		  <name>next.crawler.item.host</name>

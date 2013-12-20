@@ -102,11 +102,11 @@ public abstract class SenseCrawlItem extends CrawlItem {
 		if(times.length!=2){
 			return;
 		}
-		Object st = DateFormat.changeStrToDate(times[0]);
+		Object st = DateFormat.strToDate(times[0]);
 		if(st!=null&&st instanceof Date){
 			start = (Date)st;
 		}
-		Object et = DateFormat.changeStrToDate(times[1]);
+		Object et = DateFormat.strToDate(times[1]);
 		if(et!=null&&et instanceof Date){
 			end = (Date)et;
 		}

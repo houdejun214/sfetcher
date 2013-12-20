@@ -1,9 +1,5 @@
 package com.sdata.common.parser;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.lakeside.core.utils.PatternUtils;
 import com.lakeside.core.utils.StringUtils;
 import com.sdata.common.CommonItem;
 import com.sdata.common.IDBuilder;

@@ -51,7 +51,7 @@ public class WeiboHotParser extends SdataParser{
 	public void parseList(FetchDispatch dispatch,JSONObject hotTweet) {
 		Long id = hotTweet.getLong("id");
 		String strPubTime = hotTweet.getString("created_at");
-		Date pubTime =(Date) DateFormat.changeStrToDate(strPubTime);
+		Date pubTime =(Date) DateFormat.strToDate(strPubTime);
 		Date maxTime =DateTimeUtils.add(pubTime, Calendar.MINUTE, minutes);
 		FetchDatum hotDatum = new FetchDatum();
 		
@@ -76,7 +76,7 @@ public class WeiboHotParser extends SdataParser{
 				}
 				String uid = MapUtils.getInterString(next, "user/id");
 				String retPub = next.getString("created_at");
-				Date retPubTime =(Date) DateFormat.changeStrToDate(retPub);
+				Date retPubTime =(Date) DateFormat.strToDate(retPub);
 				Long retPubLong = retPubTime.getTime();
 				// hot reltion
 				hotReltionMap.put(sid, uid.concat(",").concat(String.valueOf(retPubLong)));
