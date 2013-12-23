@@ -7,7 +7,8 @@ package com.sdata.common;
  */
 public enum CommonParamEnum  {
 	
-	URL_PATTERN("url_pattern");
+	URL_PATTERN("url_pattern"),
+	LEVEL_LIMIT("level_limit");
 	
 	private String name;
 	private CommonParamEnum(String name){

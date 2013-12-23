@@ -21,29 +21,19 @@ import com.sdata.core.parser.config.StrategyConfig;
  * @author zhufb
  *
  */
-public class CrawlQueue {
+public class CrawlLinkQueue {
+	
 	private BlockingQueue<Map<String,Object>> queue;
 	private CrawlDB crawlDB;
 	private DistributeLock crawlLock;
 	private final int COUNT = Constants.FETCH_COUNT; 
-	private static CrawlQueue crawlQueue;
 	private static Object syn = new Object(); 
 	private final int WAIT_SECONDS = 30;
 	private int TOTAL_WAIT_SECONDS = 300;
 	
-	public static CrawlQueue getInstance(){
-		if(crawlQueue == null){
-			synchronized (syn) {
-				if(crawlQueue == null)
-					crawlQueue=  new CrawlQueue();
-			}
-		}
-		return crawlQueue;
-	}
-	
-	private CrawlQueue(){
+	public CrawlLinkQueue(CrawlDB db){
 		this.queue = new LinkedBlockingQueue<Map<String,Object>>(COUNT*5);
-		this.crawlDB = CrawlAppContext.db;
+		this.crawlDB = db;
 		this.crawlLock = new DistributeLock(CrawlDBRedis.getRedisDB(CrawlAppContext.conf,"Crawl_Queue"));
 		this.crawlLock.setTimeout(WAIT_SECONDS);
 		this.TOTAL_WAIT_SECONDS = CrawlAppContext.conf.getInt("crawler.queue.wait.timeout", 300);
@@ -73,7 +63,7 @@ public class CrawlQueue {
 	
 	protected void check(){
 			if(size() == 0){
-				synchronized (this) {
+				synchronized (syn) {
 					// add queue in this site
 					int currentWaitSeconds = 0;
 					while(size()  == 0 && currentWaitSeconds<TOTAL_WAIT_SECONDS) {

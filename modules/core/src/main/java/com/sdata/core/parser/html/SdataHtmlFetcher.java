@@ -26,7 +26,7 @@ import com.sdata.core.parser.ParseResult;
  */
 public class SdataHtmlFetcher extends SdataFetcher{
 	private static final Logger log = LoggerFactory.getLogger("SdataCrawler.SdataHtmlFetcher");
-	protected static CrawlQueue crawlQueue = CrawlQueue.getInstance();
+	protected static CrawlLinkQueue crawlQueue = new CrawlLinkQueue(CrawlAppContext.db);
 	private static boolean complete = false;
 	private Map<String, Object> current = null;
 

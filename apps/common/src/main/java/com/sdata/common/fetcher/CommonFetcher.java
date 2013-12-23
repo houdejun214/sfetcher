@@ -1,5 +1,6 @@
 package com.sdata.common.fetcher;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,19 +8,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lakeside.core.utils.PatternUtils;
+import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.UrlUtils;
+import com.sdata.common.CommonDatum;
 import com.sdata.common.CommonItem;
-import com.sdata.common.parser.CommonParser;
+import com.sdata.common.IDBuilder;
+import com.sdata.common.queue.CommonLink;
+import com.sdata.common.queue.CommonLinkQueue;
+import com.sdata.common.queue.CommonQueueFactory;
 import com.sdata.context.config.Configuration;
+import com.sdata.context.config.Constants;
 import com.sdata.context.state.RunState;
-import com.sdata.core.FetchDatum;
 import com.sdata.core.FetchDispatch;
-import com.sdata.core.RawContent;
-import com.sdata.core.parser.ParseResult;
-import com.sdata.proxy.SenseConfig;
+import com.sdata.core.exception.NegligibleException;
 import com.sdata.proxy.SenseFetchDatum;
 import com.sdata.proxy.fetcher.SenseFetcher;
 import com.sdata.proxy.item.SenseCrawlItem;
+
+import de.jetwick.snacktory.HtmlFetcher;
+import de.jetwick.snacktory.JResult;
 
 /**
  *  common crawler for news,blog etc global site crawl 
@@ -34,7 +41,6 @@ public class CommonFetcher extends SenseFetcher {
 	
 	public CommonFetcher(Configuration conf, RunState state) {
 		super(conf, state);
-		this.parser = new CommonParser(conf,state);
 	}
 
 	/* (non-Javadoc)
@@ -42,67 +48,102 @@ public class CommonFetcher extends SenseFetcher {
 	 */
 	@Override
 	public void fetchDatumList(FetchDispatch fetchDispatch, SenseCrawlItem crawlItem) {
-		List<String> linkQueue = new ArrayList<String>();
-		linkQueue.add(((CommonItem)crawlItem).parse());
-		this.fetchLinks(fetchDispatch, crawlItem, linkQueue);
+		CommonItem commonItem = (CommonItem)crawlItem;
+		CommonLinkQueue linkQueue = CommonQueueFactory.getLinkQueue(commonItem);
+		String init = crawlItem.parse();
+		linkQueue.add(init, Constants.QUEUE_LEVEL_ROOT);
+		this.dispatchLinkQueue(fetchDispatch, commonItem, linkQueue);
+		linkQueue.clear();
+		log.warn("fetch list complete :"+ init);
 	}
 	
 	/**
-	 * fetch link list 
+	 * dispatch link queue
 	 * 
 	 * @param fetchDispatch
-	 * @param item      
-	 * @param links          first link list to fetch
+	 * @param item
+	 * @param linkQueue links queue
 	 */
-	protected void fetchLinks(FetchDispatch fetchDispatch,SenseCrawlItem item,List<String> links){
-		Configuration conf = SenseConfig.getConfig(item);
-		int current = 0;
-		boolean end = false;
-		while(links.size() > current && !end){
-			String url = links.get(current);
-			log.warn("fetch common link:"+ url);
-			RawContent rc = new RawContent(url,null);
-			ParseResult result = parser.parseCrawlItem(conf,rc,item);
-			List<FetchDatum> fetchList = result.getFetchList();
-			// when fetch datum is not null ,category is null and else
-			if(fetchList!=null&&fetchList.size()>0){
-				end = this.end(result, item);
-				fetchDispatch.dispatch(fetchList);
-			}else{
-				this.mergeNoRepeat(links,filter(result.getCategoryList(),item));
+	protected void dispatchLinkQueue(FetchDispatch fetchDispatch,CommonItem item,CommonLinkQueue linkQueue){
+		while(!isComplete(item)){
+			try {
+				CommonLink clink = linkQueue.get();
+				if(clink == null){
+					continue;
+				}
+				CommonDatum datum = new CommonDatum();
+				String link = clink.getLink();
+				byte[] id = IDBuilder.build(item, link.hashCode());
+				datum.setUrl(link);
+				datum.setId(id);
+				datum.setLevel(clink.getLevel());
+				datum.setCrawlItem(item);
+				fetchDispatch.dispatch(datum);
+			} catch (InterruptedException e) {
+				continue;
 			}
-			current++;
 		}
 	}
 
-	protected void mergeNoRepeat(List<String> dest,List<String> src){
-		for(String s:src){
-			if(!dest.contains(s)){
-				dest.add(s);
-			}
+	@Override
+	public SenseFetchDatum fetchDatum(SenseFetchDatum datum){
+		CommonDatum cdatum = (CommonDatum)datum;
+		String url = datum.getUrl();
+		CommonItem citem = (CommonItem)datum.getCrawlItem();
+		if (StringUtils.isEmpty(url)) {
+			throw new NegligibleException("common datum url is null!");
 		}
+		// fetch and extract the url
+		JResult res = new HtmlFetcher().fetchAndExtract(url);
+		if(res == null){
+			return null;
+		}
+		// current 
+		else if(!res.isArticle()&&!isComplete(citem)) {
+			log.warn("this common link is one category:"+ url);
+			CommonLinkQueue linkQueue = CommonQueueFactory.getLinkQueue(citem);
+			int level = cdatum.getLevel() + 1;
+			linkQueue.add(filter(res.getLinks(),citem), level);
+			return null;
+		}
+		log.warn("this common link is one article:"+ url);
+		datum.addAllMetadata(res.toMap());
+		datum.addMetadata(com.sdata.proxy.Constants.DATA_ID,datum.getId());
+		return datum;
 	}
-	
+
+
 	/**
-	 * filte the links with url pattern
+	 * filter the links with url pattern
 	 * 
 	 * @param res
 	 * @param item
 	 * @return
 	 */
-	protected List<String> filter(List<String> links,SenseCrawlItem item) {
+	protected List<String> filter(List<String> links,CommonItem item) {
 		List<String> list = new ArrayList<String>();
 		for(String link: links){
 			String url = UrlUtils.clean(link);
-			if(url!=null&&!list.contains(url)&&PatternUtils.matches(((CommonItem)item).getUrlPattern(), url))
-				list.add(url);
+			if(StringUtils.isEmpty(url)){
+				continue;
+			}
+			if(list.contains(url)){
+				continue;
+			}
+			try {
+				if(!item.getDomain().equals(UrlUtils.getDomainName(url))){
+					continue;
+				}
+			} catch (MalformedURLException e) {
+				continue;
+			}
+			String urlPattern = item.getUrlPattern();
+			if(!StringUtils.isEmpty(urlPattern)&&!PatternUtils.matches(urlPattern, url)){
+				continue;
+			}
+			list.add(url);
 		}
 		return list;
 	}
 	
-	@Override
-	public SenseFetchDatum fetchDatum(SenseFetchDatum datum){
-		return datum;
-	}
-
 }

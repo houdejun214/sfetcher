@@ -112,7 +112,7 @@ public class Constants {
     public static final String QUEUE_DISPOSE = "isdispose";
     public static final String QUEUE_STATUS = "status";
     //
-    public static final int QUEUE_DEPTH_ROOT = 0;
+    public static final int QUEUE_LEVEL_ROOT = 1;
     public static final String QUEUE_DEPTH_MAX = "crawlDepth";
     
     //user tweet info 

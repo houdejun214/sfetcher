@@ -12,7 +12,7 @@
 		</property>
 		<property>
 			<name>FetchThreadNum</name>
-			<value>2</value>
+			<value>20</value>
 		</property>
 		<!-- crawler item db info -->
 		<property>
@@ -59,7 +59,7 @@
 		</property>
 		<property>
 			<name>hbase.cluster.name</name>
-			<value>next-2</value>
+			<value>sense-hdp</value>
 		</property> 
 		
 		<!-- runstate db -redis -->
@@ -75,19 +75,17 @@
 			<name>RedisPassword</name>
 			<value>9561cdda0d17fd15cfb9cecf7f0d081c</value>
 		</property>
-		
 		<!-- use redis for Distribute Lock multi process -->
 		<property>
 			<name>crawler.item.redis.namespace</name>
 			<value>Common_Crawler_Item</value>
 		</property>
 		
-		<!-- define this crawler is increase or full -->
+		<!-- default level limit 3 -->
 		<property>
-			<name>crawler.increase</name>
-			<value>true</value>
+			<name>crawler.level.limit</name>
+			<value>3</value>
 		</property>
-		
 		<!-- 定义crawler queue wait timeout(s), default 20s at least 10s-->
 		<property>
 			<name>crawler.queue.wait.timeout</name>

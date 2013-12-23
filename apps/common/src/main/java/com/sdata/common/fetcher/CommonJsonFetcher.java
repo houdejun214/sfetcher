@@ -9,7 +9,11 @@ import org.slf4j.LoggerFactory;
 
 import com.lakeside.core.utils.MapUtils;
 import com.lakeside.core.utils.StringUtils;
+import com.sdata.common.CommonItem;
+import com.sdata.common.queue.CommonLinkQueue;
+import com.sdata.common.queue.CommonQueueFactory;
 import com.sdata.context.config.Configuration;
+import com.sdata.context.config.Constants;
 import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDispatch;
 import com.sdata.core.RawContent;
@@ -31,13 +35,14 @@ public class CommonJsonFetcher extends CommonFetcher{
 	
 	@Override
 	public void fetchDatumList(FetchDispatch fetchDispatch, SenseCrawlItem crawlItem) {
+		CommonItem commonItem = (CommonItem)crawlItem;
 		String url = crawlItem.parse();
 		log.warn("fetch common json link: "+url);
 		RawContent rc = super.getRawContent(url);
-		this.fetchJsonData(fetchDispatch, crawlItem, rc);
+		this.fetchJsonData(fetchDispatch, commonItem, rc);
 	}
 	
-	protected void fetchJsonData(FetchDispatch fetchDispatch,SenseCrawlItem crawlItem,RawContent rc){
+	protected void fetchJsonData(FetchDispatch fetchDispatch,CommonItem item,RawContent rc){
 		String content = rc.getContent();
 		if(StringUtils.isEmpty(content)){
 			throw new NegligibleException("common json content is empty, url "+ rc.getUrl());
@@ -48,6 +53,8 @@ public class CommonJsonFetcher extends CommonFetcher{
 		}
 		JSONObject json = JSONObject.fromObject(content);
 		List<String> links = MapUtils.getListPattern(json, HTTP_PATTERN);
-		super.fetchLinks(fetchDispatch, crawlItem, filter(links, crawlItem));
+		CommonLinkQueue linkQueue = CommonQueueFactory.getLinkQueue(item);
+		linkQueue.add(filter(links, item), Constants.QUEUE_LEVEL_ROOT);
+		super.dispatchLinkQueue(fetchDispatch, item, linkQueue);
 	}
 }
