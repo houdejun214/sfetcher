@@ -86,6 +86,12 @@
 			<name>crawler.level.limit</name>
 			<value>3</value>
 		</property>
+		
+		<!-- crawler increase -->
+		<property>
+			<name>crawler.increase</name>
+			<value>true</value>
+		</property>
 		<!-- 定义crawler queue wait timeout(s), default 20s at least 10s-->
 		<property>
 			<name>crawler.queue.wait.timeout</name>

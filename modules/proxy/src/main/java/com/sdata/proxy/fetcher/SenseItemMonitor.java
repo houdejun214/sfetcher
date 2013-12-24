@@ -3,6 +3,9 @@ package com.sdata.proxy.fetcher;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.sdata.proxy.item.SenseCrawlItem;
 
 /**
@@ -10,6 +13,8 @@ import com.sdata.proxy.item.SenseCrawlItem;
  *
  */
 public class SenseItemMonitor {
+	
+	protected static Logger log = LoggerFactory.getLogger("Sense.SenseItemMonitor");
 	
 	private static Map<Long,SenseFetcher> map = new ConcurrentHashMap<Long,SenseFetcher>();
 	
@@ -32,7 +37,7 @@ public class SenseItemMonitor {
 		if(map.containsKey(item.getId())){
 			SenseFetcher fetcher = map.get(item.getId());
 			if(fetcher!=null&&!fetcher.isComplete(item)){
-				System.out.println("notify item complete "+item.getId()+ ","+item.getParamStr());
+				log.warn("notify item complete "+item.getId()+ ","+item.getParamStr());
 				fetcher.complete(item);
 			}
 		}

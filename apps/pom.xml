@@ -16,10 +16,10 @@
 	</parent>
 
 	<modules>
-		<module>common</module>
 		<module>hot</module>
 		<module>future</module>
 		<module>live</module>
+		<module>common</module>
 	</modules>
 
 	<description>Sdatacrawler apps is advance crawler task of data crawler framework. </description>

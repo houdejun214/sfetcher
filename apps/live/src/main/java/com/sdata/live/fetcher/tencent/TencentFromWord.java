@@ -61,7 +61,7 @@ public class TencentFromWord extends TencentBase {
 				}
 				super.refreshHeader();
 			}
-			if(!StringUtils.isEmpty(document.select(".noresult").text())){
+			if(document == null||!StringUtils.isEmpty(document.select(".noresult").text())){
 				complete = true;
 				return tweetsList;
 			}

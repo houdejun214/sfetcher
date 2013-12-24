@@ -39,7 +39,7 @@
 							<artifactItems>
 								<artifactItem>
 									<groupId>com.sdata</groupId>
-									<artifactId>sdatacrawler-common</artifactId>
+									<artifactId>sdatacrawler-boot</artifactId>
 									<version>${sdatacrawler.version}</version>
 									<overWrite>true</overWrite>
 									<outputDirectory>${project.build.directory}/unpack-tmp</outputDirectory>
@@ -60,12 +60,12 @@
 							<artifactItems>
 								<artifactItem>
 									<groupId>com.sdata</groupId>
-									<artifactId>sdatacrawler-common</artifactId>
+									<artifactId>sdatacrawler-boot</artifactId>
 									<version>${sdatacrawler.version}</version>
-									<outputDirectory>${project.build.directory}/alternateLocation/sdatacrawler-common</outputDirectory>
+									<outputDirectory>${project.build.directory}/alternateLocation/sdatacrawler-boot</outputDirectory>
 								</artifactItem>
 							</artifactItems>
-							<destination>${project.build.directory}/generated-jars/sdatacrawler-common.jar</destination>
+							<destination>${project.build.directory}/generated-jars/sdatacrawler-boot.jar</destination>
 							<excludes>conf/**,sites/**,template/**,*.sh,*.bat</excludes>
 							<overWriteReleases>false</overWriteReleases>
 							<overWriteSnapshots>false</overWriteSnapshots>
@@ -74,7 +74,7 @@
 				</executions>
 			</plugin>
 
-			<!-- 重新生成sdatacrawler-common.jar 去掉不用的资源文件 -->
+			<!-- 重新生成sdatacrawler-boot.jar 去掉不用的资源文件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -86,8 +86,8 @@
 							<goal>jar</goal>
 						</goals>
 						<configuration>
-							<classesDirectory>${project.build.directory}/alternateLocation/sdatacrawler-common</classesDirectory>
-							<finalName>sdatacrawler-common</finalName>
+							<classesDirectory>${project.build.directory}/alternateLocation/sdatacrawler-boot</classesDirectory>
+							<finalName>sdatacrawler-boot</finalName>
 							<outputDirectory>${project.build.directory}</outputDirectory>
 						</configuration>
 					</execution>

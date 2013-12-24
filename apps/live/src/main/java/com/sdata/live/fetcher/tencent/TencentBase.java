@@ -38,7 +38,7 @@ public abstract class TencentBase{
 	protected String format = "json";
 	protected static  HBaseClient client;
 	protected OAuth oauth;
-	protected Map<String,String> header = new HashMap<String,String>();
+	protected static Map<String,String> header = new HashMap<String,String>();
 	protected static HttpPageLoader pageLoader = HttpPageLoader.getAdvancePageLoader();
 	
 	public static TencentBase getTencentSenseFrom(Configuration conf ,SenseCrawlItem item){
@@ -67,11 +67,14 @@ public abstract class TencentBase{
 	
 	public TencentBase(Configuration conf,OAuth v){
 		this.oauth = v;
-		refreshHeader();
+//		refreshHeader();
 	}
 
 	protected boolean isValid(Document document){
-		return document !=null&&document.toString().indexOf("搜太多啦，服务器累得回火星了") < 0&&document.toString().indexOf("login_div")<0;
+		if(document == null){
+			return true;
+		}
+		return document.toString().indexOf("搜太多啦，服务器累得回火星了") < 0&&document.toString().indexOf("login_div")<0;
 	}
 	
 	protected void refreshHeader(){

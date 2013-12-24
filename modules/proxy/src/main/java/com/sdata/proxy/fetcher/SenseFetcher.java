@@ -86,7 +86,7 @@ public abstract class SenseFetcher extends SdataFetcher {
 		SenseStorer senseStore = parser.getSenseStore(item);
 		
 		// for increase crawl if repeat stop 
-		boolean increase = this.getConfBoolean("crawl.increase", true);
+		boolean increase = this.getConfBoolean("crawler.increase", true);
 		if(increase){
 			return senseStore.isExists((SenseFetchDatum) list.get(list.size() - 1));
 		}

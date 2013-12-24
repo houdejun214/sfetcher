@@ -4,14 +4,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lakeside.core.utils.time.DateFormat;
 import com.lakeside.core.utils.time.DateTimeUtils;
 import com.sdata.context.config.Configuration;
-import com.sdata.context.config.Constants;
 import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.FetchDispatch;
@@ -80,7 +77,7 @@ public class TencentSenseFetcher extends SenseFetcher {
 		boolean complete = false;
 		while (!complete) {
 			List<FetchDatum> data = tencentFetcher.getList(crawlItem, state);
-			log.info("We has crawled tweets: "+ data.size() + ",param:" +crawlItem.getParamStr() + ",state :"+state);
+			log.info("We have crawled tweets: "+ data.size() + ",param:" +crawlItem.getParamStr() + ",state :"+state);
 			ParseResult result = new ParseResult();
 			result.setFetchList(data);
 			complete = tencentFetcher.isComplete();
@@ -98,16 +95,9 @@ public class TencentSenseFetcher extends SenseFetcher {
 		List<FetchDatum> list = result.getFetchList();
 		if(list !=null&&list.size()> 0){
 			SenseStorer senseStore = SenseFactory.getStorer(item.getCrawlerName());
-			String crawl = this.getConf("crawlName", "live");
-			if("live".equals(crawl)){
-				for(FetchDatum d:list){
-					//碰到一条转发微博，且在数据库中存在了，则可停止。
-					Object opubTime = DateFormat.strToDate(d.getMeta("timestamp"));
-					String retid = d.getMeta(Constants.TWEET_RETWEETED_ID);
-					if(opubTime!=null&&opubTime instanceof Date&&state.getEnd().after((Date)opubTime)&&state.getStart().before((Date)opubTime)&&!StringUtils.isEmpty(retid)){
-						return senseStore.isExists((SenseFetchDatum)d);
-					}
-				}
+			boolean increase = this.getConfBoolean("crawler.increase", true);
+			if(increase){
+				return senseStore.isExists((SenseFetchDatum)list.get(0));
 			}
 		}
 		return false;

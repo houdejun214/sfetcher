@@ -6,7 +6,6 @@
 	      <pattern>%date %level [%thread] %10logger [line:%line] %msg%n</pattern>
 	    </encoder>
     </appender>
-  
     <logger name="org.hibernate" level="WARN"/>
     <logger name="net.sf.json" level="OFF"/>
     <logger name="defaultBeanProcessing" level="WARN"/>
@@ -17,10 +16,10 @@
     <logger name="com.sdata.core.filter" level="INFO"/>
     <logger name="HBaseClient" level="DEBUG"/>
     <logger name="SdataCrawler" level="INFO"/>
-    .
     <logger name="com.almworks.sqlite4java" level="WARN"/>
     <logger name="Sense" level="INFO"/>
-    <root level="ERROR">
+    <logger name="Live" level="INFO"/>
+    <root level="WARN">
         <appender-ref ref="Console"/>
     </root>
 </configuration>
