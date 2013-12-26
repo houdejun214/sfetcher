@@ -121,7 +121,12 @@ public abstract class SenseCrawlItem extends CrawlItem {
 	}
 
 	public String toString(){
-		return SenseCrawlItem.class.getName();
+		StringBuffer sb = new StringBuffer();
+		sb.append(" id:").append(this.getId());
+		sb.append(" crawler:").append(this.getCrawlerName());
+		sb.append(" source:").append(this.getSourceName());
+		sb.append(" params:").append(this.getParamStr());
+		return sb.toString();
 	}
 	
 	public Map<String,Object> toMap() {

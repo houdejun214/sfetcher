@@ -40,7 +40,7 @@ public class SenseFacebookFetcher extends SenseFetcher{
 			log.warn("fetch datum list:"+ url);
 			RawContent rc = super.getRawContent(url);
 			ParseResult result = parser.parseCrawlItem(conf,rc,crawlItem);
-			end = end(result, crawlItem);
+			end = end(result.getFetchList(), crawlItem);
 			fetchDispatch.dispatch(result.getFetchList());
 			List<String> categoryList = result.getCategoryList();
 			if(categoryList!=null&&categoryList.size() >0){

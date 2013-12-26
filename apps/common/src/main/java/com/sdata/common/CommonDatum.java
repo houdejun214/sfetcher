@@ -20,9 +20,6 @@ public class CommonDatum extends SenseFetchDatum{
 	
 	@Override
 	public boolean valid(){
-//		if(!super.valid()){
-//			return false;
-//		}
 		// add level limit when current level >= level limit return false
 		CommonItem item = (CommonItem)this.getCrawlItem();
 		// when get datum level > level limit end

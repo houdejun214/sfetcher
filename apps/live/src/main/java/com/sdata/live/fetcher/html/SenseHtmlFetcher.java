@@ -43,7 +43,7 @@ public class SenseHtmlFetcher extends SenseFetcher{
 				log.warn("fetch datum list:"+url);
 				RawContent rc = super.getRawContent(url);
 				ParseResult result = parser.parseCrawlItem(conf,rc,crawlItem);
-				isEnd = this.end(result, crawlItem);
+				isEnd = this.end(result.getFetchList(), crawlItem);
 				fetchDispatch.dispatch(result.getFetchList());
 				this.mergeNoRepeat(categoryList,result.getCategoryList());
 				current++;

@@ -17,6 +17,7 @@
     <logger name="com.sdata.core.filter" level="INFO"/>
     <logger name="SdataCrawler" level="INFO"/>
     <logger name="com.almworks.sqlite4java" level="WARN"/>
+    <logger name="Sense" level="INFO"/>
     <logger name="Common" level="INFO"/>
     <root level="ERROR">
         <appender-ref ref="Console"/>

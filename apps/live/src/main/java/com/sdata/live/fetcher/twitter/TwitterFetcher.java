@@ -36,7 +36,7 @@ public class TwitterFetcher extends SenseFetcher {
 			log.warn("fetch datum list:"+url);
 			RawContent rc = this.getRawContent(url);
 			ParseResult result = parser.parseCrawlItem(conf, rc, crawlItem);
-			end = this.end(result, crawlItem);
+			end = this.end(result.getFetchList(), crawlItem);
 			fetchDispatch.dispatch(result.getFetchList());
 			String currentStatus = ((TwitterParser)parser).getCurrentStatus(rc);
 			if(StringUtils.isEmpty(currentStatus)){

@@ -15,8 +15,8 @@ import com.sdata.core.FetchDatum;
 import com.sdata.core.FetchDispatch;
 import com.sdata.core.RawContent;
 import com.sdata.core.fetcher.SdataFetcher;
-import com.sdata.core.parser.ParseResult;
 import com.sdata.proxy.SenseConfig;
+import com.sdata.proxy.SenseFactory;
 import com.sdata.proxy.SenseFetchDatum;
 import com.sdata.proxy.item.SenseCrawlItem;
 import com.sdata.proxy.parser.SenseParser;
@@ -71,24 +71,33 @@ public abstract class SenseFetcher extends SdataFetcher {
 	/**
 	 * check fetch datum list stop or no
 	 * 
-	 * @param result
+	 * @param list
 	 * @param item
 	 * @return
 	 */
-	protected boolean end(ParseResult result,SenseCrawlItem item){
-		if(isComplete(item)){
-			return true;
-		}
-		List<FetchDatum> list = result.getFetchList();
+	protected boolean end(List<FetchDatum> list,SenseCrawlItem item){
 		if(list == null||list.size() == 0){
 			return true;
 		}
-		SenseStorer senseStore = parser.getSenseStore(item);
-		
+		return this.end((SenseFetchDatum) list.get(list.size() - 1), item);
+	}
+	
+	/**
+	 * check fetch datum list stop or no
+	 * 
+	 * @param list
+	 * @param item
+	 * @return
+	 */
+	protected boolean end(SenseFetchDatum datum,SenseCrawlItem item){
+		if(isComplete(item)){
+			return true;
+		}
+		SenseStorer senseStore = SenseFactory.getStorer(StringUtils.valueOf(item.getId()));
 		// for increase crawl if repeat stop 
 		boolean increase = this.getConfBoolean("crawler.increase", true);
 		if(increase){
-			return senseStore.isExists((SenseFetchDatum) list.get(list.size() - 1));
+			return senseStore.isExists(datum);
 		}
 		return false;
 	}

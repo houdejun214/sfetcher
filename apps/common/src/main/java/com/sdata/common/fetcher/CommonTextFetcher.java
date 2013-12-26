@@ -29,7 +29,7 @@ public class CommonTextFetcher extends CommonJsonFetcher{
 	public void fetchDatumList(FetchDispatch fetchDispatch, SenseCrawlItem crawlItem) {
 		CommonItem commonItem = (CommonItem)crawlItem;
 		String url = commonItem.parse();
-		log.warn("fetch common text link: " + url);
+		log.info("fetch common text link: " + url);
 		RawContent rc = super.getRawContent(url);
 		String matchPattern = PatternUtils.getMatchPattern(REGEX, rc.getContent(), 1);
 		if(!StringUtils.isEmpty(matchPattern)){
