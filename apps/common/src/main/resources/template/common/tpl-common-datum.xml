@@ -17,7 +17,6 @@
 	<field name="images" from="images"></field>
 	<field name="video" from="video"></field>
 	
-	
 	<field name="keywords" from="keywords"></field>
 	<field name="desc" from="desc"></field>
 	<field name="links" from="links"></field>

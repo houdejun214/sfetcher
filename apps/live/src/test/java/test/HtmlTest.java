@@ -1,12 +1,19 @@
 package test;
 
+import java.util.Date;
+
 import org.junit.Test;
+
+import com.lakeside.core.utils.time.DateTimeUtils;
 
 
 public class HtmlTest {
 	
 	@Test
 	public void test() throws Exception {
+		Date date = new Date();
+		String format = DateTimeUtils.format(date, "yyyy-MM-dd-H");
+		System.out.println(format);
 		
 //		String cookie ="mb_reg_from=8; RK=W0CmIUS7Ma; wbilang_2091496801=zh_CN; wbilang_10000=zh_CN; verifysession=h02FhKziizktWe6iClZMx5Bsb6nfDYtM_Hsp2V9ntJkJimtCdK8tFZNaz8wxXdLmboiKjfUiSsbbkVtyVqrgFCGUg**; ptui_loginuin=2091496801; ptisp=os; ptcz=32dc3e2e6360536b0c009d6f9e810941969401be6653b8556bc959cab318205b; pt2gguin=o2091496801; uin=o2091496801; skey=@bWHrL6xjW; p_uin=o2091496801; p_skey=S5RZyAiq*nnlnFQxO0NQuI1leb2OPsXQmHpGVH0YK9Q_; pt4_token=S77envOeyzbp34q8buTAqg__; pgv_info=ssid=s390766216; ts_refer=ui.ptlogin2.qq.com/cgi-bin/login%3Fappid%3D46000101%26style%3D13%26lang%3D%26low_login%3D1%26hide_title_bar%3D1%26hide_close_icon%3D1%26self_regurl%3Dhttp%253; pgv_pvid=1345006017; o_cookie=2091496801; ts_uid=4556937966; wb_regf=%3B0%3B%3Bmessage.t.qq.com%3B0";
 //		String cookie = Tencent.getCookie("2091496801","lmsnext");

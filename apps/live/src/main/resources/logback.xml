@@ -9,17 +9,14 @@
     <logger name="org.hibernate" level="WARN"/>
     <logger name="net.sf.json" level="OFF"/>
     <logger name="defaultBeanProcessing" level="WARN"/>
-    <logger name="twitter4j" level="WARN"/>
-    <logger name="weibo4j" level="WARN"/>
     <logger name="net.sf.json.JSONObject defaultBeanProcessing" level="none"/>
     <logger name="com.tencent.weibo" level="WARN"/>
     <logger name="com.sdata.core.filter" level="INFO"/>
-    <logger name="HBaseClient" level="DEBUG"/>
     <logger name="SdataCrawler" level="INFO"/>
     <logger name="com.almworks.sqlite4java" level="WARN"/>
     <logger name="Sense" level="INFO"/>
     <logger name="Live" level="INFO"/>
-    <root level="WARN">
+    <root level="ERROR">
         <appender-ref ref="Console"/>
     </root>
 </configuration>

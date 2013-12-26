@@ -17,16 +17,20 @@ import com.lakeside.core.utils.StringUtils;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.exception.NegligibleException;
 import com.sdata.core.item.CrawlItemEnum;
+import com.sdata.live.state.LiveState;
 import com.sdata.proxy.SenseFetchDatum;
 import com.sdata.proxy.item.SenseCrawlItem;
 
-public class WeiboSenseFromUser extends WeiboSenseFrom {
-	private int TIMES = 3;
-	public WeiboSenseFromUser(){
-		
-	}
+/**
+ * @author zhufb
+ *
+ */
+public class LiveWeiboFromUser extends LiveWeiboBase {
 	
-	public List<FetchDatum> getData(SenseCrawlItem item) {
+	private int TIMES = 3;
+	
+	@Override
+	public List<FetchDatum> getList(SenseCrawlItem item, LiveState state) {
 		String from = StringUtils.valueOf(item.getParam(CrawlItemEnum.ACCOUNT.getName()));
 		if(StringUtils.isEmpty(from)){
 			return null;
@@ -69,12 +73,10 @@ public class WeiboSenseFromUser extends WeiboSenseFrom {
 				if(time++>TIMES){
 					throw new NegligibleException("fetchTweetsByUserId  error times >:"+TIMES + e.getMessage(),e);
 				}
-				sleep(60*10);
 		  }
 		}
 	}
 		
-	
 	/**
 	 * Parse json data to datum 
 	 * @param JSONObject json
@@ -103,6 +105,17 @@ public class WeiboSenseFromUser extends WeiboSenseFrom {
 	@Override
 	public SenseFetchDatum getDatum(SenseFetchDatum datum) {
 		return datum;
+	}
+
+	@Override
+	public void next(LiveState state) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isComplete() {
+		return false;
 	}
 	
 }

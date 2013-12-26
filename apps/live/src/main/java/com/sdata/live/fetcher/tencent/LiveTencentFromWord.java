@@ -17,49 +17,59 @@ import com.sdata.core.item.CrawlItemEnum;
 import com.sdata.core.parser.ParseResult;
 import com.sdata.core.parser.html.util.DocumentUtils;
 import com.sdata.core.util.JsoupUtils;
+import com.sdata.live.state.LiveState;
 import com.sdata.proxy.SenseFetchDatum;
 import com.sdata.proxy.item.SenseCrawlItem;
 import com.tencent.weibo.api.TAPI;
 import com.tencent.weibo.api.UserAPI;
-import com.tencent.weibo.beans.OAuth;
 import com.tencent.weibo.constants.OAuthConstants;
 
 /**
  * @author zhufb
  *
  */
-public class TencentFromWord extends TencentBase {
+public class LiveTencentFromWord extends LiveTencentBase {
 	
 	private TAPI tAPI;
 	private UserAPI userAPI;
-	private TencentJsonParser parser;
+	private LiveTencentParser parser;
 	private boolean complete = false;
 	//SearchUrl
     private String searchUrl = "http://search.t.qq.com/index.php?k={0}&s_time={1}%2C{2}&s_advanced=1&s_m_type=1&p={3}";
 
-	public TencentFromWord(Configuration conf,OAuth oauth){
-		super(conf,oauth);
+    private int maxPage;
+	public LiveTencentFromWord(Configuration conf){
 		this.tAPI = new TAPI(OAuthConstants.OAUTH_VERSION_1);
 		this.userAPI = new UserAPI(OAuthConstants.OAUTH_VERSION_1);
-		this.parser = new TencentJsonParser();
+		this.parser = new LiveTencentParser();
+		this.maxPage = conf.getInt("live.tencent.maxpage", 50);
 	}
 	
 	@Override
-	public List<FetchDatum> getList(SenseCrawlItem item,TencentState state) {
+	public List<FetchDatum> getList(SenseCrawlItem item,LiveState state) {
 		this.complete = false;
 		List<FetchDatum> tweetsList = new ArrayList<FetchDatum>();
 		String keyword =  StringUtils.valueOf(item.getParam(CrawlItemEnum.KEYWORD.getName()));
 		String starttime =DateTimeUtils.format(state.getStart(), "yyyyMMddHHmmss");// this.getUnixTime(state.getStart());
 		String endtime = DateTimeUtils.format(state.getEnd(), "yyyyMMddHHmmss");//this.getUnixTime(state.getEnd());
+		int page = state.getPage();
 		try {
-			String url = MessageFormat.format(searchUrl,keyword,starttime,endtime,state.getPage());
+			if(page > maxPage){
+				complete = true;
+				return tweetsList;
+			}
+			
+			String url = MessageFormat.format(searchUrl,keyword,starttime,endtime,page);
 			Document document = null;
 			while(true){
 				document = DocumentUtils.getDocument(url, header);
-				if(isValid(document)){
+				if(document == null){
 					break;
 				}
-				super.refreshHeader();
+				if(isValid(document.toString())){
+					break;
+				}
+				super.refreshResource();
 			}
 			if(document == null||!StringUtils.isEmpty(document.select(".noresult").text())){
 				complete = true;
@@ -109,7 +119,7 @@ public class TencentFromWord extends TencentBase {
 	}
 
 	@Override
-	public void next(TencentState state) {
+	public void next(LiveState state) {
 		state.setPage(state.getPage()+1);
 	}
 

@@ -1,4 +1,4 @@
-package com.sdata.live.fetcher.tencent;
+package com.sdata.live.state;
 
 import java.util.Date;
 
@@ -8,21 +8,21 @@ import org.apache.commons.lang.StringUtils;
  * @author zhufb
  *
  */
-public class TencentState {
+public class LiveState {
 
-	public TencentState(){
+	public LiveState(){
 		
 	}
-	public TencentState(int page){
+	public LiveState(int page){
 		this.page = page;
 	}
 
-	public TencentState(Date start,Date end){
+	public LiveState(Date start,Date end){
 		this.start = start;
 		this.end = end;
 	}
 	
-	public TencentState(int page,Date start,Date end){
+	public LiveState(int page,Date start,Date end){
 		this.page= page;
 		this.start = start;
 		this.end = end;

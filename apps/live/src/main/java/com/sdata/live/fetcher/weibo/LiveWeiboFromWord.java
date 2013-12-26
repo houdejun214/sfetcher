@@ -1,12 +1,11 @@
 package com.sdata.live.fetcher.weibo;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.jsoup.nodes.Document;
 
 import weibo4j.Timeline;
 import weibo4j.model.WeiboException;
@@ -15,12 +14,12 @@ import com.lakeside.core.utils.JSONUtils;
 import com.lakeside.core.utils.PatternUtils;
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.UrlUtils;
+import com.lakeside.core.utils.time.DateTimeUtils;
 import com.lakeside.download.http.HttpPage;
-import com.lakeside.download.http.HttpPageLoader;
 import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.item.CrawlItemEnum;
-import com.sdata.core.parser.html.util.DocumentUtils;
+import com.sdata.live.state.LiveState;
 import com.sdata.proxy.SenseFetchDatum;
 import com.sdata.proxy.item.SenseCrawlItem;
 
@@ -28,27 +27,45 @@ import com.sdata.proxy.item.SenseCrawlItem;
  * @author zhufb
  *
  */
-public class WeiboSenseFromWord extends WeiboSenseFrom {
-	private final String search = "http://s.weibo.com/weibo/%s&xsort=time&page=%d";
+public class LiveWeiboFromWord extends LiveWeiboBase {
+	//http://s.weibo.com/wb/keywod&xsort=time&scope=ori&timescope=custom:2013-12-17-0:2013-12-17-1&Refer=g
+	private final String search = "http://s.weibo.com/weibo/{0}&xsort=time&scope=ori&timescope=custom:{1}:{2}&page={3}";
 	private Timeline tm = new Timeline() ;
 	private int maxPage ;
-	public WeiboSenseFromWord(Configuration conf){
-		this.maxPage = conf.getInt("sense.weibo.html.maxpage", 50);
+	private boolean complete = false; // this time range is complete or not 
+	
+	public LiveWeiboFromWord(Configuration conf){
+		this.maxPage = conf.getInt("live.weibo.maxpage", 50);
 	}
 	
-	public List<FetchDatum> getData(SenseCrawlItem item) {
+	@Override
+	public List<FetchDatum> getList(SenseCrawlItem item, LiveState state) {
+		complete = false;
 		List<FetchDatum> result = new ArrayList<FetchDatum>();
-		String from = StringUtils.valueOf(item.getParam(CrawlItemEnum.KEYWORD.getName()));
-		if(StringUtils.isEmpty(from)){
+		String keyword =  StringUtils.valueOf(item.getParam(CrawlItemEnum.KEYWORD.getName()));
+		String starttime =DateTimeUtils.format(state.getStart(), "yyyy-MM-dd-H");// this.getUnixTime(state.getStart());
+		String endtime = DateTimeUtils.format(state.getEnd(), "yyyy-MM-dd-H");//this.getUnixTime(state.getEnd());
+		int page = state.getPage();
+		if(StringUtils.isEmpty(keyword)){
+			complete = true;
 			return result;
 		}
+		if(page > maxPage){
+			complete = true;
+			return result;
+		}
+		keyword = UrlUtils.encode(keyword);
 		List<String> ids = new ArrayList<String>();
-		for(int page = 1;page <=maxPage;page++){
-			String url = String.format(search, UrlUtils.encode(from),page);
-			boolean have = getStatusIds(ids,fetchPage(url));
-			if(!have){
-				break;
-			}
+		String url = MessageFormat.format(search,keyword ,starttime,endtime,page);
+		String fetchPage = fetchPage(url);
+		if(StringUtils.isEmpty(fetchPage)||fetchPage.contains("noresult_tit")){
+			complete = true;
+			return result;
+		}
+		boolean have = getStatusIds(ids,fetchPage);
+		if(!have){
+			complete = true;
+			return result;
 		}
 		result.addAll(this.parseDatum(ids, item));
 		return result;
@@ -61,7 +78,7 @@ public class WeiboSenseFromWord extends WeiboSenseFrom {
 			if(isValid(contentHtml)){
 				return contentHtml;
 			}
-			super.refreshHeader();
+			super.refreshResource();
 		}
 	}
 	
@@ -109,7 +126,19 @@ public class WeiboSenseFromWord extends WeiboSenseFrom {
 			datum.setUrl(tweetUrl);
 			return datum;
 		}catch(WeiboException e){
+			
 		}
 		return null;
 	}
+
+	@Override
+	public void next(LiveState state) {
+		state.setPage(state.getPage()+1);
+	}
+
+	@Override
+	public boolean isComplete() {
+		return complete;
+	}
+
 }

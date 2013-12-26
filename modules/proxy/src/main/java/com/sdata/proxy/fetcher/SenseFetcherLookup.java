@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javassist.Modifier;
+
 import com.lakeside.core.utils.ClassUtils;
 
 /**
@@ -22,8 +24,10 @@ public class SenseFetcherLookup {
 				if(fetcherMap.size() ==0){
 					Set<Class<? extends SenseFetcher>> subClass = ClassUtils.getSubClass(SenseFetcher.class, "com.sdata");
 					for(Class<? extends SenseFetcher> sub:subClass){
-						String fid = getFID(sub); 
-						fetcherMap.put(fid,sub);
+						if(!Modifier.isAbstract(sub.getModifiers())){
+							String fid = getFID(sub); 
+							fetcherMap.put(fid,sub);
+						}
 					}
 				}
 			}

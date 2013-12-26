@@ -10,32 +10,30 @@ import com.sdata.core.FetchDatum;
 import com.sdata.core.RawContent;
 import com.sdata.core.item.CrawlItemEnum;
 import com.sdata.core.parser.ParseResult;
+import com.sdata.live.state.LiveState;
 import com.sdata.proxy.SenseFetchDatum;
 import com.sdata.proxy.item.SenseCrawlItem;
 import com.tencent.weibo.api.StatusesAPI;
 import com.tencent.weibo.api.UserAPI;
-import com.tencent.weibo.beans.OAuth;
 import com.tencent.weibo.constants.OAuthConstants;
 
-public class TencentFromUser extends TencentBase {
+public class LiveTencentFromUser extends LiveTencentBase {
 
 	private StatusesAPI statusesAPI;
 	private UserAPI userAPI;
 	private String pagesize = "30"; 
-	private TencentJsonParser parser;
+	private LiveTencentParser parser;
 	private boolean complete;
 	
-	public TencentFromUser(Configuration conf,OAuth oauth){
-		super(conf,oauth);
+	public LiveTencentFromUser(Configuration conf){
 		this.statusesAPI = new StatusesAPI(OAuthConstants.OAUTH_VERSION_1);
 		this.userAPI = new UserAPI(OAuthConstants.OAUTH_VERSION_1);
-		this.oauth = oauth;
-		this.parser = new TencentJsonParser();
+		this.parser = new LiveTencentParser();
 		complete = false;
 	}
 	
 	@Override
-	public List<FetchDatum> getList(SenseCrawlItem item,TencentState state) {
+	public List<FetchDatum> getList(SenseCrawlItem item,LiveState state) {
 		this.complete = false;
 		List<FetchDatum> tweetsList = new ArrayList<FetchDatum>();
 		String lastid = "0";
@@ -97,7 +95,7 @@ public class TencentFromUser extends TencentBase {
 	}
 
 	@Override
-	public void next(TencentState state) {
+	public void next(LiveState state) {
 		//nothing to do
 		
 	}

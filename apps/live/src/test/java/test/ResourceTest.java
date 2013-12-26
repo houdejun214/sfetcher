@@ -2,13 +2,8 @@ package test;
 
 import org.junit.Test;
 
-import com.sdata.conf.sites.CrawlConfig;
-import com.sdata.conf.sites.CrawlConfigManager;
-import com.sdata.context.config.Configuration;
-import com.sdata.context.config.CrawlAppContext;
 import com.sdata.core.resource.Resource;
 import com.sdata.core.resource.ResourceFactory;
-import com.sdata.live.DBFactory;
 import com.sdata.proxy.resource.TencentResource;
 
 

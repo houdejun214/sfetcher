@@ -56,11 +56,11 @@
 		</property>
 		<property>
 		  <name>hbase.namespace</name>
-		  <value>ls</value>
+		  <value>live</value>
 		</property>
 		<property>
 			<name>hbase.cluster.name</name>
-			<value>next-2</value>
+			<value>sense-hdp</value>
 		</property> 
 		
 		<!-- runstate db -redis -->

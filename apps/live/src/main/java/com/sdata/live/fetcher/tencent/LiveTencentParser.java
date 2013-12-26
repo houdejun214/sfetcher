@@ -21,7 +21,7 @@ import com.sdata.proxy.item.SenseCrawlItem;
  * @author zhufb
  *
  */
-public class TencentJsonParser {
+public class LiveTencentParser {
 	
 	private final String baseUrl = "http://t.qq.com/p/t/";
 	private final String userBaseUrl = "http://t.qq.com/";
