@@ -12,8 +12,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class CommonLinkQueue{
 	
+	private int DefaultMaxSize = 5000;
+	private int DefaultWaiting = 2;
 	private BlockingQueue<CommonLink> queue;
 	private HashSet<CommonLink> set = new HashSet<CommonLink>();
+	private Boolean empty = false;
 	
 	public CommonLinkQueue(){
 		this.queue = new LinkedBlockingQueue<CommonLink>();
@@ -22,8 +25,22 @@ public class CommonLinkQueue{
 	public void add(String link,int level){
 		CommonLink clink = new CommonLink(link,level);
 		if(!set.contains(clink)){
-			this.queue.add(clink);
-			this.set.add(clink);
+			if(size() > DefaultMaxSize){
+				this.await(DefaultWaiting);
+			}
+			synchronized(empty){
+				if(!empty){
+					this.queue.offer(clink);
+					this.set.add(clink);
+				}
+			}
+		}
+	}
+	
+	private void await(long time) {
+		try {
+			Thread.sleep(time*1000);
+		} catch (InterruptedException e) {
 		}
 	}
 	
@@ -34,7 +51,7 @@ public class CommonLinkQueue{
 	}
 	
 	public CommonLink get() throws InterruptedException{
-		return queue.poll(2, TimeUnit.SECONDS);
+		return queue.poll(DefaultWaiting, TimeUnit.SECONDS);
 	}
 	
 	public int size(){
@@ -42,7 +59,10 @@ public class CommonLinkQueue{
 	}
 	
 	public void clear(){
-		this.set.clear();
-		this.queue.clear();
+		synchronized(empty){
+			this.set.clear();
+			this.queue.clear();
+			empty = true;
+		}
 	}
 }

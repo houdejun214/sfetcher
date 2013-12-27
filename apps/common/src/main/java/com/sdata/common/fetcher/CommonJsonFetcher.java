@@ -12,6 +12,8 @@ import com.lakeside.core.utils.StringUtils;
 import com.sdata.common.CommonDatum;
 import com.sdata.common.CommonItem;
 import com.sdata.common.queue.CommonLink;
+import com.sdata.common.queue.CommonLinkQueue;
+import com.sdata.common.queue.CommonQueueFactory;
 import com.sdata.context.config.Configuration;
 import com.sdata.context.config.Constants;
 import com.sdata.context.state.RunState;
@@ -63,15 +65,20 @@ public class CommonJsonFetcher extends CommonFetcher{
 		}
 		JSONObject json = JSONObject.fromObject(content);
 		List<String> links = MapUtils.getListPattern(json, HTTP_PATTERN);
+		CommonLinkQueue linkQueue = CommonQueueFactory.getLinkQueue(item);
 		List<String> list = filter(links, item);
-		boolean end = false;
-		for(int i=0; !end && i<list.size(); i++){
-			String link = list.get(i);
-			CommonLink clink = new CommonLink(link,Constants.QUEUE_LEVEL_ROOT);
-			CommonDatum datum = super.ComLinkToDatum(item, clink);
-			end = super.end(datum, item);
-			fetchDispatch.dispatch(datum);
+		linkQueue.add(list, Constants.QUEUE_LEVEL_ROOT);
+		try {
+			boolean end = false;
+			for(CommonLink clink = linkQueue.get(); !end && clink!=null;clink = linkQueue.get()){
+				CommonDatum datum = super.ComLinkToDatum(item, clink);
+				end = super.end(datum, item);
+				fetchDispatch.dispatch(datum);
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+		CommonQueueFactory.destory(item);
 	}
 	
 	@Override

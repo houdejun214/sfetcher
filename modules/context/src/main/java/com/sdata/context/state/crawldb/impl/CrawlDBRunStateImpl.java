@@ -46,21 +46,4 @@ public class CrawlDBRunStateImpl implements CrawlDBRunState {
 	public Boolean updateRunState(final String key,final String val){
 		return db.hset(crawlName, key, val);
 	}
-
-	/**
-	 * If the field already exists, 0 is returned, otherwise if a new
-     * field is created 1 is returned.
-     *  use to db lock
-	 * @param key
-	 * @return
-	 */
-	public Boolean lock(){
-		long lock = db.hsetnx(crawlName, CrawlLock);
-		return lock == 1;
-	}
-
-	public Boolean unlock(){
-		long unlock = db.hdel(crawlName, CrawlLock);
-		return unlock == 1;
-	}
 }

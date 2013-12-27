@@ -63,14 +63,17 @@ public class CommonFetcher extends SenseFetcher {
 		while (!isComplete(item)) {
 			try {
 				CommonLink clink = linkQueue.get();
+				if(clink == null){
+					continue;
+				}
 				CommonDatum comLnkToDatum = this.ComLinkToDatum(item, clink);
 				fetchDispatch.dispatch(comLnkToDatum);
 			}catch(InterruptedException e) {
-				
+				e.printStackTrace();
 			}
 		}
-		linkQueue.clear();
-		log.warn(" item " + item.getId() + "completed and clear link queue!");
+		CommonQueueFactory.destory(item);
+		log.warn(" item " + item.getId() + " completed and clear link queue!");
 
 	}
 
@@ -84,7 +87,7 @@ public class CommonFetcher extends SenseFetcher {
 			CommonLink clink) {
 		CommonDatum datum = new CommonDatum();
 		if(clink == null){
-			return datum;
+			return null;
 		}
 		String link = clink.getLink();
 		byte[] id = IDBuilder.build(item, link.hashCode());

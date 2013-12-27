@@ -35,14 +35,6 @@ public class CrawlDBImpl implements CrawlDB{
 		return dbRunState.updateRunState(key, val);
 	}
 
-	public Boolean lock() {
-		return dbRunState.lock();
-	}
-
-	public Boolean unlock() {
-		return dbRunState.unlock();
-	}
-
 	
 	/*******************************************************/
 	/************* 下面是 CrawlDBQueue 接口实现************/

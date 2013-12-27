@@ -22,8 +22,4 @@ public interface CrawlDBRunState {
 	 */
 	public Boolean updateRunState(final String key,	final String val);
 	
-	public Boolean lock();
-	
-	public Boolean unlock();
-
 }

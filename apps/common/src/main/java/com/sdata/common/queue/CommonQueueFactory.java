@@ -32,4 +32,18 @@ public class CommonQueueFactory {
 		}
 		return map.get(item);
 	}
+	
+	public static boolean destory(CommonItem item){
+		boolean exitst = false;
+		if(map.containsKey(item)){
+			Lock lock = new ReentrantLock();
+			lock.lock();
+			if(map.containsKey(item)){
+				map.remove(item).clear();
+				exitst = true;
+			}
+			lock.unlock();
+		}
+		return exitst;
+	}
 }
