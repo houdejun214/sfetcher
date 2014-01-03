@@ -25,6 +25,7 @@
 	<field name="dtf_pv"></field>
 	<field name="dtf_pt"></field>
 	<field name="dtf_oid"></field>
+	<field name="dtf_t" ref="dtf_s"></field>
 	
 	<!-- others -->
 	<field name="head"  from="user/profile_image_url" ></field>

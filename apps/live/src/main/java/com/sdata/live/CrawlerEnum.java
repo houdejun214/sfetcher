@@ -5,7 +5,8 @@ package com.sdata.live;
  *
  */
 public enum CrawlerEnum {
-	
+
+	Ds("ds"),
 	Live("live"),
 	History("history");
 	

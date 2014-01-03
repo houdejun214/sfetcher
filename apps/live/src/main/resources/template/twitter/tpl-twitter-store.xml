@@ -9,7 +9,7 @@
 	-->
 	<collection name="twitter_users" primaryKey="id" field="user">
 	</collection>
-	<collection name="twitter_tweets" primaryKey="id" pkTable="index">
+	<collection name="raw_set" primaryKey="id" pkTable="raw_index">
 		<remove>user</remove>
 		<colfly name="others">account,uurl</colfly>
 	</collection>

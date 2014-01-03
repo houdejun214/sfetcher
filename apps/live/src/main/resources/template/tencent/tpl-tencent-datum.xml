@@ -49,6 +49,8 @@
 		<field from="title" name="tt" desc="音频名字，歌名"></field>
 	</field>
 	
+	<field name="dtf_t" ref="dtf_s"></field>
+	
 	<field from="userinfo" name="userinfo">
 		<field from="name" name="_id" ></field>
 		<field from="origin" name="origin" value="tencent"></field>

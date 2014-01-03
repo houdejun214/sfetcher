@@ -16,6 +16,12 @@
 			<groupId>com.sdata</groupId>
 			<artifactId>sdatacrawler-proxy</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+			<version>2.6</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

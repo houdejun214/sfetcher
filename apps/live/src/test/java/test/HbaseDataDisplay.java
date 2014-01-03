@@ -41,9 +41,9 @@ public class HbaseDataDisplay {
 //    	staticObject(hclient,92l);
 //    	staticObject(hclient,93l);
 //    	staticObject(hclient,94l);
-    	staticObject(hclient,95l);
+    	staticObject(hclient,102l);
 //    	staticObject(hclient,96l);
-    	staticObject(hclient,100l);
+//    	staticObject(hclient,100l);
 //    	staticObject(hclient,101l);
 //    	staticObject(hclient,98l);
 //    	staticObject(hclient,101l);
