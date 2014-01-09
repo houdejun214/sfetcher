@@ -21,6 +21,7 @@ public class Constants {
 
     //data tags
     public static final String DATA_TAGS_FROM_SOURCE = "dtf_s";//数据标签-来自xx源
+    public static final String DATA_TAGS_FROM_TYPE = "dtf_t";//数据标签-来自xx源
     public static final String DATA_TAGS_FROM_PARAM_VALUE = "dtf_pv";//数据标签-来自xx关键字
     public static final String DATA_TAGS_FROM_PARAM_TYPE = "dtf_pt";//数据标签-来自关键字类型
     public static final String DATA_TAGS_FROM_OBJECT_ID = "dtf_oid";//数据标签-来自关Object id

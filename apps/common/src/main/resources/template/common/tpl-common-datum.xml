@@ -12,7 +12,6 @@
 	<field name="lang"  value="zh"></field>
 	<field name="pub_time"  from="pub_time" action="todate"></field>
 	<field name="fet_time"  action="todate"></field>
-	<field name="dtf_t"  value="article"></field>
 	
 	<field name="image" from="image"></field>
 	<field name="images" from="images"></field>

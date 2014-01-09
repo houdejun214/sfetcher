@@ -4,9 +4,11 @@ import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
 
+import com.lakeside.core.utils.MapUtils;
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.UrlUtils;
 import com.sdata.context.config.Configuration;
+import com.sdata.proxy.Constants;
 import com.sdata.proxy.SenseConfig;
 import com.sdata.proxy.item.SenseCrawlItem;
 
@@ -24,6 +26,7 @@ public class CommonItem extends SenseCrawlItem {
 		if(map == null){
 			return;
 		}
+		this.typeName = MapUtils.getString(map,"type_name");
 		Object patterns = getParam(CommonParamEnum.URL_PATTERN.getName());
 		StringBuffer sb = new StringBuffer();
 		if(patterns instanceof List){
@@ -54,6 +57,7 @@ public class CommonItem extends SenseCrawlItem {
 	private String domain;
 	private String urlPattern;
 	private Integer levelLimit;
+	private String typeName;
 	
 	@Override
 	public String parse(){
@@ -73,5 +77,14 @@ public class CommonItem extends SenseCrawlItem {
 	}
 	public String getDomain() {
 		return domain;
+	}
+	
+	public String getTypeName() {
+		return typeName;
+	}
+	public Map<String,Object> toMap() {
+		Map<String,Object> result  = super.toMap();
+		result.put(Constants.DATA_TAGS_FROM_TYPE,this.typeName);
+		return result;
 	}
 }

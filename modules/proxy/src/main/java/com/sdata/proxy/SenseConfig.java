@@ -53,8 +53,8 @@ public class SenseConfig {
 	
 	public static Configuration getConfig(SenseCrawlItem item){
 		String id = item.getCrawlerName();
-		String entry = item.getEntryName();
-		String key = getMergeKey(id,entry);
+		String source = item.getSourceName();
+		String key = getMergeKey(id,source);
 		if(configMap.get(key) == null){
 			synchronized (configMap) {
 				if(configMap.get(key) == null){
@@ -63,7 +63,7 @@ public class SenseConfig {
 					conf.put(StrategyConfig.CONF_XML,getStrategy(item));
 					conf.put(DatumConfig.CONF_XML, getDatum(item));
 					conf.put(StoreConfig.CONF_XML, getStore(item));
-					conf.put(Constants.SOURCE, entry);
+					conf.put(Constants.SOURCE,source);
 					configMap.put(key, conf);
 				}
 			}
@@ -75,11 +75,11 @@ public class SenseConfig {
 		return String.format(CONF_PATH,id,id);
 	}
 	
-	private static String getConfigPath(String id,String entry){
-		if(StringUtils.isEmpty(entry)){
+	private static String getConfigPath(String id,String source){
+		if(StringUtils.isEmpty(source)){
 			return getConfigPath(id);
 		}
-		String path = String.format(CONF_PATH, getMergePath(id,entry),entry);
+		String path = String.format(CONF_PATH, getMergePath(id,source),source);
 		if(!check(path)){
 			return getConfigPath(id);
 		}
@@ -91,15 +91,15 @@ public class SenseConfig {
 		if(template!=null&&!StringUtils.isEmpty(template.getConfig())){
 			return CrawlConfigManager.loadFromXml(template.getConfig());
 		}
-		return CrawlConfigManager.loadFromPath(getConfigPath(item.getCrawlerName(),item.getEntryName()));
+		return CrawlConfigManager.loadFromPath(getConfigPath(item.getCrawlerName(),item.getSourceName()));
 	}
 
 	private static String getStrategyPath(String id){
 		return String.format(STRATEGY_PATH,id,id);
 	}
 	
-	private static String getStrategyPath(String id,String entry){
-		String path = String.format(STRATEGY_PATH,getMergePath(id,entry),entry);
+	private static String getStrategyPath(String id,String source){
+		String path = String.format(STRATEGY_PATH,getMergePath(id,source),source);
 		if(!check(path)){
 			path = getStrategyPath(id);
 		}
@@ -111,15 +111,15 @@ public class SenseConfig {
 		if(template!=null&&!StringUtils.isEmpty(template.getStrategy())){
 			return template.getStrategy();
 		}
-		return getStrategyPath(item.getCrawlerName(), item.getEntryName());
+		return getStrategyPath(item.getCrawlerName(), item.getSourceName());
 	}
 
 	private static String getDatumPath(String id){
 		return String.format(DATUM_PATH,id,id);
 	}
 	
-	private static String getDatumPath(String id,String entry){
-		String path = String.format(DATUM_PATH,getMergePath(id,entry),entry);
+	private static String getDatumPath(String id,String source){
+		String path = String.format(DATUM_PATH,getMergePath(id,source),source);
 		if(!check(path)){
 			path = getDatumPath(id);
 		}
@@ -131,15 +131,15 @@ public class SenseConfig {
 		if(template!=null&&!StringUtils.isEmpty(template.getDatum())){
 			return template.getDatum();
 		}
-		return getDatumPath(item.getCrawlerName(), item.getEntryName());
+		return getDatumPath(item.getCrawlerName(), item.getSourceName());
 	}
 
 	private static String getStorePath(String id){
 		return String.format(STORE_PATH,id,id);
 	}
 	
-	private static String getStorePath(String id,String entry){
-		String path = String.format(STORE_PATH,getMergePath(id,entry),entry);
+	private static String getStorePath(String id,String source){
+		String path = String.format(STORE_PATH,getMergePath(id,source),source);
 		if(!check(path)){
 			path = getStorePath(id);
 		}
@@ -151,22 +151,22 @@ public class SenseConfig {
 		if(template!=null&&!StringUtils.isEmpty(template.getStore())){
 			return template.getStore();
 		}
-		return getStorePath(item.getCrawlerName(), item.getEntryName());
+		return getStorePath(item.getCrawlerName(), item.getSourceName());
 	}
 	
-	private static String getMergePath(String id,String entry){
+	private static String getMergePath(String id,String source){
 		String result = id;
-		if(!StringUtils.isEmpty(entry)){
-			result =  id.concat("/").concat(entry);
+		if(!StringUtils.isEmpty(source)){
+			result =  id.concat("/").concat(source);
 		}
 		return result;
 	}
 
 	
-	private static String getMergeKey(String id,String entry){
+	private static String getMergeKey(String id,String source){
 		String result = id;
-		if(!StringUtils.isEmpty(entry)){
-			result =  id.concat(":").concat(entry);
+		if(!StringUtils.isEmpty(source)){
+			result =  id.concat(":").concat(source);
 		}
 		return result;
 	}

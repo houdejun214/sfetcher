@@ -8,12 +8,4 @@
 			<name>sense.weibo.html.maxpage</name>
 			<value>5</value>
 		</property>
-		<property>
-			<name>sense.weibo.html.wait.seconds</name>
-			<value>15</value>
-		</property>
-		<property>
-			<name>sense.weibo.api.wait.seconds</name>
-			<value>12</value>
-		</property>
 </configuration>
