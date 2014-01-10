@@ -25,9 +25,9 @@ public class CommonLinkQueue{
 	public void add(String link,int level){
 		CommonLink clink = new CommonLink(link,level);
 		if(!set.contains(clink)){
-			if(size() > DefaultMaxSize){
-				this.await(DefaultWaiting);
-			}
+//			if(size() > DefaultMaxSize){
+//				this.await(DefaultWaiting);
+//			}
 			synchronized(empty){
 				if(!empty){
 					this.queue.offer(clink);

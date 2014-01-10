@@ -19,6 +19,7 @@ import com.lakeside.download.http.HttpPage;
 import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.item.CrawlItemEnum;
+import com.sdata.core.parser.html.util.DocumentUtils;
 import com.sdata.live.state.LiveState;
 import com.sdata.proxy.SenseFetchDatum;
 import com.sdata.proxy.item.SenseCrawlItem;
@@ -73,6 +74,7 @@ public class LiveWeiboFromWord extends LiveWeiboBase {
 	
 	private String fetchPage(String url) {
 		while(true){
+			DocumentUtils.wait(18);
 			HttpPage page = advancePageLoader.download(httpHeader,url);
 			String contentHtml = page.getContentHtml();
 			if(isValid(contentHtml)){

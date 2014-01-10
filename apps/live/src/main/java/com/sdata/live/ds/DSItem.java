@@ -12,6 +12,7 @@ import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.UrlFormater;
 import com.lakeside.core.utils.UrlUtils;
 import com.sdata.live.LiveItem;
+import com.sdata.proxy.Constants;
 
 /**
  * 
@@ -33,7 +34,7 @@ public class DSItem extends LiveItem {
 		}
 	}
 	
-	protected String  fields;
+	protected String  typeName;
 	protected Map<String,Object> fieldMap = new HashMap<String, Object>();
 	
 	public String parse(String charset){
@@ -65,6 +66,7 @@ public class DSItem extends LiveItem {
 	public Map<String,Object> toMap() {
 		Map<String,Object> result = super.toMap();
 		result.putAll(this.getFieldMap());
+		result.put(Constants.DATA_TAGS_FROM_TYPE, this.getSourceName());
 		return result;
 	}
 }

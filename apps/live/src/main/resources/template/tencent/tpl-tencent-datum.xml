@@ -14,7 +14,6 @@
 	<field from="image" name="image" action="saveImage" desc="图片url列表"></field>
 	<field from="video/realurl" name="video"></field>
 	
-	
 	<field from="location" name="loc" desc="发表者所在地"></field>
 	<field from="timestamp" name="pub_time" action="todate" index="date" desc="发表时间(转换后的时间)"></field>
 	<field from="fet_time" name="fet_time" action="todate" index="fetchtime"></field>

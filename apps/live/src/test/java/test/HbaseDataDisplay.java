@@ -36,12 +36,14 @@ public class HbaseDataDisplay {
 //    	Map<String, Map<String, Object>> result = client.queryWithFamily("sense_hot_timeline", base64Decode);
 //    	readRecodes()
 
-    	HBaseClient hclient = HBaseClientFactory.getClientWithCustomSeri("next-2","ls");
+    	HBaseClient hclient = HBaseClientFactory.getClientWithCustomSeri("sense-hdp","ds");
+//    	count(hclient,"ds","raw_set","dtf_t","news");
+    	readRecodes(hclient,"ds","raw_set","dtf_t","tencent");
 //    	staticObject(hclient,91l);
 //    	staticObject(hclient,92l);
 //    	staticObject(hclient,93l);
 //    	staticObject(hclient,94l);
-    	staticObject(hclient,102l);
+//    	staticObject(hclient,102l);
 //    	staticObject(hclient,96l);
 //    	staticObject(hclient,100l);
 //    	staticObject(hclient,101l);
@@ -190,9 +192,8 @@ public class HbaseDataDisplay {
 		});
 	}
 
-	private static void count(HBaseClient client,
+	private static void count(HBaseClient client,final String namespace,
 			final String tableName,final String column, final Object value) {
-		final String namespace = "sense";
 		CustomSerializer mp = new CustomSerializer();
 		final TScan scan = new TScan();
 		
@@ -233,12 +234,10 @@ public class HbaseDataDisplay {
 		});
 	}
 
-	private static void readRecodes(HBaseClient client,
+	private static void readRecodes(HBaseClient client,final String namespace,
 			final String tableName,String column, Object value) {
-		final String namespace = "ls";
 		final CustomSerializer mp = new CustomSerializer();
 		final TScan scan = new TScan();
-		
 		byte[] parta = Bytes.toBytes("(SingleColumnValueFilter('dcf','"+column+"', =,'binary:");
 		byte[] partb = mp.obj2Byte(value);
 		byte[] partc = Bytes.toBytes("',true,true))");
@@ -258,16 +257,12 @@ public class HbaseDataDisplay {
 							}
 							for(TRowResult tr:buffer){
 								byte[] b = new byte[4];
-								System.arraycopy(tr.getRow(), tr.getRow().length-4, b, 0, 4);
-								int int1 = Bytes.toInt(b);
-								
+//								System.arraycopy(tr.getRow(), tr.getRow().length-4, b, 0, 4);
 								Map<ByteBuffer, TCell> columns = tr.getColumns();
 								for(Entry<ByteBuffer, TCell> e:columns.entrySet()){
 									String key = BytesBufferUtils.buf2str(e.getKey());
 									Object v = mp.byte2Obj(e.getValue().getValue());
-									if(key.contains("srct")||key.contains("pub_time")){
-										System.out.println(key+":"+v);
-									}
+									System.out.println(key+":"+v);
 									
 								}
 							}

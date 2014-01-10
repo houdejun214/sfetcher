@@ -46,7 +46,7 @@ public class CommonItem extends SenseCrawlItem {
 		}
 		String name = CommonParamEnum.LEVEL_LIMIT.getName();
 		if(super.containParam(name)){
-			this.levelLimit =(Integer)getParam(name);
+			this.levelLimit =Integer.valueOf(getParam(name).toString());
 		}
 		if(levelLimit == null||levelLimit == 0){
 			Configuration config = SenseConfig.getConfig(this);
