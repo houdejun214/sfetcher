@@ -1,9 +1,9 @@
 package com.sdata.common.fetcher;
 
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +21,8 @@ import com.sdata.context.config.Constants;
 import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDispatch;
 import com.sdata.core.exception.NegligibleException;
+import com.sdata.core.parser.html.util.DocumentUtils;
+import com.sdata.core.util.JsoupUtils;
 import com.sdata.proxy.SenseFetchDatum;
 import com.sdata.proxy.fetcher.SenseFetcher;
 import com.sdata.proxy.fetcher.SenseItemMonitor;
@@ -37,8 +39,7 @@ import de.jetwick.snacktory.JResult;
  */
 public class CommonFetcher extends SenseFetcher {
 
-	protected static Logger log = LoggerFactory
-			.getLogger("Common.CommonFetcher");
+	protected static Logger log = LoggerFactory.getLogger("Common.CommonFetcher");
 	public final static String FID = "common";
 
 	public CommonFetcher(Configuration conf, RunState state) {
@@ -57,15 +58,20 @@ public class CommonFetcher extends SenseFetcher {
 		CommonItem item = (CommonItem) crawlItem;
 		CommonLinkQueue linkQueue = CommonQueueFactory.getLinkQueue(item);
 		String init = crawlItem.parse();
-		linkQueue.add(init, Constants.QUEUE_LEVEL_ROOT);
+		Document document = DocumentUtils.getDocument(init);
+		List<String> list = JsoupUtils.getListLink(document, "a");
+		linkQueue.add(this.filter(list,item), Constants.QUEUE_LEVEL_ROOT + 1);
 		//Important: this type queue's item push and poll all depend fetch datum process
 		// and if datum level > level limit ,fetch datum process notify 
-		while (!isComplete(item)) {
+		int total = 0; 
+		while (!isComplete(item)&& total< 60) {
 			try {
 				CommonLink clink = linkQueue.get();
 				if(clink == null){
+					total+=2;
 					continue;
 				}
+				total = 0;
 				CommonDatum comLnkToDatum = this.ComLinkToDatum(item, clink);
 				fetchDispatch.dispatch(comLnkToDatum);
 			}catch(InterruptedException e) {

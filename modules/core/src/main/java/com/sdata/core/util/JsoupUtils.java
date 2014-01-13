@@ -57,6 +57,19 @@ public class JsoupUtils {
 		return text;
 	}
 	
+	public static List<String> getListLink(Element doc, String selector) {
+		List<String> result = new ArrayList<String>();
+		Elements list = doc.select(selector);
+		for(Element e:list){
+			String link = getLink(e,"a");
+			if(!StringUtils.isEmpty(link)){
+				result.add(link);
+			}
+		}
+		return result;
+	}
+	
+	
 	public static List<Element> getList(Element doc, String selector) {
 		Elements list = doc.select(selector);
 		if(list==null){

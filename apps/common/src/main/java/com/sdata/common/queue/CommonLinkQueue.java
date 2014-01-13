@@ -12,8 +12,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class CommonLinkQueue{
 	
-	private int DefaultMaxSize = 5000;
-	private int DefaultWaiting = 2;
+//	private int DefaultMaxSize = 5000;
+	public  final int DefaultWaiting = 2;
 	private BlockingQueue<CommonLink> queue;
 	private HashSet<CommonLink> set = new HashSet<CommonLink>();
 	private Boolean empty = false;
