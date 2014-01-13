@@ -157,11 +157,7 @@ public class CommonFetcher extends SenseFetcher {
 			if (list.contains(url)) {
 				continue;
 			}
-			try {
-				if (!item.getDomain().equals(UrlUtils.getDomainName(url))) {
-					continue;
-				}
-			} catch (MalformedURLException e) {
+			if (!UrlUtils.getHost(url).endsWith(item.getHost())) {
 				continue;
 			}
 			String urlPattern = item.getUrlPattern();

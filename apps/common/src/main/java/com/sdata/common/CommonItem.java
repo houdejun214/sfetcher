@@ -39,11 +39,7 @@ public class CommonItem extends SenseCrawlItem {
 			this.urlPattern = StringUtils.valueOf(patterns);
 		}
 		
-		try {
-			this.domain = UrlUtils.getDomainName(this.entryUrl);
-		} catch (MalformedURLException e) {
-			throw new RuntimeException(e);
-		}
+		this.host = UrlUtils.getHost(this.entryUrl);
 		String name = CommonParamEnum.LEVEL_LIMIT.getName();
 		if(super.containParam(name)){
 			this.levelLimit =Integer.valueOf(getParam(name).toString());
@@ -54,7 +50,7 @@ public class CommonItem extends SenseCrawlItem {
 		}
 	}
 	
-	private String domain;
+	private String host;
 	private String urlPattern;
 	private Integer levelLimit;
 	private String typeName;
@@ -75,10 +71,10 @@ public class CommonItem extends SenseCrawlItem {
 	public Integer getLevelLimit() {
 		return levelLimit;
 	}
-	public String getDomain() {
-		return domain;
-	}
 	
+	public String getHost() {
+		return host;
+	}
 	public String getTypeName() {
 		return typeName;
 	}
