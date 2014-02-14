@@ -74,9 +74,13 @@ public class LiveWeiboFromWord extends LiveWeiboBase {
 	
 	private String fetchPage(String url) {
 		while(true){
-			DocumentUtils.wait(18);
+			DocumentUtils.wait(1);
 			HttpPage page = advancePageLoader.download(httpHeader,url);
 			String contentHtml = page.getContentHtml();
+			if(isValidCodeNeed(contentHtml)){
+				System.out.println(contentHtml);
+				continue;
+			}
 			if(isValid(contentHtml)){
 				return contentHtml;
 			}

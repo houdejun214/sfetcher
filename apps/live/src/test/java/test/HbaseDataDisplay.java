@@ -35,10 +35,32 @@ public class HbaseDataDisplay {
 //    	byte[] base64Decode = EncodeUtils.base64Decode(URLDecoder.decode(id));
 //    	Map<String, Map<String, Object>> result = client.queryWithFamily("sense_hot_timeline", base64Decode);
 //    	readRecodes()
-
+//		this row simhash check repeat :422662562820128768 with:422662455248814080,distance:3
+//		this row simhash check repeat :422663899473510400 with:422663899091828736,distance:3
+//		this row simhash check repeat :422681938692669440 with:422660963393601536,distance:1
+//		this row simhash check repeat :422683085377634304 with:422682960752279552,distance:2
+//		this row simhash check repeat :422683362860204032 with:422661326003765248,distance:3
+//		this row simhash check repeat :422684477425188864 with:422665375931432960,distance:3
+//		this row simhash check repeat :422684978875203584 with:422683001852264448,distance:2
+//		this row simhash check repeat :422685086433935360 with:422659977417588736,distance:3
+//		this row simhash check repeat :422685996748898304 with:422685184635174912,distance:1
+//		this row simhash check repeat :422686471447642112 with:422686470449397760,distance:3
+//		this row simhash check repeat :422686510949597184 with:422686509603225600,distance:3
+//		this row simhash check repeat :422688654863892480 with:422664156949250048,distance:3
+//		this row simhash check repeat :422688760468078592 with:422681907864535040,distance:3
+//		this row simhash check repeat :422691970347958272 with:422662199836672000,distance:3
+//		this row simhash check repeat :422703085652017152 with:422702704138125312,distance:3
     	HBaseClient hclient = HBaseClientFactory.getClientWithCustomSeri("sense-hdp","ds");
+//    	422661107446972416
+    	Map<String, Object> query = hclient.query("raw_set",422703085652017152l);
+    	Object object = query.get("content");
+    	System.out.println("1:"+object);
+    	Map<String, Object> query2 = hclient.query("raw_set", 422702704138125312l);
+    	Object object2 = query2.get("content");
+    	System.out.println("2:"+object2);
+    	
 //    	count(hclient,"ds","raw_set","dtf_t","news");
-    	readRecodes(hclient,"ds","raw_set","dtf_t","tencent");
+//    	readRecodes(hclient,"ds","raw_set","dtf_t","tencent");
 //    	staticObject(hclient,91l);
 //    	staticObject(hclient,92l);
 //    	staticObject(hclient,93l);

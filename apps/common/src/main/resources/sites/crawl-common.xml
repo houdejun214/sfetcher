@@ -4,7 +4,7 @@
 		  storer="com.sdata.proxy.store.SenseProxyStorer">
 	 	 <property>
 			<name>TaskInterval</name>
-			<value>1800000</value>
+			<value>60000</value>
 		</property>
 		<property>
 		  <name>MainCrawlThreadNum</name>

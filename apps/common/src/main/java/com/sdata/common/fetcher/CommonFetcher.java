@@ -1,7 +1,10 @@
 package com.sdata.common.fetcher;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
@@ -10,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import com.lakeside.core.utils.PatternUtils;
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.UrlUtils;
+import com.lakeside.core.utils.time.DateFormat;
+import com.lakeside.core.utils.time.DateTimeUtils;
 import com.sdata.common.CommonDatum;
 import com.sdata.common.CommonItem;
 import com.sdata.common.IDBuilder;
@@ -131,7 +136,12 @@ public class CommonFetcher extends SenseFetcher {
 			return null;
 		}
 		log.info("This link is one article:" + url);
-		cdatum.addAllMetadata(res.toMap());
+		Map<String, Object> data = this.filter(res.toMap());
+		if(data == null){
+			log.info("This link publish time is not match our need :" + url);
+			return null;
+		}
+		cdatum.addAllMetadata(data);
 		cdatum.addMetadata(com.sdata.proxy.Constants.DATA_ID, cdatum.getId());
 		return cdatum;
 	}
@@ -146,6 +156,19 @@ public class CommonFetcher extends SenseFetcher {
 		return new HtmlFetcher().fetchAndExtract(url);
 	}
 
+	protected Map<String,Object> filter(Map<String, Object> data){
+		Date date = DateFormat.strToDate(data.get(com.sdata.proxy.Constants.PUB_TIME));
+		if(date == null){
+			return null;
+		}
+		Date now = new Date();
+		Date oneYago = DateTimeUtils.add(now,Calendar.YEAR, -1);
+		if(date.before(oneYago)){
+			return null;
+		}
+		return data;
+	}
+	
 	/**
 	 * filter the links with url pattern
 	 * 

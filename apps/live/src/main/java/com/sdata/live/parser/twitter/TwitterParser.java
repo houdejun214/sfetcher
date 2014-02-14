@@ -1,5 +1,6 @@
 package com.sdata.live.parser.twitter;
 
+import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -102,15 +103,38 @@ public class TwitterParser extends SenseParser {
 		String following = JsoupUtils.getText(document, ".stats a.js-nav:contains(Following) strong");
 		String followers = JsoupUtils.getText(document, ".stats a.js-nav:contains(Followers) strong");
 		if(!StringUtils.isEmpty(tweets)){
-			user.put("stact", Integer.valueOf(tweets.replaceAll(",","")));
+			user.put("stact", toNumber(tweets));
 		}
 		if(!StringUtils.isEmpty(following)){
-			user.put("frdct", Integer.valueOf(following.replaceAll(",","")));
+			user.put("frdct", toNumber(following));
 		}
 		if(!StringUtils.isEmpty(followers)){
-			user.put("folct", Integer.valueOf(followers.replaceAll(",","")));
+			user.put("folct", toNumber(followers));
 		}
 		return datum;
+	}
+	
+	private  int toNumber(String str){
+		str = str.replaceAll(",", "");
+		int index = -1;
+		int multiply = 1;
+		if(str.indexOf("K") > 0){
+			index = str.indexOf("K");
+			multiply = 1000;
+		}else if(str.indexOf("k")>0){
+			index = str.indexOf("k");
+			multiply = 1000;
+		}else if(str.indexOf("M")>0){
+			index = str.indexOf("M");
+			multiply = 1000000;
+		}else if(str.indexOf("m")>0){
+			index = str.indexOf("m");
+			multiply = 1000000;
+		}
+		if(index > 0){
+			return (new BigDecimal(str.substring(0,index)).multiply(BigDecimal.valueOf(multiply))).intValue();
+		}
+		return Integer.valueOf(str);
 	}
 	
 	private boolean isSingapore(SenseFetchDatum datum,Document document){

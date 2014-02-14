@@ -1,11 +1,19 @@
 package com.sdata.live.fetcher.weibo;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.http.util.EntityUtils;
 
 import weibo4j.WeiboHelper;
 
 import com.lakeside.core.utils.StringUtils;
+import com.lakeside.core.utils.time.DateTimeUtils;
+import com.lakeside.download.http.HttpPage;
 import com.lakeside.download.http.HttpPageLoader;
 import com.sdata.context.config.Configuration;
 import com.sdata.core.item.CrawlItemEnum;
@@ -41,16 +49,36 @@ public abstract class LiveWeiboBase implements LiveBaseWithTime {
 		if (html.contains("$CONFIG['islogin'] = '0'")) {
 			return false;
 		}
-		if(html.contains("\\u4f60\\u7684\\u884c\\u4e3a\\u6709\\u4e9b\\u5f02\\u5e38\\uff0c\\u8bf7\\u8f93\\u5165\\u9a8c\\u8bc1\\u7801\\uff1a")){
-			return false;
-		}
-		if (html.contains("你的行为有些异常，请输入验证码")) {
-			return false;
-		}
 		if(html.contains("新浪通行证")){
 			return false;
 		}
 		return true;
+	}
+	
+
+	public boolean isValidCodeNeed(String html) {
+		if (StringUtils.isEmpty(html)) {
+			return false;
+		}
+		if(html.contains("\\u4f60\\u7684\\u884c\\u4e3a\\u6709\\u4e9b\\u5f02\\u5e38\\uff0c\\u8bf7\\u8f93\\u5165\\u9a8c\\u8bc1\\u7801\\uff1a")){
+			return true;
+		}
+		if (html.contains("你的行为有些异常，请输入验证码")) {
+			return true;
+		}
+		return false;
+	}
+	
+	public String getValidCode() throws IOException {
+		Long currentTime = DateTimeUtils.getCurrentTime();
+		String codePath = "weibo/"+currentTime+".jpg";
+		String img = "http://s.weibo.com/ajax/pincode/pin?type=sass"+currentTime;
+		HttpPage page = this.advancePageLoader.download(img);
+		OutputStream os = new FileOutputStream(codePath);
+		byte[] contentData = page.getContentData();
+		os.write(contentData, 0, contentData.length);
+		os.close();
+		return codePath;
 	}
 
 	public void refreshResource() {
