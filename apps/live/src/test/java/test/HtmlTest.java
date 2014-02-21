@@ -1,52 +1,13 @@
 package test;
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.methods.PostMethod;
 import org.junit.Test;
-
-import com.lakeside.core.utils.time.DateTimeUtils;
 
 
 public class HtmlTest {
 	
 	@Test
 	public void test() throws Exception {
-		HttpClient client = new HttpClient();
-		String code = "2a2u";
-//		1389841009765
-		String cookie = "_s_tentry=blog.ifeng.com; UOR=blog.ifeng.com,widget.weibo.com,blog.ifeng.com; login_sid_t=cb645b12a1b4266c652f44196d0c0416; Apache=3795269723050.2964.1389839818773; SINAGLOBAL=3795269723050.2964.1389839818773; ULV=1389839818788:1:1:1:3795269723050.2964.1389839818773:; SUE=es%3Dc0aac6563568bda8e3bdaaec56813bf8%26ev%3Dv1%26es2%3D4d743a262e0ede85cb07065cad0c6e26%26rs0%3DE4ZXzG22jsx1lsFeP0ceEcLDkQQN6h5tp3YiVR2g6D47gIlNwldFfDS4m7dhqd0wZTAlzNXuJRDiwBMCcp%252B7NaTIjI42nWrN3Dz9CEWmJUKUcG7dstXbApP6cUxC3hc%252BogWdElhdwkBOa115KTIgy3pVO9Kq%252FKmFtjbAb6raA28%253D%26rv%3D0; SUP=cv%3D1%26bt%3D1389839826%26et%3D1389926226%26d%3Dc909%26i%3D2979%26us%3D1%26vf%3D0%26vt%3D0%26ac%3D0%26st%3D0%26uid%3D3956779699%26name%3D2033701349%2540qq.com%26nick%3Dsense-04%26fmp%3D%26lcp%3D; SUS=SID-3956779699-1389839826-XD-or8bc-c4f69330b9220dee7d70174af931480c; ALF=1392431826; SSOLoginState=1389839826; wvr=5; SWB=usrmd1367; ULOGIN_IMG=13898419850091; WBStore=41d2eb2fbba1c786|undefined";
-		String url = "http://s.weibo.com/ajax/pincode/verified?__rnd="+DateTimeUtils.getCurrentTime();
-//		url +="&pageid=weibo&type=sass&_t=0&secode="+code;
-//		Map<String,String> map = new HashMap<String,String>();
-//		map.put("Cookie", cookie);
-//		map.put("X-Requested-With", "XMLHttpRequest");
-//		map.put("Origin", "http://s.weibo.com");
-//		map.put("Referer", "http://s.weibo.com/weibo/%25E8%2583%25A5%25E6%25B8%25A1%25E5%2590%25A7?topnav=1&wvr=5&Refer=top_hot");
-//		map.put("Host", "s.weibo.com");
-//		map.put("Content-Type", "application/x-www-form-urlencoded");
-//		HttpPage download = HttpPageLoader.getDefaultPageLoader().download(map,url);
-//		System.out.println(download.getContentHtml());
-		
-//		map.put("Referer", "http://s.weibo.com/weibo/%25E8%2583%25A5%25E6%25B8%25A1%25E5%2590%25A7?topnav=1&wvr=5&Refer=top_hot");
-		PostMethod post = new PostMethod(url);
-//		post.setRequestHeader("Accept", "*/*");
-		post.setRequestHeader("Accept-Language","en");
-		post.setRequestHeader("Accept-Encoding","gzip,deflate,sdch");
-		post.setRequestHeader("Cookie", cookie);
-		post.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-//		post.setRequestHeader("Origin", "http://s.weibo.com");
-//		post.setRequestHeader("Content-length", "39");
-//		post.setRequestHeader("Host", "s.weibo.com");
-		post.setRequestHeader("User-Agent","Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.72 Safari/537.36");
-		post.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		post.setRequestHeader("Referer", "http://s.weibo.com/weibo/x&Refer=STopic_box");
-		post.addParameter("secode", code);
-		post.addParameter("pageid", "weibo");
-		post.addParameter("type", "sass");
-		post.addParameter("_t", "0");
-		int executeMethod = client.executeMethod(post);
-    	System.out.println(post.getResponseBodyAsString());
-		
+
 //		Date date = new Date();
 //		String format = DateTimeUtils.format(date, "yyyy-MM-dd-H");
 //		System.out.println(format);

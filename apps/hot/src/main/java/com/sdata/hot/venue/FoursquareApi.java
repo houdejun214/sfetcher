@@ -42,6 +42,9 @@ public class FoursquareApi extends BaseDataApi {
 		String queryUrl= String.format(exploreUrl,section,String.valueOf(offset),String.valueOf(limit),access_token,DateTimeUtils.format(new Date(),"yyyyMMdd"));
 		String content = HttpPageLoader.getDefaultPageLoader().download(queryUrl).getContentHtml();
 		JSONObject json = JSONObject.fromObject(content);
+		if(json ==null||json.isNullObject()){
+			return null;
+		}
 		Object venues = MapUtils.getInter(json, "response/groups/items/venue");
 		if(venues == null||!(venues instanceof List)){
 			return null;

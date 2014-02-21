@@ -2,6 +2,9 @@ package com.sdata.proxy.fetcher;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.lakeside.core.utils.StringUtils;
 import com.sdata.context.config.Configuration;
 import com.sdata.context.state.RunState;
@@ -18,6 +21,7 @@ import com.sdata.proxy.item.SenseCrawlItem;
  *
  */
 public abstract class SenseProxyFetcher extends SdataFetcher {
+	protected static Logger log = LoggerFactory.getLogger("Sense.SenseProxyFetcher");
 	protected SenseCrawlItem item = null;
 	protected static Object syn = new Object();
 	private static CrawlItemQueue crawlItemQueue;
@@ -70,6 +74,7 @@ public abstract class SenseProxyFetcher extends SdataFetcher {
 	        this.completeItem(item);
 
 		}catch(Exception e){
+			log.error("This crawler item crawl failed in progress :" +item.toString());
 			e.printStackTrace();
 			this.failItem(item);
 //			CrawlerMail.send(item.toString(),getExceptionStr(e));

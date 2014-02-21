@@ -42,11 +42,14 @@ public abstract class SenseFetcher extends SdataFetcher {
 
 	protected RawContent getRawContent(String url){
 		if(StringUtils.isEmpty(url)){
-			return null;
+			return new RawContent(url,null);
 		}
-		String content = advancePageLoader.download(url).getContentHtml();
-		if(content == null){
-			return null;
+		String content = null;
+		int i = 0; 
+		while(StringUtils.isEmpty(content)&&i<3){
+			this.await(i*1000);
+			content = advancePageLoader.download(url).getContentHtml();
+			i++;
 		}
 		return new RawContent(url,content);
 	}
