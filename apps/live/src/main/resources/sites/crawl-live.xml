@@ -18,7 +18,7 @@
 		<!-- crawler item db info -->
 		<property>
 		  <name>next.crawler.item.host</name>
-		  <value>172.18.109.42</value>
+		  <value>172.18.109.42,172.18.109.47</value>
 		</property>
 		<property>
 		  <name>next.crawler.item.port</name>
@@ -42,7 +42,7 @@
 		</property>
 		<property>
 		  <name>next.crawler.item.queue.table</name>
-		  <value>sc_crawl_item_queue</value>
+		  <value>sc_queue_live</value>
 		</property>
 		<property>
 		  <name>next.sense.template.table</name>
@@ -56,7 +56,7 @@
 		</property>
 		<property>
 		  <name>hbase.namespace</name>
-		  <value>live</value>
+		  <value>ls</value>
 		</property>
 		<property>
 			<name>hbase.cluster.name</name>
@@ -84,7 +84,7 @@
 		</property>
 		<property>
 			<name>crawler.increase</name>
-			<value>true</value>
+			<value>false</value>
 		</property> 
 		<!-- 定义crawler queue wait timeout(s), default 20s at least 10s-->
 		<property>

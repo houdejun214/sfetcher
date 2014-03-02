@@ -23,6 +23,7 @@ import com.framework.db.hbase.thrift.HBaseClient.HBaseThriftActionNoResult;
 import com.framework.db.hbase.thrift.HBaseClientFactory;
 import com.framework.db.hbase.thrift.HBaseThriftClient;
 import com.framework.db.hbase.thrift.HBaseThriftException;
+import com.lakeside.core.utils.EncodeUtils;
 import com.lakeside.core.utils.FileUtils;
 import com.sdata.live.fetcher.twitter.TwitterFetcher;
 
@@ -50,14 +51,23 @@ public class HbaseDataDisplay {
 //		this row simhash check repeat :422688760468078592 with:422681907864535040,distance:3
 //		this row simhash check repeat :422691970347958272 with:422662199836672000,distance:3
 //		this row simhash check repeat :422703085652017152 with:422702704138125312,distance:3
-    	HBaseClient hclient = HBaseClientFactory.getClientWithCustomSeri("sense-hdp","ds");
+    	HBaseClient hclient = HBaseClientFactory.getClientWithCustomSeri("sense-hdp","ls");
 //    	422661107446972416
-    	Map<String, Object> query = hclient.query("raw_set",422703085652017152l);
-    	Object object = query.get("content");
-    	System.out.println("1:"+object);
-    	Map<String, Object> query2 = hclient.query("raw_set", 422702704138125312l);
-    	Object object2 = query2.get("content");
-    	System.out.println("2:"+object2);
+    	byte [] rk = EncodeUtils.base64Decode("AAAAAAAAAG4AAAAEAAMSwAAAAAA=");
+    	TRowResult tr = hclient.queryTRow("entity", rk,"relation_list");
+//			System.arraycopy(tr.getRow(), tr.getRow().length-4, b, 0, 4);
+		Map<ByteBuffer, TCell> columns = tr.getColumns();
+		for(Entry<ByteBuffer, TCell> e:columns.entrySet()){
+			String key = BytesBufferUtils.buf2str(e.getKey());
+			Object v = hclient.getValueSerializer().byte2Obj(e.getValue().getValue());
+			System.out.println(key+":"+v);
+			
+		}
+//    	System.out.println("1:"+object);
+//    	Map<String, Object> query2 = hclient.query("raw_set", 422702704138125312l);
+//    	Object object2 = query2.get("content");
+//    	System.out.println("2:"+object2);
+    	
     	
 //    	count(hclient,"ds","raw_set","dtf_t","news");
 //    	readRecodes(hclient,"ds","raw_set","dtf_t","tencent");

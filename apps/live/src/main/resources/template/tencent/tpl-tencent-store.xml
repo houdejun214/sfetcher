@@ -9,7 +9,7 @@
 	-->
 	<collection name="tencent_users" primaryKey="id" field="userinfo">
 	</collection>
-	<collection name="raw_set" primaryKey="id" pkTable="raw_index">
+	<collection name="tencent_tweets" primaryKey="id" pkTable="index">
 		<colfly name="others">uurl,name,retid,retct,comct,sourc,fromu,self,times,type,counc,provc,cityc,openid,retweeted_status,vd,mu</colfly>
 		<remove>userinfo</remove>
 	</collection>

@@ -54,14 +54,23 @@ public class HBaseRawIndex{
 	
 	private boolean lock(Object id){
 		String path = String.valueOf(id);
-		int maxwait = 120*1000;
+		int maxwait = 10*1000;
 		int wait = 0;
 		while(!client.getDbLock().lock(path)){
 			try {
 				Thread.sleep(1000);
 				wait+=1000;
 				if(wait >= maxwait){
-					this.unlock(id);
+					int w = 0;
+					while(!this.unlock(id)){
+						if(w < maxwait){
+							Thread.sleep(1000);
+							w +=1000;
+						}else{
+							return true;
+						}
+					}
+					
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -70,8 +79,8 @@ public class HBaseRawIndex{
 		return true;
 	}
 
-	private void unlock(Object id){
-		client.getDbLock().release(String.valueOf(id));
+	private boolean unlock(Object id){
+		return client.getDbLock().release(String.valueOf(id));
 	}
 	
 	public void save(Object id,Long rk,String column){

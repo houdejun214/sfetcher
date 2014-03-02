@@ -17,7 +17,7 @@
 		<!-- crawler item db info -->
 		<property>
 		  <name>next.crawler.item.host</name>
-		  <value>172.18.109.42</value>
+		  <value>172.18.109.42,172.18.109.47</value>
 		</property>
 		<property>
 		  <name>next.crawler.item.port</name>
