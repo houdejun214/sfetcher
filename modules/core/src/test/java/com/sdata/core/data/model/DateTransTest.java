@@ -8,7 +8,7 @@ public class DateTransTest {
 
 	@Test
 	public void test() {
-		System.out.println(DateFormat.changeStrToDate("Sat Apr 14 23:53:01 SGT 2012"));
+		System.out.println(DateFormat.strToDate("Sat Apr 14 23:53:01 SGT 2012"));
 	}
 
 }

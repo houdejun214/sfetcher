@@ -12,7 +12,7 @@ import net.sf.json.JSONObject;
 
 import com.lakeside.core.utils.MapUtils;
 import com.lakeside.core.utils.StringUtils;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.RawContent;
 import com.sdata.core.parser.ParseResult;
@@ -47,6 +47,7 @@ public class VenueParser extends SdataParser{
 		//trends
 		JSONArray venues = null;
 		while(venues==null){
+			this.wait(3);
 			venues = api.getTrendingVenues(count*2);
 		}
 		Date fetTime = new Date();
@@ -62,6 +63,14 @@ public class VenueParser extends SdataParser{
 		}
 	}
 	
+	public void wait(int s){
+		try {
+			Thread.sleep(s*1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * @param cate
 	 * @param result
@@ -143,7 +152,11 @@ public class VenueParser extends SdataParser{
 			JSONObject next = (JSONObject)iterator.next();
 			if("venue".equals(next.get("type"))){
 				JSONObject photo = (JSONObject) next.getJSONArray("items").get(0);
-				datum.addMetadata("image", photo.getString("url"));
+				StringBuffer  image = new StringBuffer();
+				image.append(photo.getString("prefix"));
+				image.append("width").append(photo.getString("width"));
+				image.append(photo.getString("suffix"));
+				datum.addMetadata("image", image.toString());
 				break;
 			}
 		}

@@ -17,19 +17,19 @@ import org.dom4j.DocumentHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import weibo4j.Weibo;
 import weibo4j.util.WeiboServer;
 
 import com.lakeside.core.utils.MapUtils;
 import com.lakeside.core.utils.PatternUtils;
 import com.lakeside.core.utils.time.DateFormat;
 import com.lakeside.core.utils.time.DateTimeUtils;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.FetchDispatch;
 import com.sdata.core.RawContent;
 import com.sdata.core.parser.SdataParser;
 import com.sdata.hot.util.HotUtils;
+import com.sdata.proxy.resource.Resources;
 
 /**
  * @author zhufb
@@ -45,13 +45,13 @@ public class WeiboHotParser extends SdataParser{
 	public WeiboHotParser(Configuration conf){
 		this.minutes = conf.getInt("crawl.minutes", 5);
 		WeiboServer.init("weiboWord");
-		header.put("Cookie", Weibo.getCookie());
+		header.put("Cookie", Resources.Weibo.get().getCookie());
 	}
 	
 	public void parseList(FetchDispatch dispatch,JSONObject hotTweet) {
 		Long id = hotTweet.getLong("id");
 		String strPubTime = hotTweet.getString("created_at");
-		Date pubTime =(Date) DateFormat.changeStrToDate(strPubTime);
+		Date pubTime =(Date) DateFormat.strToDate(strPubTime);
 		Date maxTime =DateTimeUtils.add(pubTime, Calendar.MINUTE, minutes);
 		FetchDatum hotDatum = new FetchDatum();
 		
@@ -76,7 +76,7 @@ public class WeiboHotParser extends SdataParser{
 				}
 				String uid = MapUtils.getInterString(next, "user/id");
 				String retPub = next.getString("created_at");
-				Date retPubTime =(Date) DateFormat.changeStrToDate(retPub);
+				Date retPubTime =(Date) DateFormat.strToDate(retPub);
 				Long retPubLong = retPubTime.getTime();
 				// hot reltion
 				hotReltionMap.put(sid, uid.concat(",").concat(String.valueOf(retPubLong)));

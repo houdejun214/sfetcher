@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.sdata.core.CrawlAppContext;
+import com.sdata.context.config.CrawlAppContext;
 import com.sdata.core.parser.html.field.Tags;
 
 

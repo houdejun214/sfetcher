@@ -3,7 +3,7 @@ package com.sdata.hot.fetcher.video;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.hot.Hot;
 import com.sdata.hot.fetcher.HotBaseFetcher;
 

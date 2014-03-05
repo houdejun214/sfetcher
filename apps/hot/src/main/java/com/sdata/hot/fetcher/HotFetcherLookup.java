@@ -13,7 +13,7 @@ import org.eclipse.jdt.core.dom.Modifier;
 
 import com.lakeside.core.utils.ClassUtils;
 import com.lakeside.core.utils.MapUtils;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDatum;
 import com.sdata.hot.Hot;
 import com.sdata.hot.HotConstants;

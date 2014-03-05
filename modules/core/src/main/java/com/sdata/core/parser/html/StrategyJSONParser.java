@@ -8,12 +8,12 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.sdata.core.Configuration;
-import com.sdata.core.parser.html.config.StrategyConfig;
+import com.sdata.context.config.Configuration;
+import com.sdata.core.parser.config.StrategyConfig;
 import com.sdata.core.parser.html.context.StrategyContext;
 import com.sdata.core.parser.html.field.Field;
-import com.sdata.core.parser.html.field.StrategyField;
 import com.sdata.core.parser.html.field.Tags;
+import com.sdata.core.parser.html.field.strategy.StrategyField;
 
 /**
  * @author zhufb

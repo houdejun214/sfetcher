@@ -1,7 +1,7 @@
 package com.sdata.core.parser.html.mail;
 
-import com.sdata.core.CrawlAppContext;
-import com.sdata.core.util.EmailUtil;
+import com.lakeside.core.utils.EmailUtil;
+import com.sdata.context.config.CrawlAppContext;
 
 /**
  * @author zhufb

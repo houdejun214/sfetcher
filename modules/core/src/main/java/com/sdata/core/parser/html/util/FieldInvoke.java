@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.sdata.core.parser.html.context.IParserContext;
+import com.sdata.context.parser.IParserContext;
 
 /**
  * @author zhufb
@@ -120,14 +120,8 @@ public class FieldInvoke {
 		public Object getInstance() {
 			return instance;
 		}
-		public void setInstance(Object instance) {
-			this.instance = instance;
-		}
 		public Method getMethod() {
 			return method;
-		}
-		public void setMethod(Method method) {
-			this.method = method;
 		}
 	}
 	

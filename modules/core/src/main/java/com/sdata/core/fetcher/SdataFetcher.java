@@ -2,11 +2,11 @@ package com.sdata.core.fetcher;
 
 import java.util.List;
 
-import com.sdata.core.FetchDispatch;
+import com.sdata.context.config.SdataConfigurable;
+import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.RunState;
-import com.sdata.core.SdataConfigurable;
-import com.sdata.core.data.SdataStorer;
+import com.sdata.core.FetchDispatch;
+import com.sdata.core.data.store.SdataStorer;
 import com.sdata.core.parser.SdataParser;
 
 public abstract class SdataFetcher extends SdataConfigurable {

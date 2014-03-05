@@ -49,7 +49,7 @@
 		<!-- third party dependencies version -->
 		<twitter.version>3.0.3</twitter.version>
 		<tencent.version>0.0.1</tencent.version>
-		<weibo.version>0.0.2</weibo.version>
+		<weibo.version>0.0.1</weibo.version>
 		<foursquare.version>1.0.0</foursquare.version>
 		<youtube.version>2.0</youtube.version>
 		<gdata.version>1.0</gdata.version>
@@ -61,10 +61,11 @@
 		<xml-apis.version>1.3.04</xml-apis.version>
 		<xerces.version>2.9.1</xerces.version>
 		<reflections.version>0.9.8</reflections.version>
-
+		<snacktory.version>1.2-SNAPSHOT</snacktory.version>
+	
 		<!-- Plugin的属性定义 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jdk.version>1.6</jdk.version>
+		<jdk.version>1.7</jdk.version>
 
 	</properties>
 
@@ -73,7 +74,27 @@
 		<dependencies>
 			<dependency>
 				<groupId>com.sdata</groupId>
-				<artifactId>sdatacrawler-common</artifactId>
+				<artifactId>sdatacrawler-context</artifactId>
+				<version>${sdatacrawler.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sdata</groupId>
+				<artifactId>sdatacrawler-db</artifactId>
+				<version>${sdatacrawler.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sdata</groupId>
+				<artifactId>sdatacrawler-extension</artifactId>
+				<version>${sdatacrawler.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sdata</groupId>
+				<artifactId>sdatacrawler-core</artifactId>
+				<version>${sdatacrawler.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sdata</groupId>
+				<artifactId>sdatacrawler-boot</artifactId>
 				<version>${sdatacrawler.version}</version>
 				<scope>compile</scope>
 				<exclusions>
@@ -86,17 +107,7 @@
 
 			<dependency>
 				<groupId>com.sdata</groupId>
-				<artifactId>sdatacrawler-core</artifactId>
-				<version>${sdatacrawler.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sdata</groupId>
-				<artifactId>sdatacrawler-solr</artifactId>
-				<version>${sdatacrawler.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sdata</groupId>
-				<artifactId>sdatacrawler-elastic</artifactId>
+				<artifactId>sdatacrawler-proxy</artifactId>
 				<version>${sdatacrawler.version}</version>
 			</dependency>
 			<dependency>
@@ -110,7 +121,6 @@
 				<artifactId>framework-config</artifactId>
 				<version>${framework.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>com.framework</groupId>
 				<artifactId>framework-db-hbase</artifactId>
@@ -138,6 +148,17 @@
 				<artifactId>slf4j-api</artifactId>
 				<version>${slf4j.version}</version>
 			</dependency>
+			<dependency>
+		 		<groupId>de.jetwick</groupId>
+		 		<artifactId>snacktory</artifactId>
+		 		<version>${snacktory.version}</version>
+		 		<exclusions>
+		  			<exclusion>
+		  				<artifactId>slf4j-log4j12</artifactId>
+		  				<groupId>org.slf4j</groupId>
+		  			</exclusion>
+		  		</exclusions>
+		 	</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>jcl-over-slf4j</artifactId>
@@ -422,15 +443,14 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>com.lakeside</groupId>
+			<artifactId>lakeside-core</artifactId>
+		</dependency>
 	</dependencies>
 
 	<!-- repositories -->
 	<repositories>
-		<repository>
-			<id>foursquareapijava</id>
-			<url>http://foursquare-api-java.googlecode.com/svn/repository</url>
-		</repository>
 		<repository>
 			<id>local.maven.nexus</id>
 			<name>local.maven.nexus</name>
@@ -465,6 +485,15 @@
 							</goals>
 						</execution>
 					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<inherited>true</inherited>
+					<configuration>
+						<source>${jdk.version}</source>
+						<target>${jdk.version}</target>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>

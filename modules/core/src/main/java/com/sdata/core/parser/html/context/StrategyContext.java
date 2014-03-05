@@ -8,7 +8,8 @@ import net.sf.json.JSONObject;
 import org.jsoup.nodes.Document;
 
 import com.lakeside.core.utils.MapUtils;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.parser.IParserContext;
 
 /**
  * @author zhufb

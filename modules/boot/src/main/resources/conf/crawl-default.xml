@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+<configuration>
+	<property>
+	  <name>QueueThresholdSizeSlow</name>
+	  <value>500</value>
+	  <description></description>
+	</property>
+	<property>
+	  <name>ThreadWaitTimeIfNoQueue</name>
+	  <value>1000</value>
+	</property>
+	<property>
+	  <name>MainCrawlThreadNum</name>
+	  <value>1</value>
+	</property>
+	<property>
+	  <name>FetchThreadNum</name>
+	  <value>1</value>
+	</property>
+	<property>
+	  <name>MaxFileCount</name>
+	  <value>50000</value>
+	  <description>max datum count when save to file </description>
+	</property>
+	<property>
+	  <name>DataDir</name>
+	  <value>crawldata</value>
+	</property>
+	<!-- this DBType stand for crawl data save database,e.x MongoDB、HBase -->
+	<property>
+	  <name>DBType</name>
+	  <value>HBase</value>
+	</property>
+	<!-- this hbaseNamespace stand for crawl data save database name space,e.x next、sense when DBType is HBase -->
+	<property>
+	  <name>hbase.namespace</name>
+	  <value>next</value>
+	</property>
+	<!-- need index or not -->
+	<property>
+		<name>crawler.index</name>
+		<value>true</value>
+	</property>
+	<!-- elastic server cluster name -->
+	<property>
+		<name>elastic.cluster.name</name>
+		<value>ugcd</value>
+		<description></description>
+	</property>
+	<!-- this parameter is deprecated ***
+	<property>
+	  <name>CrawlDBType</name>
+	  <value>sql</value>
+	</property>
+	-->
+	
+	<!-- for crawl queue db configuration  -->
+	<property>
+	  <name>Host</name>
+	  <value>172.29.34.96</value>
+	</property>
+	<property>
+	  <name>Port</name>
+	  <value>3306</value>
+	</property>
+	<property>
+	  <name>DataBase</name>
+	  <value>sdatacrawler</value>
+	</property>
+	<property>
+	  <name>UserName</name>
+	  <value>sdatacrawler</value>
+	</property>
+	<property>
+	  <name>Password</name>
+	  <value>sdatacrawler123</value>
+	</property>
+	<property>
+	  <name>CrawlDBQueueScriptFile</name>
+	  <value>conf/crawldb-init-crawlqueue.script</value>
+	</property>
+	<!-- for redis runstate db and image db -->
+	<property>
+		<name>RedisHost</name>
+		<value>172.29.34.96</value>
+	</property>
+	<property>
+		<name>RedisPort</name>
+		<value>6379</value>
+	</property>
+	<property>
+		<name>RedisPassword</name>
+		<value>9561cdda0d17fd15cfb9cecf7f0d081c</value>
+	</property>
+	<property>
+		<name>StatisticsRedisDBName</name>
+		<value>Statistics</value>
+	</property>
+	<!-- Elastic search info -->
+	<property>
+		<name>ElasticMapping</name>
+		<value>conf/index/index-next-ugc.json</value>
+	</property>
+	
+	<!--  image db namespace 
+	  1、for image queue,redis key Sdatacrawler:ImageQueue:namespace
+	  2、for fdfs get fdfs NextFileStore.getInstance(namespace) and record url->fid in hdfs redis. 
+	 -->
+	<property>
+		<name>image.namespace</name>
+		<value>next</value>
+	</property>
+	
+	<!--for image crawler, this parameter indicate how many image will be saved in a directory.
+		for other crawler, this indicate how many items will be saved in a directory. -->
+	<property>
+		<name>SubItemsPerDirectory</name>
+		<value>10000</value>
+	</property>
+	<!--listen port of the jetty web server, default is 8080  -->
+	<property>
+		<name>JettyServerPort</name>
+		<value>8080</value>
+	</property>
+	<property>
+		<name>ProxyFile</name>
+		<value>conf/proxy.list</value>
+	</property>
+	<property>
+		<name>UseProxy</name>
+		<value>false</value>
+	</property>
+	<!-- sleep interval value for each fetchList operation ,this value is a milliseconds value	-->
+	<property>
+		<name>FetchSleepInterval</name>
+		<value>0</value>
+	</property>
+	<!-- 
+	  	task interval value for each task.
+		the task will be awaken again when a setting interval time passed. this value is a milliseconds value,
+		it will be a single task with out any awaken operation when the value is <=0
+	-->
+	<property>
+		<name>TaskInterval</name>
+		<value>0</value>
+	</property>
+	
+	<!-- 任务周期，指一个任务在多久完成一次爬行，并执行下一个爬行任务，与TaskInterval不同，TaskInterval指的任务完成后间隔时间。
+		如：设置一天的时间，该任务会在一天内完成，并开始下一个任务
+	 -->
+	<property>
+		<name>TaskPeriod</name>
+		<value>0</value>
+	</property>
+	<property>
+		<name>emails</name>
+		<value>zhfengbin@gmail.com</value>
+	</property>
+	
+	<!-- CrawlDbTableName specify the CrawlDB table Name, default the CrawlDB table name will be the same with the crawl name
+		 please specify this parameter when need use another name for it. 
+	  -->
+	<!-- 
+	<property
+		<name>CrawlDbTableName</name>
+		<value></value>
+	</property> -->
+	
+	
+	<!-- 任务运行时间，指一个任务在每天的几时几点至几时几点间可以运行，不在这个时间内，需暂停。
+	例如，如specifiedStartTime为09:00:00，specifiedEndTime为23:00:00，表示本任务仅仅在每天的9点到23点之间运行，其他时间为等待。
+	 -->
+	<property>
+		<name>specifiedStartTime</name>
+		<value>00:00:00</value>
+	</property>
+	<property>
+		<name>specifiedEndTime</name>
+		<value>23:59:59</value>
+	</property>
+	
+	<!-- Fetcher是否为单例模式
+		如果true,	crawler中每个线程的Fetcher对象为同一对象。
+		如果false,	crawler中每个线程的fetcher为不同的对象。
+	 -->
+	<property>
+		<name>isFetcherSingleton</name>
+		<value>true</value>
+	</property>
+	
+	<!-- crawler cluster configuration -->
+	<!-- 定义crawler集群的名字 -->
+	<property>
+		<name>crawler.cluster.name</name>
+		<value>next</value>
+	</property>
+	<!-- 定义crawler集群 zookeeper地址 -->
+	<property>
+		<name>crawler.cluster.zk.root</name>
+		<value>/crawler</value>
+	</property>
+	<!-- 定义crawler集群 zookeeper地址 -->
+	<property>
+		<name>crawler.cluster.zk.hosts</name>
+		<value>172.18.109.40:2181,172.18.109.45:2181,172.18.109.50:2181</value>
+	</property>
+	
+	<!-- 定义crawler queue max size 
+	<property>
+		<name>crawler.queue.size.max</name>
+		<value>10000000</value>
+	</property> -->
+	
+	<!-- 定义crawler queue max level  
+	<property>
+		<name>crawler.queue.level.max</name>
+		<value>10</value>
+	</property> -->
+	
+	<!-- 定义crawler queue wait timeout(s), default 300s
+	<property>
+		<name>crawler.queue.wait.timeout</name>
+		<value>300</value>
+	</property> -->
+	<!-- 定义crawler datum notify field cont null times limit 
+	<property>
+		<name>crawler.datum.notify.limit</name>
+		<value>100</value>
+	</property> -->
+	
+</configuration>

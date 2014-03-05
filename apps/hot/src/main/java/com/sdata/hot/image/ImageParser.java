@@ -11,7 +11,7 @@ import net.sf.json.JSONObject;
 import com.lakeside.core.utils.MapUtils;
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.time.DateFormat;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.RawContent;
 import com.sdata.core.parser.ParseResult;
@@ -162,7 +162,7 @@ public class ImageParser extends SdataParser{
 					continue;
 				}
 //				byte[] rk = HotUtils.getRowkey(Hot.Image.getValue(), fetTime, i);
-				Object pubTime = DateFormat.changeStrToDate(json.get("created_time"));
+				Object pubTime = DateFormat.strToDate(json.get("created_time"));
 				datum.addMetadata("pub_time", pubTime);
 				JSONObject caption = json.getJSONObject("caption");
 				if(!caption.isNullObject()&&!StringUtils.isEmpty(caption.getString("text"))){

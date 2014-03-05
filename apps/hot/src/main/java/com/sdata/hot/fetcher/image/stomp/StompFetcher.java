@@ -12,10 +12,10 @@ import org.slf4j.LoggerFactory;
 
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.time.DateFormat;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.NegligibleException;
 import com.sdata.core.RawContent;
+import com.sdata.core.exception.NegligibleException;
 import com.sdata.core.parser.html.util.DocumentUtils;
 import com.sdata.core.util.JsoupUtils;
 import com.sdata.hot.HotConstants;
@@ -91,7 +91,7 @@ public class StompFetcher extends HotImageFetcher {
 		String[] ets = extras.split("\\|");
 		if(ets.length>=1){
 			String pub = ets[0].replaceAll("Posted on", "").trim();
-			datum.addMetadata("pub_time", DateFormat.changeStrToDate(trim(pub)));
+			datum.addMetadata("pub_time", DateFormat.strToDate(trim(pub)));
 		}
 		if(ets.length>=2){
 			String views = ets[1].replaceAll("views", "").trim();

@@ -16,10 +16,10 @@ import twitter4j.Trend;
 import twitter4j.Trends;
 
 import com.lakeside.core.utils.StringUtils;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.NegligibleException;
 import com.sdata.core.RawContent;
+import com.sdata.core.exception.NegligibleException;
 import com.sdata.core.parser.ParseResult;
 import com.sdata.core.parser.SdataParser;
 import com.sdata.core.parser.html.util.DocumentUtils;

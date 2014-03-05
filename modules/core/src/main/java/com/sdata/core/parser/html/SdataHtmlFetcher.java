@@ -9,12 +9,12 @@ import org.slf4j.LoggerFactory;
 
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.download.http.HttpPageLoader;
-import com.sdata.core.Configuration;
-import com.sdata.core.Constants;
-import com.sdata.core.CrawlAppContext;
+import com.sdata.context.config.Configuration;
+import com.sdata.context.config.Constants;
+import com.sdata.context.config.CrawlAppContext;
+import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.RawContent;
-import com.sdata.core.RunState;
 import com.sdata.core.fetcher.SdataFetcher;
 import com.sdata.core.parser.ParseResult;
 
@@ -26,7 +26,7 @@ import com.sdata.core.parser.ParseResult;
  */
 public class SdataHtmlFetcher extends SdataFetcher{
 	private static final Logger log = LoggerFactory.getLogger("SdataCrawler.SdataHtmlFetcher");
-	protected static CrawlQueue crawlQueue = CrawlQueue.getInstance();
+	protected static CrawlLinkQueue crawlQueue = new CrawlLinkQueue(CrawlAppContext.db);
 	private static boolean complete = false;
 	private Map<String, Object> current = null;
 

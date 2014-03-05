@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import com.lakeside.core.utils.MapUtils;
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.time.DateFormat;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDatum;
 import com.sdata.hot.HotConstants;
 import com.sdata.hot.Source;
@@ -171,7 +171,7 @@ public class InstagramFetcher extends HotImageFetcher {
 				if(isHave(result,json)){
 					continue;
 				}
-				Object pubTime = DateFormat.changeStrToDate(json.get("created_time"));
+				Object pubTime = DateFormat.strToDate(json.get("created_time"));
 				datum.addMetadata(HotConstants.PUBLIC_TIME, pubTime);
 				JSONObject caption = json.getJSONObject("caption");
 				if(!caption.isNullObject()&&!StringUtils.isEmpty(caption.getString("text"))){

@@ -20,7 +20,7 @@
     .
     <logger name="com.almworks.sqlite4java" level="WARN"/>
     <logger name="Hot" level="INFO"/>
-    <root level="ERROR">
+    <root level="WARN">
         <appender-ref ref="Console"/>
     </root>
 </configuration>

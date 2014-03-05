@@ -12,7 +12,7 @@ import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 
 import com.lakeside.download.http.HttpPageLoader;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.site.BaseDataApi;
 
 /**

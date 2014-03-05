@@ -30,22 +30,23 @@
 		  <name>hbase.table</name>
 		  <value>senze</value>
 		</property>
+		
 		<property>
 			<name>ConsumerKey</name>
-			<value>GhBYe75xd84A7axu4E4xMA</value>
+			<value>JxbZCJLzi4vQEJS7TNb9rA</value>
 		</property>
 		<property>
 			<name>ConsumerSecret</name>
-			<value>4eBAV7VOHc55SHGsxOnwRRt4BMcAWngwdqkVtrdw</value>
+			<value>8Er6J6iI6EQH8jzYsbVrWbgdqFf3WcWBzsRE8Yxzu0</value>
 		</property>
 		<!-- acess info -->
 		<property>
 			<name>AccessToken</name>
-			<value>544194759-8mrKS81tJ5LybgLnGSbuEvKBkMCCyHmlomXDIrwS</value>
+			<value>544194759-esvNxnh4p8k8BAo95VteSplM5aVuPhCjQHEjuNuF</value>
 		</property>
 		<property>
 			<name>AccessTokenSecret</name>
-			<value>RZWC6AHkmzvJHxYfQ2E39yQJFntTrtFXgT2pYqDfNI</value>
+			<value>ikNacleByw5U8O7SjF04DWZzTXQIMLLyFBoI4dobk</value>
 		</property>
 	</site>
 </configuration>

@@ -15,7 +15,7 @@ import com.lakeside.core.utils.MapUtils;
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.time.DateFormat;
 import com.lakeside.core.utils.time.DateTimeUtils;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDatum;
 import com.sdata.hot.HotConstants;
 import com.sdata.hot.Source;
@@ -65,7 +65,7 @@ public class FlickrFetcher extends HotImageFetcher {
 		for (int i = 1; i <= mediaData.size(); i++) {
 			FetchDatum datum = new FetchDatum();
 			JSONObject json = mediaData.getJSONObject(i - 1);
-			Object pubTime = DateFormat.changeStrToDate(json.get("dateupload"));
+			Object pubTime = DateFormat.strToDate(json.get("dateupload"));
 			datum.addMetadata(HotConstants.PUBLIC_TIME, pubTime);
 			JSONObject caption = json.getJSONObject("description");
 			if (!caption.isNullObject()
@@ -87,11 +87,11 @@ public class FlickrFetcher extends HotImageFetcher {
 			target.append(id);
 
 			datum.addMetadata("views", json.get("views"));
-			Object updateTime = DateFormat.changeStrToDate(json
+			Object updateTime = DateFormat.strToDate(json
 					.get("lastupdate"));
 			datum.addMetadata("update_time", updateTime);
 			Object takenTime = DateFormat
-					.changeStrToDate(json.get("datetaken"));
+					.strToDate(json.get("datetaken"));
 			datum.addMetadata("taken_time", takenTime);
 
 			if (json.containsKey("latitude") && json.containsKey("longitude")) {

@@ -11,10 +11,10 @@ import org.dom4j.Element;
 
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.core.utils.time.DateFormat;
-import com.sdata.core.Configuration;
+import com.sdata.context.config.Configuration;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.NegligibleException;
 import com.sdata.core.RawContent;
+import com.sdata.core.exception.NegligibleException;
 import com.sdata.hot.HotConstants;
 import com.sdata.hot.Source;
 import com.sdata.hot.fetcher.video.HotVideoFetcher;
@@ -93,7 +93,7 @@ public class YoutubeFetcher extends HotVideoFetcher{
 				datum.addMetadata("title", title);
 				datum.addMetadata("content", contet);
 				datum.addMetadata("image", image);
-				datum.addMetadata("pub_time", DateFormat.changeStrToDate(pubDate));
+				datum.addMetadata("pub_time", DateFormat.strToDate(pubDate));
 				datum.addMetadata("uname", uname);
 				datum.addMetadata("views", views);
 				datum.addMetadata("head", head);

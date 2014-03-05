@@ -7,14 +7,14 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.dom4j.Element;
 import org.dom4j.tree.DefaultAttribute;
 
-import com.sdata.core.parser.html.field.DatumField;
-import com.sdata.core.parser.html.field.DatumItem;
-import com.sdata.core.parser.html.field.DatumList;
 import com.sdata.core.parser.html.field.Field;
-import com.sdata.core.parser.html.field.StrategyDatum;
-import com.sdata.core.parser.html.field.StrategyInit;
-import com.sdata.core.parser.html.field.StrategyLinks;
 import com.sdata.core.parser.html.field.Tags;
+import com.sdata.core.parser.html.field.datum.DatumField;
+import com.sdata.core.parser.html.field.datum.DatumItem;
+import com.sdata.core.parser.html.field.datum.DatumList;
+import com.sdata.core.parser.html.field.strategy.StrategyDatum;
+import com.sdata.core.parser.html.field.strategy.StrategyInit;
+import com.sdata.core.parser.html.field.strategy.StrategyLinks;
 
 /**
  * @author zhufb
