@@ -16,11 +16,26 @@
 	</parent>
 
 	<modules>
-		<module>hot</module>
-		<module>future</module>
-		<module>live</module>
-		<module>common</module>
+		<!--<module>hot</module>-->
+		<!--<module>future</module>-->
+		<!--<module>live</module>-->
+		<!--<module>common</module>-->
+        <module>amazon</module>
+        <!--<module>blogs</module>-->
 	</modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.sdata</groupId>
+            <artifactId>sdatacrawler-boot</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>sdatacrawler-solr</artifactId>
+                    <groupId>com.sdata</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
 
 	<description>Sdatacrawler apps is advance crawler task of data crawler framework. </description>
 </project>

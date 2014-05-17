@@ -5,3 +5,5 @@ target
 output
 .shell_history
 bin
+.idea
+*.iml

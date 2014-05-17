@@ -22,7 +22,6 @@
 		<module>extension</module>
 		<module>core</module>
 		<module>boot</module>
-		<module>proxy</module>
 	</modules>
 
 </project>

@@ -1,0 +1,74 @@
+{
+   "ugc": {
+      "_all" : {
+         "enabled" : false
+      },
+      "_source": { 
+         "compress": true,
+         "includes" : ["dbid","geo","origin","url","img_s","classification","loc","lang","author","fetchtime","date"],
+         "excludes" : ["content","title"]
+      },
+      "dynamic_templates": [
+          {
+              "string_template" : { 
+                  "match" : "*",
+                  "mapping": {"type": "string", "index": "not_analyzed" },
+                  "match_mapping_type" : "string"
+               } 
+           }
+      ],
+      "properties":{  
+         "dbid":{  
+            "type":"string",  
+            "index": "no"
+         },  
+          "url":{
+            "type":"string",
+            "index" : "no"
+         }, 
+         "title":{  
+            "type":"string",  
+            "analyzer":"ik",
+            "index" : "analyzed"
+         },  
+         "content":{  
+            "type":"string", 
+            "analyzer":"ik",
+            "index" : "analyzed"
+         }, 
+         "geo":{  
+            "type":"geo_point"  
+         }, 
+         "origin":{  
+            "type":"string",
+            "index" : "not_analyzed"  
+         },  
+         "img_s":{  
+            "type":"string",
+            "index" : "no"
+         }, 
+         "classification":{  
+            "type":"string",
+            "index" : "not_analyzed"
+         }, 
+         "loc":{  
+            "type":"string",
+            "index" : "not_analyzed"
+         }, 
+         "lang":{
+            "type":"string",
+            "index" : "not_analyzed"
+         }, 
+         "author":{  
+            "type":"string",
+            "index" : "not_analyzed"
+         }, 
+         "fetchtime":{  
+            "type":"date"  
+         },  
+         "date":{  
+            "type":"date"  
+         }  
+      }  
+   }
+}

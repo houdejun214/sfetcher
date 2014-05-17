@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS `{RunState}` (
+  `key` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `siteName` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `value` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  UNIQUE KEY `key` (`key`,`siteName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
