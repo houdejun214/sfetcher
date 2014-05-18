@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<datum filter="null:name|_id|url">
+    <!-- product -->
+    <field from="productId" name="_id"></field>
+    <field from="productId" name="id" index="dbid"></field><!-- amazon product id, type is UUID -->
+    <field from="productName" name="name" index="title"></field><!-- amazon product name -->
+    <field from="category" name="ctry"></field><!-- product category -->
+    <field from="purl" name="url" index="url"></field><!-- amazon's product url -->
+    <field from="isfetched" name="iftch"></field>
+    <field from="reviewStar" name="rs"></field>
+    <field from="listPrice" name="lp"></field>
+    <field from="price" name="price"></field>
+    <field from="images" name="images" action="saveImage" index="img_s"></field>
+    <field from="stocksSatus" name="ss"></field>
+    <field from="technicalDetails" name="td"></field>
+    <field from="description" name="desc" index="content"></field>
+    <field from="fetchTime" name="fetdt" index="fetchtime"></field>
+    <field from="origin" name="origin" index="origin" value="amazon"></field>
+    <field from="classification" name="classification" index="classification" value="product" indexOnly="true"></field>
+    <field from="docloc" name="docloc" index="loc" value="ww" indexOnly="true"></field>
+    <field from="lang" name="lang" index="lang" value="en" indexOnly="true"></field>
+    <list  from="reviews" name="reviews">
+        <item>
+            <field from="rstrId" name="_id"></field><!-- this review belong to any product-->
+            <field from="pid" name="pid"></field><!-- this review belong to any product-->
+            <field from="reviewUrl" name="url"></field>
+            <field from="star" name="star"></field>
+            <field from="title" name="title"></field>
+            <field from="datetime" name="crtdt" action="todate"></field>
+            <field from="rstrId" name="id"></field><!-- rename to id -->
+            <field from="authorName" name="aname"></field>
+            <field from="authorUrl" name="aurl" ></field>
+            <field from="reviewContent" name="content" ></field><!-- rename to content -->
+            <field from="productDetails" name="pd" ></field>
+            <field from="fetdt" name="fetdt" action="todate"></field>
+            <field from="origin" name="origin" index="origin" value="amazon"></field>
+        </item>
+    </list>
+</datum>
