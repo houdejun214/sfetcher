@@ -6,26 +6,28 @@ import java.util.Map;
  * @author zhufb
  *
  */
-public interface BaseDao {
-	
+public abstract class BaseDao {
+
+    protected Collection collection;
+
+    public BaseDao(Collection collection){
+        this.collection = collection;
+    }
+
 	/**
 	 * @param data
 	 */
-	public boolean save(Map<String,Object> data);
+	public abstract boolean save(Map<String,Object> data);
 	
 	/**
 	 * exists
-	 * 
-	 * @param count
 	 * @return
 	 */
-	public boolean isExists(Object id);
+	public abstract boolean isExists(Object id);
 	
 	/**
 	 * delete
-	 * 
-	 * @param count
 	 * @return
 	 */
-	public void delete(Object id);
+	public abstract void delete(Object id);
 }

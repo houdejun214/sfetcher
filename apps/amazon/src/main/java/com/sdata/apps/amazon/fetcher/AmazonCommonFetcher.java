@@ -1,5 +1,8 @@
 package com.sdata.apps.amazon.fetcher;
 
+import com.lakeside.core.utils.ApplicationResourceUtils;
+import com.lakeside.core.utils.FileUtils;
+import com.lakeside.download.http.HttpPageLoader;
 import com.sdata.apps.amazon.parser.AmazonParseResult;
 import com.sdata.apps.amazon.parser.AmazonParser;
 import com.sdata.context.config.Configuration;
@@ -15,16 +18,19 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.net.UnknownHostException;
 import java.util.*;
+import java.util.regex.Pattern;
 
 /**
- *
+ * amazon fetcher.
  */
 class AmazonCommonFetcher extends SdataFetcher {
-    private static final String amazonCategoryUrl="http://www.amazon.com/gp/site-directory/ref=topnav_sad";
 
     private static final Logger log = LoggerFactory.getLogger("SdataCrawler.AmazonFetcher");
+
+    private static final String amazonCategoryUrl="http://www.amazon.com/gp/site-directory/ref=topnav_sad";
 
     private Queue<Map<String,Object>> categoires=null;
 
@@ -45,7 +51,6 @@ class AmazonCommonFetcher extends SdataFetcher {
         AmazonParser amazonParser = new AmazonParser(conf,state);
         this.parser = amazonParser;
         loadCategoryFilter();
-        initProductCategory(amazonParser);
     }
 
     @Override
@@ -132,17 +137,6 @@ class AmazonCommonFetcher extends SdataFetcher {
         }
         return complete;
     }
-
-    private void initProductCategory(AmazonParser amazonParser){
-        List<Map<String, Object>> categorylist = crawlDB.queryQueue(topN);
-        if(categorylist==null || categorylist.size()==0){
-            String content = ((AmazonParser)parser).download(amazonCategoryUrl);
-            categorylist = amazonParser.parseTopCategoryList(content);
-            categorylist = appendCategoryQueue(categorylist,true);
-        }
-        categoires = new LinkedList<Map<String,Object>>(categorylist);
-    }
-
 
     private void loadCategoryFilter(){
         String filterFile = this.getConf("filterFile");

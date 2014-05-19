@@ -82,7 +82,7 @@
 	<!-- for redis runstate db and image db -->
 	<property>
 		<name>RedisHost</name>
-		<value>172.29.34.96</value>
+		<value>172.31.51.195</value>
 	</property>
 	<property>
 		<name>RedisPort</name>
@@ -152,11 +152,6 @@
 		<name>TaskPeriod</name>
 		<value>0</value>
 	</property>
-	<property>
-		<name>emails</name>
-		<value>zhfengbin@gmail.com</value>
-	</property>
-	
 	<!-- CrawlDbTableName specify the CrawlDB table Name, default the CrawlDB table name will be the same with the crawl name
 		 please specify this parameter when need use another name for it. 
 	  -->

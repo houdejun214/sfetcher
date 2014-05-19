@@ -2,8 +2,8 @@
 <configuration>
 
     <!-- crawl site for amazon -->
-    <site name="amazon" fetcher="com.sdata.component.fetcher.AmazonFetcher"
-          storer="com.sdata.core.data.SdataStandardStorer">
+    <site name="amazon" fetcher="com.sdata.apps.amazon.fetcher.AmazonCateItemsFetcher"
+          storer="com.sdata.apps.amazon.data.AmazonStorer">
         <property>
             <name>FetchThreadNum</name>
             <value>1</value>
@@ -11,6 +11,18 @@
         <property>
             <name>source</name>
             <value>amazon</value>
+        </property>
+        <property>
+            <name>MainCrawlThreadNum</name>
+            <value>1</value>
+        </property>
+        <property>
+            <name>FetchThreadNum</name>
+            <value>10</value>
+        </property>
+        <property>
+            <name>cateListFile</name>
+            <value>template/amazon/amazon.category.list</value>
         </property>
         <property>
             <name>filterFile</name>
@@ -27,6 +39,22 @@
         <property>
             <name>TaskInterval</name>
             <value>86400000</value>
+        </property>
+        <property>
+            <name>storer.mysql.jdbc.host</name>
+            <value>172.31.51.199</value>
+        </property>
+        <property>
+            <name>storer.mysql.jdbc.database</name>
+            <value>amazon</value>
+        </property>
+        <property>
+            <name>storer.mysql.jdbc.username</name>
+            <value>root</value>
+        </property>
+        <property>
+            <name>storer.mysql.jdbc.password</name>
+            <value>mysql!123456</value>
         </property>
     </site>
 </configuration>

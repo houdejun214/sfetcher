@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<strategy>
-	<links selector=".pagebox a:contains(下一页)|links"></links>
-	<datum selector=".r-info h2 a|links"></datum>
-</strategy>

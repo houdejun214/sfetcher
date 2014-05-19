@@ -4,15 +4,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.sdata.db.Collection;
 import org.apache.commons.lang.StringUtils;
 
 import com.sdata.context.config.Configuration;
 import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.data.dao.DaoFactory;
+import com.sdata.db.DaoFactory;
 import com.sdata.core.parser.config.StoreConfig;
 import com.sdata.db.BaseDao;
-import com.sdata.db.DaoCollection;
 
 /**
  *  sdata crawler standard storer
@@ -38,33 +38,21 @@ public class SdataBaseStorer extends SdataStorer {
 	public void save(FetchDatum datum)  {
 		if(datum!=null && datum.getMetadata()!=null){
 			Configuration conf = this.getConf();
-			Iterator<DaoCollection> collections = StoreConfig.getInstance(conf).getCollections();
+			Iterator<Collection> collections = StoreConfig.getInstance(conf).getCollections();
 			this.saveMultiCollection(conf,collections,datum.getMetadata());
 		}
 	}
 
 	/**
-	 * get Collection Dao with collection name 
-	 * 
-	 * @param conf
-	 * @param name
-	 * @return
-	 */
-	public BaseDao getDao(Configuration conf,String name){
-		return DaoFactory.getDaos(conf).get(name);
-	}
-	
-	/**
 	 * 
 	 * with conf meta data
 	 * 
 	 * @param conf
-	 * @param metadatal
 	 */
-	protected void saveMultiCollection(Configuration conf,Iterator<DaoCollection> collections,Map<String, Object> metadata){
+	protected void saveMultiCollection(Configuration conf,Iterator<Collection> collections,Map<String, Object> metadata){
 		while(collections.hasNext()){
-			DaoCollection collection = collections.next();
-			BaseDao dao = getDao(conf,collection.getName());
+			Collection collection = collections.next();
+            BaseDao dao = DaoFactory.getDao(conf,collection);
 			this.saveOneCollection(collection,dao,metadata);
 		}
 	}
@@ -76,7 +64,7 @@ public class SdataBaseStorer extends SdataStorer {
 	 * @param dao
 	 * @param data
 	 */
-	protected void saveOneCollection(DaoCollection collection,BaseDao dao,Map<String, Object> data){
+	protected void saveOneCollection(Collection collection,BaseDao dao,Map<String, Object> data){
 		String field = collection.getField();
 		// default all datum
 		if(StringUtils.isEmpty(field)){

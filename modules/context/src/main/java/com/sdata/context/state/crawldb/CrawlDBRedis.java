@@ -26,8 +26,13 @@ public class CrawlDBRedis  {
 					String host = conf.get("RedisHost");
 					int port = conf.getInt("RedisPort",6379);
 					String password = conf.get("RedisPassword");
-					if(StringUtils.isEmpty(password))password = null;
-					dbs.put(namespace,new RedisDB(host,port,password,namespacePrefix));
+                    Boolean auth = conf.getBoolean("RedisAuth", false);
+                    if(auth){
+                        dbs.put(namespace,new RedisDB(host,port,password,namespacePrefix));
+                    }else{
+                        dbs.put(namespace,new RedisDB(host,port,namespacePrefix));
+                    }
+
 				}
 			}
 		}

@@ -87,35 +87,14 @@ public class RunState {
 	}
 
 	public String getCurrentFetchState() {
+        if(currentFetchState==null){
+
+        }
 		return currentFetchState;
 	}
 
 	public void setCurrentFetchState(String currentFetchState) {
-		this.currentFetchState = currentFetchState;
-	}
-
-	public Date getCurrentTaskStartTime() {
-		return currentTaskStartTime;
-	}
-
-	public void setCurrentTaskStartTime(Date currentTaskStartTime) {
-		this.currentTaskStartTime = currentTaskStartTime;
-	}
-
-	public Date getCurrentTaskEndTime() {
-		return currentTaskEndTime;
-	}
-
-	public void setCurrentTaskEndTime(Date currentTaskEndTime) {
-		this.currentTaskEndTime = currentTaskEndTime;
-	}
-
-	public Date getLastTaskEndTime() {
-		return lastTaskEndTime;
-	}
-
-	public void setLastTaskEndTime(Date lastTaskEndTime) {
-		this.lastTaskEndTime = lastTaskEndTime;
+        this.updateCurrentFetchState(currentFetchState);
 	}
 
 	public long getUnexpectedDiscardCount() {

@@ -3,7 +3,7 @@
 	
 	<!-- crawl site for amazon -->
 	<site name="test" fetcher="com.sdata.core.fetcher.SdataTestFetcher"
-		storer="com.sdata.core.data.SdataEmptyStorer">
+		storer="com.sdata.core.data.store.SdataEmptyStorer">
 		<property>
 		  <name>MainCrawlThreadNum</name>
 		  <value>2</value>

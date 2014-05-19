@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<strategy>
-	<!-- http://belluspuera.blogspot.sg/search?q=canon -->
-	<links selector="#blog-pager-older-link a|link"></links>
-	<datum selector="#main h3.post-title a|links"></datum>
-</strategy>

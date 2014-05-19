@@ -1,75 +1,88 @@
 package com.sdata.apps.amazon.fetcher;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.lakeside.core.utils.ApplicationResourceUtils;
+import com.lakeside.core.utils.FileUtils;
+import com.lakeside.core.utils.StringUtils;
 import com.sdata.apps.amazon.parser.AmazonParseResult;
 import com.sdata.apps.amazon.parser.AmazonParser;
 import com.sdata.context.config.Configuration;
 import com.sdata.context.config.Constants;
-import com.sdata.context.config.CrawlAppContext;
 import com.sdata.context.state.RunState;
-import com.sdata.context.state.crawldb.CrawlDB;
 import com.sdata.core.FetchDatum;
-import com.sdata.core.FetchDispatch;
 import com.sdata.core.RawContent;
 import com.sdata.core.fetcher.SdataFetcher;
 import com.sdata.core.parser.ParseResult;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.net.UnknownHostException;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 
 /**
  * fetch a single category data
  */
-class AmazonCateItemsFetcher extends SdataFetcher {
+public class AmazonCateItemsFetcher extends SdataFetcher {
     private static final Logger log = LoggerFactory.getLogger("SdataCrawler.AmazonFetcher");
 
     private Queue<Map<String,Object>> categoires=null;
 
     private Map<String, Object> curCategory=null;
-
-    private CrawlDB crawlDB;
-
     private Boolean curCategoryOver = false;
     private int curPageNo = 1;
     private static int maxPage = 400;
-    private int topN = 10;
     private List<String> categoryFilters;
 
     public AmazonCateItemsFetcher(Configuration conf, RunState state) throws UnknownHostException {
         this.setConf(conf);
         this.setRunState(state);
-        crawlDB = CrawlAppContext.db;
         AmazonParser amazonParser = new AmazonParser(conf,state);
         this.parser = amazonParser;
-        loadCategoryFilter();
         initProductCategory(amazonParser);
+        resetFetchState();
+    }
+
+    private void resetFetchState(){
+        curCategory = categoires.poll();
+        curPageNo = 1;
+        curCategoryOver = false;
+        String currentFetchState = state.getCurrentFetchState();
+        if(StringUtils.isNotEmpty(currentFetchState)){
+            String[] arrs = currentFetchState.split(",", 2);
+            if(arrs!=null && arrs.length==2) {
+                curCategory.put(Constants.QUEUE_URL, arrs[1]);
+                curPageNo = Integer.valueOf(arrs[0]);
+            }
+        }
     }
 
     @Override
     public List<FetchDatum> fetchDatumList() {
         if(curCategory==null && (categoires!=null && categoires.size()>0)){
-            curCategory = categoires.poll();
+            moveNext();
         }
         if(curCategory!=null){
+            String category = (String)curCategory.get(Constants.QUEUE_NAME);
             String link = (String)curCategory.get(Constants.QUEUE_URL);
-            log.info("fetch list ["+ getCurCategoryInfo()+"]");
             String content = ((AmazonParser)parser).download(link);
             RawContent c = new RawContent(link,content);
             c.setMetadata(Constants.QUEUE_DEPTH, curCategory.get(Constants.QUEUE_DEPTH));
+            c.setMetadata("category", category);
             AmazonParseResult parseList = (AmazonParseResult)parser.parseList(c);
             if(!parseList.isListEmpty() && parseList.getNextUrl()!=null&&maxPage>=curPageNo){
                 curCategory.put(Constants.QUEUE_URL, parseList.getNextUrl());
             } else {
                 curCategoryOver = true;
             }
-            if(curPageNo <= 1) {
-                // the first page, add the parsed category pages.
-                List<Map<String, Object>> newCategoryList = parseList.getNewCategoryList();
-                appendCategoryQueue(newCategoryList,false);
-            }
             List<FetchDatum> fetchList = parseList.getFetchList();
+            Object name = curCategory.get(Constants.QUEUE_NAME);
+            log.info("fetch category list [{}], page [{}], fetch num [{}] ",new Object[]{name,curPageNo,fetchList.size()});
             moveNext();
             return fetchList;
         }
@@ -80,7 +93,7 @@ class AmazonCateItemsFetcher extends SdataFetcher {
     public FetchDatum fetchDatum(FetchDatum datum) {
         if(datum!=null && !StringUtils.isEmpty(datum.getUrl())){
             String url = datum.getUrl();
-            log.info("fetching product: "+url);
+            //log.info("fetching product: "+url);
             String content = ((AmazonParser)parser).download(url);
             //datum.setContent(content);
             RawContent rawContent = new RawContent(url,content);
@@ -88,6 +101,7 @@ class AmazonCateItemsFetcher extends SdataFetcher {
             ParseResult result = parser.parseSingle(rawContent);
             if(result != null){
                 datum.setMetadata(result.getMetadata());
+                datum.addMetadata(Constants.FETCH_TIME, new Date());
             }else{
                 throw new RuntimeException("fetch content is empty");
             }
@@ -100,23 +114,15 @@ class AmazonCateItemsFetcher extends SdataFetcher {
      */
     @Override
     protected void moveNext() {
-        if(curCategoryOver){
-            crawlDB.updateQueueComplete(curCategory.get(Constants.QUEUE_KEY).toString());
-            if(categoires.size() <= 0){
-                List<Map<String, Object>> tops = crawlDB.queryQueue(topN);
-                categoires.addAll(tops);
-            }
+        if(curCategory==null || curCategoryOver){
             curCategory = categoires.poll();
-            if(curCategory == null){
-                List<Map<String, Object>> tops = crawlDB.queryQueue(topN);
-                categoires.addAll(tops);
-                curCategory = categoires.poll();
-            }
             curPageNo = 1;
             curCategoryOver = false;
         } else {
             curPageNo++;
         }
+        state.setCurrentEntry((Integer) curCategory.get(Constants.QUEUE_SEQUENCE_ID));
+        state.setCurrentFetchState(StringUtils.format("{0},{1}",curPageNo,curCategory.get(Constants.QUEUE_URL)));
     }
 
     @Override
@@ -124,7 +130,6 @@ class AmazonCateItemsFetcher extends SdataFetcher {
         boolean complete = false;
         if(curCategory==null&&categoires.size()==0) {
             //delete queue;
-            crawlDB.deleteQueue();
             //update currentFetchState to a empty String for next task
             state.updateCurrentFetchState("");
             complete = true;
@@ -132,68 +137,36 @@ class AmazonCateItemsFetcher extends SdataFetcher {
         return complete;
     }
 
-    private void initProductCategory(AmazonParser amazonParser){
-        List<Map<String, Object>> categorylist = crawlDB.queryQueue(topN);
-        if(categorylist==null || categorylist.size()==0){
-            String content = ((AmazonParser)parser).download(amazonCategoryUrl);
-            categorylist = amazonParser.parseTopCategoryList(content);
-            categorylist = appendCategoryQueue(categorylist,true);
-        }
-        categoires = new LinkedList<Map<String,Object>>(categorylist);
-    }
-
-
-    private void loadCategoryFilter(){
-        String filterFile = this.getConf("filterFile");
+    private void initProductCategory(AmazonParser amazonParser) {
+        String filterFile = this.getConf("cateListFile");
         String file = ApplicationResourceUtils.getResourceUrl(filterFile);
+        List<String> categoryList = null;
+        categoires = Lists.newLinkedList();
+        int entryId = state.getCurrentEntry();
+        log.info("start crawler from [{}]",entryId);
         try {
-            categoryFilters = FileUtils.readLines(new File(file), "utf-8");
-            List<String> comments = new ArrayList<String>();
-            for(String filter:categoryFilters){
-                if(filter.startsWith("//") || filter.startsWith("#") ){
-                    comments.add(filter);
+            categoryList = FileUtils.readLines(new File(file), "utf-8");
+            int i=1;
+            for(String category:categoryList){
+                if(i<entryId){
+                    break;
+                }
+                String[] arrs = category.split(",",2);
+                if(arrs!=null && arrs.length==2) {
+                    String cate = arrs[0];
+                    String link = StringUtils.trim(arrs[1], "\"");
+                    Map<String, Object> data = Maps.newHashMap();
+                    data.put(Constants.QUEUE_SEQUENCE_ID, i++);
+                    data.put(Constants.QUEUE_NAME, cate);
+                    data.put(Constants.QUEUE_URL, StringEscapeUtils.unescapeXml(link));
+                    categoires.add(data);
+                }else{
+                    log.warn("[{}] can't be parse",category);
                 }
             }
-            for(String comment:comments){
-                categoryFilters.remove(comment);
-            }
-
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
-    }
 
-    private List<Map<String, Object>> appendCategoryQueue(List<Map<String, Object>> list,boolean needFilter) {
-        List<Map<String, Object>> newCategoryList =new ArrayList<Map<String, Object>>();
-        if(needFilter){
-            for(Map<String, Object> obj:list){
-                String name = (String)obj.get(Constants.QUEUE_KEY);
-                boolean filter = false;
-                for(String regex: categoryFilters){
-                    boolean matches = Pattern.matches(regex, name);
-                    if(matches){
-                        filter = true;
-                        break;
-                    }
-                }
-                if(!filter){
-                    newCategoryList.add(obj);
-                }
-            }
-        }else{
-            newCategoryList = list;
-        }
-        this.crawlDB.insertQueueObjects(newCategoryList);
-        return newCategoryList;
-    }
-
-    private String getCurCategoryInfo(){
-        StringBuilder info = new StringBuilder();
-        if(this.curCategory!= null){
-            info.append("catId:"+this.curCategory.get(Constants.QUEUE_KEY)+",");
-            info.append("page:"+curPageNo+",");
-            info.append("url:"+this.curCategory.get(Constants.QUEUE_URL));
-        }
-        return info.toString();
     }
 }

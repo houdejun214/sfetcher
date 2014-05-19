@@ -1,7 +1,0 @@
-<configuration>
-	<!-- crawl site for tencent -->
-		<!-- <property>
-			<name>sense.html.page.max</name>
-			<value>10</value>
-		</property> -->
-</configuration>

@@ -13,7 +13,6 @@ import com.sdata.context.config.CrawlAppContext;
 import com.sdata.context.state.RunState;
 import com.sdata.context.state.crawldb.CrawlDB;
 import com.sdata.context.state.crawldb.impl.CrawlDBImpl;
-import com.sdata.core.parser.html.mail.CrawlerMail;
 import com.sdata.crawl.task.CrawlTask;
 
 public class DataCrawl {
@@ -68,7 +67,6 @@ public class DataCrawl {
 //		CrawlClusterManager cluster = new CrawlClusterManager(mainTask,conf);
 //		cluster.startCrawler();
 		mainTask.startCrawl();
-		CrawlerMail.send();
 	}
 
 	public static CrawlTask mainTask;

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.sdata.db.Collection;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
@@ -17,17 +18,16 @@ import com.sdata.context.config.Configuration;
 import com.sdata.context.config.Constants;
 import com.sdata.context.parser.config.AbstractConfig;
 import com.sdata.db.ColumnFamily;
-import com.sdata.db.DaoCollection;
 
 /**
  * @author zhufb
  *
  */
 public class StoreConfig extends AbstractConfig{
-	private List<DaoCollection> list;
+	private List<Collection> list;
 	private static Object syn = new Object(); 
 	public final static String CONF_XML ="storeXml";
-	private transient DaoCollection mainCollection;
+	private transient Collection mainCollection;
 	private final static Map<Configuration,StoreConfig> configMap  = new ConcurrentHashMap<Configuration,StoreConfig>();
 	public static StoreConfig getInstance(Configuration conf){
 		if(!configMap.containsKey(conf)){
@@ -42,12 +42,12 @@ public class StoreConfig extends AbstractConfig{
 
 	@Override
 	protected void parse(Document document) {
-		list = new ArrayList<DaoCollection>();
+		list = new ArrayList<Collection>();
 		Element root = document.getRootElement();
 		Iterator<Element> iterator = root.elementIterator();
 		while(iterator.hasNext()){
 			Element next = (Element)iterator.next();
-			DaoCollection collection = new DaoCollection(conf.get(Constants.SOURCE));
+			Collection collection = new Collection(conf.get(Constants.SOURCE));
 			// attribute
 			this.copyAttributeToCollection(collection, next);
 			// sub element contains update and remove
@@ -60,7 +60,7 @@ public class StoreConfig extends AbstractConfig{
 		super(conf);
 	}
 	
-	private void copyAttributeToCollection(DaoCollection collection,Element e) {
+	private void copyAttributeToCollection(Collection collection,Element e) {
 		Iterator iterator = e.attributeIterator();
 		while (iterator.hasNext()) {
 			DefaultAttribute next = (DefaultAttribute) iterator.next();
@@ -78,7 +78,7 @@ public class StoreConfig extends AbstractConfig{
 		}
 	}
 
-	private void addChildren(DaoCollection collection,Element e) {
+	private void addChildren(Collection collection,Element e) {
 		Iterator<Element> iterator = e.elementIterator();
 		while (iterator.hasNext()) {
 			Element next = iterator.next();
@@ -98,15 +98,15 @@ public class StoreConfig extends AbstractConfig{
 		}
 	}
 
-	public Iterator<DaoCollection> getCollections() {
+	public Iterator<Collection> getCollections() {
 		return list.iterator();
 	}
 
-	public DaoCollection getMainCollection() {
+	public Collection getMainCollection() {
 		if(mainCollection == null){
-			Iterator<DaoCollection> iterator = list.iterator();
+			Iterator<Collection> iterator = list.iterator();
 			while(iterator.hasNext()){
-				DaoCollection sc = iterator.next();
+				Collection sc = iterator.next();
 				if(StringUtils.isEmpty(sc.getField())){
 					mainCollection =  sc;
 				}

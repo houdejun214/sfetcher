@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<strategy>
-	<!-- http://www.ladyironchef.com/?s={keywords}&submit=Search-->
-	<links selector="div.pagebar a:contains(Next)|link"></links>
-	<datum selector=".entry-header h1.entry-title a|links"></datum>
-</strategy>

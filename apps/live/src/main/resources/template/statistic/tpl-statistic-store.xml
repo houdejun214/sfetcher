@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<store>
-	<collection name="statistic_week">
-		<colfly name="psi">psi-n,psi-s,psi-w,psi-e,psi-c,psi-sg</colfly>
-		<colfly name="pm">pm-n,pm-s,pm-w,pm-e,pm-c,pm-sg</colfly>
-	</collection>
-</store>

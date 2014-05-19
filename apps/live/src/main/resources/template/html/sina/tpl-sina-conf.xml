@@ -1,7 +1,0 @@
-<configuration>
-	<!-- crawl site for tencent -->
-		<property>
-			<name>sense.html.charset</name>
-			<value>GBK</value>
-		</property>
-</configuration>

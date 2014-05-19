@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<store>
-	<collection name="hardwarezone_posts" pkTable="index">
-		<colfly name="others">titleUrl,floor,uurl</colfly>
-	</collection>
-</store>
