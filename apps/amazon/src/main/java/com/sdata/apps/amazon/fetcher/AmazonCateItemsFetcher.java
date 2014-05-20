@@ -52,12 +52,14 @@ public class AmazonCateItemsFetcher extends SdataFetcher {
         curCategory = categoires.poll();
         curPageNo = 1;
         curCategoryOver = false;
-        String currentFetchState = state.getCurrentFetchState();
-        if(StringUtils.isNotEmpty(currentFetchState)){
-            String[] arrs = currentFetchState.split(",", 2);
-            if(arrs!=null && arrs.length==2) {
-                curCategory.put(Constants.QUEUE_URL, arrs[1]);
-                curPageNo = Integer.valueOf(arrs[0]);
+        if(curCategory!=null) {
+            String currentFetchState = state.getCurrentFetchState();
+            if (StringUtils.isNotEmpty(currentFetchState)) {
+                String[] arrs = currentFetchState.split(",", 2);
+                if (arrs != null && arrs.length == 2) {
+                    curCategory.put(Constants.QUEUE_URL, arrs[1]);
+                    curPageNo = Integer.valueOf(arrs[0]);
+                }
             }
         }
     }
@@ -91,6 +93,7 @@ public class AmazonCateItemsFetcher extends SdataFetcher {
 
     @Override
     public FetchDatum fetchDatum(FetchDatum datum) {
+        this.await(500);
         if(datum!=null && !StringUtils.isEmpty(datum.getUrl())){
             String url = datum.getUrl();
             //log.info("fetching product: "+url);
@@ -142,27 +145,27 @@ public class AmazonCateItemsFetcher extends SdataFetcher {
         String file = ApplicationResourceUtils.getResourceUrl(filterFile);
         List<String> categoryList = null;
         categoires = Lists.newLinkedList();
-        int entryId = state.getCurrentEntry();
-        log.info("start crawler from [{}]",entryId);
+        int startId = state.getCurrentEntry();
+        log.info("start crawler from [{}]",startId);
         try {
             categoryList = FileUtils.readLines(new File(file), "utf-8");
             int i=1;
             for(String category:categoryList){
-                if(i<entryId){
-                    break;
+                if(i>=startId){
+                    String[] arrs = category.split(",",2);
+                    if(arrs!=null && arrs.length==2) {
+                        String cate = arrs[0];
+                        String link = StringUtils.trim(arrs[1], "\"");
+                        Map<String, Object> data = Maps.newHashMap();
+                        data.put(Constants.QUEUE_SEQUENCE_ID, i);
+                        data.put(Constants.QUEUE_NAME, cate);
+                        data.put(Constants.QUEUE_URL, StringEscapeUtils.unescapeXml(link));
+                        categoires.add(data);
+                    }else{
+                        log.warn("[{}] can't be parse",category);
+                    }
                 }
-                String[] arrs = category.split(",",2);
-                if(arrs!=null && arrs.length==2) {
-                    String cate = arrs[0];
-                    String link = StringUtils.trim(arrs[1], "\"");
-                    Map<String, Object> data = Maps.newHashMap();
-                    data.put(Constants.QUEUE_SEQUENCE_ID, i++);
-                    data.put(Constants.QUEUE_NAME, cate);
-                    data.put(Constants.QUEUE_URL, StringEscapeUtils.unescapeXml(link));
-                    categoires.add(data);
-                }else{
-                    log.warn("[{}] can't be parse",category);
-                }
+                i++;
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
