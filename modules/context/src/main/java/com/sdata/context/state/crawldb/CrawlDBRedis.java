@@ -17,8 +17,8 @@ public class CrawlDBRedis  {
 	private static String ROOT = "Sdatacrawler:";
 	private static Object sync = new Object();
 	private static Map<String,RedisDB> dbs = new HashMap<String,RedisDB>();
-	
-	public static RedisDB getRedisDB(Configuration conf,String namespace){
+
+    public static RedisDB getRedisDB(Configuration conf,String namespace){
 		if(!dbs.containsKey(namespace)){
 			synchronized(sync){
 				if(!dbs.containsKey(namespace)){
