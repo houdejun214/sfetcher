@@ -88,8 +88,9 @@ public class AmazonCateItemsFetcher extends SdataFetcher {
             if(curPageNo<=1 && (fetchList==null || fetchList.size()==0)){
                 log.info("There are likely to be blocked, wait 5 minutes");
                 this.await(3*1000*60);
+            }else{
+                moveNext();
             }
-            moveNext();
             return fetchList;
         }
         return null;
