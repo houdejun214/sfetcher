@@ -1,6 +1,5 @@
 package com.sdata.apps.amazon.parser;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,5 +17,15 @@ public class AmazonParseResult extends ParseResult {
 	public void setNewCategoryList(List<Map<String, Object>> newCategoryList) {
 		this.newCategoryList = newCategoryList;
 	}
-	
+
+    private boolean isBlock = false;
+
+    public boolean isBlock() {
+        return isBlock;
+    }
+
+    public void setBlock(boolean isBlock) {
+        this.isBlock = isBlock;
+    }
+
 }

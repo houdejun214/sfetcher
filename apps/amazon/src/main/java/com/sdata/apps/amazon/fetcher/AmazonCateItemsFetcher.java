@@ -85,7 +85,7 @@ public class AmazonCateItemsFetcher extends SdataFetcher {
             List<FetchDatum> fetchList = parseList.getFetchList();
             Object name = curCategory.get(Constants.QUEUE_NAME);
             log.info("fetch category list [{}], page [{}], fetch num [{}] ",new Object[]{name,curPageNo,fetchList.size()});
-            if(curPageNo<=1 && (fetchList==null || fetchList.size()==0)){
+            if(curPageNo<=1 && (fetchList==null || fetchList.size()==0) && parseList!=null && parseList.isBlock()){
                 log.info("There are likely to be blocked, wait 5 minutes");
                 this.await(3*1000*60);
             }else{

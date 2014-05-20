@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public class AmazonDataDao extends BaseDao{
 	
-	private static Logger log = LoggerFactory.getLogger("FashionBlogImageDao");
+	private static Logger log = LoggerFactory.getLogger("SdataCrawler.FashionBlogImageDao");
 
 	public AmazonDataDao(MysqlDataSource datasource) {
 		this.jdbcTemplate = datasource.getJdbcTemplate();
@@ -77,6 +77,8 @@ public class AmazonDataDao extends BaseDao{
                         "`fetch_time`) "
 						+ "VALUES(:id,:name,:product_url,:image_url,:category,:description,:price,:fetch_time)";
                 this.jdbcTemplate.update(sql, param);
+            } else {
+                log.info("duplicate datum [{}]",data.get("productId"));
             }
 		} catch (Exception e) {
             e.printStackTrace();

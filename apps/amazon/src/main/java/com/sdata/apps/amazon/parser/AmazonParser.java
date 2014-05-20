@@ -50,8 +50,12 @@ public class AmazonParser extends SdataParser{
 		AmazonParseResult result = new AmazonParseResult();
 		Document doc = parseHtmlDocument(c);
 		if(doc==null){
-			return null;
+			return result;
 		}
+        if(doc.select("#main div.results").size()==0){
+            result.setBlock(true);
+            return result;
+        }
         Elements products = doc.select("#rightContainerATF #rightResultsATF div.results div.prod" +
                 ",#rightResultsATF #atfResults div.results.list div.product" +
                 ",#rightResultsATF div.results.list div.product");
@@ -130,7 +134,8 @@ public class AmazonParser extends SdataParser{
 		JSONArray images = new JSONArray();
         // only one image
         Element imageCell = doc.select("#main-image-container .image.selected img," +
-                "#main-image-container #img-canvas img").first();
+                "#main-image-container #img-canvas img," +
+                "#main-image-content #main-image-wrapper #main-image").first();
         if(imageCell!=null){
             String src = imageCell.attr("src");
             String imageUrl = getImageUrl(src);
