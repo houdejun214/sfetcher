@@ -19,10 +19,15 @@ public class AmazonStorer extends SdataStorer {
 
     private static Object sync = new Object();
 
-    private AmazonDataDao dao = null;
+    private static AmazonDataDao dao = null;
+
+    public static AmazonDataDao getDataDao(){
+        return dao;
+    }
 
     public AmazonStorer(Configuration conf,RunState state){
         this.setConf(conf);
+        this.init(conf);
         this.state = state;
     }
 
@@ -44,7 +49,6 @@ public class AmazonStorer extends SdataStorer {
 
     @Override
     public void save(FetchDatum datum) throws Exception {
-        init(this.getConf());
         try {
             Map<String, Object> metadata = datum.getMetadata();
             metadata.put(Constants.FETCH_TIME, new Date());

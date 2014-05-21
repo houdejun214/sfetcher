@@ -4,6 +4,7 @@
     <!-- crawl site for amazon -->
     <site name="amazon" fetcher="com.sdata.apps.amazon.fetcher.AmazonCateItemsFetcher"
           storer="com.sdata.apps.amazon.data.AmazonStorer">
+        <filter pos="before" class="com.sdata.apps.amazon.filter.AmazonFilter"></filter>
         <property>
             <name>FetchThreadNum</name>
             <value>1</value>

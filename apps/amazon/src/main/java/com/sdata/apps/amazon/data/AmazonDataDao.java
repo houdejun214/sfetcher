@@ -39,6 +39,26 @@ public class AmazonDataDao extends BaseDao{
 		this.saveProduct(data);
 	}
 
+    /**
+     * check if the product exists
+     * @param productId
+     * @return
+     */
+    public boolean checkExists(String productId){
+        if(StringUtils.isEmpty(productId)){
+            return false;
+        }
+        Map<String,Object> param = new HashMap<String,Object>();
+        param.put("id", productId);
+        String sql = "select * from `production` where `id` = :id";
+        List<Map<String, Object>> results = this.jdbcTemplate.queryForList(sql, param);
+        if(results!=null && results.size()>0) {
+            return true;
+        }
+        return false;
+    }
+
+
 	/**
 	 * save page infomation
 	 * @param data

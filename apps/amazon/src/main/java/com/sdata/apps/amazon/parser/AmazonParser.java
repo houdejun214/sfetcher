@@ -52,13 +52,14 @@ public class AmazonParser extends SdataParser{
 		if(doc==null){
 			return result;
 		}
-        if(doc.select("#main div.results").size()==0){
+        if(doc.select("#main div.results,#searchResults div.results").size()==0){
             result.setBlock(true);
             return result;
         }
         Elements products = doc.select("#rightContainerATF #rightResultsATF div.results div.prod" +
                 ",#rightResultsATF #atfResults div.results.list div.product" +
-                ",#rightResultsATF div.results.list div.product");
+                ",#rightResultsATF div.results.list div.product" +
+                ",#rightResultsATF div.results div.prod");
         Iterator<Element> iterator2 = products.iterator();
         while(iterator2.hasNext()){
             Element el = iterator2.next();
