@@ -9,6 +9,10 @@ import com.sdata.core.FetchDatum;
 
 
 public class SdataFilter extends SdataConfigurable  {
+
+    public static final Boolean CONTINUE = Boolean.TRUE;
+
+    public static final Boolean DISCARD = Boolean.FALSE;
 	
 	protected Logger log = LoggerFactory.getLogger(this.getClass());
 	
