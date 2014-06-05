@@ -36,7 +36,7 @@ public class AmazonCateItemsFetcher extends SdataFetcher {
     private Map<String, Object> curCategory=null;
     private Boolean curCategoryOver = false;
     private int curPageNo = 1;
-    private static int maxPage = 100;
+    private static int maxPage = 70;
     private List<String> categoryFilters;
 
     public AmazonCateItemsFetcher(Configuration conf, RunState state) throws UnknownHostException {

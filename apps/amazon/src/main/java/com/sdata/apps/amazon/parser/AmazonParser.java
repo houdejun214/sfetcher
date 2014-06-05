@@ -112,7 +112,7 @@ public class AmazonParser extends SdataParser{
 			return null;
 		}
 		Map<String,Object> jobj= new HashMap<String,Object>();
-		jobj.put("productName", this.selectText(doc, ".parseasinTitle #btAsinTitle,#title"));
+		jobj.put("productName", this.selectText(doc, ".parseasinTitle #btAsinTitle,#title,#aiv-content-title"));
 		jobj.put("productId",pid);
 		jobj.put("purl", c.getUrl());
 		jobj.put("category", c.getMetadata("category"));
@@ -136,7 +136,8 @@ public class AmazonParser extends SdataParser{
         // only one image
         Element imageCell = doc.select("#main-image-container .image.selected img," +
                 "#main-image-container #img-canvas img," +
-                "#main-image-content #main-image-wrapper #main-image").first();
+                "#main-image-content #main-image-wrapper #main-image," +
+                "#aiv-main-content .dp-img-bracket img").first();
         if(imageCell!=null){
             String src = imageCell.attr("src");
             String imageUrl = getImageUrl(src);

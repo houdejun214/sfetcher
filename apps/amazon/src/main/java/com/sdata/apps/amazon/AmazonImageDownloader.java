@@ -2,6 +2,7 @@ package com.sdata.apps.amazon;
 
 import com.google.common.collect.Maps;
 import com.lakeside.core.utils.PathUtils;
+import com.lakeside.core.utils.StringUtils;
 import com.lakeside.data.redis.RedisDB;
 import com.lakeside.data.sqldb.MysqlDataSource;
 import com.sdata.conf.ArgConfig;
@@ -20,10 +21,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * Created by dejun on 19/05/14.
@@ -34,6 +32,7 @@ import java.util.concurrent.TimeUnit;
 public class AmazonImageDownloader {
 
     private static final Logger log = LoggerFactory.getLogger(AmazonImageDownloader.class);
+    public static final String DOWNLOADER_RUN_STATE = "RunState";
 
     private final ExecutorService pool;
     private final String dirctory;
@@ -41,14 +40,16 @@ public class AmazonImageDownloader {
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private final Configuration conf;
     private final RedisDB dbRedis;
-    private final int size = 100;
+    private final int size = 50;
     private final int downloadRetry = 3;
 
     public AmazonImageDownloader(Configuration conf){
         this.conf = conf;
         Integer thread = conf.getInt("thread", 1);
         dirctory = conf.get("directory");
-        pool = Executors.newFixedThreadPool(thread);
+        pool = new ThreadPoolExecutor(thread, thread,
+                0L, TimeUnit.MILLISECONDS,
+                new BlockedTaskQueue<Runnable>(thread));
         String host = conf.get("storer.mysql.jdbc.host");
         String database = conf.get("storer.mysql.jdbc.database");
         String username = conf.get("storer.mysql.jdbc.username");
@@ -60,16 +61,24 @@ public class AmazonImageDownloader {
     }
 
     public void start() throws InterruptedException {
-        int start = 0;
+        long start = 0;
+        String stateStart = dbRedis.get(DOWNLOADER_RUN_STATE);
+        if (StringUtils.isNotEmpty(stateStart) && StringUtils.isNum(stateStart)) {
+            start = Long.valueOf(stateStart);
+            log.info("resume download from [{}]",start);
+        }
         final AmazonImageDownloader downloader = this;
         while (true) {
             List<Map<String, Object>> result = query(start, size);
             if(result==null || result.size()==0){
                 break;
             }
+            dbRedis.set(DOWNLOADER_RUN_STATE, String.valueOf(start));
             for(Map<String,Object> item: result){
                 final String category = (String) item.get("category");
                 final String imageUrl = (String) item.get("image_url");
+                Long seq = (Long) item.get("seq");
+                start = seq+1;
                 pool.submit(new Callable<Object>() {
                     @Override
                     public Object call() throws Exception {
@@ -78,12 +87,12 @@ public class AmazonImageDownloader {
                     }
                 });
             }
-            start+=size;
         }
         pool.awaitTermination(5, TimeUnit.MINUTES);
+        dbRedis.set(DOWNLOADER_RUN_STATE, String.valueOf(start));
     }
 
-    private List<Map<String, Object>> query(int start, int size){
+    private List<Map<String, Object>> query(long start, int size){
         String sql = "select * from production where seq >=:start and seq<:end";
         HashMap<String, Object> params = Maps.newHashMap();
         params.put("start",start);
@@ -105,10 +114,14 @@ public class AmazonImageDownloader {
                 String fileName = PathUtils.getFileName(url);
                 String destFile = PathUtils.getPath(dirctory + "/" + category + "/" + fileName);
                 com.lakeside.core.utils.FileUtils.insureFileDirectory(destFile);
-                FileUtils.copyURLToFile(new URL(url), new File(destFile));
+                File destination = new File(destFile);
+                if(!destination.exists()) {
+                    log.info("download image [{}] to [{}]",url, destFile);
+                    FileUtils.copyURLToFile(new URL(url), destination);
+                }
                 return;
             }catch (Exception e){
-                log.info("download image [{}],[{}] exception, retry it.",category, url);
+                log.warn("download image [{}],[{}] exception, retry it.",category, url);
                 i++;
             }
         }
