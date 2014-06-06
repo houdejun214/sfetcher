@@ -93,10 +93,10 @@ public class AmazonImageDownloader {
     }
 
     private List<Map<String, Object>> query(long start, int size){
-        String sql = "select * from production where seq >=:start and seq<:end";
+        String sql = "select * from production where seq >=:start order by `seq` asc limit :countsize";
         HashMap<String, Object> params = Maps.newHashMap();
         params.put("start",start);
-        params.put("end",start+size);
+        params.put("countsize",size);
         List<Map<String, Object>> results = jdbcTemplate.queryForList(sql, params);
         return results;
     }
