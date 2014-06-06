@@ -52,8 +52,11 @@ public class AmazonParser extends SdataParser{
 		if(doc==null){
 			return result;
 		}
-        if(doc.select("#main div.results,#searchResults div.results").size()==0){
+        if (isBlocked(doc)){
             result.setBlock(true);
+            return result;
+        }
+        if(doc.select("#main div.results,#searchResults div.results").size()==0){
             return result;
         }
         Elements products = doc.select("#rightContainerATF #rightResultsATF div.results div.prod" +
@@ -100,7 +103,14 @@ public class AmazonParser extends SdataParser{
 		return result;
 	}
 
-	@Override
+    private boolean isBlocked(Document doc) {
+        if("Robot Check".equals(doc.title()) || "/errors/validateCaptcha".equals(doc.select("div.a-container form").attr("action"))){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
 	public ParseResult parseSingle(RawContent c) {
 		ParseResult result = new ParseResult();
 		Document doc = parseHtmlDocument(c);
