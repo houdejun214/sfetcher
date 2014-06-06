@@ -45,7 +45,7 @@ public class AmazonImageDownloader {
 
     public AmazonImageDownloader(Configuration conf){
         this.conf = conf;
-        Integer thread = conf.getInt("thread", 1);
+        Integer thread = conf.getInt("thread", 10);
         dirctory = conf.get("directory");
         pool = new ThreadPoolExecutor(thread, thread,
                 0L, TimeUnit.MILLISECONDS,
