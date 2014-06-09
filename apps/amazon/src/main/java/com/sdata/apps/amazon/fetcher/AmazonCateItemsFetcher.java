@@ -157,8 +157,8 @@ public class AmazonCateItemsFetcher extends SdataFetcher {
             int i=1;
             for(String category:categoryList){
                 if(i>=startId){
-                    String[] arrs = category.split(",",2);
-                    if(arrs!=null && arrs.length==2) {
+                    String[] arrs = category.split(",");
+                    if(arrs!=null && arrs.length>=2) {
                         String cate = arrs[0];
                         String link = StringUtils.trim(arrs[1], "\"");
                         Map<String, Object> data = Maps.newHashMap();
