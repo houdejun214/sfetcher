@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import com.lakeside.core.utils.ApplicationResourceUtils;
 import com.lakeside.core.utils.FileUtils;
 import com.lakeside.core.utils.StringUtils;
+import com.sdata.apps.amazon.BlockedException;
 import com.sdata.apps.amazon.parser.AmazonParseResult;
 import com.sdata.apps.amazon.parser.AmazonParser;
 import com.sdata.context.config.Configuration;
@@ -99,22 +100,29 @@ public class AmazonCateItemsFetcher extends SdataFetcher {
     @Override
     public FetchDatum fetchDatum(FetchDatum datum) {
         this.await(500);
-        if(datum!=null && !StringUtils.isEmpty(datum.getUrl())){
-            String url = datum.getUrl();
-            //log.info("fetching product: "+url);
-            String content = ((AmazonParser)parser).download(url);
-            //datum.setContent(content);
-            RawContent rawContent = new RawContent(url,content);
-            rawContent.addAllMeata(datum.getMetadata());
-            ParseResult result = parser.parseSingle(rawContent);
-            if(result != null){
-                datum.setMetadata(result.getMetadata());
-                datum.addMetadata(Constants.FETCH_TIME, new Date());
-            }else{
-                throw new RuntimeException("fetch content is empty");
+        while (true) {
+            try {
+                if (datum != null && !StringUtils.isEmpty(datum.getUrl())) {
+                    String url = datum.getUrl();
+                    //log.info("fetching product: "+url);
+                    String content = ((AmazonParser) parser).download(url);
+                    //datum.setContent(content);
+                    RawContent rawContent = new RawContent(url, content);
+                    rawContent.addAllMeata(datum.getMetadata());
+                    ParseResult result = parser.parseSingle(rawContent);
+                    if (result != null) {
+                        datum.setMetadata(result.getMetadata());
+                        datum.addMetadata(Constants.FETCH_TIME, new Date());
+                    } else {
+                        throw new RuntimeException("fetch content is empty");
+                    }
+                }
+                return datum;
+            } catch (BlockedException e) {
+                log.warn("fetch datum blocked, wait 5 minutes");
+                this.await(3*1000*60);
             }
         }
-        return datum;
     }
 
     /**

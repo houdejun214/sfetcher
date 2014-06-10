@@ -3,6 +3,7 @@ package com.sdata.apps.amazon.parser;
 
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.download.http.HttpPageLoader;
+import com.sdata.apps.amazon.BlockedException;
 import com.sdata.context.config.Configuration;
 import com.sdata.context.config.Constants;
 import com.sdata.context.state.RunState;
@@ -121,6 +122,9 @@ public class AmazonParser extends SdataParser{
 		if(StringUtils.isEmpty(pid)){
 			return null;
 		}
+        if (isBlocked(doc)){
+            throw new BlockedException();
+        }
 		Map<String,Object> jobj= new HashMap<String,Object>();
 		jobj.put("productName", this.selectText(doc, ".parseasinTitle #btAsinTitle,#title,#aiv-content-title"));
 		jobj.put("productId",pid);
@@ -150,6 +154,9 @@ public class AmazonParser extends SdataParser{
                 "#aiv-main-content .dp-img-bracket img").first();
         if(imageCell!=null){
             String src = imageCell.attr("src");
+            if(src.startsWith("data:image")){
+                src = imageCell.attr("data-old-hires");
+            }
             String imageUrl = getImageUrl(src);
             images.add(imageUrl);
         }
