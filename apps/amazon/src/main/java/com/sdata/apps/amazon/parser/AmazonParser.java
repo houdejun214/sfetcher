@@ -154,7 +154,7 @@ public class AmazonParser extends SdataParser{
                 "#aiv-main-content .dp-img-bracket img").first();
         if(imageCell!=null){
             String src = imageCell.attr("src");
-            if(src.startsWith("data:image")){
+            if(src.trim().startsWith("data:image/")){
                 src = imageCell.attr("data-old-hires");
             }
             String imageUrl = getImageUrl(src);

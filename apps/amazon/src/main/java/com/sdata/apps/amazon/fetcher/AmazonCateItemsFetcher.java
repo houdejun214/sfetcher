@@ -37,7 +37,7 @@ public class AmazonCateItemsFetcher extends SdataFetcher {
     private Map<String, Object> curCategory=null;
     private Boolean curCategoryOver = false;
     private int curPageNo = 1;
-    private static int maxPage = 70;
+    private static int maxPage = 40;
     private List<String> categoryFilters;
 
     public AmazonCateItemsFetcher(Configuration conf, RunState state) throws UnknownHostException {
@@ -137,8 +137,10 @@ public class AmazonCateItemsFetcher extends SdataFetcher {
         } else {
             curPageNo++;
         }
-        state.setCurrentEntry((Integer) curCategory.get(Constants.QUEUE_SEQUENCE_ID));
-        state.setCurrentFetchState(StringUtils.format("{0},{1}",curPageNo,curCategory.get(Constants.QUEUE_URL)));
+        if (curCategory != null) {
+            state.setCurrentEntry((Integer) curCategory.get(Constants.QUEUE_SEQUENCE_ID));
+            state.setCurrentFetchState(StringUtils.format("{0},{1}",curPageNo,curCategory.get(Constants.QUEUE_URL)));
+        }
     }
 
     @Override
