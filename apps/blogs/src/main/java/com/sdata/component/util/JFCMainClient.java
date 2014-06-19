@@ -402,7 +402,7 @@ public class JFCMainClient extends JFrame implements ActionListener, WindowListe
 		} 
 		
 		if (e.getActionCommand().equals( "quit" )) {
-			addTextToConsole(isgerman()?"Programmende ausgewählt - beende DownloadThreads, Vorgang kann eine Weile dauern!":"quit requested - signaling donwload threads to terminate, this may take a while!");
+			addTextToConsole(isgerman()?"Programmende ausgewählt - beende DownloadThreads, Vorgang kann eine Weile dauern!":"quit requested - signaling donwload threads to terminate, this may peek a while!");
 			// seems to have to effect:
 			//JFCMainClient.frame.repaint();
 			JFCMainClient.shutdownAppl();

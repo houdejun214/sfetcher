@@ -47,14 +47,12 @@
 		<value>ugcd</value>
 		<description></description>
 	</property>
-	<!-- this parameter is deprecated ***
-	<property>
-	  <name>CrawlDBType</name>
-	  <value>sql</value>
-	</property>
-	-->
-	
-	<!-- for crawl queue db configuration  -->
+    <!--crawl db queue settings -->
+    <property>
+        <name>crawl.queue.mdb.dir</name>
+        <value>data/queue</value>
+    </property>
+	<!-- for crawl queue db configuration
 	<property>
 	  <name>Host</name>
 	  <value>172.29.34.96</value>
@@ -63,6 +61,7 @@
 	  <name>Port</name>
 	  <value>3306</value>
 	</property>
+	 -->
 	<property>
 	  <name>DataBase</name>
 	  <value>sdatacrawler</value>
@@ -82,7 +81,7 @@
 	<!-- for redis runstate db and image db -->
 	<property>
 		<name>RedisHost</name>
-		<value>172.31.51.195</value>
+		<value>172.31.51.60</value>
 	</property>
 	<property>
 		<name>RedisPort</name>
@@ -96,39 +95,12 @@
 		<name>StatisticsRedisDBName</name>
 		<value>Statistics</value>
 	</property>
-	<!-- Elastic search info -->
-	<property>
-		<name>ElasticMapping</name>
-		<value>conf/index/index-next-ugc.json</value>
-	</property>
-	
-	<!--  image db namespace 
-	  1、for image queue,redis key Sdatacrawler:ImageQueue:namespace
-	  2、for fdfs get fdfs NextFileStore.getInstance(namespace) and record url->fid in hdfs redis. 
-	 -->
-	<property>
-		<name>image.namespace</name>
-		<value>next</value>
-	</property>
-	
+
 	<!--for image crawler, this parameter indicate how many image will be saved in a directory.
 		for other crawler, this indicate how many items will be saved in a directory. -->
 	<property>
 		<name>SubItemsPerDirectory</name>
 		<value>10000</value>
-	</property>
-	<!--listen port of the jetty web server, default is 8080  -->
-	<property>
-		<name>JettyServerPort</name>
-		<value>8080</value>
-	</property>
-	<property>
-		<name>ProxyFile</name>
-		<value>conf/proxy.list</value>
-	</property>
-	<property>
-		<name>UseProxy</name>
-		<value>false</value>
 	</property>
 	<!-- sleep interval value for each fetchList operation ,this value is a milliseconds value	-->
 	<property>
@@ -200,27 +172,27 @@
 		<value>172.18.109.40:2181,172.18.109.45:2181,172.18.109.50:2181</value>
 	</property>
 	
-	<!-- 定义crawler queue max size 
+	<!-- 定义crawler queue max size
 	<property>
 		<name>crawler.queue.size.max</name>
 		<value>10000000</value>
 	</property> -->
-	
-	<!-- 定义crawler queue max level  
+
+	<!-- 定义crawler queue max level
 	<property>
 		<name>crawler.queue.level.max</name>
 		<value>10</value>
 	</property> -->
-	
+
 	<!-- 定义crawler queue wait timeout(s), default 300s
 	<property>
 		<name>crawler.queue.wait.timeout</name>
 		<value>300</value>
 	</property> -->
-	<!-- 定义crawler datum notify field cont null times limit 
+	<!-- 定义crawler datum notify field cont null times limit
 	<property>
 		<name>crawler.datum.notify.limit</name>
 		<value>100</value>
 	</property> -->
-	
+
 </configuration>

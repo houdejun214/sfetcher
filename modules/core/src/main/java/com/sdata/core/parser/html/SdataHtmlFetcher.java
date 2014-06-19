@@ -42,7 +42,7 @@ public class SdataHtmlFetcher extends SdataFetcher{
 		if(current != null){
 			String url = (String)current.get(Constants.QUEUE_URL);
 			log.info("fetch datum list:"+url);
-			RawContent rawContent = this.getRawContent(url);
+			RawContent rawContent = this.fetchRawContent(url);
 			rawContent.addAllMeata(current);
 			ParseResult parseResult = parser.parseList(rawContent);
 			this.put(parseResult.getCategoryList());
@@ -59,16 +59,16 @@ public class SdataHtmlFetcher extends SdataFetcher{
 			return null;
 		}
 		log.info("fetch datum one:"+datum.getUrl());
-		ParseResult result = parser.parseSingle(this.getRawContent(datum.getUrl()));
+		ParseResult result = parser.parseSingle(this.fetchRawContent(datum.getUrl()));
 		datum.addAllMetadata(result.getMetadata());
 		return datum;
 	}
 	
-	protected RawContent getRawContent(String url){
+	protected RawContent fetchRawContent(String url){
 		if(StringUtils.isEmpty(url)){
 			return null;
 		}
-		String content = HttpPageLoader.getAdvancePageLoader().download(url).getContentHtml();
+		String content = HttpPageLoader.getAdvancePageLoader().get(url).getContentHtml();
 		if(content == null){
 			return null;
 		}

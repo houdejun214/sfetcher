@@ -34,7 +34,7 @@
 		<commons-lang.version>2.6</commons-lang.version>
 
 		<!-- http request version -->
-		<jsoup.version>1.7.1</jsoup.version>
+		<jsoup.version>1.7.3</jsoup.version>
 		<jsonlib.version>2.4</jsonlib.version>
 		<javax.mail.version>1.4.5</javax.mail.version>
 
@@ -458,6 +458,16 @@
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
             </snapshots>
+        </repository>
+        <repository>
+            <id>oracleReleases</id>
+            <name>Oracle Released Java Packages</name>
+            <url>http://download.oracle.com/maven</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>sonatype-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </repository>
     </repositories>
 

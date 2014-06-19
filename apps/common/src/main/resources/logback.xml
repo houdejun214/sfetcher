@@ -15,11 +15,10 @@
     <logger name="net.sf.json.JSONObject defaultBeanProcessing" level="none"/>
     <logger name="com.tencent.weibo" level="WARN"/>
     <logger name="com.sdata.core.filter" level="INFO"/>
-    <logger name="SdataCrawler" level="INFO"/>
     <logger name="com.almworks.sqlite4java" level="WARN"/>
     <logger name="Sense" level="INFO"/>
     <logger name="Common" level="INFO"/>
-    <root level="ERROR">
+    <root level="INFO">
         <appender-ref ref="Console"/>
     </root>
 </configuration>

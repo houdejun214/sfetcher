@@ -23,9 +23,11 @@ public class Tags extends Enum{
 	public static final Tags INIT = new Tags("init");
 	public static final Tags LINKS = new Tags("links");
 	public static final Tags DATUM = new Tags("datum");
-	public static final Tags DATA = new Tags("data");
-	
-	public Tags(String type) {
+    public static final Tags HEADER = new Tags("header");
+	public static final Tags ITORTOR = new Tags("itorator");
+    public static final Tags CONST = new Tags("const");
+
+    public Tags(String type) {
 		super(type);
 	}
 

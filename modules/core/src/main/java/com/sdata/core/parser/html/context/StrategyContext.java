@@ -20,6 +20,7 @@ public class StrategyContext implements IParserContext {
 	private Document doc;
 	private JSONObject json;
 	private Map<String,Object> contextVariable = new HashMap<String,Object>();
+    private Map<String,Object> returnContext = new HashMap<String,Object>();
 	private Map<String,String> httpHeader = new HashMap<String,String>();
 	public StrategyContext(Configuration conf,Document doc){
 		this.conf = conf;
@@ -31,13 +32,17 @@ public class StrategyContext implements IParserContext {
 		this.json = json;
 	}
 
-	public void addData(String k,Object v){
-		
-	}
+	public void addData(String k,Object v) {
+        returnContext.put(k, v);
+    }
 
 	public Document getDoc() {
 		return doc;
 	}
+
+    public Map<String, Object> getContextVariable() {
+        return contextVariable;
+    }
 	
 	/**
 	 * get the variable value by variable key,
@@ -66,7 +71,15 @@ public class StrategyContext implements IParserContext {
 		this.contextVariable.put(key, value);
 	}
 
-	public Configuration getConfig() {
+    public void putVariableAll(Map<String, Object> maps) {
+        this.contextVariable.putAll(maps);
+    }
+
+    public Map<String, Object> getReturnContext() {
+        return returnContext;
+    }
+
+    public Configuration getConfig() {
 		return conf;
 	}
 

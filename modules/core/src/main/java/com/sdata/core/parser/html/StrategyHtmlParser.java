@@ -19,10 +19,16 @@ import com.sdata.core.parser.html.field.Tags;
  *
  */
 public class StrategyHtmlParser extends StrategyParser{
-	public StrategyHtmlParser(Configuration conf,Document doc){
+
+    public StrategyHtmlParser(Configuration conf,Document doc){
 		context = new StrategyContext(conf,doc);
 	}
-	protected List<Object> getData(Tags tag){
+
+    public StrategyContext getContext() {
+        return this.context;
+    }
+
+    protected List<Object> getData(Tags tag){
 		List<Object> result = new ArrayList<Object>();
 		List<Field> list = StrategyConfig.getInstance(context.getConfig()).getTag(tag.getName());
 		Iterator<Field> iterator = list.iterator();

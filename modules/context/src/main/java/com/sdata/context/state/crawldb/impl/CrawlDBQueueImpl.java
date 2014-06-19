@@ -111,10 +111,20 @@ public class CrawlDBQueueImpl extends CrawlDBSqlSupport implements CrawlDBQueue 
 		this.updateQueueStatus(key, QueueStatus.COMPLETE);
 		return true;
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.sdata.core.CrawlDB#updateQueueDispose(java.lang.String)
-	 */
+
+    @Override
+    public Map<String, Object> poll() {
+        throw new RuntimeException("doesn't support this operation in mysql db");
+    }
+
+    @Override
+    public Map<String, Object> peek() {
+        throw new RuntimeException("doesn't support this operation in mysql db");
+    }
+
+    /* (non-Javadoc)
+     * @see com.sdata.core.CrawlDB#updateQueueDispose(java.lang.String)
+     */
 	public Boolean updateQueueStatus(final String key,String status){
 		String sql="update "+CrawlQueueTableName+" set status=:status where `key`=:key";
 		Map<String,Object> parameters = new HashMap<String,Object>();
@@ -174,10 +184,15 @@ public class CrawlDBQueueImpl extends CrawlDBSqlSupport implements CrawlDBQueue 
 		}
 		return false;
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.sdata.core.CrawlDB#deleteQueueByKey(java.lang.String)
-	 */
+
+    @Override
+    public boolean insertTopQueueObjects(List<Map<String, Object>> list) {
+        throw new RuntimeException("doesn't support this operation in mysql db");
+    }
+
+    /* (non-Javadoc)
+         * @see com.sdata.core.CrawlDB#deleteQueueByKey(java.lang.String)
+         */
 	public Boolean deleteQueueByKey(String key){
 		String sql="delete from "+CrawlQueueTableName+" where `key`=:key";
 		Map<String,Object> parameters = new HashMap<String,Object>();

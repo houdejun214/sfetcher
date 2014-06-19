@@ -1,23 +1,47 @@
 <?xml version="1.0"?>
-<!-- filter '&amp;' = '&' -->
-<datum filter="null:title&amp;content">
-	<!-- tweet -->
-	<field name="_id" from = "id"  ></field>
- 	<field name="id"  action="tolong"></field>
- 	<field name="url" from="url" ></field>
- 	<field name="title" from="title" ></field>
-	<field name="content"  from="content"></field>
-	<field name="geo"  from="geo"></field>
-	<field name="loc"  from="loc"></field>
-	<field name="lang"  value="zh"></field>
-	<field name="pub_time"  from="pub_time" action="todate"></field>
-	<field name="fet_time"  action="todate"></field>
-	
-	<field name="image" from="image"></field>
-	<field name="images" from="images"></field>
-	<field name="video" from="video"></field>
-	
-	<field name="keywords" from="keywords"></field>
-	<field name="desc" from="desc"></field>
-	<field name="links" from="links"></field>
-</datum>
+<datums>
+    <datum match="zappos.com">
+        <field name="domain" value="zappos.com" />
+        <field name="category" selector="{{category}}" />
+        <field name="url" selector="{{url}}" />
+        <field name="productId" selector="{{productId}}" />
+        <field name="image" selector="#protagonist img|link"></field>
+        <field name="title" selector="#productStage h1.banner|text"></field>
+    </datum>
+
+    <datum match="jabong.com">
+        <field name="domain" value="jabong.com" />
+        <field name="category" selector="{{category}}" />
+        <field name="url" selector="{{url}}" />
+        <field name="productId" selector="{{productId}}" />
+        <field name="image" selector="#prdbig li img|link"></field>
+        <field name="title" selector="#qa-prd-brand|text"></field>
+    </datum>
+
+    <!--<datum match="asos.com">-->
+        <!--<const name="domain" value="asos.com" />-->
+        <!--<field name="category" selector="{{category}}" />-->
+        <!--<field name="url" selector="{{url}}" />-->
+        <!--<field name="productId" selector="{{productId}}" />-->
+        <!--<field name="image" selector="{{image}}"></field>-->
+        <!--<field name="title" selector="{{title}}"></field>-->
+    <!--</datum>-->
+
+    <!--<datum match="flipkart.com">-->
+        <!--<const name="domain" value="flipkart.com" />-->
+        <!--<field name="category" selector="{{category}}" />-->
+        <!--<field name="url" selector="{{url}}" />-->
+        <!--<field name="productId" selector="{{productId}}" />-->
+        <!--<field name="image" selector="{{image}}"></field>-->
+        <!--<field name="title" selector="{{title}}"></field>-->
+    <!--</datum>-->
+
+    <datum>
+        <field name="domain" selector="{{domain}}" />
+        <field name="category" selector="{{category}}" />
+        <field name="url" selector="{{url}}" />
+        <field name="productId" selector="{{productId}}" />
+        <field name="image" selector="{{image}}" />
+        <field name="title" selector="{{title}}" />
+    </datum>
+</datums>

@@ -49,8 +49,12 @@ public class DatumContext implements IParserContext {
 	public Document getDoc() {
 		return doc;
 	}
-	
-	/**
+
+    public Map<String, Object> getContextVariable() {
+        return contextVariable;
+    }
+
+    /**
 	 * get the variable value by variable key,
 	 * the variable may contained in metadata, contextVariable or configuration 
 	 * @param key
@@ -64,7 +68,7 @@ public class DatumContext implements IParserContext {
 		}else if(this.conf.containsKey(key)){
 			return this.conf.get(key);
 		}else {
-			Field field = DatumConfig.getInstance(conf).getField(key);
+			Field field = DatumConfig.getInstance(conf).getField(this.doc, key);
 			if(field != null){
 				this.metadata.put(key, field.getData(this, doc));
 				return this.metadata.get(key);
@@ -81,7 +85,7 @@ public class DatumContext implements IParserContext {
 		}else if(this.conf.containsKey(key)){
 			return this.conf.get(key);
 		}else {
-			DatumField field = (DatumField)DatumConfig.getInstance(conf).getField(key);
+			DatumField field = (DatumField)DatumConfig.getInstance(conf).getField(this.doc, key);
 			if(field != null){
 				this.metadata.put(key, field.transData(this, data));
 				return this.metadata.get(key);
@@ -113,13 +117,17 @@ public class DatumContext implements IParserContext {
 		this.contextVariable.put(key, value);
 	}
 
-	public void putData(String key, Object value) {
+    public void putVariableAll(Map<String, Object> maps) {
+        this.contextVariable.putAll(maps);
+    }
+
+    public void putData(String key, Object value) {
 		this.metadata.put(key, value);
 	}
 	
 	public Object getField(String name){
 		if(!this.hasVariable(name)){
-			Field field = getDatumConfig().getField(name);
+			Field field = getDatumConfig().getField(this.doc, name);
 			Object data = field.getData(this, doc);
 			metadata.put(name, data);
 		}

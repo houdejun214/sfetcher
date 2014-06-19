@@ -1,127 +1,82 @@
 package com.sdata.core.parser.config;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import org.apache.commons.lang.StringUtils;
-import org.dom4j.Document;
-import org.dom4j.Element;
-
+import com.google.common.collect.Lists;
 import com.sdata.context.config.Configuration;
 import com.sdata.context.parser.config.AbstractConfig;
 import com.sdata.core.parser.html.field.Field;
-import com.sdata.core.parser.html.field.datum.DatumField;
-import com.sdata.core.parser.html.notify.CrawlNotify;
-import com.sdata.core.parser.html.notify.DatumNotify;
-import com.sdata.core.parser.html.util.XmlFieldUtils;
+import org.dom4j.Document;
+import org.dom4j.Element;
+
+import java.util.*;
 
 /**
  * @author zhufb
- *
  */
-public class DatumConfig extends AbstractConfig{
-	
-	private List<Field> list ;
-	private Map<String,Field> fieldMap = new ConcurrentHashMap<String,Field>();
-	private DatumFilter datumFilter;
-	private CrawlNotify crawlNotify;
-	public final static String CONF_XML = "datumXml";
-	private final static Map<Configuration,DatumConfig> configMap  = new HashMap<Configuration,DatumConfig>();
-	
-	public static DatumConfig getInstance(Configuration conf){
-		if(!configMap.containsKey(conf)){
-			synchronized (configMap) {
-				if(!configMap.containsKey(conf)) {
-					configMap.put(conf,new DatumConfig(conf));
-				}
-			}
-		}
-		return configMap.get(conf);
-	}
-	
-	public DatumConfig(String str){
-		super(str);
-	}
-	
-	public DatumConfig(Configuration conf){
-		super(conf);
-	}
+public class DatumConfig extends AbstractConfig {
+    private List<Field> empty = Lists.newArrayList();
 
-	@Override
-	protected void parse(Document document) {
-		list = new ArrayList<Field>();
-		Element root = document.getRootElement();
-		//add filter
-		this.addDatumFilter(root);
-		
-		this.addCrawlNotify(root);
-		Iterator<Element> iterator = root.elementIterator();
-		while(iterator.hasNext()){
-			Element next = (Element)iterator.next();
-			list.add(XmlFieldUtils.getFieldFromXml(next));
-		}
-	}
-	
-	private void addDatumFilter(Element root){
-		String v = root.attributeValue("filter");
-		datumFilter = new DatumFilter(v);
-	}
+    private List<DatumSet> datums;
+    public final static String CONF_XML = "datumXml";
+    private final static Map<Configuration, DatumConfig> configMap = new HashMap<Configuration, DatumConfig>();
 
-	private void addCrawlNotify(Element root){
-		String v = root.attributeValue("notify");
-		crawlNotify = new DatumNotify(conf,v);
-	}
-	
-	public Field getField(String name) {
-		if(StringUtils.isEmpty(name)){
-			return null;
-		}
-		Iterator<Field> fields = getFields();
-		while(fields.hasNext()){
-			Field field = fields.next();
-			Object str = field.getName();
-			if(str!=null&&str.toString().equals(name)){
-				return field;
-			}
-		}
-		return null;
-	}
+    public static DatumConfig getInstance(Configuration conf) {
+        if (!configMap.containsKey(conf)) {
+            synchronized (configMap) {
+                if (!configMap.containsKey(conf)) {
+                    configMap.put(conf, new DatumConfig(conf));
+                }
+            }
+        }
+        return configMap.get(conf);
+    }
 
-	public Iterator<Field> getFields() {
-		return list.iterator();
-	}
+    public DatumConfig(Configuration conf) {
+        super(conf);
+    }
 
-	public Map<String,Field> getFieldMap() {
-		if(fieldMap.size() == 0){
-			Iterator<Field> fields = getFields();
-			while(fields.hasNext()){
-				this.putMap((DatumField)fields.next());
-			}
-		}
-		return fieldMap;
-	}
-	
-	private void putMap(DatumField field){
-		Object str = field.getName();
-		if(str!=null&&!StringUtils.isEmpty(str.toString())){
-			fieldMap.put(str.toString(), field);
-		}
-	}
+    @Override
+    protected void load(Document document) {
+        datums = new ArrayList<DatumSet>();
+        Element root = document.getRootElement();
+        if (root.getQName().getName().equals("datum")) {
+            datums.add(new DatumSet(root));
+        } else {
+            List<Element> lists = root.elements();
+            for (Element el : lists) {
+                datums.add(new DatumSet(el));
+            }
+        }
+    }
 
-	public DatumFilter getDatumFilter() {
-		return datumFilter;
-	}
+    @Override
+    protected String getConfXmlKey() {
+        return CONF_XML;
+    }
 
-	public CrawlNotify getCrawlNotify() {
-		return crawlNotify;
-	}
+    public DatumFilter getDatumFilter(org.jsoup.nodes.Document doc) {
+        for (DatumSet set : datums) {
+            if (set.match(doc)) {
+                return set.getDatumFilter();
+            }
+        }
+        return null;
+    }
 
-	@Override
-	protected String getConfXmlKey() {
-		return CONF_XML;
-	}
+    public Iterator<Field> getFields(org.jsoup.nodes.Document doc) {
+        for (DatumSet set : datums) {
+            if (set.match(doc)) {
+                return set.getFields();
+            }
+        }
+        return empty.iterator();
+    }
+
+    public Field getField(org.jsoup.nodes.Document doc, String name) {
+        for (DatumSet set : datums) {
+            if (set.match(doc)) {
+                return set.getField(name);
+            }
+        }
+        return null;
+    }
 }

@@ -13,7 +13,11 @@ import com.sdata.core.FetchDatum;
  *
  */
 public class FetchQueue {
-	
+
+    public FetchQueue() {
+
+    }
+
 	public FetchQueue(Configuration conf) {
 		int maxQueueSize = conf.getInt("MaxQueueSize", 1000);
 		this.queue = new ArrayBlockingQueue<FetchDatum>(maxQueueSize);
@@ -21,7 +25,7 @@ public class FetchQueue {
 	
 	private ArrayBlockingQueue<FetchDatum> queue = null;
 	
-	private Object synchronizeObject=new Object(); 
+	protected Object synchronizeObject=new Object();
 
 	/**
 	 * Inserts an image object at the tail of this queue if it is
@@ -59,8 +63,7 @@ public class FetchQueue {
 	public boolean offer(FetchDatum data){
 		return this.offerOne(data);
 	}
-	
-	
+
 	public FetchDatum poll(){
 		return this.pollOne();
 	}

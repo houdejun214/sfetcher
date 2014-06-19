@@ -5,13 +5,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.sdata.core.parser.html.util.Documents;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import com.sdata.context.parser.IParserContext;
 import com.sdata.core.parser.html.field.Field;
-import com.sdata.core.parser.html.util.DocumentUtils;
 import com.sdata.core.parser.select.DataSelector;
 import com.sdata.core.parser.select.DataSelectorPipleBuilder;
 
@@ -31,7 +31,7 @@ public class DatumList extends DatumField{
 			doc = this.getLinkDoc(context,doc);
 		}
 		while(doc!= null){
-			// parse list attribute
+			// load list attribute
 			this.putListData(context,result, doc);
 			// check has next
 			if(!this.hasNext(context,doc)){
@@ -87,7 +87,7 @@ public class DatumList extends DatumField{
 		if(context.hasVariable("Cookie")){
 			
 		}
-		return DocumentUtils.getDocument(linkUrl==null?"":linkUrl.toString(),context.getHttpHeader());
+		return Documents.getDocument(linkUrl == null ? "" : linkUrl.toString(), context.getHttpHeader());
 	}
 	
 	private void putListData(IParserContext context,List<Object> result,Element doc){

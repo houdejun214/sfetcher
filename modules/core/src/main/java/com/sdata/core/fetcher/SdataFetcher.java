@@ -1,15 +1,27 @@
 package com.sdata.core.fetcher;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
+import com.lakeside.core.utils.StringUtils;
+import com.lakeside.download.http.HttpPage;
+import com.lakeside.download.http.HttpPageLoader;
+import com.sdata.context.config.Constants;
 import com.sdata.context.config.SdataConfigurable;
 import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDatum;
 import com.sdata.core.FetchDispatch;
+import com.sdata.core.RawContent;
 import com.sdata.core.data.store.SdataStorer;
 import com.sdata.core.parser.SdataParser;
+import org.apache.commons.httpclient.HttpStatus;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 public abstract class SdataFetcher extends SdataConfigurable {
+
+    protected static HttpPageLoader advancePageLoader = HttpPageLoader.getAdvancePageLoader();
 	
 	protected RunState state;
 	
@@ -46,8 +58,39 @@ public abstract class SdataFetcher extends SdataConfigurable {
 	public void fetchDatumList(FetchDispatch dispatch){};
 
 	public FetchDatum fetchDatum(FetchDatum datum){return null;};
-	
-	protected void moveNext(){};
+
+    protected RawContent fetchRawContent(String url){
+        if(StringUtils.isEmpty(url)){
+            return null;
+        }
+        String content = downloadDocument(url).getContentHtml();
+        if(content == null){
+            return null;
+        }
+        RawContent raw = new RawContent(url,content);
+        return raw;
+    }
+
+    protected RawContent fetchRawContent(FetchDatum datum){
+        String url = datum.getUrl();
+        Map<String, Object> metadata = datum.getMetadata();
+        Object method = metadata.get(Constants.QUEUE_METHOD);
+        Object header = metadata.get(Constants.QUEUE_HEADER);
+        if(StringUtils.isEmpty(url)){
+            return null;
+        }
+        HttpPage page;
+        if (method != null && "post".equalsIgnoreCase(method.toString())) {
+            page = this.advancePageLoader.post((Map) header, null, url);
+        }else{
+            page = this.advancePageLoader.get((Map) header, url);
+        }
+        RawContent raw = new RawContent(url,page.getContentHtml());
+        return raw;
+    }
+
+
+    protected void moveNext(){};
 
 	public boolean isComplete(){return false;};
 	
@@ -75,4 +118,28 @@ public abstract class SdataFetcher extends SdataConfigurable {
 		// this method do nothing.
 		// you can add your business in your fetcher object
 	}
+
+    // page downloader helpers
+
+    public HttpPage downloadDocument(String url){
+        if(org.apache.commons.lang.StringUtils.isEmpty(url)){
+            return null;
+        }
+        HttpPage page = advancePageLoader.get(url);
+        if(page.getStatusCode()!= HttpStatus.SC_OK){
+            return null;
+        }
+        return page;
+    }
+
+    public HttpPage downloadDocument(String url, Map<String, String> header){
+        if(org.apache.commons.lang.StringUtils.isEmpty(url)){
+            return null;
+        }
+        HttpPage page = advancePageLoader.get(header, url);
+        if(page.getStatusCode()!=HttpStatus.SC_OK){
+            return null;
+        }
+        return page;
+    }
 }

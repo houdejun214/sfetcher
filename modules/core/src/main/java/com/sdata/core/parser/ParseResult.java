@@ -1,10 +1,7 @@
 package com.sdata.core.parser;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.lakeside.core.utils.StringUtils;
 import com.sdata.core.FetchDatum;
@@ -12,7 +9,7 @@ import com.sdata.core.FetchDatum;
 public class ParseResult {
 	
 	private List<FetchDatum> fetchList = new ArrayList<FetchDatum>();
-	private List categoryList = new ArrayList();
+	private List<Map<String,Object>> categoryList = new ArrayList();
 	private String nextUrl;
 	private Map metadata = new HashMap<String,Object>(); 
 	
@@ -21,7 +18,7 @@ public class ParseResult {
 	}
 	
 
-	public List getCategoryList() {
+	public List<Map<String,Object>> getCategoryList() {
 		return categoryList;
 	}
 
@@ -37,13 +34,23 @@ public class ParseResult {
 		this.categoryList = categoryList;
 	}
 
-	public void addCategory(Object cate) {
+	public void addCategory(Map<String,Object> cate) {
 		this.categoryList.add(cate);
 	}
 
 	public Map getMetadata() {
 		return metadata;
 	}
+
+    private boolean isBlock = false;
+
+    public boolean isBlock() {
+        return isBlock;
+    }
+
+    public void setBlock(boolean isBlock) {
+        this.isBlock = isBlock;
+    }
 	
 	public boolean isListEmpty(){
 		if(fetchList==null || fetchList.size()==0){

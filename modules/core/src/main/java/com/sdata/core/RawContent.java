@@ -56,8 +56,12 @@ public class RawContent {
 		}
 		return null;
 	}
-	
-	public boolean isEmpty(){
+
+    public Map<String, Object> getMetadata() {
+        return metadata;
+    }
+
+    public boolean isEmpty(){
 		if(this.content==null || "".equals(content)){
 			return true;
 		}

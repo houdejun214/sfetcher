@@ -15,21 +15,27 @@ import com.sdata.core.parser.html.field.Field;
  *
  */
 public class DatumParser{
+
 	private DatumContext context;
-	public DatumParser(Configuration conf,Document doc){
+
+    public DatumParser(Configuration conf,Document doc){
 		context = new DatumContext(conf,doc);
 	}
 
-	public DatumParser(DatumContext context){
-		this.context = context;
-	}
-	
-	public void addContext(String key,Object value ){
+    public DatumContext getContext() {
+        return context;
+    }
+
+    public void addContext(String key,Object value ){
 		this.context.putVariable(key, value);
 	}
-	
-	public Map<String,Object> analysis(){
-		Iterator<Field> fields = DatumConfig.getInstance(context.getConfig()).getFields();
+
+    public void addAllContext(Map<String, Object> maps) {
+        this.context.putVariableAll(maps);
+    }
+
+    public Map<String,Object> analysis(){
+		Iterator<Field> fields = DatumConfig.getInstance(context.getConfig()).getFields(context.getDoc());
 		while(fields.hasNext()){
 			Field field = fields.next();
 			String name = field.getName();

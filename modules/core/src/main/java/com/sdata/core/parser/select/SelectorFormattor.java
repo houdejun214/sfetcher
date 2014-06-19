@@ -96,7 +96,7 @@ public class SelectorFormattor {
 				variable = context.getVariable(variableName);
 			}
 			if(variable==null){
-				return orgformat;
+				return "";
 			}else{
 				return variable.toString();
 			}

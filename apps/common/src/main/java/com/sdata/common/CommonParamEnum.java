@@ -2,7 +2,6 @@ package com.sdata.common;
 
 
 /**
- * @author zhufb
  *
  */
 public enum CommonParamEnum  {

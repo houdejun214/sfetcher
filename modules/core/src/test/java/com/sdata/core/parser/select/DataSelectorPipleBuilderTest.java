@@ -9,7 +9,7 @@ public class DataSelectorPipleBuilderTest {
 //	public static void setUpBeforeClass() throws Exception {
 //		if(doc==null){
 //			String content = HttpPageLoader.getDefaultPageLoader().download("http://www.dianping.com/shop/5422956?KID=114027").getContentHtml();
-//			doc = Jsoup.parse(content);
+//			doc = Jsoup.load(content);
 //		}
 //	}
 //

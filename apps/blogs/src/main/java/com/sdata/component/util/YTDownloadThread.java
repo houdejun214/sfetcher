@@ -407,7 +407,7 @@ public class YTDownloadThread extends Thread {
 						}
 						//$FALL-THROUGH$
 					case 2: // SD
-						// try to download desired format first, if it's not available we take the other of same res 
+						// try to download desired format first, if it's not available we peek the other of same res
 						if (JFCMainClient.getBmpgbuttonstate()) {
 							if (!JFCMainClient.bSaveDiskSpace) {
 								this.sNextVideoURL.add(iindex++, ssourcecodevideourls.get("35"));

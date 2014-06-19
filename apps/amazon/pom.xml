@@ -6,8 +6,8 @@
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   
-  <artifactId>sdatacrawler-amazon</artifactId>
-  <name>sdatacrawler-amazon</name>
+  <artifactId>sdatacrawler-app-amazon</artifactId>
+  <name>sdatacrawler-app-amazon</name>
   <description>amazon crawler app</description>
   
   <dependencies>

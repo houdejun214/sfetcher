@@ -7,3 +7,4 @@ output
 bin
 .idea
 *.iml
+/data/

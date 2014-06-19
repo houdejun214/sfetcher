@@ -10,7 +10,6 @@ import com.sdata.context.model.QueueStatus;
 import com.sdata.core.item.CrawlItemDB;
 
 /**
- * @author zhufb
  *
  */
 public class CommonItemDB extends CrawlItemDB {

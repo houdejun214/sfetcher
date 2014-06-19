@@ -6,14 +6,12 @@ import java.util.Map;
 import com.sdata.context.config.Configuration;
 import com.sdata.context.state.CrawlDBRunState;
 import com.sdata.context.state.crawldb.CrawlDB;
-import com.sdata.context.state.crawldb.CrawlDBImageQueue;
 import com.sdata.context.state.crawldb.CrawlDBQueue;
 
 public class CrawlDBImpl implements CrawlDB{
 	
 	private CrawlDBRunState dbRunState=null;
 	private CrawlDBQueue dbQueue=null;
-	private CrawlDBImageQueue dbimageQueue = null;
 	private Configuration conf = null;
 	
 	public CrawlDBImpl(Configuration conf){
@@ -64,7 +62,19 @@ public class CrawlDBImpl implements CrawlDB{
 		return dbQueue.updateQueueComplete(key);
 	}
 
-	public Boolean updateQueueStatus(String key, String status) {
+    @Override
+    public Map<String, Object> poll() {
+        this.ensureDbQueue();
+        return dbQueue.poll();
+    }
+
+    @Override
+    public Map<String, Object> peek() {
+        this.ensureDbQueue();
+        return dbQueue.peek();
+    }
+
+    public Boolean updateQueueStatus(String key, String status) {
 		this.ensureDbQueue();
 		return dbQueue.updateQueueStatus(key, status);
 	}
@@ -79,7 +89,13 @@ public class CrawlDBImpl implements CrawlDB{
 		return dbQueue.insertQueueObjects(list);
 	}
 
-	public Boolean isQueueDepthComplete(String depth) {
+    @Override
+    public boolean insertTopQueueObjects(List<Map<String, Object>> list) {
+        this.ensureDbQueue();
+        return dbQueue.insertTopQueueObjects(list);
+    }
+
+    public Boolean isQueueDepthComplete(String depth) {
 		this.ensureDbQueue();
 		return dbQueue.isQueueDepthComplete(depth);
 	}
@@ -106,51 +122,9 @@ public class CrawlDBImpl implements CrawlDB{
 		if(dbQueue == null){
 			synchronized(this){
 				if(dbQueue == null){
-					dbQueue = new CrawlDBQueueImpl(conf);
+					dbQueue = new CrawlMDBQueueImpl(conf);
 				}
 			}
 		}
 	}
-	
-	/*******************************************************/
-	/************* 下面是 CrawlDBImageQueue 接口实现************/
-	public List<Map<String,Object>> queryImageQueue(int count) {
-		this.ensureDbImageQueue();
-		return dbimageQueue.queryImageQueue(count);
-	}
-
-	public Boolean isImageExists(String url, String source) {
-		this.ensureDbImageQueue();
-		return dbimageQueue.isImageExists(url, source);
-	}
-
-	public void insertImageQueue(List<String> list, String source) {
-		this.ensureDbImageQueue();
-		dbimageQueue.insertImageQueue(list, source);
-		
-	}
-
-	public void updateImageQueue(String id, String status) {
-		this.ensureDbImageQueue();
-		dbimageQueue.updateImageQueue(id, status);
-	}
-
-	public Map<String, Object> getOneImage() {
-		this.ensureDbImageQueue();
-		return dbimageQueue.getOneImage();
-	}
-
-	/**
-	 * 确保只有在使用的时候才创建DBImageQueue
-	 */
-	private void ensureDbImageQueue(){
-		if(dbimageQueue == null){
-			synchronized(this){
-				if(dbimageQueue == null){
-					dbimageQueue = new CrawlDBImageQueueImpl(conf);
-				}
-			}
-		}
-	}
-
 }

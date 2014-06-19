@@ -19,7 +19,7 @@
 		<!--<module>hot</module>-->
 		<!--<module>future</module>-->
 		<!--<module>live</module>-->
-		<!--<module>common</module>-->
+		<module>common</module>
         <module>amazon</module>
         <!--<module>blogs</module>-->
 	</modules>

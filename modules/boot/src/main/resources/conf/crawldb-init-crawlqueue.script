@@ -1,10 +1,10 @@
 CREATE TABLE IF NOT EXISTS `{CrawlQueue}` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `url` varchar(5000) COLLATE utf8_unicode_ci NOT NULL,
-  `depth` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `status` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `key` varchar(255)  NOT NULL,
+  `url` varchar(5000) NOT NULL,
+  `depth` varchar(10) NOT NULL,
+  `status` varchar(10) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `depth` (`depth`),
   KEY `status` (`status`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ;

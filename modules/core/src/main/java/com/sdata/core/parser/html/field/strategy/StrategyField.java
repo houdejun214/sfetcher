@@ -1,11 +1,13 @@
 package com.sdata.core.parser.html.field.strategy;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.lakeside.core.utils.UrlUtils;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
@@ -26,8 +28,17 @@ public abstract class StrategyField  extends FieldDefault implements Field {
 	protected String path;
 	protected List<Field> subFields = new ArrayList<Field>(); 
 	protected IParserContext context;
-	
-	/**
+    protected String match;
+
+    public String getMatch() {
+        return match;
+    }
+
+    public void setMatch(String match) {
+        this.match = match;
+    }
+
+    /**
 	 * 根据context和Json爬取数据
 	 * 
 	 * @param context
@@ -46,27 +57,48 @@ public abstract class StrategyField  extends FieldDefault implements Field {
 	
 	public Object getData(IParserContext context, Element doc) {
 		this.context = context;
-		Object result = super.getSelectValue(context, doc);
-		// has child it's map
-		if(result!=null&&result instanceof Elements&&this.hasChild()){
-			List<Object> resultList = new ArrayList<Object>();
-			Iterator<Element> iterator = ((Elements) result).iterator();
-			while(iterator.hasNext()){
-				Element next = (Element)iterator.next();
-				Map<String, Object> childsData = this.getChildsData(next);
-				resultList.add(childsData);
-			}
-			result = resultList;
-		}
-		return super.refine(context,result);
+        if (this.match(doc)) {
+            Object result = super.getSelectValue(context, doc);
+            // has child it's map
+            if(result!=null&&result instanceof Elements&&this.hasChild()){
+                List<Object> resultList = new ArrayList<Object>();
+                Iterator<Element> iterator = ((Elements) result).iterator();
+                while(iterator.hasNext()){
+                    Element next = (Element)iterator.next();
+                    Map<String, Object> childsData = this.getChildsData(next);
+                    resultList.add(childsData);
+                }
+                result = resultList;
+            }
+            return super.refine(context,result);
+        }
+        return null;
 	}
-	
-	private Map<String,Object> getChildsData(Element element){
+
+    protected boolean match(Element doc) {
+        if (StringUtils.isNotEmpty(match)) {
+            String url = doc.baseUri();
+            String domainName = null;
+            try {
+                domainName = UrlUtils.getDomainName(url);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return false;
+            }
+            if(match.matches(domainName)) {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+
+    private Map<String,Object> getChildsData(Element element){
 		Map<String,Object> map = new HashMap<String,Object>();
 		List<Field> childs = this.getChilds();
 		Iterator<Field> iterator = childs.iterator();
 		while(iterator.hasNext()){
-			StrategyField f = (StrategyField)iterator.next();
+			Field f = (Field)iterator.next();
 			Object td = f.getData(context,element);
 			map.put(f.getName(), td);
 		}

@@ -17,6 +17,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.sdata.core.parser.html.util.Documents;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -36,7 +37,6 @@ import com.sdata.core.QueueStatus;
 import com.sdata.core.RunState;
 import com.sdata.core.crawldb.CrawlDBQueue;
 import com.sdata.core.fetcher.SdataFetcher;
-import com.sdata.core.parser.html.util.DocumentUtils;
 import com.sdata.core.util.ApplicationResourceUtils;
 import com.sdata.core.util.WebPageDownloader;
 
@@ -400,7 +400,7 @@ public class FashionBlogsFetcher extends SdataFetcher{
 			WebPageDownloader downloader = new WebPageDownloader(blogUrl);
 			String content = downloader.fastDownload();
 			String pageUrl = downloader.getPageUrl();
-			doc = DocumentUtils.parseDocument(content,pageUrl);
+			doc = Documents.parseDocument(content, pageUrl);
 		} catch (Exception e) {
 			return null;
 		}

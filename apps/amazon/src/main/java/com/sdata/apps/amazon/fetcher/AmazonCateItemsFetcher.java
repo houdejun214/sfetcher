@@ -177,7 +177,7 @@ public class AmazonCateItemsFetcher extends SdataFetcher {
                         data.put(Constants.QUEUE_URL, StringEscapeUtils.unescapeXml(link));
                         categoires.add(data);
                     }else{
-                        log.warn("[{}] can't be parse",category);
+                        log.warn("[{}] can't be load",category);
                     }
                 }
                 i++;

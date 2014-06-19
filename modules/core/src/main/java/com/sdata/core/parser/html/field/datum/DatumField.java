@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.sdata.core.parser.html.util.Documents;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -18,7 +19,6 @@ import com.sdata.context.parser.IParserContext;
 import com.sdata.core.parser.html.context.DatumContext;
 import com.sdata.core.parser.html.field.Field;
 import com.sdata.core.parser.html.field.FieldDefault;
-import com.sdata.core.parser.html.util.DocumentUtils;
 import com.sdata.core.parser.select.DataSelector;
 import com.sdata.core.parser.select.DataSelectorPipleBuilder;
 
@@ -66,7 +66,7 @@ public class DatumField extends FieldDefault implements Field{
 			Iterator<Field> iterator = childs.iterator();
 			while(iterator.hasNext()){
 				DatumField f = (DatumField)iterator.next();
-				Object td = f.getData(context,DocumentUtils.parseDocument(((Elements)result).html()));
+				Object td = f.getData(context, Documents.parseDocument(((Elements) result).html()));
 				map.put(f.getName(), td);
 			}
 			result = map;
@@ -192,7 +192,7 @@ public class DatumField extends FieldDefault implements Field{
 
 	protected Document getNextDoc(IParserContext context,Element doc){
 		Object nextUrl = this.getNext(context, doc);
-		return DocumentUtils.getDocument(nextUrl==null?"":nextUrl.toString(),context.getHttpHeader());
+		return Documents.getDocument(nextUrl == null ? "" : nextUrl.toString(), context.getHttpHeader());
 	}
 
 	protected Object getInterData(IParserContext context,Map<String,Object> data){

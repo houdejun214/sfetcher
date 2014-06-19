@@ -1,13 +1,12 @@
 package com.sdata.core.parser.html;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.sdata.core.parser.config.StrategyConfig;
 import com.sdata.core.parser.html.context.StrategyContext;
 import com.sdata.core.parser.html.field.Tags;
-import com.sdata.core.parser.html.notify.CrawlNotify;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author zhufb
@@ -21,6 +20,10 @@ public abstract class StrategyParser{
 	public void addContext(String key,Object value ){
 		this.context.putVariable(key, value);
 	}
+
+    public void addAllContext(Map<String, Object> maps) {
+        this.context.putVariableAll(maps);
+    }
 	
 	public Map<Tags,Object> analysis(){
 		Map<Tags,Object> result = new HashMap<Tags,Object>();
@@ -30,9 +33,8 @@ public abstract class StrategyParser{
 			throw new RuntimeException("not found strategy file!");
 		}
 		result.put(Tags.LINKS, getData(Tags.LINKS));
-		result.put(Tags.DATUM, getData(Tags.DATUM));
-		CrawlNotify crawlNotify = instance.getCrawlNotify();
-		crawlNotify.notify(result);
+        result.put(Tags.LINKS, getData(Tags.ITORTOR));
+        result.put(Tags.DATUM, getData(Tags.DATUM));
 		return result;
 	}
 	

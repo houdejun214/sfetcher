@@ -17,17 +17,13 @@ public abstract class AbstractConfig{
 	
 	protected Configuration conf;
 	protected String config;
-	protected String CONF_XML;
-	protected AbstractConfig(String str) {
-		this.load(str);
-	}
-	
+
 	protected AbstractConfig(Configuration conf){
 		this.conf = conf;
 		this.load(conf.get(getConfXmlKey()));
 	}
 
-	protected abstract void parse(Document document);
+	protected abstract void load(Document document);
 	
 	protected abstract String getConfXmlKey();
 	
@@ -37,25 +33,25 @@ public abstract class AbstractConfig{
 		}
 		Document document = null;
 		try {
-			document = this.getDocFromStr(str);
+            document = this.loadDocFromPath(str);
 		} catch (DocumentException e) {
 			try {
-				document = this.getDocFromPath(str);
+                document = this.loadDocFromContent(str);
 			} catch (DocumentException e1) {
 				throw new RuntimeException("load crawler file exception"+str,e1);
 			}
 		}
-		this.parse(document);
+		this.load(document);
 	}
 	
-	protected Document getDocFromPath(String path) throws DocumentException{
+	protected Document loadDocFromPath(String path) throws DocumentException{
 		String file = ApplicationResourceUtils.getResourceUrl(path);
 		SAXReader reader = new SAXReader();
 		Document document = reader.read(file);
 		return document;
 	}
 	
-	protected Document getDocFromStr(String str) throws DocumentException{
+	protected Document loadDocFromContent(String str) throws DocumentException{
 		 return DocumentHelper.parseText(str);  
 	}
 	

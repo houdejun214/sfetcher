@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<strategy>
+    <links selector=".pagination a.btn.arrow:last-child|link" match="zappos.com"></links>
+    <datum selector="#searchResults a.product"  match="zappos.com">
+        <field name="url" selector="link"></field>
+        <field name="productId" selector="[data-product-id]"></field>
+        <field name="domain" value="zappos.com" />
+    </datum>
+
+    <links selector=".pagination a.btn.arrow:last-child|link" match="myntra.com">
+        <!--<header></header>-->
+    </links>
+    <datum selector="ul.results"  match="myntra.com">
+        <field name="url" selector="a|link"></field>
+        <field name="productId" selector="[data-styleid]"></field>
+        <field name="domain" value="myntra.com" />
+    </datum>
+
+    <!-- -->
+    <itorator selector="{{url}}" var="page" start="2" end="20" match="jabong.com" ></itorator>
+    <datum selector="#productsCatalog li"  match="jabong.com">
+        <field name="url" selector=".productImageLink|link"></field>
+        <field name="productId" selector=".product-image|[id]"></field>
+        <field name="domain" value="jabong.com" />
+    </datum>
+
+    <links selector=".pagination a.btn.arrow:last-child|link" match="asos.com"></links>
+    <datum selector="#items li"  match="asos.com">
+        <field name="url" selector="a.productImageLink|link"></field>
+        <field name="productId" selector="a.productImageLink|link|~/[?&amp;]iid=(\w*)/|{{1}}"></field>
+        <field name="image" selector="img.product-image|link"></field>
+        <field name="title" selector="a.desc|text"></field>
+        <field name="domain" value="asos.com" />
+    </datum>
+
+
+    <itorator selector="{{url}?ajax=true}" var="start" start="1" end="500" step="15" match="flipkart.com" ></itorator>
+    <datum selector="#products .product-unit,.browse-grid-row .product-unit"  match="flipkart.com">
+        <field name="url" selector=".pu-visual-section a.fk-product-thumb|link"></field>
+        <field name="productId" selector="[data-pid]"></field>
+        <field name="image" selector=".pu-visual-section a.fk-product-thumb img|link"></field>
+        <field name="title" selector=".pu-details .pu-title|text"></field>
+        <field name="domain" value="flipkart.com" />
+    </datum>
+</strategy>

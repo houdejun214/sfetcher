@@ -41,7 +41,7 @@ public class StoreConfig extends AbstractConfig{
 	}
 
 	@Override
-	protected void parse(Document document) {
+	protected void load(Document document) {
 		list = new ArrayList<Collection>();
 		Element root = document.getRootElement();
 		Iterator<Element> iterator = root.elementIterator();

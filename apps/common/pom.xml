@@ -1,24 +1,35 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
+    <parent>
     <groupId>com.sdata</groupId>
     <artifactId>sdatacrawler-apps</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-  </parent>
+    </parent>
   
-  <artifactId>sdatacrawler-common</artifactId>
-  <name>sdatacrawler-common</name>
+  <artifactId>sdatacrawler-app-common</artifactId>
+  <name>sdatacrawler-app-common</name>
   <description>common crawler app</description>
   
   <dependencies>
-  	<dependency>
-  		<groupId>de.jetwick</groupId>
-  		<artifactId>snacktory</artifactId>
-  	</dependency>
-  	<dependency>
-  		<groupId>com.sdata</groupId>
-  		<artifactId>sdatacrawler-proxy</artifactId>
-  	</dependency>
+  	<!--<dependency>-->
+  		<!--<groupId>de.jetwick</groupId>-->
+  		<!--<artifactId>snacktory</artifactId>-->
+  	<!--</dependency>-->
+    <dependency>
+          <groupId>com.sdata</groupId>
+          <artifactId>sdatacrawler-boot</artifactId>
+          <exclusions>
+              <exclusion>
+                  <artifactId>sdatacrawler-solr</artifactId>
+                  <groupId>com.sdata</groupId>
+              </exclusion>
+          </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.sleepycat</groupId>
+      <artifactId>je</artifactId>
+      <version>6.0.11</version>
+    </dependency>
   </dependencies>
   <build>
 		<plugins>

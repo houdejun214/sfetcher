@@ -1,22 +1,19 @@
 package com.sdata.core.parser.config;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
-
 import com.sdata.context.config.Configuration;
 import com.sdata.context.parser.config.AbstractConfig;
 import com.sdata.core.parser.html.field.Field;
 import com.sdata.core.parser.html.field.strategy.StrategyField;
 import com.sdata.core.parser.html.field.strategy.StrategyInit;
-import com.sdata.core.parser.html.notify.CrawlNotify;
-import com.sdata.core.parser.html.notify.StrategyNotify;
 import com.sdata.core.parser.html.util.XmlFieldUtils;
+import org.dom4j.Document;
+import org.dom4j.Element;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author zhufb
@@ -24,8 +21,7 @@ import com.sdata.core.parser.html.util.XmlFieldUtils;
  */
 public class StrategyConfig extends AbstractConfig{
 	private List<Field> list;
-	private CrawlNotify crawlNotify;
-	private static Object syn = new Object(); 
+	private static Object syn = new Object();
 	private StrategyInit initField;
 	public final static String CONF_XML ="strategyXml";
 	private final static Map<Configuration,StrategyConfig> configMap  = new ConcurrentHashMap<Configuration,StrategyConfig>();
@@ -46,12 +42,11 @@ public class StrategyConfig extends AbstractConfig{
 	}
 	
 	@Override
-	protected void parse(Document document) {
+	protected void load(Document document) {
 		list = new ArrayList<Field>();
 		Element root = document.getRootElement();
 		Iterator<Element> iterator = root.elementIterator();
 		// add notify
-		this.addCrawlNotify(root);
 		while(iterator.hasNext()){
 			Element next = (Element)iterator.next();
 			Field fieldFromXml = XmlFieldUtils.getFieldFromXml(next);
@@ -64,11 +59,6 @@ public class StrategyConfig extends AbstractConfig{
 		
 	}
 
-	private void addCrawlNotify(Element root){
-		String v = root.attributeValue("notify");
-		crawlNotify = new StrategyNotify(v);
-	}
-	
 	public String getNextInit() {
 		return initField.getNextInit();
 	}
@@ -90,10 +80,6 @@ public class StrategyConfig extends AbstractConfig{
 
 	public Iterator<Field> getFields() {
 		return list.iterator();
-	}
-
-	public CrawlNotify getCrawlNotify() {
-		return crawlNotify;
 	}
 
 	@Override

@@ -3,6 +3,8 @@ package com.sdata.core.parser.html.util;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 
+import com.sdata.core.parser.html.field.datum.ConstDatumField;
+import com.sdata.core.parser.html.field.strategy.*;
 import org.apache.commons.beanutils.BeanUtils;
 import org.dom4j.Element;
 import org.dom4j.tree.DefaultAttribute;
@@ -12,9 +14,6 @@ import com.sdata.core.parser.html.field.Tags;
 import com.sdata.core.parser.html.field.datum.DatumField;
 import com.sdata.core.parser.html.field.datum.DatumItem;
 import com.sdata.core.parser.html.field.datum.DatumList;
-import com.sdata.core.parser.html.field.strategy.StrategyDatum;
-import com.sdata.core.parser.html.field.strategy.StrategyInit;
-import com.sdata.core.parser.html.field.strategy.StrategyLinks;
 
 /**
  * @author zhufb
@@ -30,7 +29,9 @@ public class XmlFieldUtils {
 		String name = e.getName();
 		if (Tags.FIELD.getName().equals(name)) {
 			result = new DatumField();
-		} else if (Tags.LIST.getName().equals(name)) {
+		} else if (Tags.CONST.getName().equals(name)) {
+            result = new ConstDatumField();
+        }  else if (Tags.LIST.getName().equals(name)) {
 			result = new DatumList();
 		} else if (Tags.ITEM.getName().equals(name)) {
 			result = new DatumItem();
@@ -38,8 +39,12 @@ public class XmlFieldUtils {
 			result = new StrategyInit();
 		} else if (Tags.LINKS.getName().equals(name)) {
 			result = new StrategyLinks();
+        } else if (Tags.HEADER.getName().equals(name)) {
+            result = new StrategyHeader();
 		} else if (Tags.DATUM.getName().equals(name)) {
 			result = new StrategyDatum();
+        } else if (Tags.ITORTOR.getName().equals(name)) {
+            result = new StrategyItorator();
 		}else{
 			throw new RuntimeException("wrong tag name:"+name);
 		}
