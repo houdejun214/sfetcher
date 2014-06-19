@@ -1,12 +1,11 @@
 package com.sdata.core.parser.html;
 
+import com.google.common.collect.Lists;
 import com.sdata.core.parser.config.StrategyConfig;
 import com.sdata.core.parser.html.context.StrategyContext;
 import com.sdata.core.parser.html.field.Tags;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author zhufb
@@ -32,12 +31,26 @@ public abstract class StrategyParser{
 		if(instance == null){
 			throw new RuntimeException("not found strategy file!");
 		}
-		result.put(Tags.LINKS, getData(Tags.LINKS));
-        result.put(Tags.LINKS, getData(Tags.ITORTOR));
-        result.put(Tags.DATUM, getData(Tags.DATUM));
+        mergeList(result,Tags.LINKS, getData(Tags.LINKS));
+        mergeList(result,Tags.LINKS, getData(Tags.ITORTOR));
+        mergeList(result,Tags.DATUM, getData(Tags.DATUM));
 		return result;
 	}
-	
-	protected abstract List<Object> getData(Tags tag);
+
+    private void mergeList(Map<Tags,Object> result, Tags tag, List<Object> list) {
+        Object o = result.get(tag);
+        if (o == null) {
+            result.put(tag, list);
+        }else if (o instanceof List) {
+            List old = (List) o;
+            old.addAll(list);
+        }else {
+            ArrayList<Object> newlist = Lists.newArrayList(o);
+            newlist.addAll(list);
+            result.put(tag, newlist);
+        }
+    }
+
+    protected abstract List<Object> getData(Tags tag);
 
 }
