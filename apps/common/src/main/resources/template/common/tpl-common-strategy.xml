@@ -7,20 +7,23 @@
         <field name="domain" value="zappos.com" />
     </datum>
 
-    <links selector=".pagination a.btn.arrow:last-child|link" match="myntra.com">
-        <!--<header></header>-->
-    </links>
-    <datum selector="ul.results"  match="myntra.com">
-        <field name="url" selector="a|link"></field>
-        <field name="productId" selector="[data-styleid]"></field>
-        <field name="domain" value="myntra.com" />
-    </datum>
+    <!--<links selector=".pagination a.btn.arrow:last-child|link" match="myntra.com">-->
+    <!--</links>-->
+    <!--<datum selector="ul.results"  match="myntra.com">-->
+        <!--<field name="url" selector="a|link"></field>-->
+        <!--<field name="productId" selector="[data-styleid]"></field>-->
+        <!--<field name="domain" value="myntra.com" />-->
+    <!--</datum>-->
 
     <!-- -->
-    <itorator selector="{{url}}" var="page" start="2" end="20" match="jabong.com" ></itorator>
-    <datum selector="#productsCatalog li"  match="jabong.com">
-        <field name="url" selector=".productImageLink|link"></field>
-        <field name="productId" selector=".product-image|[id]"></field>
+    <itorator selector="{{url}}" var="page" start="2" end="20" match="jabong.com" >
+        <header key="X-Requested-With" value="XMLHttpRequest"></header>
+    </itorator>
+    <datum selector="li a[unbxdattr=product]"  match="jabong.com">
+        <field name="url" selector="link"></field>
+        <field name="productId" selector="[id]"></field>
+        <field name="image" selector="img.itm-img|link"></field>
+        <field name="title" selector=".qa-brandTitle|text"></field>
         <field name="domain" value="jabong.com" />
     </datum>
 
@@ -32,7 +35,6 @@
         <field name="title" selector="a.desc|text"></field>
         <field name="domain" value="asos.com" />
     </datum>
-
 
     <itorator selector="{{url}?ajax=true}" var="start" start="1" end="500" step="15" match="flipkart.com" ></itorator>
     <datum selector="#products .product-unit,.browse-grid-row .product-unit"  match="flipkart.com">

@@ -1,10 +1,14 @@
 package com.sdata.core.fetcher;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import com.lakeside.core.utils.QueryUrl;
 import com.lakeside.core.utils.StringUtils;
+import com.lakeside.core.utils.URIEncoder;
 import com.lakeside.download.http.HttpPage;
 import com.lakeside.download.http.HttpPageLoader;
 import com.sdata.context.config.Constants;
@@ -16,6 +20,8 @@ import com.sdata.core.RawContent;
 import com.sdata.core.data.store.SdataStorer;
 import com.sdata.core.parser.SdataParser;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.http.client.utils.URIUtils;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -59,33 +65,21 @@ public abstract class SdataFetcher extends SdataConfigurable {
 
 	public FetchDatum fetchDatum(FetchDatum datum){return null;};
 
-    protected RawContent fetchRawContent(String url){
-        if(StringUtils.isEmpty(url)){
-            return null;
-        }
-        String content = downloadDocument(url).getContentHtml();
-        if(content == null){
-            return null;
-        }
-        RawContent raw = new RawContent(url,content);
-        return raw;
-    }
-
-    protected RawContent fetchRawContent(FetchDatum datum){
-        String url = datum.getUrl();
-        Map<String, Object> metadata = datum.getMetadata();
+    protected RawContent fetchRawContent(Map<String,Object> metadata) {
+        String url = StringUtils.valueOf(metadata.get(Constants.QUEUE_URL));
         Object method = metadata.get(Constants.QUEUE_METHOD);
         Object header = metadata.get(Constants.QUEUE_HEADER);
-        if(StringUtils.isEmpty(url)){
-            return null;
+        if (StringUtils.isEmpty(url)) {
+            throw new RuntimeException("url is empty");
         }
+        url = new QueryUrl(url).toString();
         HttpPage page;
         if (method != null && "post".equalsIgnoreCase(method.toString())) {
             page = this.advancePageLoader.post((Map) header, null, url);
-        }else{
+        } else {
             page = this.advancePageLoader.get((Map) header, url);
         }
-        RawContent raw = new RawContent(url,page.getContentHtml());
+        RawContent raw = new RawContent(url, page.getContentHtml());
         return raw;
     }
 

@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.net.UnknownHostException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -53,8 +54,7 @@ public class CommonProxyFetcher extends SdataFetcher {
             complete = true;
         } else {
             String category = (String) curCategory.get(Constants.QUEUE_CATEGORY);
-            String link = (String) curCategory.get(Constants.QUEUE_URL);
-            RawContent c = fetchRawContent(link);
+            RawContent c = fetchRawContent(curCategory);
             c.setMetadata(Constants.QUEUE_CATEGORY, category);
             c.addAllMeata(curCategory);
             ParseResult parseResult = parser.parseList(c);
@@ -75,7 +75,7 @@ public class CommonProxyFetcher extends SdataFetcher {
                 dispatch.dispatch(datum);
                 size++;
             }
-            log.info("fetch datum list:[{}] with items [{}]" , link, size);
+            log.info("fetch datum list:[{}] with items [{}]" , curCategory.get(Constants.QUEUE_URL), size);
             // move to next
             curCategory = queue.poll();
         }
@@ -86,8 +86,8 @@ public class CommonProxyFetcher extends SdataFetcher {
         if(datum == null){
             return null;
         }
-        log.debug("fetch datum one:"+datum.getUrl());
-        RawContent c = this.fetchRawContent(datum);
+        log.debug("fetch datum one:" + datum.getUrl());
+        RawContent c = this.fetchRawContent(datum.getMetadata());
         c.addAllMeata(datum.getMetadata());
         ParseResult result = parser.parseSingle(c);
         datum.addAllMetadata(result.getMetadata());
@@ -120,6 +120,7 @@ public class CommonProxyFetcher extends SdataFetcher {
                         log.warn("[{}] can't be load",category);
                     }
                 }
+                Collections.reverse(categoires);
                 this.queue.insertQueueObjects(categoires);
                 log.info("load {} categories from files {}", categoires.size(), filterFile);
             } catch (Exception e) {

@@ -19,6 +19,10 @@
             <name>TaskInterval</name>
             <value>86400000</value>
         </property>
+	<property>
+            <name>FetchSleepInterval</name>
+            <value>500</value>
+        </property>
         <!-- mysql data store info-->
         <property>
             <name>storer.mysql.jdbc.host</name>

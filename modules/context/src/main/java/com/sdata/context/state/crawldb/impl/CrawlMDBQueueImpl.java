@@ -26,7 +26,7 @@ public class CrawlMDBQueueImpl implements CrawlDBQueue {
 	private static final Logger log = LoggerFactory.getLogger("SdataCrawler.CrawlDBQueueImpl");
     private static final String FETCH_QUEUE = "crawl_queue";
     private BlockingQueue<Map<String,Object>> queue;
-//    private ObjectMapper mapper = new ObjectMapper();
+    private final DB db;
 
     public CrawlMDBQueueImpl(Configuration conf) {
         String dir = ApplicationResourceUtils.getResourceUrl(conf.get("crawl.queue.mdb.dir"));
@@ -35,10 +35,9 @@ public class CrawlMDBQueueImpl implements CrawlDBQueue {
         FileUtils.mkDirectory(dir);
         // configure and open database using builder pattern.
         // all options are available with code auto-completion.
-        DB db = DBMaker.newFileDB(new File(dir, "queue.mdb"))
+        db = DBMaker.newFileDB(new File(dir, "queue.mdb"))
                 .closeOnJvmShutdown()
                 .make();
-
         queue = db.getStack(FETCH_QUEUE);
     }
 
@@ -78,18 +77,7 @@ public class CrawlMDBQueueImpl implements CrawlDBQueue {
 	 * @see com.sdata.core.CrawlDB#queryQueue(int, java.lang.Boolean)
 	 */
 	public List<Map<String,Object>> queryQueue(int topN,Boolean dispose) {
-        List<Map<String,Object>> list = Lists.newArrayList();
-        for (int i = 0; i < topN; i++) {
-            if(this.queue.size()==0){
-                break;
-            }
-            Map<String, Object> top = this.queue.poll();
-            if (top == null) {
-                break;
-            }
-            list.add(top);
-        }
-        return list;
+        throw new RuntimeException("doesn't support this operation in bdb crawl queue");
     }
 
     public List<Map<String,Object>> queryQueue(String tableName, int topN,Boolean dispose){
@@ -109,7 +97,9 @@ public class CrawlMDBQueueImpl implements CrawlDBQueue {
 
     @Override
     public Map<String, Object> poll() {
-        return this.queue.poll();
+        Map<String, Object> poll = this.queue.poll();
+        db.commit();
+        return poll;
     }
 
     @Override
@@ -135,6 +125,7 @@ public class CrawlMDBQueueImpl implements CrawlDBQueue {
         for (Map<String, Object> data : objects) {
             this.queue.offer(data);
         }
+        db.commit();
         return true;
     }
 
@@ -143,6 +134,7 @@ public class CrawlMDBQueueImpl implements CrawlDBQueue {
         for (Map<String, Object> data : objects) {
             this.queue.offer(data);
         }
+        db.commit();
         return true;
     }
 

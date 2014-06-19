@@ -5,7 +5,7 @@
         <field name="category" selector="{{category}}" />
         <field name="url" selector="{{url}}" />
         <field name="productId" selector="{{productId}}" />
-        <field name="image" selector="#protagonist img|link"></field>
+        <field name="image" selector="#protagonist img,#detailImage img|link"></field>
         <field name="title" selector="#productStage h1.banner|text"></field>
     </datum>
 
