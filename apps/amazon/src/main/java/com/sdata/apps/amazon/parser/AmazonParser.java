@@ -200,7 +200,7 @@ public class AmazonParser extends SdataParser{
 	public String download(String url){
 		String content = null;
 		while(true) {
-            content = httpLoader.download(url).getContentHtml();
+            content = httpLoader.get(url).getContentHtml();
             if (StringUtils.isEmpty(content)) {
                 log.warn("*********获取内容为空,正在等待,5秒后继续访问...");
                 sleep(5);

@@ -10,10 +10,6 @@
             <value>1</value>
         </property>
         <property>
-            <name>source</name>
-            <value>amazon</value>
-        </property>
-        <property>
             <name>MainCrawlThreadNum</name>
             <value>1</value>
         </property>
@@ -43,11 +39,11 @@
         </property>
         <property>
             <name>storer.mysql.jdbc.host</name>
-            <value>172.31.51.199</value>
+            <value>172.31.51.56</value>
         </property>
         <property>
             <name>storer.mysql.jdbc.database</name>
-            <value>amazon</value>
+            <value>flipkart</value>
         </property>
         <property>
             <name>storer.mysql.jdbc.username</name>

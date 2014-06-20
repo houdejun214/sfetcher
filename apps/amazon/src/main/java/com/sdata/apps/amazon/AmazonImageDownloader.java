@@ -77,12 +77,13 @@ public class AmazonImageDownloader {
             for(Map<String,Object> item: result){
                 final String category = (String) item.get("category");
                 final String imageUrl = (String) item.get("image_url");
+                final String domain = (String) item.get("domain");
                 Long seq = (Long) item.get("seq");
                 start = seq+1;
                 pool.submit(new Callable<Object>() {
                     @Override
                     public Object call() throws Exception {
-                        downloader.download(category,imageUrl);
+                        downloader.download(category,imageUrl,domain);
                         return null;
                     }
                 });
@@ -107,11 +108,14 @@ public class AmazonImageDownloader {
      * @param url
      * @throws IOException
      */
-    public void download(String category, String url) throws IOException {
+    public void download(String category, String url,String prefix) throws IOException {
         int i=0;
         while (i<downloadRetry) {
             try{
                 String fileName = PathUtils.getFileName(url);
+                if(StringUtils.isNotEmpty(prefix)){
+                    fileName=prefix+"."+fileName;
+                }
                 String destFile = PathUtils.getPath(dirctory + "/" + category + "/" + fileName);
                 com.lakeside.core.utils.FileUtils.insureFileDirectory(destFile);
                 File destination = new File(destFile);
