@@ -54,7 +54,7 @@ public class CommonProxyFetcher extends SdataFetcher {
             complete = true;
         } else {
             String category = (String) curCategory.get(Constants.QUEUE_CATEGORY);
-            RawContent c = fetchRawContent(curCategory);
+            RawContent c = fetchContent(curCategory);
             c.setMetadata(Constants.QUEUE_CATEGORY, category);
             c.addAllMeata(curCategory);
             ParseResult parseResult = parser.parseList(c);
@@ -87,7 +87,7 @@ public class CommonProxyFetcher extends SdataFetcher {
             return null;
         }
         log.debug("fetch datum one:" + datum.getUrl());
-        RawContent c = this.fetchRawContent(datum.getMetadata());
+        RawContent c = new RawContent(datum.getUrl(), true, this);
         c.addAllMeata(datum.getMetadata());
         ParseResult result = parser.parseSingle(c);
         datum.addAllMetadata(result.getMetadata());

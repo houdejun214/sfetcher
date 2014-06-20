@@ -71,6 +71,24 @@ public class DatumConfig extends AbstractConfig {
         return empty.iterator();
     }
 
+    public Iterator<Field> getFields(String url) {
+        for (DatumSet set : datums) {
+            if (set.match(url)) {
+                return set.getFields();
+            }
+        }
+        return empty.iterator();
+    }
+
+    public boolean needFetchContent(String url){
+        for (DatumSet set : datums) {
+            if (set.match(url)) {
+                return set.needFetchContent();
+            }
+        }
+        return true;
+    }
+
     public Field getField(org.jsoup.nodes.Document doc, String name) {
         for (DatumSet set : datums) {
             if (set.match(doc)) {

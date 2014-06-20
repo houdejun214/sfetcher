@@ -106,5 +106,8 @@ public class FieldDefault {
 		this.selector = selector;
 		this.dataSelector = DataSelectorPipleBuilder.build(selector);
 	}
-	
+
+    public DataSelector getDataSelector(){
+        return this.dataSelector;
+    }
 }

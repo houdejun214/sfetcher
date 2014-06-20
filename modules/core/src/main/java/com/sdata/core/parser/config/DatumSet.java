@@ -5,6 +5,7 @@ import com.lakeside.core.utils.UrlUtils;
 import com.sdata.core.parser.html.field.Field;
 import com.sdata.core.parser.html.field.datum.DatumField;
 import com.sdata.core.parser.html.util.XmlFieldUtils;
+import com.sdata.core.parser.select.DataSelectorFormat;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.Element;
 
@@ -85,6 +86,13 @@ public class DatumSet {
     public boolean match(org.jsoup.nodes.Element doc) {
         if (StringUtils.isNotEmpty(match)) {
             String url = doc.baseUri();
+            return this.match(url);
+        }
+        return true;
+    }
+
+    public boolean match(String url) {
+        if (StringUtils.isNotEmpty(match)) {
             String domainName = null;
             try {
                 domainName = UrlUtils.getDomainName(url);
@@ -98,5 +106,16 @@ public class DatumSet {
             return false;
         }
         return true;
+    }
+
+    public boolean needFetchContent(){
+        Iterator<Field> fields = getFields();
+        while(fields.hasNext()){
+            Field field = fields.next();
+          if(!(field.getDataSelector() instanceof DataSelectorFormat)){
+            return true;
+          }
+        }
+        return false;
     }
 }

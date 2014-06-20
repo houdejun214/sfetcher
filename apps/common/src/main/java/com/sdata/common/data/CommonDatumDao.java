@@ -52,15 +52,15 @@ public class CommonDatumDao extends BaseDao{
      * @return
      */
     public boolean checkExists(Map<String, Object> datum){
-        String productId =StringUtils.valueOf(datum.get("productId"));
-        if(StringUtils.isEmpty(productId)){
-            return false;
-        }
-        String sql = "select * from `production` where `productId` = :productId and `domain`=:domain and `category`=:category";
-        List<Map<String, Object>> results = this.jdbcTemplate.queryForList(sql, datum);
-        if(results!=null && results.size()>0) {
-            return true;
-        }
+//        String productId =StringUtils.valueOf(datum.get("productId"));
+//        if(StringUtils.isEmpty(productId)){
+//            return false;
+//        }
+//        String sql = "select * from `production` where `productId` = :productId and `domain`=:domain and `category`=:category";
+//        List<Map<String, Object>> results = this.jdbcTemplate.queryForList(sql, datum);
+//        if(results!=null && results.size()>0) {
+//            return true;
+//        }
         return false;
     }
 

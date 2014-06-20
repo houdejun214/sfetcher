@@ -65,7 +65,7 @@ public abstract class SdataFetcher extends SdataConfigurable {
 
 	public FetchDatum fetchDatum(FetchDatum datum){return null;};
 
-    protected RawContent fetchRawContent(Map<String,Object> metadata) {
+    public RawContent fetchContent(Map<String, Object> metadata) {
         String url = StringUtils.valueOf(metadata.get(Constants.QUEUE_URL));
         Object method = metadata.get(Constants.QUEUE_METHOD);
         Object header = metadata.get(Constants.QUEUE_HEADER);
@@ -83,6 +83,21 @@ public abstract class SdataFetcher extends SdataConfigurable {
         return raw;
     }
 
+    public String fetchContent(String url, Map<String,Object> metadata) {
+        Object method = metadata.get(Constants.QUEUE_METHOD);
+        Object header = metadata.get(Constants.QUEUE_HEADER);
+        if (StringUtils.isEmpty(url)) {
+            throw new RuntimeException("url is empty");
+        }
+        url = new QueryUrl(url).toString();
+        HttpPage page;
+        if (method != null && "post".equalsIgnoreCase(method.toString())) {
+            page = this.advancePageLoader.post((Map) header, null, url);
+        } else {
+            page = this.advancePageLoader.get((Map) header, url);
+        }
+        return page.getContentHtml();
+    }
 
     protected void moveNext(){};
 

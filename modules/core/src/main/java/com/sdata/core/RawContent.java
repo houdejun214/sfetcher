@@ -1,5 +1,9 @@
 package com.sdata.core;
 
+import com.lakeside.core.utils.StringUtils;
+import com.sdata.core.fetcher.SdataFetcher;
+import org.hsqldb.lib.StringUtil;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,19 +12,37 @@ public class RawContent {
 	public RawContent(String content){
 		this.content = content;
 	}
-	
-	public RawContent(String url,String content){
+
+    public RawContent(String url,String content){
 		this.url = url;
 		this.content = content;
 	}
-	
-	private String url;
+
+    public RawContent(String url, boolean lazyDownload, SdataFetcher fetcher) {
+        this.url = url;
+        this.lazyDownload = lazyDownload;
+        this.fetcher = fetcher;
+    }
+
+    private boolean lazyDownload=false;
+
+    private SdataFetcher fetcher;
+
+    private String url;
 	
 	private String content;
 	
 	private Map<String,Object> metadata = null;
 
-	public String getContent() {
+    public boolean isLazyDownload() {
+        return lazyDownload;
+    }
+
+    public void setLazyDownload(boolean lazyDownload) {
+        this.lazyDownload = lazyDownload;
+    }
+
+    public String getContent() {
 		return content;
 	}
 
@@ -38,14 +60,14 @@ public class RawContent {
 	
 	public void setMetadata(String key,Object value){
 		if(this.metadata==null){
-			this.metadata = new HashMap<String,Object>();
+			this.metadata = new HashMap();
 		}
 		this.metadata.put(key, value);
 	}
 	
 	public void addAllMeata(Map<String,Object> map){
 		if(this.metadata==null){
-			this.metadata = new HashMap<String,Object>();
+			this.metadata = new HashMap();
 		}
 		this.metadata.putAll(map);
 	}
@@ -67,4 +89,10 @@ public class RawContent {
 		}
 		return false;
 	}
+
+    public void fetchContent() {
+        if (StringUtils.isEmpty(this.content) && StringUtils.isNotEmpty(this.url)) {
+            this.content = this.fetcher.fetchContent(this.url, this.metadata);
+        }
+    }
 }

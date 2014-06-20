@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
+import com.sdata.core.parser.config.DatumConfig;
+import com.sdata.core.parser.html.field.Field;
 import com.sdata.core.parser.html.util.Documents;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -64,11 +66,23 @@ public class SdataHtmlParser extends SdataParser{
 		if(c == null){
 			throw new NegligibleException("RawContent is null!");
 		}
-		String content = c.getContent();
-		if(StringUtils.isEmpty(content)){
-			throw new NegligibleException("webpage content is empty!");
-		}
-		Document doc = Documents.parseDocument(content, c.getUrl());
+		if(c.isEmpty() && c.isLazyDownload()){
+            boolean needFetchContent = DatumConfig.getInstance(this.getConf()).needFetchContent(c.getUrl());
+            if (!needFetchContent) {
+                DatumParser parser = new DatumParser(getConf(), new Document(c.getUrl()));
+                parser.addAllContext(c.getMetadata());
+                parser.addContext("url", c.getUrl());
+                Map<String, Object> analysis = parser.analysis();
+                result.setMetadata(analysis);
+                return result;
+            } else {
+                c.fetchContent();
+            }
+        }
+        if(c.isEmpty()){
+            throw new NegligibleException("webpage content is empty!");
+        }
+        Document doc = Documents.parseDocument(c.getContent(), c.getUrl());
 		DatumParser parser = new DatumParser(getConf(),doc);
         parser.addAllContext(c.getMetadata());
         parser.addContext("url", c.getUrl());
@@ -77,7 +91,7 @@ public class SdataHtmlParser extends SdataParser{
 		return result;
 	}
 	
-	protected void parseDatum(ParseResult result,Map<Tags, Object> data,RawContent raw){
+	protected void parseDatum(ParseResult result, Map<Tags, Object> data, RawContent raw){
 		List<Object> list =(List<Object>)data.get(Tags.DATUM) ;
 		if(list == null||list.size() == 0){
 			return;
