@@ -56,7 +56,7 @@ public class CommonDatumDao extends BaseDao{
         if(StringUtils.isEmpty(productId)){
             return false;
         }
-        String sql = "select * from `production` where `productId` = :productId and `domain`=:domain and `category`=:category";
+        String sql = "select * from `production` where `url` = :url and `domain`=:domain and `category`=:category";
         List<Map<String, Object>> results = this.jdbcTemplate.queryForList(sql, datum);
         if(results!=null && results.size()>0) {
             return true;
