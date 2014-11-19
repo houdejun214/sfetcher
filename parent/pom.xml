@@ -116,26 +116,26 @@
 				<version>${reflections.version}</version>
 			</dependency>
 			<!-- framework dependency -->
-			<dependency>
-				<groupId>com.framework</groupId>
-				<artifactId>framework-config</artifactId>
-				<version>${framework.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.framework</groupId>
-				<artifactId>framework-db-hbase</artifactId>
-				<version>${framework.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.framework</groupId>
-				<artifactId>framework-db-mongo</artifactId>
-				<version>${framework.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.framework</groupId>
-				<artifactId>framework-io</artifactId>
-				<version>${framework.version}</version>
-			</dependency>
+			<!--<dependency>-->
+				<!--<groupId>com.framework</groupId>-->
+				<!--<artifactId>framework-config</artifactId>-->
+				<!--<version>${framework.version}</version>-->
+			<!--</dependency>-->
+			<!--<dependency>-->
+				<!--<groupId>com.framework</groupId>-->
+				<!--<artifactId>framework-db-hbase</artifactId>-->
+				<!--<version>${framework.version}</version>-->
+			<!--</dependency>-->
+			<!--<dependency>-->
+				<!--<groupId>com.framework</groupId>-->
+				<!--<artifactId>framework-db-mongo</artifactId>-->
+				<!--<version>${framework.version}</version>-->
+			<!--</dependency>-->
+			<!--<dependency>-->
+				<!--<groupId>com.framework</groupId>-->
+				<!--<artifactId>framework-io</artifactId>-->
+				<!--<version>${framework.version}</version>-->
+			<!--</dependency>-->
 
 			<dependency>
 				<groupId>junit</groupId>

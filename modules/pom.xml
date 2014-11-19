@@ -19,7 +19,6 @@
 	<modules>
 		<module>context</module>
 		<module>db</module>
-		<module>extension</module>
 		<module>core</module>
 		<module>boot</module>
 	</modules>
