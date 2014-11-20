@@ -7,12 +7,7 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<description>Sdatacrawler is a data crawler framework develped by NExT group at NUS. </description>
-	<url>http://www.nextcenter.org/</url>
-	<organization>
-		<name>NExT search centre at NUS</name>
-		<url>http://next.comp.nus.edu.sg</url>
-	</organization>
+	<description>Sdatacrawler is a data crawler framework. </description>
 
 	<modules>
 		<module>parent</module>

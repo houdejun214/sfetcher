@@ -17,6 +17,7 @@
 		<module>context</module>
 		<module>core</module>
 		<module>db</module>
+		<module>scala</module>
 	</modules>
 
 
