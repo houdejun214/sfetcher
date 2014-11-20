@@ -14,12 +14,13 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.framework</groupId>
-			<artifactId>framework-db-hbase</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.sdata</groupId>
 			<artifactId>sdatacrawler-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mapdb</groupId>
+			<artifactId>mapdb</artifactId>
+			<version>1.0.6</version>
 		</dependency>
 	</dependencies>
 	

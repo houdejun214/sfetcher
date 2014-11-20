@@ -15,7 +15,6 @@ import com.sdata.core.FetchDispatch;
 import com.sdata.core.RawContent;
 import com.sdata.core.fetcher.SdataFetcher;
 import com.sdata.core.parser.ParseResult;
-import com.sdata.core.parser.html.SdataHtmlParser;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +37,6 @@ public class CommonProxyFetcher extends SdataFetcher {
         this.setConf(conf);
         this.setRunState(state);
         queue = CrawlAppContext.db;
-        this.parser = new SdataHtmlParser(conf,state);
         String cateListFile = conf.get("input.list");
         initProductCategory(cateListFile);
     }

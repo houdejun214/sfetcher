@@ -2,7 +2,6 @@ package com.sdata.core;
 
 import com.lakeside.core.utils.StringUtils;
 import com.sdata.core.fetcher.SdataFetcher;
-import org.hsqldb.lib.StringUtil;
 
 import java.util.HashMap;
 import java.util.Map;

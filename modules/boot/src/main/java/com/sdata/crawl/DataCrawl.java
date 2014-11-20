@@ -1,10 +1,6 @@
 package com.sdata.crawl;
 
 
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.bridge.SLF4JBridgeHandler;
-
-import com.lakeside.download.http.proxy.ProxyConfig;
 import com.sdata.conf.ArgConfig;
 import com.sdata.conf.sites.CrawlConfig;
 import com.sdata.conf.sites.CrawlConfigManager;
@@ -14,6 +10,8 @@ import com.sdata.context.state.RunState;
 import com.sdata.context.state.crawldb.CrawlDB;
 import com.sdata.context.state.crawldb.impl.CrawlDBImpl;
 import com.sdata.crawl.task.CrawlTask;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.bridge.SLF4JBridgeHandler;
 
 public class DataCrawl {
 	
@@ -54,18 +52,12 @@ public class DataCrawl {
 		CrawlDB db = getCrawlDB(conf);
 		CrawlAppContext.db = db;
 		
-		// load proxy list
-		if("true".equals(conf.get("UseProxy"))){
-			ProxyConfig.loadAndSetProxy(configs.getDefaultConf("ProxyFile"));
-		}
 		// set network address cache time to live forever
 		java.security.Security.setProperty("networkaddress.cache.ttl", "-1");
 		RunState state = new RunState(crawlName,db);
 		CrawlAppContext.state = state;
 		mainTask = new CrawlTask(crawlSite,state);
 		System.out.println("/****************** start to crawl ["+crawlName+"] ******************/");
-//		CrawlClusterManager cluster = new CrawlClusterManager(mainTask,conf);
-//		cluster.startCrawler();
 		mainTask.startCrawl();
 	}
 

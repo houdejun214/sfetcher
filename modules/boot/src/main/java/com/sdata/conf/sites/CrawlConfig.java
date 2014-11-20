@@ -22,8 +22,7 @@ public class CrawlConfig {
 	private String storer;
 	private Configuration conf;
 	private Map<String,List<String>> filters = new HashMap<String,List<String>>();
-	//private List<String> filters = new ArrayList<String>();
-	
+
 	public CrawlConfig(){
 	}
 	

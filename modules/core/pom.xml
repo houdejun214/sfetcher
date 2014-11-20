@@ -24,11 +24,15 @@
 		</dependency>
 		<dependency>
 			<groupId>com.lakeside</groupId>
+			<artifactId>lakeside-conf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.lakeside</groupId>
 			<artifactId>lakeside-data-sql</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.lakeside</groupId>
-			<artifactId>lakeside-download</artifactId>
+			<artifactId>lakeside-http</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.lakeside</groupId>
@@ -47,20 +51,8 @@
 			<artifactId>c3p0</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.framework</groupId>
-			<artifactId>framework-db-hbase</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.framework</groupId>
-			<artifactId>framework-db-mongo</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.sdata</groupId>
 			<artifactId>sdatacrawler-context</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sdata</groupId>
-			<artifactId>sdatacrawler-extension</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.sdata</groupId>
@@ -73,6 +65,11 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.3.5</version>
 		</dependency>
 	</dependencies>
 

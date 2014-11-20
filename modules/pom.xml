@@ -2,11 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-	<artifactId>sdatacrawler-modules</artifactId>
-	<packaging>pom</packaging>
-	<name>sdatacrawler-modules</name>
-
 	<parent>
 		<groupId>com.sdata</groupId>
 		<artifactId>sdatacrawler-parent</artifactId>
@@ -14,13 +9,15 @@
 		<relativePath>../parent/</relativePath>
 	</parent>
 
-	<description>Sdatacrawler modules is basis components of data crawler framework. </description>
 
+	<artifactId>sdatacrawler-modules</artifactId>
+	<packaging>pom</packaging>
 	<modules>
-		<module>context</module>
-		<module>db</module>
-		<module>core</module>
 		<module>boot</module>
+		<module>context</module>
+		<module>core</module>
+		<module>db</module>
 	</modules>
+
 
 </project>
