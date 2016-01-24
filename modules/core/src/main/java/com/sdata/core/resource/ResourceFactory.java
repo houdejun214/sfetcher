@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Resource dto
  * 
- * @author zhufb
+ *
  *
  */
 public class ResourceFactory<T extends Resource> {

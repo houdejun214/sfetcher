@@ -3,7 +3,7 @@ package com.sdata.db;
 import java.util.Map;
 
 /**
- * @author zhufb
+ *
  *
  */
 public abstract class BaseDao {

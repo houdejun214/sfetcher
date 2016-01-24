@@ -9,7 +9,7 @@ import org.apache.commons.collections.MapUtils;
 /**
  * Resource dto
  * 
- * @author zhufb
+ *
  *
  */
 public class Resource {

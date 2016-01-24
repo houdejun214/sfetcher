@@ -3,7 +3,7 @@ package com.sdata.core.item;
 import org.apache.commons.lang.enums.ValuedEnum;
 
 /**
- * @author zhufb
+ *
  *
  */
 public class CrawlItemEnum extends ValuedEnum {

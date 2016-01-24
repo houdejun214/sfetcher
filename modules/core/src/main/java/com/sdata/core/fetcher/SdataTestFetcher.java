@@ -1,14 +1,10 @@
 package com.sdata.core.fetcher;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.sdata.context.config.Configuration;
 import com.sdata.context.state.RunState;
 import com.sdata.core.FetchDatum;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 此crawler不做任何数据抓取操作，仅作为测试使用。
@@ -24,14 +20,6 @@ public class SdataTestFetcher extends SdataFetcher {
 		this.setRunState(state);
 	}
 
-	@Override
-	public List<FetchDatum> fetchDatumList() {
-		this.await(2000);
-		ArrayList<FetchDatum> list = new ArrayList<FetchDatum>();
-		list.add(new FetchDatum());
-		log.debug("fetch datum list test");
-		return list;
-	}
 
 	@Override
 	public FetchDatum fetchDatum(FetchDatum datum) {

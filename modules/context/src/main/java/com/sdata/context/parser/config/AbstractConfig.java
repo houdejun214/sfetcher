@@ -10,7 +10,7 @@ import com.lakeside.core.utils.ApplicationResourceUtils;
 import com.sdata.context.config.Configuration;
 
 /**
- * @author zhufb
+ *
  *
  */
 public abstract class AbstractConfig{

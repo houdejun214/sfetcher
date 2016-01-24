@@ -1,7 +1,7 @@
 package com.sdata.core.resource;
 
 /**
- * @author zhufb
+ *
  *
  */
 public class ResourceStatus {

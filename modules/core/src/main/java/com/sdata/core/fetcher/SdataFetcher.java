@@ -1,11 +1,5 @@
 package com.sdata.core.fetcher;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
 import com.lakeside.core.utils.QueryUrl;
 import com.lakeside.core.utils.StringUtils;
 import com.lakeside.http.HttpPage;
@@ -19,10 +13,9 @@ import com.sdata.core.RawContent;
 import com.sdata.core.data.store.SdataStorer;
 import com.sdata.core.parser.SdataParser;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.utils.URIUtils;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
+
+import java.util.List;
+import java.util.Map;
 
 public abstract class SdataFetcher extends SdataConfigurable {
 
@@ -53,12 +46,6 @@ public abstract class SdataFetcher extends SdataConfigurable {
 			e.printStackTrace();
 		}
 	}
-	
-	/**
-	 * @deprecated
-	 * @return
-	 */
-	public List<FetchDatum> fetchDatumList(){ return null;};
 	
 	public void fetchDatumList(FetchDispatch dispatch){};
 

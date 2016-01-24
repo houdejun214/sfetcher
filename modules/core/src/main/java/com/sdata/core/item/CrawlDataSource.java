@@ -4,7 +4,7 @@ import com.lakeside.data.sqldb.MysqlDataSource;
 import com.sdata.context.config.Configuration;
 
 /**
- * @author zhufb
+ *
  *
  */
 public class CrawlDataSource  {

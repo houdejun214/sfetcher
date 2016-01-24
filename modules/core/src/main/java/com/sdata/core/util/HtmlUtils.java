@@ -14,7 +14,7 @@ import com.lakeside.core.utils.StringUtils;
 /**
  * utils for operate html doc
  * 
- * @author zhufb
+ *
  * 
  */
 public class HtmlUtils {

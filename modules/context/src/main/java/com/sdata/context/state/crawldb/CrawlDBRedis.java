@@ -9,7 +9,7 @@ import com.lakeside.data.redis.RedisDB;
 import com.sdata.context.config.Configuration;
 
 /**
- * @author zhufb
+ *
  *
  */
 public class CrawlDBRedis  {

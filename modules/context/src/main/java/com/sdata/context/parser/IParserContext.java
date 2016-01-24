@@ -8,7 +8,7 @@ import com.sdata.context.config.Configuration;
 
 
 /**
- * @author zhufb
+ *
  *
  */
 public interface IParserContext {

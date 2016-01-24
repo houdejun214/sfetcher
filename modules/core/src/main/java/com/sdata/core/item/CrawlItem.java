@@ -8,7 +8,7 @@ import com.lakeside.core.utils.MapUtils;
 /**
  * 
  * Crawl item for crawler from SCMS
- * @author zhufb
+ *
  *
  */
 public class CrawlItem {

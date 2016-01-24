@@ -16,7 +16,7 @@ import com.lakeside.core.utils.time.DateTimeUtils;
 /**
  * utils for operate html doc
  * 
- * @author zhufb
+ *
  * 
  */
 public class JsoupUtils {

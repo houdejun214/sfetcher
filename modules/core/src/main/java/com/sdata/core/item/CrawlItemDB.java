@@ -11,7 +11,7 @@ import com.sdata.context.config.Configuration;
 import com.sdata.context.model.QueueStatus;
 
 /**
- * @author zhufb
+ *
  *
  */
 public abstract class CrawlItemDB {

@@ -12,7 +12,7 @@ import com.sdata.context.config.Configuration;
 import com.sdata.core.item.CrawlDataSource;
 
 /**
- * @author zhufb
+ *
  * 
  */
 public class ResourceDB {
