@@ -1,17 +1,12 @@
 package com.sdata
 
-import org.specs._
-import org.specs.runner.{ConsoleRunner, JUnit4}
+import org.junit.runner.RunWith
+import org.specs2.Specification
+import org.specs2.runner.JUnitRunner
+import org.specs2.specification.core.SpecStructure
 
-class MySpecTest extends JUnit4(MySpec)
-//class MySpecSuite extends ScalaTestSuite(MySpec)
-object MySpecRunner extends ConsoleRunner(MySpec)
 
-object MySpec extends Specification {
-  "This wonderful system" should {
-    "save the world" in {
-      val list = Nil
-      list must beEmpty
-    }
-  }
+@RunWith(classOf[JUnitRunner])
+class MySpec extends Specification {
+  override def is: SpecStructure = ???
 }

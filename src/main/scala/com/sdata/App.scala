@@ -4,6 +4,6 @@ package com.sdata
  * Hello world!
  *
  */
-object App extends Application {
+object App {
   println( "Hello World!" )
 }

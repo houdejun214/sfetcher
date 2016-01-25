@@ -3,9 +3,9 @@
   <groupId>com.sdata</groupId>
   <artifactId>sdatacrawler</artifactId>
   <version>2.0.0-SNAPSHOT</version>
-  <inceptionYear>2008</inceptionYear>
   <properties>
     <scala.version>2.11.7</scala.version>
+      <lakeside.version>1.1.0-SNAPSHOT</lakeside.version>
   </properties>
 
   <repositories>
@@ -14,6 +14,15 @@
       <name>Scala-Tools Maven2 Repository</name>
       <url>http://scala-tools.org/repo-releases</url>
     </repository>
+      <repository>
+          <id>dj.mvn.repo</id>
+          <url>https://raw.githubusercontent.com/houdejun214/mvn-repo/master/</url>
+          <!-- use snapshot version -->
+          <snapshots>
+              <enabled>true</enabled>
+              <updatePolicy>always</updatePolicy>
+          </snapshots>
+      </repository>
   </repositories>
 
   <pluginRepositories>
@@ -30,18 +39,49 @@
       <artifactId>scala-library</artifactId>
       <version>${scala.version}</version>
     </dependency>
+      <dependency>
+          <groupId>com.lakeside</groupId>
+          <artifactId>lakeside-core</artifactId>
+          <version>${lakeside.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>com.lakeside</groupId>
+          <artifactId>lakeside-conf</artifactId>
+          <version>${lakeside.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.jsoup</groupId>
+          <artifactId>jsoup</artifactId>
+          <version>1.7.3</version>
+      </dependency>
+      <dependency>
+          <groupId>com.ning</groupId>
+          <artifactId>async-http-client</artifactId>
+          <version>1.9.32</version>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpasyncclient</artifactId>
+          <version>4.1.1</version>
+      </dependency>
+      <dependency>
+          <groupId>io.netty</groupId>
+          <artifactId>netty</artifactId>
+          <version>3.9.9.Final</version>
+      </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.4</version>
+      <version>4.8.1</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.specs</groupId>
-      <artifactId>specs</artifactId>
-      <version>1.2.5</version>
-      <scope>test</scope>
-    </dependency>
+      <dependency>
+          <groupId>org.specs2</groupId>
+          <artifactId>specs2_2.11</artifactId>
+          <version>3.7</version>
+          <scope>test</scope>
+      </dependency>
+
   </dependencies>
 
   <build>
