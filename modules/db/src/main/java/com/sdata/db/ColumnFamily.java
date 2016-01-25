@@ -17,8 +17,7 @@ public class ColumnFamily {
 		this.setName(name);
 		this.setFields(fields);
 	}
-	
-	
+
 	public String getName() {
 		return name;
 	}

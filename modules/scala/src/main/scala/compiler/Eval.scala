@@ -1,4 +1,4 @@
-package com.sdata.scala.compiler;
+package compiler
 
 /*
  * Copyright 2010 Twitter, Inc.
@@ -16,8 +16,6 @@ package com.sdata.scala.compiler;
  * limitations under the License.
  */
 
-package com.sdata.scala
-
 import java.io._
 import java.math.BigInteger
 import java.net.URLClassLoader
@@ -28,14 +26,11 @@ import java.util.jar.JarFile
 import scala.collection.mutable
 import scala.io.Source
 import scala.tools.nsc.interpreter.AbstractFileClassLoader
-import scala.tools.nsc.io.{AbstractFile, VirtualDirectory}
 import scala.tools.nsc.reporters.AbstractReporter
-import scala.tools.nsc.util.{BatchSourceFile, Position}
 import scala.tools.nsc.{Global, Settings}
 import scala.util.matching.Regex
 
-import com.twitter.conversions.string._
-import com.twitter.io.StreamIO
+
 
 /**
  * Evaluate a file or string and return the result.
@@ -71,8 +66,6 @@ class Eval(target: Option[File]) {
   def this() {
     this(None)
   }
-
-  import Eval.jvmId
 
   private lazy val compilerPath = try {
     classPathOfClass("scala.tools.nsc.Interpreter")
@@ -579,5 +572,3 @@ class Eval(target: Option[File]) {
   class CompilerException(val messages: List[List[String]]) extends Exception(
     "Compiler exception " + messages.map(_.mkString("\n")).mkString("\n"))
 }
-Status API Training Shop Blog About
-© 2014 GitHub, Inc. Terms Privacy Security Contact
