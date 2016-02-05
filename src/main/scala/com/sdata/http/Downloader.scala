@@ -1,4 +1,4 @@
-package com.sdata.net
+package com.sdata.http
 
 import org.apache.http.HttpResponse
 import org.apache.http.client.methods.HttpGet

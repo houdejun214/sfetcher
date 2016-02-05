@@ -19,7 +19,7 @@ class Amazon extends Datum("product") {
   def image = field[String]("image") select("#imgTagWrapperId img|link")
 }
 
-object AmazonApp {
+object AmazonApp extends App{
   val fetcher = Fetcher("Amazone")
   fetcher links {
 

@@ -1,13 +1,13 @@
 package com.sdata.fetcher
 
 import akka.actor.ActorSystem
-import com.sdata.core.parser.select.{DataSelector, DataSelectorPipleBuilder}
+import com.sdata.core.parser.select.{PageContext, DataSelector, DataSelectorPipleBuilder}
 
 /**
  * Created by dejun on 25/1/16.
  */
 
-case class Task();
+case class Task(implicit context: PageContext);
 
 case class CatalogLinkTask(url:String) extends Task;
 

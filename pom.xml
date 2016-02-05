@@ -102,6 +102,17 @@
             <artifactId>mapdb</artifactId>
             <version>3.0.0-M1</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.codingwell</groupId>
+            <artifactId>scala-guice_2.11</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>
