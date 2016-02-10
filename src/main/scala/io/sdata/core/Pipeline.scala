@@ -38,7 +38,8 @@ class Pipeline {
       new CrawlModule
     )
     val system = injector.instance[ActorSystem]
-    val crawlActor = system.actorOf(GuiceAkkaExtension(system).props(CrawlActor.name))
+//    val log = Logging(system, Pipeline)
+    val crawlActor = system.actorOf(GuiceAkkaExtension(system).props[CrawlActor])
     val router: route.Router[Entry] = new route.Router[Entry]()
     CrawlContext().router = router
     var entry: ConstEntry = null
@@ -50,6 +51,11 @@ class Pipeline {
         router.addRoute(p.pattern, entry)
       }
     }
+    println("###########################################")
+    println("#")
+    println("#  Start the crawling task.")
+    println("#")
+    println("###########################################")
     crawlActor ! CrawlPage(entry.entryUrl)
   }
 }

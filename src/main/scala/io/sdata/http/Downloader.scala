@@ -32,11 +32,10 @@ object Downloader {
 
     /**
      * get content of the response
-     * @param response
      * @return
      */
-    def content(response:HttpResponse):String = {
-      EntityUtils.toString(response.getEntity)
+    def content = {
+      EntityUtils.toString(httpResponse.getEntity)
     }
   }
 }

@@ -10,7 +10,7 @@ import com.google.inject.{Key, Injector}
  * implement the Actor trait, we need to use a name annotation on each actor (defined in the Guice
  * module) so that the name-based lookup obtains the correct actor from Guice.
  */
-class GuiceActorProducer(val injector: Injector, val actorName: String) extends IndirectActorProducer {
+class GuiceNamedActorProducer(val injector: Injector, val actorName: String) extends IndirectActorProducer {
 
   override def actorClass = classOf[Actor]
 

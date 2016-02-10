@@ -4,6 +4,8 @@ import akka.actor.Extension;
 import akka.actor._
 import com.google.inject.Injector
 
+import scala.reflect.ClassTag
+
 /**
  * An Akka extension implementation for Guice-based injection. The Extension provides Akka access to
  * dependencies defined in Guice.
@@ -16,7 +18,9 @@ class GuiceAkkaExtensionImpl extends Extension {
     this.injector = injector
   }
 
-  def props(actorName: String) = Props(classOf[GuiceActorProducer], injector, actorName)
+  def props[A <: Actor](implicit tag: ClassTag[A]) = Props(classOf[GuiceTypedActorProducer[A]], injector, tag.runtimeClass)
+
+  def props(actorName: String) = Props(classOf[GuiceNamedActorProducer], injector, actorName)
 
 }
 

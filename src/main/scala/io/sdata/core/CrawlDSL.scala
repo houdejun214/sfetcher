@@ -8,7 +8,11 @@ object CrawlDSL {
   type Description = () => Unit
   def field[C](name:String)= new Field[C](name)
   def link()= new Link
-//  type Selectable= Selectable
+  def link(selector:String)=  {
+    val l = new Link
+    l.select(selector)
+    l
+  }
 }
 
 abstract class Entry {
@@ -40,6 +44,8 @@ class ConstEntry(private var _entryUrl:String) extends Entry {
 class Pattern(_pattern:String) extends Entry{
 
 
+  private var point:Entry = null
+
   /**
    * check if match with the pattern
    * @param input
@@ -50,6 +56,13 @@ class Pattern(_pattern:String) extends Entry{
   }
 
   def pattern = _pattern
+
+  def pointTo(target:Entry) ={
+    point = target
+    this
+  }
+
+  def ->(target:Entry) = pointTo(target)
 }
 
 
