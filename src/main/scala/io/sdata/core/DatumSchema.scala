@@ -42,6 +42,9 @@ class DatumSchema(tableName:String, entryRef: Entry) {
     this
   }
 
+  def fields = _fields
+  def links = _links
+
   def entry() = {
     entryRef
   }
@@ -66,6 +69,22 @@ class DatumSchema(tableName:String, entryRef: Entry) {
       _links += l
     }
     this
+  }
+
+  /**
+   * check if contains datum fields definition
+   * @return
+   */
+  def hasFields = {
+    ! _fields.isEmpty
+  }
+
+  /**
+   * check if contains links definition
+   * @return
+   */
+  def hasLinks = {
+    ! _links.isEmpty
   }
 }
 

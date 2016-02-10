@@ -22,11 +22,13 @@ object Downloader {
   def download(url: String): Response = {
     val get: HttpGet = new HttpGet(url)
     val response: HttpResponse = client.execute(get, null).get
-    new Response(response)
+    new Response(url, response)
   }
 
 
-  class Response(httpResponse: HttpResponse) {
+  class Response(val _url:String, val httpResponse: HttpResponse) {
+
+    def url = _url
 
     def status = httpResponse.getStatusLine.getReasonPhrase
 

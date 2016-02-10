@@ -21,6 +21,10 @@ public class RouteResult<T> {
         return target;
     }
 
+    public boolean found(){
+        return target!=null;
+    }
+
     /** Returns all params embedded in the request path. */
     public Map<String, String> pathParams() {
         return pathParams;

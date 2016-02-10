@@ -17,6 +17,7 @@ object CrawlDSL {
 
 abstract class Entry {
   var _datumSchema:DatumSchema=null
+  private var _point:Entry = null
   var _name:String=""
   def name = _name
   def name(_name:String): Entry ={
@@ -30,21 +31,43 @@ abstract class Entry {
     _datumSchema = DatumSchema(name, this)
     _datumSchema
   }
+
+  def schema = _datumSchema
+
+  def pointTo(target:Entry) ={
+    _point = target
+    this
+  }
+
+  def point = _point
+
+  def ->(target:Entry) = pointTo(target)
+
+  def hashPoint = (_point != null)
+
+  /**
+   * check if contains datum fields definition
+   * @return
+   */
+  def isDatumPage:Boolean = {
+    (_datumSchema!=null && _datumSchema.hasFields)
+  }
+
+  /**
+   * check if contains links definition
+   * @return
+   */
+  def hasLinks = {
+    (_datumSchema!=null && _datumSchema.hasLinks)
+  }
 }
 
 class ConstEntry(private var _entryUrl:String) extends Entry {
-  private var target:Entry = null;
-  def ->(target:Entry) = {
-    this.target = target
-  }
-
   def entryUrl = _entryUrl
 }
 
 class Pattern(_pattern:String) extends Entry{
 
-
-  private var point:Entry = null
 
   /**
    * check if match with the pattern
@@ -57,12 +80,6 @@ class Pattern(_pattern:String) extends Entry{
 
   def pattern = _pattern
 
-  def pointTo(target:Entry) ={
-    point = target
-    this
-  }
-
-  def ->(target:Entry) = pointTo(target)
 }
 
 

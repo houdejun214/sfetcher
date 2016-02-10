@@ -2,7 +2,7 @@ package io.sdata.core
 
 import akka.actor.ActorSystem
 import com.google.inject.Guice
-import io.sdata.actors.CrawlActor.CrawlPage
+import io.sdata.actors.CrawlActor.EntryPage
 import io.sdata.actors.{CrawlActor, CrawlModule}
 import io.sdata.modules.{AkkaModule, ConfigModule, GuiceAkkaExtension}
 import net.codingwell.scalaguice.InjectorExtensions._
@@ -56,6 +56,6 @@ class Pipeline {
     println("#  Start the crawling task.")
     println("#")
     println("###########################################")
-    crawlActor ! CrawlPage(entry.entryUrl)
+    crawlActor ! EntryPage(entry, entry.entryUrl)
   }
 }

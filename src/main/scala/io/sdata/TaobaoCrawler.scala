@@ -11,22 +11,16 @@ import scala.collection._
  */
 object TaobaoCrawler extends App {
 
-  var entry = Entry("https://hanxierka.world.tmall.com/?spm=a312a.7700718.0.0.BqrR7F")
-
-  val layer0 = Pattern("https://hanxierka.world.tmall.com/index.htm?:*")
+  val layer0 = Pattern("https://hanxierka.tmall.com/index.htm?:*")
   .datum()
   .links(Seq(
-    link(".tshop-pbsm-shop-nav-ch .menu-list|link")
+    link(".tshop-pbsm-shop-nav-ch .menu-list .menu a|links")
   )).entry()
 
-
-  val layer1 = Pattern("https://hanxierka.world.tmall.com/search.htm?:*")
-    .pointTo(layer2)
-
-  val layer2 = Pattern("https://hanxierka.world.tmall.com/category-:id.htm?:*")
+  val layer2 = Pattern("https://hanxierka.tmall.com/category-:id.htm?:*")
     .datum()
     .links(Seq(
-    link(".tshop-pbsm-shop-item-cates li.cat.fst-cat|link ")
+    link(".tshop-pbsm-shop-item-cates li.cat.fst-cat|links ")
   )).entry()
 
   val layer3 = Pattern("https://detail.tmall.com/item.htm?:*")
@@ -37,6 +31,12 @@ object TaobaoCrawler extends App {
     field[String]("price") on ("#priceblock_ourprice|txt"),
     field[String]("image") on ("#imgTagWrapperId img|link")
   )).entry()
+
+  var entry = Entry("https://hanxierka.tmall.com/?spm=a312a.7700718.0.0.BqrR7F")
+    .-> (layer0)
+
+  val layer1 = Pattern("https://hanxierka.tmall.com/search.htm?:*")
+    .-> (layer2)
 
   lazy val store = new DummyStore()
 

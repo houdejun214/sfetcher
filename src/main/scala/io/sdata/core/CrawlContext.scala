@@ -1,12 +1,13 @@
 package io.sdata.core
 
+import com.google.inject.Provider
 import com.lakeside.config.Configuration
 
 /**
  * Created by dejun on 3/2/16.
  */
 
-object CrawlContext {
+object CrawlContext extends Provider[CrawlContext] {
 
   val context:CrawlContext = new CrawlContext
 
@@ -21,6 +22,8 @@ object CrawlContext {
   def apply():CrawlContext = {
     context
   }
+
+  override def get(): CrawlContext = context
 }
 
 class CrawlContext {
