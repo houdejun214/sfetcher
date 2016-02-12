@@ -54,12 +54,9 @@ class ParseActor @Inject()(inject: Injector,
               case Some(i) =>
                 val target: Entry = routeResult.target()
                 crawlActor ! CrawlPage(target, l)
-              case None =>
+              case None => //do nothing
              }
-//            if(routeResult.found()){
-//              val target: Entry = routeResult.target()
-//              crawlActor ! CrawlPage(target, l)
-//            }
+
           }
         }
       }

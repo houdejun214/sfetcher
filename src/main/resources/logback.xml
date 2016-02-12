@@ -1,10 +1,10 @@
 <configuration>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>[%-5level] [%date{dd/MM/yyyy HH:mm:ss.SSS}] %logger{0} - %msg%n</pattern>
+            <pattern>[%-5level] [%date{dd/MM/yyyy HH:mm:ss.SSS}] %logger{0} %X{akkaSource} - %msg%n</pattern>
         </encoder>
     </appender>
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>

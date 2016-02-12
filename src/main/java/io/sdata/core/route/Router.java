@@ -67,23 +67,15 @@ final public class Router<T> {
         paths.remove(p);
     }
 
-
-    //--------------------------------------------------------------------------
-
     /** @return {@code null} if no match; note: {@code queryParams} is not set in {@link RouteResult} */
-    public RouteResult<T> route(String path) {
-        return route(StringUtils.split(path, "/"));
-    }
-
-    /** @return {@code null} if no match; note: {@code queryParams} is not set in {@link RouteResult} */
-    private RouteResult<T> route(String[] requestPathTokens) {
+    public RouteResult<T> route(String requestPath) {
         // Optimization note:
         // - Reuse tokens and pathParams in the loop
         // - decoder doesn't decode anything if decoder.parameters is not called
-        Map<String, String> pathParams = new HashMap<String, String>();
+        Map<String, String> pathParams = new HashMap<>();
         for (Map.Entry<Path, T> entry : routes.entrySet()) {
             Path path = entry.getKey();
-            if (path.match(requestPathTokens, pathParams)) {
+            if (path.match(requestPath, pathParams)) {
                 T target = entry.getValue();
                 return new RouteResult(target, pathParams, Collections.emptyMap());
             }

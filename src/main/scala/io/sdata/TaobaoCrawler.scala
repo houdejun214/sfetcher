@@ -11,19 +11,19 @@ import scala.collection._
  */
 object TaobaoCrawler extends App {
 
-  val layer0 = Pattern("https://hanxierka.tmall.com/index.htm?:*")
+  val layer0 = Pattern("https://hanxierka.tmall.com/index.htm?*")
   .datum()
   .links(Seq(
     link(".tshop-pbsm-shop-nav-ch .menu-list .menu a|links")
   )).entry()
 
-  val layer2 = Pattern("https://hanxierka.tmall.com/category-:id.htm?:*")
+  val layer2 = Pattern("https://hanxierka.tmall.com/category-*.htm?*")
     .datum()
     .links(Seq(
     link(".tshop-pbsm-shop-item-cates li.cat.fst-cat|links ")
   )).entry()
 
-  val layer3 = Pattern("https://detail.tmall.com/item.htm?:*")
+  val layer3 = Pattern("https://detail.tmall.com/item.htm?*")
     .datum("product")
     .fields(Seq(
     field[String]("name") on ("#productTitle|txt"),
@@ -35,7 +35,7 @@ object TaobaoCrawler extends App {
   var entry = Entry("https://hanxierka.tmall.com/?spm=a312a.7700718.0.0.BqrR7F")
     .-> (layer0)
 
-  val layer1 = Pattern("https://hanxierka.tmall.com/search.htm?:*")
+  val layer1 = Pattern("https://hanxierka.tmall.com/search.htm?*")
     .-> (layer2)
 
   lazy val store = new DummyStore()
