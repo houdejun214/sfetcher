@@ -14,7 +14,7 @@ class CrawlRuntime {
     .fileDB("./.crawl.run.mdb")
     .make()
 
-  val memDb  = DBMaker
+  val memDb = DBMaker
     .memoryDB()
     .make()
 
@@ -23,13 +23,13 @@ class CrawlRuntime {
     .valueSerializer(SerializerAtomicLong)
     .createOrOpen()
 
-  def counterGet(key:String):Long ={
-    counters.getOrDefault(key,new AtomicLong(1L)).get()
+  def counterGet(key: String): Long = {
+    counters.getOrDefault(key, new AtomicLong(1L)).get()
   }
 
-  def counterInc(key:String, delta:Int) = {
+  def counterInc(key: String, delta: Int) = {
     counters
-      .getOrDefault(key,new AtomicLong(1L))
+      .getOrDefault(key, new AtomicLong(1L))
       .addAndGet(delta)
   }
 
@@ -37,6 +37,7 @@ class CrawlRuntime {
     override def serialize(out: DataOutput2, value: AtomicLong): Unit = {
       out.writeLong(value.get())
     }
+
     override def deserialize(input: DataInput2, available: Int): AtomicLong = {
       new AtomicLong(input.readLong())
     }

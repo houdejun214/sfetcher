@@ -2,8 +2,9 @@ package io.sdata.core
 
 import com.google.inject.Provider
 import com.lakeside.config.Configuration
-import io.sdata.core.crawldb.{CrawlDBOfH2, CrawlDB}
-import io.sdata.store.{DummyStore, DBStore}
+import io.sdata.core.crawldb.{CrawlDB, CrawlDBOfH2}
+import io.sdata.http.{Downloader, PhantomJSRender}
+import io.sdata.store.{DBStore, FileJsonStore}
 
 /**
  * Created by dejun on 3/2/16.
@@ -11,17 +12,17 @@ import io.sdata.store.{DummyStore, DBStore}
 
 object CrawlContext extends Provider[CrawlContext] {
 
-  val context:CrawlContext = new CrawlContext
+  val context: CrawlContext = new CrawlContext
 
-  def settings(key:String): String = {
+  def settings(key: String): String = {
     context.settings.get(key)
   }
 
-  def settings(key:String, value:String): Unit = {
+  def settings(key: String, value: String): Unit = {
     context.settings.put(key, value)
   }
 
-  def apply():CrawlContext = {
+  def apply(): CrawlContext = {
     context
   }
 
@@ -29,9 +30,11 @@ object CrawlContext extends Provider[CrawlContext] {
 
 
   object Implicits {
-    implicit val crawDB:CrawlDB = CrawlDBOfH2
-    implicit val store:DBStore = DummyStore
+    implicit lazy val crawDB: CrawlDB = CrawlDBOfH2
+    implicit lazy val store: DBStore = FileJsonStore
+    implicit lazy val downloader: Downloader = PhantomJSRender
   }
+
 }
 
 class CrawlContext {
@@ -39,8 +42,8 @@ class CrawlContext {
   val settings = new Configuration()
 
   // runtime database
-//  val runtime = new CrawlRuntime
+  //  val runtime = new CrawlRuntime
 
-  var router:route.Router[Entry] = null
+  var router: route.Router[Entry] = null
 
 }

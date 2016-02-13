@@ -6,9 +6,11 @@ import io.sdata.modules.ConfigModule.ConfigProvider
 import net.codingwell.scalaguice.ScalaModule
 
 object ConfigModule {
+
   class ConfigProvider extends Provider[Config] {
     override def get() = ConfigFactory.load()
   }
+
 }
 
 /**

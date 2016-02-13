@@ -38,7 +38,7 @@ class Pipeline {
       new CrawlModule
     )
     val system = injector.instance[ActorSystem]
-//    val log = Logging(system, Pipeline)
+    //    val log = Logging(system, Pipeline)
     val crawlActor = system.actorOf(GuiceAkkaExtension(system).props[CrawlActor])
     val router: route.Router[Entry] = new route.Router[Entry]()
     CrawlContext().router = router

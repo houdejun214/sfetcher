@@ -1,0 +1,7 @@
+{
+  "ignoreSslErrors": true,
+  "outputEncoding": "utf8",
+  "maxDiskCacheSize": 100000,
+  "autoLoadImages": false,
+  "localToRemoteUrlAccessEnabled": true
+}

@@ -7,19 +7,19 @@ import org.mapdb.{Serializer, HTreeMap, DBMaker}
  */
 object CrawlDBOfMapDB {
 
-  lazy val instance= new CrawlDBOfMapDB("./.crawl.links.mdb")
+  lazy val instance = new CrawlDBOfMapDB("./.crawl.links.mdb")
 
   def apply() = instance
 }
 
-class CrawlDBOfMapDB(path:String) extends CrawlDB{
+class CrawlDBOfMapDB(path: String) extends CrawlDB {
   // runtime database
   lazy val crawlDB = DBMaker
     .fileDB(path)
     //    .memoryDB()
     .make()
 
-  lazy val memDb  = DBMaker
+  lazy val memDb = DBMaker
     .memoryDB()
     .make()
 
@@ -28,11 +28,11 @@ class CrawlDBOfMapDB(path:String) extends CrawlDB{
     .valueSerializer(Serializer.INTEGER)
     .createOrOpen()
 
-  def exists(url:String) = {
+  def exists(url: String) = {
     linkQueue.containsKey(url)
   }
 
-  def append(urls:String*) = {
+  def append(urls: String*) = {
     urls.foreach {
       url =>
         if (!linkQueue.containsKey(url)) {

@@ -24,15 +24,16 @@ object CrawlDBOfH2 extends CrawlDB {
 
   private val links = TableQuery[CrawlLinks]
 
+  Await.result(db.run(links.schema.drop), Duration.Inf)
   createTableIfNotExists(links)
 
   private def createTableIfNotExists(table: TableQuery[_ <: Table[_]]): Unit = {
     db.run(MTable.getTables(table.baseTableRow.tableName)).flatMap { result => {
-        if (result.isEmpty) {
-          db.run(table.schema.create)
-        }
-        Future.successful()
+      if (result.isEmpty) {
+        db.run(table.schema.create)
       }
+      Future.successful()
+    }
     }
   }
 
@@ -58,18 +59,22 @@ object CrawlDBOfH2 extends CrawlDB {
   }
 
   override def appendIfNotExists(url: String): Option[Boolean] = {
-    val insertAction = links.filter(_.url === url)
-      .result
-      .headOption
-      .flatMap {
-      case Some(link) =>
-        DBIO.successful(Option(false))
-      case None =>
-        append(url)
-        DBIO.successful(Option(true))
-    }.transactionally
+    try {
+      val insertAction = links.filter(_.url === url)
+        .result
+        .headOption
+        .flatMap {
+        case Some(link) =>
+          DBIO.successful(Option(false))
+        case None =>
+          append(url)
+          DBIO.successful(Option(true))
+      }.transactionally
 
-    Await.result(db.run(insertAction), Duration.Inf)
+      Await.result(db.run(insertAction), Duration.Inf)
+    } catch {
+      case ex: Exception => Option(false)
+    }
   }
 }
 

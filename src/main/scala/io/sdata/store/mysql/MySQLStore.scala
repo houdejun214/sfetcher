@@ -11,22 +11,22 @@ import scala.collection.mutable
 
 object MySQLStore {
 
-  def apply(jdbc:String)={
+  def apply(jdbc: String) = {
     new MySQLStore(jdbc)
   }
 }
 
-class MySQLStore(jdbc:String) extends DBStore{
+class MySQLStore(jdbc: String) extends DBStore {
 
-  private var _username=""
-  private var _password=""
+  private var _username = ""
+  private var _password = ""
 
-  def username(_username:String)= {
+  def username(_username: String) = {
     this._username = _username
     this
   }
 
-  def password(_password:String) ={
+  def password(_password: String) = {
     this._password = _password
     this
   }

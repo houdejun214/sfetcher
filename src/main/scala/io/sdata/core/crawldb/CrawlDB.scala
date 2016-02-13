@@ -5,11 +5,11 @@ package io.sdata.core.crawldb
  */
 trait CrawlDB {
 
-  def exists(url:String):Boolean
+  def exists(url: String): Boolean
 
-  def append(urls:String*):Unit
+  def append(urls: String*): Unit
 
-  def appendIfNotExists(urls:String):Option[Boolean]
+  def appendIfNotExists(urls: String): Option[Boolean]
 }
 
 

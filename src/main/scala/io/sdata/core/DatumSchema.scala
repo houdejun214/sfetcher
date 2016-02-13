@@ -9,12 +9,12 @@ import scala.collection._
  */
 
 object DatumSchema {
-  def apply(name:String,entry: Entry)=new DatumSchema(name,entry)
+  def apply(name: String, entry: Entry) = new DatumSchema(name, entry)
 
 }
 
-class DatumSchema(tableName:String, entryRef: Entry) {
-  private val _fields = mutable.Map[String,Selectable]()
+class DatumSchema(tableName: String, entryRef: Entry) {
+  private val _fields = mutable.Map[String, Selectable]()
   private val _links = mutable.ListBuffer[Link]()
 
   /**
@@ -23,9 +23,9 @@ class DatumSchema(tableName:String, entryRef: Entry) {
    * @tparam C
    * @return
    */
-  def field[C](name:String)= {
+  def field[C](name: String) = {
     val f = new Field[C](name)
-    _fields += (name->f)
+    _fields += (name -> f)
     f
   }
 
@@ -34,15 +34,16 @@ class DatumSchema(tableName:String, entryRef: Entry) {
    * @param list
    * @return
    */
-  def fields(list:Seq[Selectable]) = {
-    for(s:Selectable <- list) {
+  def fields(list: Seq[Selectable]) = {
+    for (s: Selectable <- list) {
       val f = s.asInstanceOf[Field[_]]
-      _fields += (f.name->f)
+      _fields += (f.name -> f)
     }
     this
   }
 
   def fields = _fields
+
   def links = _links
 
   def entry() = {
@@ -63,7 +64,7 @@ class DatumSchema(tableName:String, entryRef: Entry) {
    * create a new link description
    * @return
    */
-  def links(list:Seq[Selectable]) = {
+  def links(list: Seq[Selectable]) = {
     for (s: Selectable <- list) {
       val l = s.asInstanceOf[Link]
       _links += l
@@ -76,7 +77,7 @@ class DatumSchema(tableName:String, entryRef: Entry) {
    * @return
    */
   def hasFields = {
-    ! _fields.isEmpty
+    !_fields.isEmpty
   }
 
   /**
@@ -84,37 +85,38 @@ class DatumSchema(tableName:String, entryRef: Entry) {
    * @return
    */
   def hasLinks = {
-    ! _links.isEmpty
+    !_links.isEmpty
   }
 }
 
 abstract class Selectable {
-  var selector:DataSelector=null
+  var selector: DataSelector = null
 
-  def select(selector:String) = {
+  def select(selector: String) = {
     this.selector = Selector(selector)
     this
   }
-  def on(selector:String) = select(selector)
+
+  def on(selector: String) = select(selector)
 }
 
-class Field[C](_name:String) extends Selectable {
+class Field[C](_name: String) extends Selectable {
   def name = _name
 }
 
-class Link extends Selectable { }
+class Link extends Selectable {}
 
-case class ListField(_name:String) extends Field(_name)
+case class ListField(_name: String) extends Field(_name)
 
-case class ObjectField(_name:String) extends Field(_name)
+case class ObjectField(_name: String) extends Field(_name)
 
 
 object Selector {
 
-  def build(syntax:String): DataSelector = {
+  def build(syntax: String): DataSelector = {
     DataSelectorPipleBuilder.build(syntax);
   }
 
-  def apply(syntax:String): DataSelector = build(syntax)
+  def apply(syntax: String): DataSelector = build(syntax)
 
 }

@@ -8,7 +8,7 @@ import net.codingwell.scalaguice.InjectorExtensions._
 /**
  * Created by dejun on 3/2/16.
  */
-trait AbstractApp extends App{
+trait AbstractApp extends App {
 
   override def delayedInit(body: => Unit) = {
 

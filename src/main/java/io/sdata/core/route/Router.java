@@ -49,6 +49,9 @@ final public class Router<T> {
 
     /** @return {@code null} if no match; note: {@code queryParams} is not set in {@link RouteResult} */
     public RouteResult<T> route(String requestPath) {
+        if (StringUtils.isEmpty(requestPath)) {
+            return null;
+        }
         // Optimization note:
         // - Reuse tokens and pathParams in the loop
         // - decoder doesn't decode anything if decoder.parameters is not called
@@ -59,11 +62,9 @@ final public class Router<T> {
                 T target = entry.getValue();
                 return new RouteResult(target, pathParams, Collections.emptyMap());
             }
-
             // Reset for the next loop
             pathParams.clear();
         }
-
         return null;
     }
 }
