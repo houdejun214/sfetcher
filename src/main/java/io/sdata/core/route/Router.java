@@ -18,10 +18,6 @@ final public class Router<T> {
     // A path can only point to one target
     private final Map<Path, T> routes = new HashMap<Path, T>();
 
-    // Reverse index to create reverse routes fast (a target can have multiple paths)
-    private final Map<T, Set<Path>> reverseRoutes = new HashMap<T, Set<Path>>();
-
-
     /** Returns all routes in this router, an unmodifiable map of {@code Path -> Target}. */
     public Map<Path, T> routes() {
         return Collections.unmodifiableMap(routes);
@@ -33,24 +29,11 @@ final public class Router<T> {
      */
     public Router<T> addRoute(String path, T target) {
         Path p = new Path(path);
-        if (routes.containsKey(path)) {
+        if (routes.containsKey(p)) {
             return this;
         }
-
         routes.put(p, target);
-        addReverseRoute(target, p);
         return this;
-    }
-
-    private void addReverseRoute(T target, Path path) {
-        Set<Path> paths = reverseRoutes.get(target);
-        if (paths == null) {
-            paths = new HashSet<Path>();
-            paths.add(path);
-            reverseRoutes.put(target, paths);
-        } else {
-            paths.add(path);
-        }
     }
 
     //--------------------------------------------------------------------------
@@ -62,9 +45,6 @@ final public class Router<T> {
         if (target == null) {
             return;
         }
-
-        Set<Path> paths = reverseRoutes.remove(target);
-        paths.remove(p);
     }
 
     /** @return {@code null} if no match; note: {@code queryParams} is not set in {@link RouteResult} */

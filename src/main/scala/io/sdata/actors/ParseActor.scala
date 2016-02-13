@@ -4,8 +4,9 @@ import java.util
 
 import com.google.inject.{Inject, Injector}
 import io.sdata.actors.CrawlActor.CrawlPage
-import io.sdata.actors.DatumEmitorActor.EmitDatum
+import io.sdata.actors.EmitorActor.EmitDatum
 import io.sdata.actors.ParseActor.PageContent
+import io.sdata.core.crawldb.CrawlDB
 import io.sdata.core.route.RouteResult
 import io.sdata.core.{CrawlContext, Entry}
 import io.sdata.http.Downloader.Response
@@ -26,7 +27,7 @@ object ParseActor {
 
 class ParseActor @Inject()(inject: Injector,
                            crawlContext: CrawlContext) extends BaseActor(inject) with ActorInject {
-
+  import CrawlContext.Implicits.crawDB
 
   override def receive: Receive = {
     case PageContent(from, response) => {
@@ -39,11 +40,11 @@ class ParseActor @Inject()(inject: Injector,
     }
   }
 
-  def parseWithPattern(response: Response, from: Entry): Unit = {
+  def parseWithPattern(response: Response, from: Entry)(implicit crawlDB:CrawlDB): Unit = {
       if (from.isDatumPage) {
-        val emitorActor = injectActor[DatumEmitorActor]
+        val emitorActor = injectActor[EmitorActor]
         val datum = resolveDatum(from, response)
-        emitorActor ! EmitDatum(datum)
+        emitorActor ! EmitDatum(from.schema, datum)
       } else {
         val links = resolveLinks(from, response)
         val crawlActor = injectActor[CrawlActor]
@@ -51,12 +52,17 @@ class ParseActor @Inject()(inject: Injector,
           case l => {
             val routeResult: RouteResult[Entry] = crawlContext.router.route(l)
              Option(routeResult) match {
-              case Some(i) =>
-                val target: Entry = routeResult.target()
-                crawlActor ! CrawlPage(target, l)
-              case None => //do nothing
+              case Some(result) =>
+                val target: Entry = result.target()
+                crawlDB.appendIfNotExists(l) match {
+                  case Some(success) => if(success){
+                    println(s"New page => $l")
+                    crawlActor ! CrawlPage(target, l)
+                  }
+                  case _=> // duplicate link page, don't need to parse again.
+                }
+              case _ => //do nothing
              }
-
           }
         }
       }

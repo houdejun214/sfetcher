@@ -47,13 +47,6 @@ final class Path {
         return path;
     }
 
-    /**
-     * Returns the path given at the constructor, without slashes at both ends,
-     * and split by {@code '/'}.
-     */
-//    public String[] tokens() {
-//        return paths;
-//    }
 
     //--------------------------------------------------------------------------
     // Need these so that Paths can be conveniently used as Map keys.
@@ -68,8 +61,12 @@ final class Path {
         if (o == null) {
             return false;
         }
-
         return ((Path) o).path.equals(path);
+    }
+
+    @Override
+    public String toString() {
+        return path;
     }
 
     //--------------------------------------------------------------------------

@@ -2,7 +2,6 @@ package io.sdata
 
 import io.sdata.core.CrawlDSL._
 import io.sdata.core.{Entry, Pattern, Pipeline}
-import io.sdata.store.DummyStore
 
 import scala.collection._
 
@@ -20,7 +19,9 @@ object TaobaoCrawler extends App {
   val layer2 = Pattern("https://hanxierka.tmall.com/category-*.htm?*")
     .datum()
     .links(Seq(
-    link(".tshop-pbsm-shop-item-cates li.cat.fst-cat|links ")
+    link(".tshop-pbsm-shop-item-cates li.cat.fst-cat a|links "),
+    link(".tshop-pbsm-tmall-srch-list .J_TItems .item .detail a|links "),
+    link(".tshop-pbsm-tmall-srch-list .J_TItems .pagination a|links ")
   )).entry()
 
   val layer3 = Pattern("https://detail.tmall.com/item.htm?*")
@@ -38,7 +39,7 @@ object TaobaoCrawler extends App {
   val layer1 = Pattern("https://hanxierka.tmall.com/search.htm?*")
     .-> (layer2)
 
-  lazy val store = new DummyStore()
+//  lazy val store = new DummyStore()
 
   Pipeline(entry,layer0, layer1, layer2, layer3)
     .start

@@ -1,6 +1,9 @@
 package io.sdata.store.mysql
 
+import io.sdata.core.DatumSchema
 import io.sdata.store.DBStore
+
+import scala.collection.mutable
 
 /**
  * Created by dejun on 9/2/16.
@@ -27,4 +30,6 @@ class MySQLStore(jdbc:String) extends DBStore{
     this._password = _password
     this
   }
+
+  override def store(schema: DatumSchema, datum: mutable.Map[String, _]): Unit = ???
 }

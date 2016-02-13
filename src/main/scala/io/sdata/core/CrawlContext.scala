@@ -2,6 +2,8 @@ package io.sdata.core
 
 import com.google.inject.Provider
 import com.lakeside.config.Configuration
+import io.sdata.core.crawldb.{CrawlDBOfH2, CrawlDB}
+import io.sdata.store.{DummyStore, DBStore}
 
 /**
  * Created by dejun on 3/2/16.
@@ -24,6 +26,12 @@ object CrawlContext extends Provider[CrawlContext] {
   }
 
   override def get(): CrawlContext = context
+
+
+  object Implicits {
+    implicit val crawDB:CrawlDB = CrawlDBOfH2
+    implicit val store:DBStore = DummyStore
+  }
 }
 
 class CrawlContext {
@@ -34,4 +42,5 @@ class CrawlContext {
 //  val runtime = new CrawlRuntime
 
   var router:route.Router[Entry] = null
+
 }

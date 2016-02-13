@@ -48,7 +48,7 @@ class Pipeline {
         entry = e.asInstanceOf[ConstEntry]
       } else if (e.isInstanceOf[Pattern]) {
         val p = e.asInstanceOf[Pattern]
-        router.addRoute(p.pattern, entry)
+        router.addRoute(p.pattern, p)
       }
     }
     println("###########################################")

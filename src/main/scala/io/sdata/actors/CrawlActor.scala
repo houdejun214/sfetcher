@@ -33,20 +33,26 @@ class CrawlActor @Inject()(inject: Injector,
   override def receive: Receive = {
     case EntryPage(from, url) => {
       val response = download(url)
-      val parseActor = injectActor[ParseActor]
-      parseActor ! PageContent(from, response)
+      if(response.success){
+        val parseActor = injectActor[ParseActor]
+        parseActor ! PageContent(from, response)
+      }
     }
     case CrawlPage(from, url) => {
       val response = download(url)
-      val parseActor = injectActor[ParseActor]
-      parseActor ! PageContent(from, response)
+      if(response.success){
+        val parseActor = injectActor[ParseActor]
+        parseActor ! PageContent(from, response)
+      }
     }
   }
 
   def download(url: String) = {
     val watch: Stopwatch = new Stopwatch().start()
     val response = Downloader.download(url)
-    log.info("Download [{}] in [{}ms] <= {}", response.status, watch.elapsed(TimeUnit.MILLISECONDS), url)
+    if(response.success){
+      log.info("Download [{}] in [{}ms] <= {}", response.status, watch.elapsed(TimeUnit.MILLISECONDS), url)
+    }
     response
   }
 }
