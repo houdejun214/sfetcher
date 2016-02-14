@@ -10,6 +10,8 @@ import org.jsoup.nodes.Document;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 public class DataSelectorPipleBuilderTest {
 	
 	private static Document doc;
@@ -70,9 +72,11 @@ public class DataSelectorPipleBuilderTest {
 
 	@Test
 	public void testFormat(){
-		DataSelector selector = DataSelectorPipleBuilder.build(".desc-list dl|:[dt=服务]|dd em|txt");
-		Object select = selector.select(doc);
-		System.out.println("testFilter:"+select);
+		DataSelector selector = DataSelectorPipleBuilder.build("{$url}");
+        PageContext context = new PageContext();
+        context.addContextVariable("url", "http://www.google.com");
+        Object select = selector.select(doc,context);
+        assertEquals("http://www.google.com", select);
 	}
 
 //	@Test

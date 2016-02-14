@@ -9,7 +9,9 @@ object PhantomJSRender extends Downloader {
 
   import sys.process._
 
-  private val CommandPattern = "{0} --config={1} {2} {3}"
+  private val CommandPattern = "{0} --ignore-ssl-errors=true " +
+    "--load-images=false " +
+    "--web-security=false {2} {3}"
 
   private lazy val sdataHome: String = {
     var home: String = "";

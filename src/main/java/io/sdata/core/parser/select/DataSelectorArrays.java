@@ -19,7 +19,7 @@ public class DataSelectorArrays extends DataSelector {
 		}
 	}
 	
-	@Override Object selectObject(Object inputObject){
+	@Override Object selectObject(Object inputObject, PageContext context){
 		return this.getIndexAtObjectIfList(inputObject, index);
 	}
 }

@@ -3,6 +3,8 @@ package io.sdata.core.parser.select;
 import com.lakeside.config.Configuration;
 import org.jsoup.nodes.Document;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,14 +14,23 @@ public class PageContext {
 	private Map<String,String> httpHeader = new HashMap<String,String>();
 	private Map<String,Object> metadata = new HashMap<String,Object>();
 	private Map<String,Object> contextVariable = new HashMap<String,Object>();
-	
+    public PageContext(){
+        this.conf = new Configuration();
+    }
 	public PageContext(Configuration conf){
 		this.conf = conf;
 	}
 	public PageContext(Configuration conf, Document doc){
 		this.conf = conf;
 		this.doc = doc;
-	}
+        this.addContextVariable("url", doc.baseUri());
+        try {
+            URI uri = new URI(doc.baseUri());
+            this.addContextVariable("domain", uri.getHost());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 	public Map<String, Object> getMetadata() {
 		return metadata;
@@ -78,7 +89,7 @@ public class PageContext {
 		return false;
 	}
 	
-	public void putVariable(String key, Object value) {
+	public void addContextVariable(String key, Object value) {
 		this.contextVariable.put(key, value);
 	}
 

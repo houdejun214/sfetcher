@@ -28,9 +28,10 @@ object TaobaoCrawler extends App {
     .datum("product")
     .fields(Seq(
     field[String]("name") on ("#detail .tm-detail-meta .tb-detail-hd h1|txt"),
-//    field[String]("url") on ("url"),
+    field[String]("url") on ("{$url}"),
     field[String]("price") on ("#detail .tm-detail-meta .tm-price-panel .tm-price|html"),
-    field[String]("image") on ("#detail .tb-gallery .tb-booth a img|link")
+    field[String]("image") on ("#detail .tb-gallery .tb-booth a img|link"),
+    field[String]("shop_name") on(".sea-header-bd .hd-shop-info .hd-shop-name a|text")
   )).entry()
 
 //  var entry = Entry("https://hanxierka.tmall.com/?spm=a312a.7700718.0.0.BqrR7F")

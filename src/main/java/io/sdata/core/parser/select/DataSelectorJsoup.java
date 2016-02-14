@@ -29,7 +29,7 @@ public class DataSelectorJsoup extends DataSelector {
 		}
 	}
 
-	@Override Object selectObject(Object inputObject){
+	@Override Object selectObject(Object inputObject, PageContext context){
 		if(inputObject==null){
 			return null;
 		}

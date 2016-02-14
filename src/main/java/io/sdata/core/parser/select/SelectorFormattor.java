@@ -29,12 +29,12 @@ public class SelectorFormattor {
 		return sb.toString();
 	}
 
-	private static final String formatSpecifier = "\\{([_a-zA-Z0-9]+)\\}";
+	private static final String formatSpecifier = "\\$([_a-zA-Z0-9]+)";
 
 	private static Pattern fsPattern = Pattern.compile(formatSpecifier);
 
 	private FormatString[] parse(String format) {
-		List<FormatString> al = new ArrayList<FormatString>();
+		List<FormatString> al = new ArrayList<>();
 		Matcher m = fsPattern.matcher(format);
 		int i = 0;
 		while (i < format.length()) {

@@ -32,38 +32,39 @@ public abstract class DataSelector {
 	
 	private DataSelector next;
 	
-	protected PageContext context;
-	
 	public Object select(Object inputObject){
-		Object result = this.selectObject(inputObject);
-		DataSelector _next = next;
-		while(result!=null && _next!=null){
-			_next.setContext(context);
-			result = _next.selectObject(result);
-			_next = _next.getNext();
-		}
-		return result;
-	}
+        return select(inputObject, null);
+    }
+
+
+    public Object select(Object inputObject, PageContext context){
+        Object result = this.selectObject(inputObject, context);
+        DataSelector _next = next;
+        while(result!=null && _next!=null){
+            //_next.setContext(context);
+            result = _next.selectObject(result, context);
+            _next = _next.getNext();
+        }
+        return result;
+    }
+
+
 	
 	/**
 	 * this method must be override by each implementation 
 	 * 
 	 * @param inputObject
-	 * @return
+	 * @param context
+     * @return
 	 */
-	abstract Object selectObject(Object inputObject);
+	abstract Object selectObject(Object inputObject, PageContext context);
 
 	public DataSelector getNext() {
 		return next;
 	}
 
 	public void setNext(DataSelector next) {
-		next.setContext(this.context);
 		this.next = next;
-	}
-	
-	public void setContext(PageContext context) {
-		this.context = context;
 	}
 
 	protected Object getFirstObjectIfList(Object input){

@@ -4,7 +4,7 @@ import com.google.inject.Provider
 import com.lakeside.config.Configuration
 import io.sdata.core.crawldb.{CrawlDB, CrawlDBOfH2}
 import io.sdata.http.{Downloader, PhantomJSRender}
-import io.sdata.store.{DBStore, FileJsonStore}
+import io.sdata.store.{DBStore, FileCsvStore}
 
 /**
  * Created by dejun on 3/2/16.
@@ -13,6 +13,8 @@ import io.sdata.store.{DBStore, FileJsonStore}
 object CrawlContext extends Provider[CrawlContext] {
 
   val context: CrawlContext = new CrawlContext
+
+  def settings = context.settings
 
   def settings(key: String): String = {
     context.settings.get(key)
@@ -31,8 +33,8 @@ object CrawlContext extends Provider[CrawlContext] {
 
   object Implicits {
     implicit lazy val crawDB: CrawlDB = CrawlDBOfH2
-    implicit lazy val store: DBStore = FileJsonStore
-    implicit lazy val downloader: Downloader = PhantomJSRender
+    implicit lazy val store: DBStore = FileCsvStore
+    implicit lazy val downloader: Downloader = PhantomJSRender //HttpDownloader //PhantomJSRender
   }
 
 }

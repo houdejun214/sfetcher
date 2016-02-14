@@ -9,7 +9,7 @@ import org.jsoup.select.Elements;
 public class DataSelectorLinkList extends DataSelectorLink {
 
 	@Override
-	Object selectObject(Object inputObject) {
+	Object selectObject(Object inputObject, PageContext context) {
 		if(inputObject==null){
 			return null;
 		}

@@ -8,6 +8,7 @@ import io.sdata.actors.CrawlActor.CrawlPage
 import io.sdata.actors.EmitorActor.EmitDatum
 import io.sdata.actors.ParseActor.PageContent
 import io.sdata.core.crawldb.CrawlDB
+import io.sdata.core.parser.select.PageContext
 import io.sdata.core.route.RouteResult
 import io.sdata.core.{CrawlContext, Entry}
 import io.sdata.http.Response
@@ -71,11 +72,13 @@ class ParseActor @Inject()(inject: Injector,
   }
 
   def resolveDatum(from: Entry, res: Response): mutable.Map[String, AnyRef] = {
-    val doc = Jsoup.parse(res.content)
+    var url = res.url
+    val doc = Jsoup.parse(res.content, url)
+    val context = new PageContext(CrawlContext.settings, doc)
     val datum: mutable.Map[String, AnyRef] = mutable.Map[String, AnyRef]()
     from.schema.fields foreach {
       case (name, f) => {
-        val data = f.selector.select(doc)
+        val data = f.selector.select(doc,context)
         datum += (name -> data)
       }
     }
@@ -87,14 +90,14 @@ class ParseActor @Inject()(inject: Injector,
     val uri = new URI(res.url)
     var url = res.url
     if(uri.getScheme.equals("file")){
-      url = uri.toString().replaceFirst("file","http")
+      url = uri.toString().replaceFirst("file","https")
     }
     val doc = Jsoup.parse(res.content, url)
+    val context = new PageContext(CrawlContext.settings, doc)
     val links = mutable.ListBuffer[String]()
     from.schema.links foreach {
       case f =>
-        val data = f.selector.select(doc)
-
+        val data = f.selector.select(doc, context)
         if (data.isInstanceOf[util.List[_]]) {
           val list: util.List[_] = data.asInstanceOf[util.List[String]]
           for (l <- JavaConversions.asScalaBuffer(list)) {

@@ -2,13 +2,7 @@ package io.sdata.core.parser.select;
 
 public class DataSelectorPipleBuilder {
 	
-	
 	public static DataSelector build(String selector){
-		
-		return build(selector,null);
-	}
-	
-	public static DataSelector build(String selector,PageContext context){
 		
 		DataSelector headSelector= null;
 		DataSelector preSelector = null;
@@ -38,7 +32,6 @@ public class DataSelectorPipleBuilder {
 				curSelector = new DataSelectorJsoup(txt);
 			}
 			if(headSelector == null){
-				curSelector.setContext(context);
 				headSelector = curSelector;
 			}else{
 				preSelector.setNext(curSelector);

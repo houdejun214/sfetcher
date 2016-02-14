@@ -13,7 +13,7 @@ import org.jsoup.select.Elements;
 public class DataSelectorText extends DataSelector {
 	
 	
-	@Override Object selectObject(Object inputObject){
+	@Override Object selectObject(Object inputObject, PageContext context){
 		if(inputObject==null){
 			return null;
 		}

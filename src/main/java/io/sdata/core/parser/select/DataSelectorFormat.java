@@ -18,7 +18,7 @@ public class DataSelectorFormat extends DataSelector {
 		}
 	}
 	
-	@Override Object selectObject(Object inputObject){
+	@Override Object selectObject(Object inputObject, PageContext context){
 		return formatter.format(inputObject, context);
 	}
 }
