@@ -1,13 +1,16 @@
 package io.sdata.http
 
+import java.util.concurrent.TimeUnit
+
 import com.lakeside.core.utils.{PathUtils, StringUtils}
+
+import scala.concurrent.duration.Duration
+import scala.concurrent.{Await, Future}
 
 /**
  * Created by dejun on 13/2/16.
  */
 object PhantomJSRender extends Downloader {
-
-  import sys.process._
 
   private val CommandPattern = "{0} --ignore-ssl-errors=true " +
     "--load-images=false " +
@@ -34,10 +37,27 @@ object PhantomJSRender extends Downloader {
    * @param url
    */
   def render(url: String): String = {
+    import sys.process._
+    import scala.concurrent.ExecutionContext.Implicits.global
     val command: String = StringUtils.format(CommandPattern, phantomjsPath, configPath, renderPath, url)
-    //println(s"phantomjs=> $command")
-    val result = (command !!)
-    result
+    var retry=1
+    while (retry <= 3){
+      val buffer = new StringBuffer
+      val process = command.run(BasicIO(false, buffer, None))
+      val f:Future[Int] = Future {
+        process.exitValue()
+      }
+      try {
+        Await.result(f, Duration(60,TimeUnit.SECONDS))
+        return buffer.toString
+      } catch {
+        case ex:Exception=>
+          process.destroy()
+          retry+=1
+          println("Proceed html render timeout, try it again.")
+      }
+    }
+    "" //empty result
   }
 
   override def download(url: String): Response = {
