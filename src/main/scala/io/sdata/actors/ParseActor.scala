@@ -28,6 +28,7 @@ object ParseActor {
 }
 
 class ParseActor @Inject()(inject: Injector,
+                           dispatcher:CrawlActorDispatcher,
                            crawlContext: CrawlContext) extends BaseActor(inject) with ActorInject {
 
   import CrawlContext.Implicits.crawDB
@@ -50,7 +51,7 @@ class ParseActor @Inject()(inject: Injector,
       emitorActor ! EmitDatum(from.schema, datum)
     } else {
       val links = resolveLinks(from, response)
-      val crawlActor = injectActor[CrawlActor]
+      //val crawlActor = injectActor[CrawlActor]
       links foreach {
         case l => {
           val routeResult: RouteResult[Entry] = crawlContext.router.route(l)
@@ -60,7 +61,7 @@ class ParseActor @Inject()(inject: Injector,
               crawlDB.appendIfNotExists(l) match {
                 case Some(success) => if (success) {
                   println(s"New page => $l")
-                  crawlActor ! CrawlPage(target, l)
+                  dispatcher ! CrawlPage(target, l)
                 }
                 case _ => // duplicate link page, don't need to parse again.
               }
@@ -72,7 +73,7 @@ class ParseActor @Inject()(inject: Injector,
   }
 
   def resolveDatum(from: Entry, res: Response): mutable.Map[String, AnyRef] = {
-    var url = res.url
+    val url = res.url
     val doc = Jsoup.parse(res.content, url)
     val context = new PageContext(CrawlContext.settings, doc)
     val datum: mutable.Map[String, AnyRef] = mutable.Map[String, AnyRef]()

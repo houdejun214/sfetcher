@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit
 
 import com.google.common.base.Stopwatch
 import com.google.inject.{Inject, Injector}
-import io.sdata.actors.CrawlActor.{CrawlPage, EntryPage}
+import io.sdata.actors.CrawlActor.CrawlPage
 import io.sdata.actors.ParseActor.PageContent
 import io.sdata.core.{CrawlContext, DatumSchema, Entry}
 import io.sdata.http.{Downloader, Response, StaticResponse}
@@ -19,7 +19,7 @@ import org.apache.commons.io.FileUtils
 
 object CrawlActor {
 
-  case class EntryPage(from: Entry, url: String)
+  //case class EntryPage(from: Entry, url: String)
 
   case class Page(url: String)
 
@@ -35,13 +35,6 @@ class CrawlActor @Inject()(inject: Injector,
   import CrawlContext.Implicits.downloader
 
   override def receive: Receive = {
-    case EntryPage(from, url) => {
-      val response = download(url)
-      if (response.success) {
-        val parseActor = injectActor[ParseActor]
-        parseActor ! PageContent(from, response)
-      }
-    }
     case CrawlPage(from, url) => {
       val response = download(url)
       if (response.success) {

@@ -1,7 +1,7 @@
 package io.sdata.modules
 
 import akka.actor.ActorSystem
-import com.google.inject.{AbstractModule, Injector, Provider}
+import com.google.inject.{Singleton, AbstractModule, Injector, Provider}
 import AkkaModule.ActorSystemProvider
 import com.typesafe.config.Config
 import net.codingwell.scalaguice.ScalaModule
@@ -9,6 +9,7 @@ import javax.inject.Inject
 
 object AkkaModule {
 
+  @Singleton
   class ActorSystemProvider @Inject()(val config: Config,
                                       val injector: Injector) extends Provider[ActorSystem] {
     override def get() = {

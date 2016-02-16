@@ -1,10 +1,9 @@
 package io.sdata.core
 
-import akka.actor.ActorSystem
 import com.google.inject.Guice
-import io.sdata.actors.CrawlActor.EntryPage
-import io.sdata.actors.{CrawlActor, CrawlModule}
-import io.sdata.modules.{AkkaModule, ConfigModule, GuiceAkkaExtension}
+import io.sdata.actors.CrawlActor.CrawlPage
+import io.sdata.actors.{CrawlActorDispatcher, CrawlModule}
+import io.sdata.modules.{AkkaModule, ConfigModule}
 import net.codingwell.scalaguice.InjectorExtensions._
 
 import scala.collection.mutable
@@ -37,9 +36,10 @@ class Pipeline {
       new ConfigModule,
       new CrawlModule
     )
-    val system = injector.instance[ActorSystem]
+    val dispatcher = injector.instance[CrawlActorDispatcher]
     //    val log = Logging(system, Pipeline)
-    val crawlActor = system.actorOf(GuiceAkkaExtension(system).props[CrawlActor])
+
+    //val crawlActor = system.actorOf(GuiceAkkaExtension(system).props[CrawlActor])
     val router: route.Router[Entry] = new route.Router[Entry]()
     CrawlContext().router = router
     var entry: ConstEntry = null
@@ -56,6 +56,6 @@ class Pipeline {
     println("#  Start the crawling task.")
     println("#")
     println("###########################################")
-    crawlActor ! EntryPage(entry, entry.entryUrl)
+    dispatcher ! CrawlPage(entry, entry.entryUrl)
   }
 }

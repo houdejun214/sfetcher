@@ -8,4 +8,4 @@ bin
 .idea
 *.iml
 /data/
-*.crawl.run.mdb
+*.crawl.*
