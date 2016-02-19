@@ -12,7 +12,9 @@ import io.sdata.modules.GuiceAkkaExtension
 class CrawlActorDispatcher @Inject()(system:ActorSystem) {
 
   def tell(page: CrawlActor.CrawlPage) = {
-    val crawlActor = system.actorOf(GuiceAkkaExtension(system).props[CrawlActor])
+    val crawlActor = system.actorOf(GuiceAkkaExtension(system)
+      .props[CrawlActor]
+      .withDispatcher("crawl-dispatcher"))
     crawlActor ! page
   }
 

@@ -30,7 +30,10 @@ object CrawlActor {
 }
 
 class CrawlActor @Inject()(inject: Injector,
-                           crawlContext: CrawlContext) extends BaseActor(inject) with ActorInject {
+                           crawlContext: CrawlContext)
+  extends BaseActor(inject)
+//    with PersistentActor
+    with ActorInject {
 
   import CrawlContext.Implicits.downloader
 
@@ -38,7 +41,7 @@ class CrawlActor @Inject()(inject: Injector,
     case CrawlPage(from, url) => {
       val response = download(url)
       if (response.success) {
-        val parseActor = injectActor[ParseActor]
+        val parseActor = injectActor[ParseActor]("parse-dispatcher")
         parseActor ! PageContent(from, response)
       }
     }
@@ -70,4 +73,10 @@ class CrawlActor @Inject()(inject: Injector,
         }
       }
   }
+
+//  override def receiveRecover: Receive = ???
+//
+//  override def receiveCommand: Receive = ???
+//
+//  override def persistenceId: String = "CrawlActor"
 }
