@@ -1,7 +1,5 @@
 package io.sdata.core.crawldb
 
-import java.util.concurrent.TimeUnit
-
 import slick.driver.H2Driver.api._
 import slick.jdbc.meta.MTable
 
@@ -10,8 +8,8 @@ import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
 
 /**
- * Created by dejun on 13/2/16.
- */
+  * Created by dejun on 13/2/16.
+  */
 
 object CrawlDBOfH2 extends CrawlDB {
 
@@ -28,12 +26,13 @@ object CrawlDBOfH2 extends CrawlDB {
   createTableIfNotExists(links)
 
   private def createTableIfNotExists(table: TableQuery[_ <: Table[_]]): Unit = {
-    db.run(MTable.getTables(table.baseTableRow.tableName)).flatMap { result => {
-      if (result.isEmpty) {
-        db.run(table.schema.create)
+    db.run(MTable.getTables(table.baseTableRow.tableName)).flatMap {
+      result => {
+        if (result.isEmpty) {
+          db.run(table.schema.create)
+        }
+        Future.successful()
       }
-      Future.successful()
-    }
     }
   }
 
@@ -48,12 +47,10 @@ object CrawlDBOfH2 extends CrawlDB {
   }
 
   override def append(urls: String*): Unit = {
-
     val buffer = mutable.ListBuffer[CrawlLink]()
     for (url <- urls) {
       buffer += CrawlLink(url, CrawlLinkState.Init.id)
     }
-
     val insertAction: DBIO[Unit] = (links ++= buffer).map { result => Unit }
     Await.result(db.run(insertAction), Duration.Inf)
   }
@@ -64,17 +61,21 @@ object CrawlDBOfH2 extends CrawlDB {
         .result
         .headOption
         .flatMap {
-        case Some(link) =>
-          DBIO.successful(Option(false))
-        case None =>
-          append(url)
-          DBIO.successful(Option(true))
-      }.transactionally
-
+          case Some(link) =>
+            DBIO.successful(Option(false))
+          case None =>
+            append(url)
+            DBIO.successful(Option(true))
+        }.transactionally
       Await.result(db.run(insertAction), Duration.Inf)
     } catch {
       case ex: Exception => Option(false)
     }
+  }
+
+  def size(): Int = {
+    val run: Future[Int] = db.run(links.length.result)
+    Await.result(run, Duration.Inf)
   }
 }
 
