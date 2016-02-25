@@ -19,8 +19,6 @@ import org.apache.commons.io.FileUtils
 
 object CrawlActor {
 
-  //case class EntryPage(from: Entry, url: String)
-
   case class Page(url: String)
 
   case class CrawlPage(from: Entry, url: String)
@@ -32,7 +30,6 @@ object CrawlActor {
 class CrawlActor @Inject()(inject: Injector,
                            crawlContext: CrawlContext)
   extends BaseActor(inject)
-//    with PersistentActor
     with ActorInject {
 
   import CrawlContext.Implicits.downloader
@@ -73,10 +70,4 @@ class CrawlActor @Inject()(inject: Injector,
         }
       }
   }
-
-//  override def receiveRecover: Receive = ???
-//
-//  override def receiveCommand: Receive = ???
-//
-//  override def persistenceId: String = "CrawlActor"
 }

@@ -106,13 +106,13 @@
         </dependency>
         <dependency>
             <groupId>org.fusesource.leveldbjni</groupId>
-            <artifactId>leveldbjni</artifactId>
+            <artifactId>leveldbjni-all</artifactId>
             <version>1.8</version>
         </dependency>
         <dependency>
             <groupId>org.mapdb</groupId>
             <artifactId>mapdb</artifactId>
-            <version>3.0.0-M1</version>
+            <version>1.0.9</version>
         </dependency>
         <dependency>
             <groupId>com.google.inject</groupId>
@@ -154,7 +154,11 @@
             <artifactId>super-csv</artifactId>
             <version>2.4.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.typesafe.scala-logging</groupId>
+            <artifactId>scala-logging-slf4j_2.11</artifactId>
+            <version>2.1.2</version>
+        </dependency>
         <dependency>
             <groupId>org.specs2</groupId>
             <artifactId>specs2_2.11</artifactId>

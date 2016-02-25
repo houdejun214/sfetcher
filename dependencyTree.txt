@@ -1,0 +1,26 @@
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building sdatacrawler 2.0.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+Downloading: https://raw.githubusercontent.com/houdejun214/mvn-repo/master/com/lakeside/lakeside-core/1.1.0-SNAPSHOT/maven-metadata.xml
+361 B           Downloaded: https://raw.githubusercontent.com/houdejun214/mvn-repo/master/com/lakeside/lakeside-core/1.1.0-SNAPSHOT/maven-metadata.xml (361 B at 0.2 KB/sec)
+Downloading: https://raw.githubusercontent.com/houdejun214/mvn-repo/master/com/lakeside/lakeside-conf/1.1.0-SNAPSHOT/maven-metadata.xml
+361 B           Downloaded: https://raw.githubusercontent.com/houdejun214/mvn-repo/master/com/lakeside/lakeside-conf/1.1.0-SNAPSHOT/maven-metadata.xml (361 B at 0.2 KB/sec)
+Downloading: http://scala-tools.org/repo-releases/org/specs2/specs2_2.11/3.7/specs2_2.11-3.7.jar
+        Downloading: https://raw.githubusercontent.com/houdejun214/mvn-repo/master/org/specs2/specs2_2.11/3.7/specs2_2.11-3.7.jar
+        Downloading: https://repo.maven.apache.org/maven2/org/specs2/specs2_2.11/3.7/specs2_2.11-3.7.jar
+        [INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 7.728 s
+[INFO] Finished at: 2016-02-20T17:40:58+08:00
+[INFO] Final Memory: 12M/220M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal on project sdatacrawler: Could not resolve dependencies for project io.sdata:sdatacrawler:jar:2.0.0-SNAPSHOT: Could not find artifact org.specs2:specs2_2.11:jar:3.7 in scala-tools.org (http://scala-tools.org/repo-releases) -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException

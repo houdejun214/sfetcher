@@ -5,7 +5,9 @@ target
 output
 .shell_history
 bin
+docs
 .idea
 *.iml
 /data/
 *.crawl.*
+.leveldb
