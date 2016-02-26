@@ -57,7 +57,7 @@ class ParseActor @Inject()(inject: Injector,
           val routeResult: RouteResult[Entry] = crawlContext.router.route(l)
           Option(routeResult) match {
             case Some(result) =>
-              val target: Entry = result.target()
+              val target: Entry = result.target
               crawlDB.appendIfNotExists(l) match {
                 case Some(success) => if (success) {
                   println(s"New page => $l")

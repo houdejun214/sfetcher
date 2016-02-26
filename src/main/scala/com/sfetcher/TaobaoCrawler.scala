@@ -32,8 +32,6 @@ object TaobaoCrawler extends App {
     field[String]("shop_name") on(".sea-header-bd .hd-shop-info .hd-shop-name a|text")
   )).entry()
 
-//  var entry = Entry("https://hanxierka.tmall.com/?spm=a312a.7700718.0.0.BqrR7F")
-//    .->(layer0)
 
   var entry = Entry("file://Users/dejun/working/temp/category.html")
       .->(layer2)
