@@ -33,4 +33,10 @@ class HttpPathTest extends FreeSpec {
       .withParam("b"->"B")
     assert(path.parameters.size == 2)
   }
+
+  "HttpPath with parameters string" in {
+    val path: HttpPath = new HttpPath("POST http://google.com")
+      .withParams("a=A&b=B&c=C")
+    assert(path.parameters.size == 3)
+  }
 }

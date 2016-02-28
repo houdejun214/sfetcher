@@ -97,6 +97,13 @@ class ConstEntry(val path: Path) extends EntryRef with Parameterize {
     }
     this
   }
+
+  override def withParams(params: String): ConstEntry = {
+    if (path.isInstanceOf[Parameterize]) {
+      path.asInstanceOf[Parameterize].withParams(params)
+    }
+    this
+  }
 }
 
 class Pattern(_pattern: String) extends EntryRef {
