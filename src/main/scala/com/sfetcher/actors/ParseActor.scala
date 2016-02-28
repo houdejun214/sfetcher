@@ -5,12 +5,12 @@ import java.util
 
 import com.google.inject.{Inject, Injector}
 import com.sfetcher.core.route.RouteResult
-import io.sdata.actors.CrawlActor.CrawlPage
+import io.sdata.actors.CrawlActor.CrawlURL
 import io.sdata.actors.EmitorActor.EmitDatum
 import io.sdata.actors.ParseActor.PageContent
 import com.sfetcher.core.crawldb.CrawlDB
 import com.sfetcher.core.parser.select.PageContext
-import com.sfetcher.core.{CrawlContext, Entry}
+import com.sfetcher.core.{EntryRef, CrawlContext}
 import com.sfetcher.http.Response
 import com.sfetcher.modules.ActorInject
 import org.jsoup.Jsoup
@@ -23,7 +23,7 @@ import scala.collection.{JavaConversions, mutable}
 
 object ParseActor {
 
-  case class PageContent(from: Entry, res: Response)
+  case class PageContent(from: EntryRef, res: Response)
 
 }
 
@@ -44,7 +44,7 @@ class ParseActor @Inject()(inject: Injector,
     }
   }
 
-  def parseWithPattern(response: Response, from: Entry)(implicit crawlDB: CrawlDB): Unit = {
+  def parseWithPattern(response: Response, from: EntryRef)(implicit crawlDB: CrawlDB): Unit = {
     if (from.isDatumPage) {
       val emitorActor = injectActor[EmitorActor]
       val datum = resolveDatum(from, response)
@@ -54,14 +54,14 @@ class ParseActor @Inject()(inject: Injector,
       //val crawlActor = injectActor[CrawlActor]
       links foreach {
         case l => {
-          val routeResult: RouteResult[Entry] = crawlContext.router.route(l)
+          val routeResult: RouteResult[EntryRef] = crawlContext.router.route(l)
           Option(routeResult) match {
             case Some(result) =>
-              val target: Entry = result.target
+              val target: EntryRef = result.target
               crawlDB.appendIfNotExists(l) match {
                 case Some(success) => if (success) {
                   println(s"New page => $l")
-                  dispatcher ! CrawlPage(target, l)
+                  dispatcher ! CrawlURL(target, l)
                 }
                 case _ => // duplicate link page, don't need to parse again.
               }
@@ -72,7 +72,7 @@ class ParseActor @Inject()(inject: Injector,
     }
   }
 
-  def resolveDatum(from: Entry, res: Response): mutable.Map[String, AnyRef] = {
+  def resolveDatum(from: EntryRef, res: Response): mutable.Map[String, AnyRef] = {
     val url = res.url
     val doc = Jsoup.parse(res.content, url)
     val context = new PageContext(CrawlContext.settings, doc)
@@ -87,7 +87,7 @@ class ParseActor @Inject()(inject: Injector,
   }
 
 
-  def resolveLinks(from: Entry, res: Response): mutable.ListBuffer[String] = {
+  def resolveLinks(from: EntryRef, res: Response): mutable.ListBuffer[String] = {
     val uri = new URI(res.url)
     var url = res.url
     if(uri.getScheme.equals("file")){

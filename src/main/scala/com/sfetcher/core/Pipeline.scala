@@ -1,9 +1,9 @@
 package com.sfetcher.core
 
+import _root_.io.sdata.actors.CrawlActor.CrawlPath
 import com.google.inject.Guice
-import io.sdata.actors.CrawlActor.CrawlPage
-import io.sdata.actors.{CrawlActorDispatcher, CrawlModule}
 import com.sfetcher.modules.{AkkaModule, ConfigModule}
+import io.sdata.actors.{CrawlActorDispatcher, CrawlModule}
 import net.codingwell.scalaguice.InjectorExtensions._
 
 import scala.collection.mutable
@@ -13,7 +13,7 @@ import scala.collection.mutable
  */
 
 object Pipeline {
-  def apply(entries: Entry*) = {
+  def apply(entries: EntryRef*) = {
     val pipeline: Pipeline = new Pipeline()
     pipeline.append(entries)
     pipeline
@@ -22,10 +22,10 @@ object Pipeline {
 
 class Pipeline {
 
-  private var _entries = mutable.ListBuffer[Entry]()
+  private var _entries = mutable.ListBuffer[EntryRef]()
 
-  def append(entries: Seq[Entry]): Unit = {
-    for (e: Entry <- entries) {
+  def append(entries: Seq[EntryRef]): Unit = {
+    for (e: EntryRef <- entries) {
       _entries += e
     }
   }
@@ -40,7 +40,7 @@ class Pipeline {
     //    val log = Logging(system, Pipeline)
 
     //val crawlActor = system.actorOf(GuiceAkkaExtension(system).props[CrawlActor])
-    val router: route.Router[Entry] = new route.Router[Entry]()
+    val router: route.Router[EntryRef] = new route.Router[EntryRef]()
     CrawlContext().router = router
     var entry: ConstEntry = null
     for (e <- _entries) {
@@ -56,6 +56,6 @@ class Pipeline {
     println("#  Start the crawling task.")
     println("#")
     println("###########################################")
-    dispatcher ! CrawlPage(entry, entry.entryUrl)
+    dispatcher ! CrawlPath(entry, entry.path)
   }
 }

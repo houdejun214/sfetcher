@@ -5,8 +5,10 @@ import java.security.cert.X509Certificate
 import java.util
 import javax.net.ssl.SSLContext
 
+import com.sfetcher.core.HttpPath
 import org.apache.http.client.config.{AuthSchemes, CookieSpecs, RequestConfig}
-import org.apache.http.client.methods.HttpGet
+import org.apache.http.client.entity.UrlEncodedFormEntity
+import org.apache.http.client.methods.{HttpGet, HttpPost, HttpRequestBase}
 import org.apache.http.config.{ConnectionConfig, RegistryBuilder}
 import org.apache.http.conn.ssl.NoopHostnameVerifier
 import org.apache.http.impl.client.LaxRedirectStrategy
@@ -15,11 +17,12 @@ import org.apache.http.impl.nio.client.{CloseableHttpAsyncClient, HttpAsyncClien
 import org.apache.http.impl.nio.codecs.{DefaultHttpRequestWriterFactory, DefaultHttpResponseParserFactory}
 import org.apache.http.impl.nio.conn.{ManagedNHttpClientConnectionFactory, PoolingNHttpClientConnectionManager}
 import org.apache.http.impl.nio.reactor.{DefaultConnectingIOReactor, IOReactorConfig}
+import org.apache.http.message.BasicNameValuePair
 import org.apache.http.nio.conn.ssl.SSLIOSessionStrategy
 import org.apache.http.nio.conn.{NoopIOSessionStrategy, SchemeIOSessionStrategy}
 import org.apache.http.nio.util.HeapByteBufferAllocator
 import org.apache.http.ssl.{SSLContexts, TrustStrategy}
-import org.apache.http.{Consts, HttpResponse}
+import org.apache.http.{Consts, HttpResponse, NameValuePair}
 import org.slf4j.{Logger, LoggerFactory}
 
 /**
@@ -131,15 +134,24 @@ object HttpDownloader extends Downloader {
     httpclient
   }
 
-
   /**
    * Downloads given url via GET and returns response entity.
    *
    */
-  def download(url: String): Response = {
-    val get: HttpGet = new HttpGet(url)
+  def download(httpPath: HttpPath): Response = {
+    val url = httpPath.path
+    var request: HttpRequestBase = null
+    httpPath.method match {
+      case "POST"=> val post = new HttpPost(url)
+        if(httpPath.parameters.nonEmpty){
+          addPostParameters(post,httpPath.parameters)
+        }
+        request = post
+      case "GET" => request=new HttpGet(url)
+      case _=>
+    }
     try {
-      val response: HttpResponse = client.execute(get, null).get
+      val response: HttpResponse = client.execute(request, null).get
       new Response(url, Option(response))
     } catch {
       case ex: Exception =>
@@ -148,5 +160,10 @@ object HttpDownloader extends Downloader {
     }
   }
 
+  private def addPostParameters(post: HttpPost, parameters:Seq[(String, String)]) = {
+    val urlParameters = new util.ArrayList[NameValuePair]()
+    parameters.foreach(pair=>urlParameters.add(new BasicNameValuePair(pair._1, pair._2)))
+    post.setEntity(new UrlEncodedFormEntity(urlParameters))
+  }
 }
 

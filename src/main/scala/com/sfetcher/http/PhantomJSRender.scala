@@ -3,6 +3,7 @@ package com.sfetcher.http
 import java.util.concurrent.TimeUnit
 
 import com.lakeside.core.utils.{PathUtils, StringUtils}
+import com.sfetcher.core.HttpPath
 
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
@@ -17,7 +18,7 @@ object PhantomJSRender extends Downloader {
     "--web-security=false {2} {3}"
 
   private lazy val sdataHome: String = {
-    var home: String = "";
+    var home: String = ""
     if (!sys.env.contains("SDATA_HOME")) {
       println("Please specify env `SDATA_HOME` first.")
       home = sys.props("SDATA_HOME")
@@ -34,11 +35,12 @@ object PhantomJSRender extends Downloader {
 
   /**
    * render html page.
-   * @param url
+    *
+    * @param url
    */
   def render(url: String): String = {
-    import sys.process._
     import scala.concurrent.ExecutionContext.Implicits.global
+    import sys.process._
     val command: String = StringUtils.format(CommandPattern, phantomjsPath, configPath, renderPath, url)
     var retry=1
     while (retry <= 3){
@@ -60,7 +62,8 @@ object PhantomJSRender extends Downloader {
     "" //empty result
   }
 
-  override def download(url: String): Response = {
+  override def download(httpPath:HttpPath): Response = {
+    val url = httpPath.path
     val content = render(url)
     new StaticResponse(url, Option(content))
   }

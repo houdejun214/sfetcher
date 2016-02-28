@@ -6,9 +6,9 @@ import java.util.concurrent.TimeUnit
 
 import com.google.common.base.Stopwatch
 import com.google.inject.{Inject, Injector}
-import io.sdata.actors.CrawlActor.CrawlPage
+import com.sfetcher.core._
+import _root_.io.sdata.actors.CrawlActor.{CrawlPath, CrawlURL}
 import io.sdata.actors.ParseActor.PageContent
-import com.sfetcher.core.{CrawlContext, DatumSchema, Entry}
 import com.sfetcher.http.{Downloader, Response, StaticResponse}
 import com.sfetcher.modules.ActorInject
 import org.apache.commons.io.FileUtils
@@ -19,12 +19,12 @@ import org.apache.commons.io.FileUtils
 
 object CrawlActor {
 
+  //indicate crawl task.
+  trait Crawl
   case class Page(url: String)
-
-  case class CrawlPage(from: Entry, url: String)
-
+  case class CrawlURL(from: EntryRef, url: String) extends Crawl
+  case class CrawlPath(from: EntryRef, path: Path) extends Crawl
   case class PageDatum(datum: DatumSchema)
-
 }
 
 class CrawlActor @Inject()(inject: Injector,
@@ -35,8 +35,15 @@ class CrawlActor @Inject()(inject: Injector,
   import CrawlContext.Implicits.downloader
 
   override def receive: Receive = {
-    case CrawlPage(from, url) => {
-      val response = download(url)
+    case CrawlPath(from, path:Path) => {
+      val response = download(path)
+      if (response.success) {
+        val parseActor = injectActor[ParseActor]("parse-dispatcher")
+        parseActor ! PageContent(from, response)
+      }
+    }
+    case CrawlURL(from, url) => {
+      val response = download(Path(url))
       if (response.success) {
         val parseActor = injectActor[ParseActor]("parse-dispatcher")
         parseActor ! PageContent(from, response)
@@ -44,18 +51,20 @@ class CrawlActor @Inject()(inject: Injector,
     }
   }
 
-  def download(url: String)(implicit downloader: Downloader) = {
+  def download(path: Path)(implicit downloader: Downloader): Response = {
     val watch: Stopwatch = new Stopwatch().start()
-    log.info("Downloading => {}", url)
-    val uri = new URI(url)
-    if(uri.getScheme.equals("file")){
-      readFile(uri)
-    }else{
-      val response = downloader.download(url)
-      if (response.success) {
-        log.info("Download [{}] in [{}ms] <= {}", response.status, watch.elapsed(TimeUnit.MILLISECONDS), url)
-      }
-      response
+    log.info("Downloading => {}", path)
+    path match {
+      case file: FilePath =>
+        readFile(file.uri)
+      case http: HttpPath =>
+        val response = downloader.download(http)
+        if (response.success) {
+          log.info("Download [{}] in [{}ms] <= {}", response.status, watch.elapsed(TimeUnit.MILLISECONDS), path)
+        }
+        response
+      case _ =>
+        throw new FetchException("Can not resolve downloader")
     }
   }
 

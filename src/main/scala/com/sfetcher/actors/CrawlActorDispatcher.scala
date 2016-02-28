@@ -11,7 +11,7 @@ import com.sfetcher.modules.GuiceAkkaExtension
  */
 class CrawlActorDispatcher @Inject()(system:ActorSystem) {
 
-  def tell(page: CrawlActor.CrawlPage) = {
+  def tell(page: CrawlActor.Crawl) = {
     val crawlActor = system.actorOf(GuiceAkkaExtension(system)
       .props[CrawlActor]
       .withDispatcher("crawl-dispatcher"))
@@ -19,5 +19,5 @@ class CrawlActorDispatcher @Inject()(system:ActorSystem) {
   }
 
 
-  def !(page: CrawlActor.CrawlPage)=tell(page)
+  def !(page: CrawlActor.Crawl)=tell(page)
 }

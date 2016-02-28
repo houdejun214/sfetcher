@@ -15,10 +15,10 @@ object Router {
 
 final class Router[T] {
 
-  private val _routes: mutable.Map[Path, T] = new mutable.HashMap[Path, T]()
+  private val _routes: mutable.Map[PathMatcher, T] = new mutable.HashMap[PathMatcher, T]()
 
   /** Returns all routes in this router, an unmodifiable map of {@code Path -> Target}. */
-  def routes: Map[Path, T] = {
+  def routes: Map[PathMatcher, T] = {
     _routes.toMap
   }
 
@@ -27,7 +27,7 @@ final class Router[T] {
     * A path can only point to one target.
     */
   def addRoute(path: String, target: T): Router[T] = {
-    val p: Path = new Path(path)
+    val p: PathMatcher = new PathMatcher(path)
     if (_routes.contains(p)) {
       return this
     }
@@ -37,7 +37,7 @@ final class Router[T] {
 
   /** Removes the route specified by the path. */
   def removePath(path: String) {
-    val p: Path = new Path(path)
+    val p: PathMatcher = new PathMatcher(path)
     _routes.remove(p)
   }
 
@@ -49,7 +49,7 @@ final class Router[T] {
     val pathParams: mutable.Map[String, String] = new mutable.HashMap[String, String]
     import scala.collection.JavaConversions._
     for (entry <- routes.entrySet) {
-      val path: Path = entry.getKey
+      val path: PathMatcher = entry.getKey
       if (path.`match`(requestPath, pathParams)) {
         val target: T = entry.getValue
         return new RouteResult[T](target, pathParams.toMap)

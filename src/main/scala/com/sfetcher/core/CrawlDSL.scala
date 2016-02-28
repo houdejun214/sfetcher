@@ -1,7 +1,9 @@
 package com.sfetcher.core
 
+import scala.collection.Seq
+
 /**
- * Created by dejun on 8/2/16.
+  * Created by dejun on 8/2/16.
  */
 object CrawlDSL {
 
@@ -18,79 +20,104 @@ object CrawlDSL {
   }
 }
 
-abstract class Entry {
-  var _datumSchema: DatumSchema = null
-  private var _point: Entry = null
-  var _name: String = ""
+abstract class EntryRef {
+  private var _datumSchema: DatumSchema = null
+  private var _point: EntryRef = null
 
-  def name = _name
-
-  def name(_name: String): Entry = {
-    this._name = _name
-    this
+  /**
+    * generate empty DatumSchema with a name
+ *
+    * @return
+    */
+  def datum(name: String, fields: Seq[Selectable]): DatumSchema = {
+    _datumSchema = DatumSchema(name, this)
+    _datumSchema.fields(fields)
+    _datumSchema
   }
 
-  def datum(): DatumSchema = datum("")
-
-  def datum(name: String): DatumSchema = {
-    _datumSchema = DatumSchema(name, this)
-    _datumSchema
+  /**
+    * generate links schema
+ *
+    * @param list
+    * @return
+    */
+  def links(list: Seq[Selectable]) = {
+    _datumSchema = DatumSchema("", this)
+    _datumSchema.links(list)
   }
 
   def schema = _datumSchema
 
-  def pointTo(target: Entry) = {
+  def pointTo(target: EntryRef) = {
     _point = target
     this
   }
 
   def point = _point
 
-  def ->(target: Entry) = pointTo(target)
+  def ->(target: EntryRef) = pointTo(target)
 
-  def hashPoint = (_point != null)
+  def hashPoint = _point != null
 
   /**
    * check if contains datum fields definition
-   * @return
+    *
+    * @return
    */
   def isDatumPage: Boolean = {
-    (_datumSchema != null && _datumSchema.hasFields)
+    _datumSchema != null && _datumSchema.hasFields
   }
 
   /**
    * check if contains links definition
-   * @return
+    *
+    * @return
    */
   def hasLinks = {
-    (_datumSchema != null && _datumSchema.hasLinks)
+    _datumSchema != null && _datumSchema.hasLinks
   }
 }
 
-class ConstEntry(private var _entryUrl: String) extends Entry {
-  def entryUrl = _entryUrl
+/**
+  * define a const entry, it always be regard as the entry task of the pipeline.
+  * @param path
+  */
+class ConstEntry(val path: Path) extends EntryRef with Parameterize {
+
+  override def withParam(param: (String, String)): ConstEntry = {
+    if (path.isInstanceOf[Parameterize]) {
+      path.asInstanceOf[Parameterize].withParam(param)
+    }
+    this
+  }
+
+  override def withParams(params: scala.Seq[(String, String)]): ConstEntry = {
+    if (path.isInstanceOf[Parameterize]) {
+      path.asInstanceOf[Parameterize].withParams(params)
+    }
+    this
+  }
 }
 
-class Pattern(_pattern: String) extends Entry {
-
+class Pattern(_pattern: String) extends EntryRef {
 
   /**
    * check if match with the pattern
-   * @param input
+    *
+    * @param input
    * @return
    */
   def isMatch(input: String) = {
     input.matches(_pattern)
   }
-
   def pattern = _pattern
-
 }
 
 
 object Entry {
-  def apply(entry: String) = {
-    new ConstEntry(entry)
+  def apply(constInput: String) = {
+    val path = Path(constInput)
+    new ConstEntry(path)
   }
 }
 

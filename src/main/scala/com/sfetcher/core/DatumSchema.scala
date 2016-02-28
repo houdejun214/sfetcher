@@ -10,11 +10,11 @@ import scala.collection._
  */
 
 object DatumSchema {
-  def apply(name: String, entry: Entry) = new DatumSchema(name, entry)
+  def apply(name: String, entry: EntryRef) = new DatumSchema(name, entry)
 
 }
 
-class DatumSchema(tableName: String, entryRef: Entry) {
+class DatumSchema(tableName: String, entryRef: EntryRef) {
   private val _fields = mutable.Map[String, Selectable]()
   private val _links = mutable.ListBuffer[Link]()
 
