@@ -20,9 +20,7 @@ object ShangbiaoCrawler extends AbstractApp {
     )).entry()
 
   var entry = Entry("POST http://sbcx.saic.gov.cn:9080/tmois/wsggcx_getGgaoMainlate.xhtml")
-    .withParam("gmBean.anNum" -> "1476")
-    .withParam("pagenum" -> "1")
-    .withParam("pagesize" -> "15")
+    .withParams("gmBean.anNum=1493&gmBean.anType=TMZCSQ&gmBean.regNum=&gmBean.pageNum=&pagenum=2&pagesize=15&sum=10098&countpage=674&goNum=1")
     .->(layer0)
 
   start(layer0, layer1, entry)

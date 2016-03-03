@@ -38,5 +38,10 @@ class HttpPathTest extends FreeSpec {
     val path: HttpPath = new HttpPath("POST http://google.com")
       .withParams("a=A&b=B&c=C")
     assert(path.parameters.size == 3)
+
+    val path1: HttpPath = new HttpPath("POST http://google.com")
+      .withParams("gmBean.anNum=1493&gmBean.anType=TMZCSQ&gmBean.regNum=&gmBean.pageNum=&pagenum=2&pagesize=15&sum=10098&countpage=674&goNum=1")
+    assert(path1.parameters.size == 9)
   }
+
 }

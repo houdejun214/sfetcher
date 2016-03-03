@@ -75,7 +75,11 @@ case class HttpPath(private val url: String) extends Path with Parameterize {
   def withParams(params: String): HttpPath = {
     val list = params.split("&").toList.map(_.trim).filter(_.length > 0).flatMap(x => {
       val s = x.split('=')
-      Map[String, String](s(0) -> s(1))
+      if (s.length == 2){
+        Map[String, String](s(0) -> s(1))
+      }else{
+        Map[String, String](s(0) -> "")
+      }
     })
 
     parameters ++= list
