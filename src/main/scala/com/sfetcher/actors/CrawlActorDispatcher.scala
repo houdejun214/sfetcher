@@ -11,13 +11,12 @@ import com.sfetcher.modules.GuiceAkkaExtension
  */
 class CrawlActorDispatcher @Inject()(system:ActorSystem) {
 
-  def tell(page: CrawlActor.Crawl) = {
+  def tell(page: CrawlActor.Crawl)= {
     val crawlActor = system.actorOf(GuiceAkkaExtension(system)
       .props[CrawlActor]
       .withDispatcher("crawl-dispatcher"))
     crawlActor ! page
   }
-
 
   def !(page: CrawlActor.Crawl)=tell(page)
 }

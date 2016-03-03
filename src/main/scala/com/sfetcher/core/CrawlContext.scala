@@ -3,7 +3,6 @@ package com.sfetcher.core
 import com.google.inject.Provider
 import com.lakeside.config.Configuration
 import com.sfetcher.core.crawldb.{CrawlDB, CrawlDBOfH2}
-import com.sfetcher.http.{Downloader, HttpDownloader}
 import com.sfetcher.store.{DBStore, FileCsvStore}
 
 /**
@@ -34,7 +33,7 @@ object CrawlContext extends Provider[CrawlContext] {
   object Implicits {
     implicit lazy val crawDB: CrawlDB = CrawlDBOfH2
     implicit lazy val store: DBStore = FileCsvStore
-    implicit lazy val downloader: Downloader = HttpDownloader //HttpDownloader //PhantomJSRender
+    //implicit lazy val downloader: Downloader = HttpDownloader //HttpDownloader //PhantomJSRender
   }
 
 }

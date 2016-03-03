@@ -2,7 +2,8 @@ package com.sfetcher.core
 
 import _root_.io.sdata.actors.CrawlActor.CrawlPath
 import com.google.inject.Guice
-import com.sfetcher.modules.{AkkaModule, ConfigModule}
+import com.sfetcher.http.Downloader
+import com.sfetcher.modules.{DownloaderModule, AkkaModule, ConfigModule}
 import io.sdata.actors.{CrawlActorDispatcher, CrawlModule}
 import net.codingwell.scalaguice.InjectorExtensions._
 
@@ -31,11 +32,12 @@ class Pipeline {
     }
   }
 
-  def start() = {
+  def start(implicit downloader:Downloader) = {
     val injector = Guice.createInjector(
       new AkkaModule,
       new ConfigModule,
-      new CrawlModule
+      new CrawlModule,
+      new DownloaderModule(downloader)
     )
     val dispatcher = injector.instance[CrawlActorDispatcher]
     //    val log = Logging(system, Pipeline)

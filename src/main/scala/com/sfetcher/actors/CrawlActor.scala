@@ -28,11 +28,13 @@ object CrawlActor {
 }
 
 class CrawlActor @Inject()(inject: Injector,
-                           crawlContext: CrawlContext)
+                           downloader: Downloader,
+                           crawlContext: CrawlContext
+                          )
   extends BaseActor(inject)
     with ActorInject {
 
-  import CrawlContext.Implicits.downloader
+  implicit val _downloader = downloader
 
   override def receive: Receive = {
     case CrawlPath(from, path:Path) => {
