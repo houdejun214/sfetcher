@@ -1,7 +1,7 @@
 package com.sfetcher
 
 import com.sfetcher.core.CrawlDSL._
-import com.sfetcher.core.{Entry, EntryRef$, Pattern, Pipeline}
+import com.sfetcher.core._
 
 /**
   *
@@ -16,7 +16,7 @@ object ShangbiaoCrawler extends AbstractApp {
 
   val layer1 = Pattern("http://sbcx.saic.gov.cn:9080/tmois/wsggcx_getImageInputSterem.xhtml*")
     .datum("shangbiao", Seq(
-      field[String]("img") on ("{$url}")
+      "img".on("{$url}")
     )).entry()
 
   var entry = Entry("POST http://sbcx.saic.gov.cn:9080/tmois/wsggcx_getGgaoMainlate.xhtml")
@@ -25,7 +25,5 @@ object ShangbiaoCrawler extends AbstractApp {
     .withParam("pagesize" -> "15")
     .->(layer0)
 
-  Pipeline(entry, layer0, layer1)
-    .start()
-
+  start(layer0, layer1, entry)
 }

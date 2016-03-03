@@ -13,7 +13,8 @@ import scala.collection.mutable
  */
 
 object Pipeline {
-  def apply(entries: EntryRef*) = {
+
+  def apply(entries: Seq[EntryRef]) = {
     val pipeline: Pipeline = new Pipeline()
     pipeline.append(entries)
     pipeline

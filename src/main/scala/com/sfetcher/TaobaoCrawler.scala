@@ -1,12 +1,12 @@
 package com.sfetcher
 
 import com.sfetcher.core.CrawlDSL._
-import com.sfetcher.core.{Entry, EntryRef$, Pattern, Pipeline}
+import com.sfetcher.core.{AbstractApp, Entry, Pattern}
 
 /**
   *
   */
-object TaobaoCrawler extends App {
+object TaobaoCrawler extends AbstractApp {
 
   val layer0 = Pattern("http*://hanxierka.tmall.com/index.htm?*")
     .links(Seq(
@@ -22,11 +22,11 @@ object TaobaoCrawler extends App {
 
   val layer3 = Pattern("http*://detail.tmall.com/item.htm?*")
     .datum("product",Seq(
-      field[String]("name") on ("#detail .tm-detail-meta .tb-detail-hd h1|txt"),
-      field[String]("url") on ("{$url}"),
-      field[String]("price") on ("#detail .tm-detail-meta .tm-price-panel .tm-price|html"),
-      field[String]("image") on ("#detail .tb-gallery .tb-booth a img|link"),
-      field[String]("shop_name") on (".sea-header-bd .hd-shop-info .hd-shop-name a|text")
+      "name".on("#detail .tm-detail-meta .tb-detail-hd h1|txt"),
+      "url".on("{$url}"),
+      "price".on("#detail .tm-detail-meta .tm-price-panel .tm-price|html"),
+      "image".on("#detail .tb-gallery .tb-booth a img|link"),
+      "shop_name".on(".sea-header-bd .hd-shop-info .hd-shop-name a|text")
     )).entry()
 
 
@@ -36,6 +36,5 @@ object TaobaoCrawler extends App {
   val layer1 = Pattern("http*://hanxierka.tmall.com/search.htm?*")
     .->(layer2)
 
-  Pipeline(entry, layer0, layer1, layer2, layer3)
-    .start
+  start(entry, layer0, layer1, layer2, layer3)
 }

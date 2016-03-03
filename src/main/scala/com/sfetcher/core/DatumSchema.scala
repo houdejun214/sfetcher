@@ -4,6 +4,7 @@ import com.sfetcher.core.parser.select.DataSelector
 import com.sfetcher.core.parser.select.DataSelectorPipleBuilder
 
 import scala.collection._
+import scala.reflect.ClassTag
 
 /**
  * Created by dejun on 25/1/16.
@@ -108,6 +109,7 @@ abstract class Selectable {
 }
 
 class Field[C](_name: String) extends Selectable {
+
   def name = _name
 }
 

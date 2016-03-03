@@ -1,6 +1,7 @@
 package com.sfetcher.core
 
 import scala.collection.Seq
+import scala.language.implicitConversions
 
 /**
   * Created by dejun on 8/2/16.
@@ -18,6 +19,16 @@ object CrawlDSL {
     l.select(selector)
     l
   }
+
+  class DatumFieldHelper(underlying: String) {
+    def on[C](s: String):Selectable = {
+      val f: Field[C] = new Field[C](underlying)
+      f.on(s)
+      f
+    }
+  }
+
+  implicit def stringToDatumFieldHelper(underlying: String):DatumFieldHelper = new DatumFieldHelper(underlying)
 }
 
 abstract class EntryRef {
@@ -80,6 +91,7 @@ abstract class EntryRef {
 
 /**
   * define a const entry, it always be regard as the entry task of the pipeline.
+ *
   * @param path
   */
 class ConstEntry(val path: Path) extends EntryRef with Parameterize {
